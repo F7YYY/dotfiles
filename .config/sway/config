@@ -1,0 +1,341 @@
+###########_GITHUB.COM/F7YYY_###########
+#⠀⠀⣠⣾⠿⢋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢦⠀⠀⠙⢆⠀⠀⠀#
+#⠀⡰⠟⢥⠒⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠡⡀⠀⠀⠡⡀⠀#
+#⡰⢁⠔⠁⠀⠀⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠈⠛⠓⠂⠀⠀⠀⠀⣡⠀⠀⠀⠐⡀#
+#⠁⠂⠀⠀⠀⠀⣀⠴⠚⠁⠀⠀⠀⠀⠀⠀⠀⠀⠁⠈⠀⠀⠀⠀⠀⡆⠀⠀⠀⠐#
+#⠀⠀⠀⢀⠔⠁⠀⠀⠉⠀⢡⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⢀#
+#⠀⠀⠀⠀⠀⠀⠀⠀⡀⢤⣤⣄⠀⠀⠀⠀⠀⠰⠿⡿⠻⠛⠛⠻⡴⢶⠀⠀⡰⣿#
+#⠀⠀⠀⠀⠀⣀⣤⠶⢟⠛⠋⠉⠋⠀⠀⠀⠈⠀⠀⠀⠉⠀⠀⠀⠀⢘⠄⣸⣟⣏#
+#⠀⠀⠀⢐⣶⠟⠁⠠⠂⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠘⣿⣜⣼#
+#⢀⣀⠤⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢶⠄⣷⣿⣻⣿#
+#⡈⠳⡰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠐⣠⡀⠀⠀⠈⢂⠀⠀⡇⠀⠀⠀#
+#⠈⢢⠀⠳⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⡄⠀⠀⠀⢳⢤⠁⠀⠀⠀#
+#⠀⢌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⡿⣿⠿⢿⣧⠀⠀⠀⢠⠃⢀⠄⠀⠀#
+#⡀⠀⠺⠇⠠⡀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠘⡆⠈⢻⠀⠀⠠⠃⣠⠎⠀⠀⠀#
+#⠈⠑⠂⠠⣤⠽⣄⡀⠀⠀⠀⠀⠀⠀⠀⢻⡄⠀⠐⠀⢸⠀⡰⢁⡾⠁⠀⠀⠀⢀#
+#⣤⠀⠀⠀⠈⠀⠈⠢⡁⠢⢄⠀⠀⠀⠀⠀⠙⢦⠀⠀⠈⠰⠑⠁⠀⠀⠀⠀⠀⠀#
+#⠘⠀⠀⢀⡀⠀⠀⠀⠑⠄⠈⠻⣶⡀⣤⣤⡀⣀⣆⢠⠧⠁⠀⠀⠀⠀⠀⠀⠀⠀#
+############_'man 1/5 sway'_#############
+##
+##_EXEC-(DAEMONS+APPS):------------------------------------------------------------------------------
+bar swaybar_command waybar
+# DAEMONS
+exec_always {
+    'killall -e $(pgrep -f ${BASH_SOURCE[0]} | grep -v $$)'
+    'killall -e dynamic.sh; $(exec ~/.config/sway/modules/dynamic.sh &)'
+    'killall -e mako; exec mako'
+    'killall -e autotiling; exec autotiling'
+    'killall -e wlsunset; exec wlsunset -s 22:00 -S 10:00 -d 60'
+}
+# APPLICATIONS
+exec {
+    /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+    #systemctl --user start user-graphical-session.target
+    zoom
+    #teams
+    betterbird
+    corectrl
+    #easyeffects
+    #openrgb
+    #obs
+    #lutris
+    steam -silent
+    discord --enable-features=WaylandWindowDecorations,UseOzonePlatform --ozone-platform=wayland --start-minimized
+    signal-desktop-beta --use-tray-icon --enable-features=UseOzonePlatform --ozone-platform=wayland
+    #telegram-desktop -startintray
+    youtube-music
+}
+
+##_VARIABLES:------------------------------------------------------------------------------
+set {
+    $mod Mod4
+    $term kitty
+    $menu wofi
+    $font pango:Sony Sketch EF 14
+    $lock physlock -ms -p 'ERROR 410: https://fd.ax/7K'
+# VIM-KEYS
+    $up k
+    $down j
+    $left h
+    $right l
+# COLORS
+    $red #FF0000
+    $white #FFFFFF
+    $grey #FFFFFF99
+    $black #000000
+    $clear #00000000
+# MODES
+    $utils '[R]esize, [L]ayout, [N]otification, [P]ower'
+    $resize 'RESIZE: [←↑↓→]'
+    $layout 'LAYOUT: [D]stacking, [T]abbed, [S]plit, [V]-split-[H]'
+    $notification 'NOTIFICATION: [D]efault, [S]top'
+}
+
+##_KEYBINDS:------------------------------------------------------------------------------
+bindsym {
+    $mod+q kill
+    $mod+Alt+f focus mode_toggle
+    $mod+Escape exec $term
+    $mod+Space exec $menu
+    $mod+Ctrl+c reload
+    $mod+Alt+Space mode $utils
+    $mod+Ctrl+Delete exec $powermenu
+    $mod+Ctrl+Backspace exec $term sudo libredefender scan
+    $mod+Ctrl+Escape exec $term -e ranger
+# MOVE-CURSOR
+    $mod+Ctrl+$left seat - cursor move -10 0
+    $mod+Ctrl+$down seat - cursor move 0 10
+    $mod+Ctrl+$up seat - cursor move 0 -10
+    $mod+Ctrl+$right seat - cursor move 10 0
+# SCREENSHOT+GIF
+    $mod+p exec grimshot save area ~/Pictures/Screenshots/Zone_$(date +'%Y-%m-%d-%H%M%S.png')
+    $mod+Shift+p exec grimshot save screen ~/Pictures/Screenshots/Screen_$(date +'%Y-%m-%d-%H%M%S.png')
+    $mod+g exec ~/.config/sway/modules/gif.sh #EXECUTE TWICE
+# XF86-CONTROLS
+    XF86ScreenSaver exec $lock
+    # Sreen brightness controls
+    XF86MonBrightnessUp exec light -A 20 # increase screen brightness
+    XF86MonBrightnessDown exec light -U 20 # decrease screen brightness
+    # PULSEAUDIO
+    XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+    XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+    XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+    XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    # MEDIA
+    XF86AudioNext exec playerctl next
+    XF86AudioPlay exec playerctl play-pause
+    XF86AudioPrev exec playerctl previous
+    XF86AudioStop exec playerctl stop
+}
+
+##_WORKSPACES:------------------------------------------------------------------------------ 
+set {
+    $ws1 workspace 1
+    $ws2 workspace 2
+    $ws3 workspace 3
+    $ws4 workspace 4
+    $ws5 workspace 5
+    $ws6 workspace 6
+    $ws7 workspace 7
+    $ws8 workspace 8
+    $ws9 workspace 9
+    $ws0 workspace 10
+    $sp scratchpad
+}
+bindsym {
+    $mod+b splith
+    $mod+v splitv
+    $mod+t layout tabbed
+    $mod+s layout toggle split
+    $mod+Ctrl+s layout stacking
+    $mod+Ctrl+f fullscreen
+    $mod+f floating toggle
+    $mod+a focus parent
+# SCRATCHPAD
+    $mod+Ctrl+Minus move scratchpad
+    $mod+Minus scratchpad show
+# SWITCH_WORKSPACES
+    $mod+1 $ws1
+    $mod+2 $ws2
+    $mod+3 $ws3
+    $mod+4 $ws4
+    $mod+5 $ws5
+    $mod+6 $ws6
+    $mod+7 $ws7
+    $mod+8 $ws8
+    $mod+9 $ws9
+    $mod+0 $ws10
+# MOVE_CONTAINERS_TO_WORKSPACES
+    $mod+Ctrl+1 move container to $ws1
+    $mod+Ctrl+2 move container to $ws2
+    $mod+Ctrl+3 move container to $ws3
+    $mod+Ctrl+4 move container to $ws4
+    $mod+Ctrl+5 move container to $ws5
+    $mod+Ctrl+6 move container to $ws6
+    $mod+Ctrl+7 move container to $ws7
+    $mod+Ctrl+8 move container to $ws8
+    $mod+Ctrl+9 move container to $ws9
+    $mod+Ctrl+0 move container to $ws10
+# TAB-WORKSPACES
+    $mod+Shift+Tab workspace next
+    $mod+Tab workspace back_and_forth
+# MOVE_FOCUSED_WINDOWS
+    $mod+Left focus left
+    $mod+Down focus down
+    $mod+Up focus up
+    $mod+Right focus right
+# MOVE_FOCUSED_WINDOWS_ARROW-KEYS
+    $mod+Ctrl+Left move left
+    $mod+Ctrl+Down move down
+    $mod+Ctrl+Up move up
+    $mod+Ctrl+Right move right
+}
+# UTILITY_CENTER
+mode $utils {
+    bindsym --to-code {
+        r mode $resize
+        l mode $layout
+        n mode $notification
+        p exec $powermenu
+    # EXIT
+        Return mode 'default'
+        Escape mode 'default'
+    }
+}
+# CONTAINER_RESIZING+ALIGNMENT
+set {
+    $f floating enable
+    $o opacity 0.9
+    $m minimize
+    $r max_render_time off
+# MOVE
+    $mm move position mouse
+    $mws1 move to $ws1
+    $mws2 move to $ws2
+    $mws3 move to $ws3
+    $mws4 move to $ws4
+    $mws5 move to $ws5
+    $mws6 move to $ws6
+    $mws7 move to $ws7
+    $mws8 move to $ws8
+    $mws9 move to $ws9
+    $mws0 move to $ws10
+    $msp move to $sp
+}
+## RESIZE_WINDOW_KEYBINDS/ARROWS+MOUSE
+mode $resize {
+    bindsym --to-code {
+        $left swaymsg resize grow left 10 || swaymsg resize shrink right 10
+        Ctrl+$left swaymsg resize grow left 1 || swaymsg resize shrink right 1
+        $down swaymsg resize shrink up 10 || swaymsg resize grow down 10
+        Ctrl+$down swaymsg resize shrink up 1 || swaymsg resize grow down 1
+        $up swaymsg resize grow up 10 || swaymsg resize shrink down 10
+        Ctrl+$up swaymsg resize grow up 1 || swaymsg resize shrink down 1
+        $right swaymsg resize shrink left 10 || swaymsg resize grow right 10
+        Ctrl+$right swaymsg resize shrink left 1 || swaymsg resize grow right 1
+    # EXIT
+        Return mode 'default'
+        Escape mode 'default'
+    }
+}
+## CONTAINER_LAYOUTS-(STACK, TAB, SPLIT-V/H)
+mode $layout {
+    bindsym --to-code {
+        d layout stacking; mode 'default'
+        t layout tabbed; mode 'default'
+        s layout toggle split; mode 'default'
+        v layout splitv; mode 'default'
+        h layout splith; mode 'default'
+    # EXIT
+        Return mode 'default'
+        Escape mode 'default'
+    }
+}
+# swaymsg -t get_tree | grep app_id
+for_window {
+    [app_id=".*"] splitt, $mm, $m, $o, layout tabbed
+    [window_role=".*"] splitt, $mm, $m, $o, layout tabbed
+    [window_role="pop-up|bubble|task_dialog|page-info|Preferences|dialog|menu|About"] $f, $mm, $m, $o, layout tabbed, focus, sticky
+    [window_role="Open Files|File Operation Progress"] $f, focus, sticky
+    [title="(?:Open|Save) (?:File|File Transfer*|Folder|As)"] $f, focus, sticky
+    [title="Sharing Indicator"] $f, focus, sticky
+    [app_id="^mpv$"] $f, focus, sticky
+    [app_id="^pavucontrol$"] $f, focus, sticky
+    [app_id="^org.gnome.Calculator$"] $f
+    [app_id="^openrgb$"] $f
+    [app_id="^zenity$"] $f
+}
+assign {
+    [class="^betterbird$"] $ws2
+    [class="^Microsoft Teams - Preview$"] $ws2
+    [app_id="^zoom$"] $ws3
+    [class="^corectrl$"] $sp
+    [app_id="^com.github.wwmm.easyeffects$"] $sp
+}
+workspace_auto_back_and_forth no
+floating_modifier $mod normal
+tiling_drag enable
+
+##_PERIPHERALS:------------------------------------------------------------------------------
+# DISPLAY
+output {
+    DP-1 mode 1920x1080@240HZ position 0,0 scale 1
+    * adaptive_sync on
+}
+# KEYBOARD
+input type:keyboard {
+    xkb_layout us:en
+    xkb_numlock enabled
+}
+# MOUSE
+focus_follows_mouse no
+mouse_warping none
+input type:mouse {
+    #left_handed enabled
+    natural_scroll disabled
+    accel_profile 'flat'
+    pointer_accel 0
+}
+
+##_SYSTEM_POWER_OPTIONS:------------------------------------------------------------------------------
+# SYSTEM_POWERMENU-(LOCK, SUSPEND, EXIT, REBOOT, UEFI, OFF)
+set $powermenu swaynag \
+    -m 'POWERMENU:' \
+    -z 'SHUTDOWN' 'systemctl -i poweroff' \
+    -z 'UEFI' 'systemctl -i reboot --firmware-setup; mode "default"' \
+    -z 'REBOOT' 'systemctl -i reboot' \
+    -z 'EXIT' 'swaymsg exit' \
+    -z 'SUSPEND' 'systemctl suspend && pkill swaynag && $lock' \
+    -z 'LOCK' '$lock' \
+    -y 'overlay' \
+    --f $font \
+    --button-border-size=2px \
+    --button-dismiss-gap=666px \
+    --button-text=#000000 \
+    --button-background=#FFFFFF \
+    --border-bottom=#FF0000 \
+    --background=#000000 \
+    --text=#FF0000 \
+# SWAYIDLE 
+exec swayidle -w \
+    timeout 600 '$lock' \
+    timeout 700 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+    before-sleep 'playerctl -a pause' \
+    before-sleep "$lock"\
+
+##_THEMES:------------------------------------------------------------------------------
+# CLASSES                       $BORDER	$BG	$TEXT	$INDIC	$CHILDBORDER
+client.background		n/a	#ffffff	n/a	n/a	n/a
+client.focused			$white	$black	$white	$white	$white
+client.focused_inactive 	$grey	$black	$white	$grey	$grey
+client.focused_tab_title	$white $black $white $red $red
+client.unfocused		$grey	$black	$white	$grey	$grey
+client.urgent			$red	$black	$red	$red	$red
+client.placeholder		$black	$black	$white	$black	$black
+# BORDERS+GAPPS+OTHER
+popup_during_fullscreen smart
+default_border pixel 4
+default_floating_border none
+smart_borders on
+smart_gaps on
+gaps {
+	inner 4px
+	outer 4px
+}
+
+##_NOTIFICATIONS:------------------------------------------------------------------------------
+mode $notification {
+    bindsym --to-code {
+        d exec makoctl set-mode default; mode 'default'
+        s exec makoctl set-mode do-not-disturb; mode 'default'
+    # EXIT
+        Return mode 'default'
+        Escape mode 'default'
+    }
+}
+
+##_XWAYLAND:------------------------------------------------------------------------------
+xwayland enable
+##_INCLUSION:------------------------------------------------------------------------------
+include /etc/sway/config.d/*
+##_END::----------------------------------------------------------------------------

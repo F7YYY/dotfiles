@@ -1,0 +1,101 @@
+@define-color black rgba(0, 0, 0, 0.66);
+@define-color white rgba(255, 255, 255, 0.66);
+
+* {
+    font: 14px Sony Sketch EF;
+    margin: 1px 0px 0px 0px;
+    min-height: 0;
+    background: transparent;
+}
+
+@keyframes blink {
+    to {
+        background-color: white;
+        color: black;
+    }
+}
+
+tooltip {
+    background-color: @black;
+    border: 4px double white;
+    border-radius: 20px;
+}
+
+window#waybar {
+    color: #ffffff;
+    transition-property: inherit;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+window>menu {
+    border: 4px double white;
+    border-radius: 16px;
+    background-color: @black;
+}
+
+window>menu>*:hover {
+    color: red;
+    border-radius: 16px;
+    background-color: @black;
+}
+
+.modules-center>widget>* {
+    background-color: @black;
+    border: solid white;
+    border-width: 1px 0px;
+}
+
+.modules-center>widget>label,
+.modules-center>widget*image {
+    padding: 0px 8px;
+}
+
+.modules-center>button.urgent.first-child>*,
+.modules-center>widget:first-child>* {
+    border-radius: 16px 0px 0px 16px;
+}
+
+.modules-center>widget:last-child>* {
+    border-radius: 0px 16px 16px 0px;
+}
+
+#idle_inhibitor.deactivated,
+#pulseaudio.muted,
+#workspaces>button {
+    color: grey;
+}
+
+#workspaces>button.focused {
+    color: white;
+}
+
+#workspaces>button:hover {
+    color: black;
+    background-color: @white;
+    border-radius: 16px;
+}
+
+#workspaces>button.urgent {
+    color: red;
+    background-color: @black;
+}
+
+.modules-left>widget>*,
+.modules-right>widget>* {
+    color: black;
+    background-color: @white;
+    padding: 0px 8px;
+    border: 1px solid black;
+}
+
+.modules-left>widget:last-child>* {
+    border-radius: 0px 16px 16px 0px;
+}
+
+.modules-right>widget:first-child>* {
+    border-radius: 16px 0px 0px 16px;
+}

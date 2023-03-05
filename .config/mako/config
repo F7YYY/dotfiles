@@ -1,0 +1,15 @@
+sort=-time
+layer=overlay
+anchor=top-right
+font=Sony Sketch EF 12
+width=300
+margin=10
+padding=1
+border-size=2
+border-radius=10
+border-color=#000000
+progress-color=over #000000
+background-color=#ffffff
+text-color=#000000
+#default-timeout=5555
+group-by=summary

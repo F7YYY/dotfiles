@@ -1,0 +1,155 @@
+{ // MODULES LAYOUT
+	"modules-left": [
+		"sway/workspaces",
+		"custom/scratchpad-indicator",
+		"tray"
+	],
+	"modules-center": [
+		"custom/weather",
+		"sway/mode",
+		"clock"
+	],
+	"modules-right": [
+		"idle_inhibitor",
+		"pulseaudio",
+		"network",
+		"custom/wireguard", // !CONVERT TO WOFI!
+		"network#vpn",
+		"custom/updates"
+	],
+	// MODULES CONFIGURATION
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": true,
+		"format": "{icon}",
+		"format-icons": {
+			"default": "",
+			"focused": "",
+			"urgent": ""
+		}
+	},
+	"custom/scratchpad-indicator": {
+		"interval": 1,
+		"exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'",
+		"format": "{}",
+		"on-click": "swaymsg 'scratchpad show'",
+		"on-click-right": "swaymsg 'move scratchpad'",
+		"return-type": "json"
+	},
+	"tray": {
+		"icon-size": 20,
+		"spacing": 10,
+		"show-passive-items": true
+	},
+	"custom/weather": {
+		"interval": 3600,
+		"exec-if": "ping https://v2.wttr.in -c1",
+		"exec": "~/.config/waybar/modules/weather.sh",
+		"on-click-right": "firefox https:///v2.wttr.in || brave https:///v2.wttr.in",
+		"return-type": "json"
+	},
+	"sway/mode": {
+		"format": "<span style=\"italic\">{}</span>",
+		"pango_markup": true
+	},
+	"clock": {
+		"interval": 1,
+		"format": "⧖ {:%T}",
+		"format-alt": "  {:%A: %D}",
+		"on-click-right": "wl-copy $(date '+%F_%T')",
+		"tooltip-format": "<big>{:%B %d, %Y}</big>\n<tt><small>{calendar}</small></tt>"
+	},
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "",
+			"deactivated": "﯈"
+		}
+	},
+	"pulseaudio": {
+		"scroll-step": 10,
+		"format": "{icon} {volume}% {format_source}",
+		"format-source": "{volume}%",
+		"format-bluetooth": "{icon} {volume}%  {format_source}",
+		"format-muted": "🔇",
+		"format-source-muted": "",
+		"format-bluetooth-muted": "",
+		"format-icons": {
+			"speaker": "蓼",
+			"hdmi": "  ",
+			"headphones": [
+				" ",
+				" ",
+				" "
+			],
+			"handsfree": "",
+			"headset": [
+				" ",
+				" ",
+				" "
+			],
+			"phone": [
+				" ",
+				" ",
+				" "
+			],
+			"portable": [
+				" ",
+				" ",
+				" "
+			],
+			"car": [
+				" ",
+				" ",
+				" "
+			],
+			"hifi": "",
+			//"default": ["", "", ""]
+			"default": [
+				"🔈",
+				"墳",
+				"🔊"
+			]
+		},
+		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"on-click-middle": "pavucontrol",
+		"on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+		"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -10%",
+		"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +10%"
+	},
+	"network": {
+		"interval": 1,
+		"format-wifi": "{essid}",
+		"format-ethernet": "{ifname} ",
+		"format-linked": "{ifname}{essid}",
+		"format-disconnected": "⚠",
+		"tooltip-format-wifi": "{essid} ({ifname})\nFreq: {frequency}MHz\nStrength: {signaldBm}dBm ({signalStrength}%)\nIP: {ipaddr}/{cidr}\n⬆: {bandwidthUpBits} ⬇: {bandwidthDownBits}",
+		"tooltip-format-ethernet": "{ifname}\nIP: {ipaddr}/{cidr}\n⬆: {bandwidthUpBits} ⬇: {bandwidthDownBits}",
+		"on-click": "kitty nmtui"
+	},
+	"custom/wireguard": {
+		"format": "{}<big> 嬨</big>",
+		"format-disconnected": "{}<big> ⚠</big>",
+		"exec": "~/.config/waybar/modules/wireguard.sh",
+		//"on-click": "rofi -modi 'WireGuard:~/.config/waybar/modules/wireguard-rofi.sh' -show WireGuard; pkill -SIGRTMIN+6 waybar",
+		"on-click": "wofi -c 'WireGuard:~/.config/waybar/modules/wireguard-rofi.sh' -S WireGuard; pkill -SIGRTMIN+6 waybar",
+		"signal": 6,
+		"interval": 60,
+		"tooltip": false
+	},
+	"network#vpn": {
+		"interface": "tun*",
+		"interval": 1,
+		"format": "{}<big> 嬨</big>",
+		"format-disconnected": "",
+		"tooltip-format-linked": "{ifname}\nIP: {ipaddr}/{cidr}\n⬆: {bandwidthUpBits} ⬇: {bandwidthDownBits}",
+	},
+	"custom/updates": {
+		"exec": "(checkupdates ; yay -Qua) | wc -l",
+		"interval": 1111,
+		"format": " {}",
+		"on-click": "(checkupdates ; yay -Qua) | wc -l",
+		"on-click-right": "kitty yay -Syyyu ; yay -Sc ; yay -Qqdt",
+		"tooltip-format": "checkupdates ; yay -Qua"
+	}
+}
