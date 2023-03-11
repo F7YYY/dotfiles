@@ -299,7 +299,8 @@ set $powermenu swaynag \
 # SWAYIDLE 
 exec swayidle -w \
     timeout 600 '$lock' \
-    timeout 700 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+    timeout 900 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
     before-sleep 'playerctl -a pause' \
     before-sleep "$lock"\
 

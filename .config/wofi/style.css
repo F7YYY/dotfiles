@@ -1,60 +1,49 @@
-@define-color base1 rgba(0, 0, 0, 0.88);
-@define-color base2 rgba(255, 255, 255, 0.77);
-@define-color base3 rgba(255, 0, 55, 0.66);
+@define-color black rgba(0,0,0,0.66);
 
 * {
-    margin: 0px;
-    padding: 1px 4px;
-    width: 1px;
-    color: @base3;
-    background-color: transparent;
+    font-family: Sony Sketch EF;
     font-size: 20px;
-    font-family: 'Sony Sketch EF';
-    animation-name: fadeIn;
+    color: white;
 }
 
 window {
-    max-width: fit-content;
-    border: 2px solid;
-    border-radius: 14px;
-    color: white;
-    background-color: @base1;
-    transition: 1s ease-in-out;
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: @black;
+}
+
+#outer-box {
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 15px;
+    background-color: @black;
 }
 
 #input {
-    margin-bottom: 10px;
-    border-radius: 10px;
-    padding: 6px;
-    color: @base1;
-    background-color: @base2;
-}
-
-#input image {
-	color: @base3;
-}
-
-#img,
-#inner-box,
-#outer-box {
-    padding: 4px;
-}
-
-#text {
-    color: @base2;
-}
-
-#text:selected {
-	color: black;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 2px solid white;
+    padding: 0em 10px;
+    background-color: black;
+    color: red;
 }
 
 #entry {
+    margin-bottom: 10px;
     padding: 5px;
-    color: white;
 }
 
 #entry:selected {
-    border: 2px solid;
-    border-radius: 10px;
-    background-color: @base2;
+    background-color: white;
+    border: 1px solid red;
+    border-radius: 8px;
+}
+
+#img {
+    padding: 0px 10px ;
+}
+
+#selected #text, #selected #img {
+    color: black;
 }

@@ -1,1 +1,10 @@
-{}
+{
+    "BDFDB": true,
+    "ZeresPluginLibrary": true,
+    "DoNotTrack": true,
+    "FileViewer": true,
+    "PluginRepo": true,
+    "ThemeRepo": true,
+    "TypingIndicator": true,
+    "TypingUsersAvatars": true
+}

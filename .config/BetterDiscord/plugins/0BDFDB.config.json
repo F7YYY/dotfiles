@@ -1,0 +1,22 @@
+{
+	"all": {
+		"changeLogs": {
+			"BDFDB": "3.1.5",
+			"PluginRepo": "2.4.6",
+			"ThemeRepo": "2.4.9"
+		},
+		"choices": {
+			"toastPosition": "right"
+		},
+		"general": {
+			"shareData": true,
+			"showToasts": true,
+			"showSupportBadges": false,
+			"useChromium": false
+		},
+		"hashes": {
+			"0BDFDB.data.json": "128bb45e968aa6e22194ba68934114c2bfe4d123",
+			"0BDFDB.raw.css": "a1c4a8b6f28c4765c6af2853ddf13a35922a2b9e"
+		}
+	}
+}
