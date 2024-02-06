@@ -1,0 +1,351 @@
+//////////////////////////////////////////////////////////
+//  ██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗  //
+//  ██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗ //
+//  ██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝ //
+//  ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗ //
+//  ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║ //
+//   ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ //
+//"https://github.com/Alexays/Waybar/wiki/Configuration"//
+//
+//──LAYOUT────────────────────────────────────────────────
+{
+"position": "top",
+	"layer": "top",
+	"pango_markup": true,
+	"modules-left": [				//__APPLICATIONS__
+		"custom/appmenu",
+		"hyprland/workspaces",		// WIP ~ CONVERT TO "wlr/workspaces",
+		"wlr/taskbar",
+		"sway/scratchpad",			// WIP ~ CONVERT TO "wlr/scratchpad",
+		"tray",
+		"gamemode"
+	],
+	"modules-center": [				//__STATUS__
+		"custom/weather",			// AUR: WTTRBAR
+		"clock"
+	],
+	"modules-right": [				//__SYSTEM__
+		"idle_inhibitor",
+		"cava",
+		"pulseaudio",
+		"network",
+		//"custom/vpn",				// WIP ~ SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/VPN.SH -> WOFI
+		//"custom/wireguard",		// WIP ~ SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/WIREGUARD.SH -> WOFI
+		//"group/hardware",			// WIP ~ SYSTEM HARDWARE STATUS
+		"custom/powermenu",			// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU.SH
+		"custom/pacman"				// AUR: WAYBAR-UPDATES
+	],
+	//──CONFIGURATION─────────────────────────────────────
+	"custom/appmenu": {
+		"format": "⌘",
+		"on-click": "wofi",
+		"on-click-middle": "wofi-emoji",
+		"on-click-right": "wofi-calc",
+		"tooltip": false
+	},
+	"hyprland/workspaces": {
+		"active-only": false,
+		"all-outputs": true,
+		"sort-by-number": true,
+		"format": "{icon}",
+		"format-icons": {
+			"1": "①",
+			"2": "②",
+			"3": "③",
+			"4": "④",
+			"5": "⑤",
+			"6": "⑥",
+			"7": "⑦",
+			"8": "⑧",
+			"9": "⑨",
+			"10": "⑩",
+			"default": "",
+			"focused": "",
+			"persistent": "",
+			"urgent": ""	// 
+		},
+		"on-click": "activate",
+		"on-click-right": "close",
+		"tooltip": false
+	},
+	"wlr/taskbar": {
+		"all-outputs": true,
+		"markup": true,
+		"sort-by-app-id": true,
+        "format": "{icon}",
+        "ignore-list": [
+            "kitty",
+            "Alacritty",
+            "wezterm"
+		],
+		"on-click": "activate",
+        "on-click-middle": "close",
+        "on-click-right": "minimize-raise",
+		"tooltip-format": "{title}",
+		"tooltip": true
+    },
+	"sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", "☯"],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+	"tray": {
+		"interval": 1,
+		"show-passive-items": true
+	},
+	"gamemode": {
+		"format": "{glyph}",
+		"format-alt": "{glyph} {count}",
+		"tooltip-format": "Games running: {count}",
+		"glyph": "",
+		"hide-not-running": true,
+		"use-icon": true,
+		"icon-name": "input-gaming-symbolic",
+		"icon-spacing": 4,
+		"icon-size": 20,
+		"tooltip": true
+	},
+	"custom/weather": {
+		"interval": 3600,
+		"exec": "wttrbar",
+		"format": "{}°C",
+		"on-click": "exec",
+		"on-click-right": "xdg-open https://wttr.in/",
+		"return-type": "json",
+		"tooltip": true
+	},
+	"clock": {
+		"interval": 1,
+		"format": "ⴵ  {:%T %Z}",
+		"format-alt": "    {:%a: %D}",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode": "year",
+			"mode-mon-col": 3,
+			"weeks-pos": "right",
+			"on-scroll": 1,
+			"on-click-right": "mode",
+			"format": {
+				"months": "<span color='#FFFFFF'><b>{}</b></span>",
+				"days": "<span color='#DDDDDD'><b>{}</b></span>",
+				"weeks": "<span color='#777777'><b>W{}</b></span>",
+				"weekdays": "<span color='#777777'><b>{}</b></span>",
+				"today": "<span color='#FF0000'><b><u>{}</u></b></span>"
+			}
+		},
+		"actions": {
+			"on-click-right": "mode",
+			"on-click-forward": "tz_up",
+			"on-click-backward": "tz_down",
+			"on-scroll-up": "shift_up",
+			"on-scroll-down": "shift_down"
+		},
+		"on-click-middle": "wl-copy $(date '+%F_%T')",
+		"tooltip": true
+	},
+	"idle_inhibitor": {
+		"what": "handle-lid-switch",
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "🏶",
+			"deactivated": "🏵"
+		},
+		"tooltip": false
+	},
+	"cava": {
+		"cava_config": "$HOME/.config/cava/config",
+		"input_delay": 2,
+		"format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+		"actions": {
+			"on-click-right": "mode"
+		},
+		"tooltip": false
+	},
+	"pulseaudio": {
+		"interval": 1,
+		"scroll-step": 10,
+		"format": "{volume}% {icon} {format_source}",
+		"format-bluetooth": " {volume}% {icon} {format_source}",
+		"format-bluetooth-muted": " {format_source}",
+		"format-muted": "󰝟 {format_source}",
+		"format-source": "{volume}% ",
+		"format-source-muted": "",
+		"format-icons": {
+			"hdmi": "",
+			"hifi": "",
+			"headphones": "🎧",
+			"handsfree": "🎧",
+			"headset": "🎧",
+			"phone": "📱",
+			"portable": "📱",
+			"car": "",
+			"default": ["🕨","🕩","🕪"]
+		},
+		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"on-click-middle": "pavucontrol",
+		"on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+		"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+		"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+		"tooltip": true
+	},
+	"network": {
+		"interval": 1,
+		"format-wifi": "{essid} {icon}",
+		"format-ethernet": "{ifname} ",
+		"format-linked": "{ifname}{essid}",
+		"format-disconnected": "⚠",
+		"tooltip-format-wifi": "{ifname}: {essid}\n Frequency: {frequency}MHz\n Strength: {signaldBm}dBm ({signalStrength}%)\n IP: {ipaddr}/{cidr}\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
+		"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
+        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+		"on-click": "$HOME/.config/wofi/scripts/nmtui.sh",
+		"on-click-right": "kitty $SHELL -c 'nmtui'",
+		"tooltip": true
+	},
+	"custom/vpn": {
+		"interval": 60,
+		"exec": "$HOME/.config/wofi/scripts/vpn.sh --status",
+		"format": "{output}<big>🖧</big>",
+		"format-disconnected": "{}<big> ⚠</big>",
+		"tooltip-format-linked": "{ifname}\nIP: {ipaddr}/{cidr}\n⬆: {bandwidthUpBits} ⬇: {bandwidthDownBits}",
+		"on-click": "$HOME/.config/wofi/scripts/vpn.sh show_vpn_menu",
+		"return-type": "json",
+		"tooltip": true
+	},
+	"custom/wireguard": {
+		"interval": 1,
+		"format": "{}<big>🖧</big>",
+		"format-disconnected": "{}<big> ⚠</big>",
+		"exec": "$HOME/.config/wofi/scripts/wireguard.sh --status",
+		"on-click": "$HOME/.config/wofi/scripts/wireguard.sh --menu",
+		"signal": 6,
+		"tooltip": true
+	},
+	"custom/powermenu": {
+		"format": "⏻",
+		"on-click": "$HOME/.config/wofi/scripts/powermenu.sh",
+		"on-click-middle": "$HOME/.config/wofi/scripts/powermenu.sh",
+		"on-click-right": "$HOME/.config/wofi/scripts/powermenu.sh",
+		"tooltip": false
+	},
+	"custom/pacman": {
+		"exec-if": "which waybar-updates",
+		"exec": "waybar-updates",
+		"format": "{icon}",
+		"format-icons": {
+			"pending-updates": "🡇"
+		},
+		"on-click": "kitty $SHELL -c 'yay -Syyu && yay -Ycc && yay -Sc'",
+		"on-right-click": "kitty $SHELL -c 'yay -Syyu && yay -Ycc && yay -Sc'",
+		"return-type": "json",
+		"tooltip": true
+	},
+	//──HARDWARE_STATUS───────────────────────────────────
+	"group/hardware": { // 
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration": 300,
+			"children-class": "not-memory",
+			"transition-left-to-right": false
+		},
+		"interval": 1,
+		"format": "{modules}",
+		"modules": [
+			"cpu",
+			"custom/gpu",
+			"memory",
+			"custom/storage",
+			"temperature",
+			"battery",
+			"backlight"
+		],
+		"actions": {
+			"on-click-right": "mode",
+			"on-click-forward": "tz_up",
+			"on-click-backward": "tz_down",
+			"on-scroll-up": "switch_monitor_up",   // Updated action for scrolling up
+			"on-scroll-down": "switch_monitor_down" // Updated action for scrolling down
+		},
+		"cpu": {
+			"interval": 1,
+			"format": "{icon} {usage:>2}% ﬙",
+			"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"]
+		},
+		"custom/gpu": {
+			"interval": 1,
+			"exec": "radeontop -d -l 1 -i 1 - | cut -c 32-35 -",
+			"format": "{}% ﬙",
+			"return-type": ""
+		},
+		"memory": {
+			"interval": 1,
+			"format": "{used:0.1f}G/{total:0.1f}G 𝍬"
+		},
+		"custom/storage": {
+			"interval": 1,
+			"format": "{percentage_free}% free on {path} {icon}",
+			"format-alt": "{percentage}% {icon}",
+			"format-alt-click": "click-right",
+			"format-icons": [""]
+		},
+		"temperature": {
+			"interval": 1,
+			// "thermal-zone": 2,
+			// "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+			"critical-threshold": 80,
+			// "format-critical": "{temperatureC}°C {icon}",
+			"format": "{temperatureC}°C {icon}",
+			"format-icons": ["","",""]
+		},
+		"battery": {
+			"interval": 1,
+			"format": "{capacity}% {icon}",
+			"format-charging": "{capacity}% {icon}🗲",
+			"format-plugged": "{capacity}% {icon} ",
+			"format-alt": "{time} {icon}",
+			// "format-good": "", // An empty format will hide the module
+			// "format-full": "",
+			"format-icons": ["","","","",""],
+			"states": {
+				"good": 90,
+				"warning": 30,
+				"critical": 15
+			}
+		},
+		"backlight": {
+			"device": "intel_backlight",
+			"format": "{icon}",
+			"format-alt": "{percent}% {icon}",
+			"format-alt-click": "click-right",
+			"format-icons": ["󰃞", "󰃟", "󰃝", "󰃠"],
+			"on-scroll-down": "brightnessctl -q s +10%",
+			"on-scroll-up": "brightnessctl -q s 10%-"
+		}
+	}
+}
+
+/*
+	//──OTHERS────────────────────────────────────────────
+	"bluetooth": {
+		"interval": 1,
+		"format": " {status}",
+		"format-connected": " {device_alias}",
+		"format-connected-battery": " {device_alias} {device_battery_percentage}%"
+		// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+	},
+	"bluetooth": {
+		"interval": 1,
+		// "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+		"format": " {status}",
+		"format-disabled": "", // an empty format will hide the module
+		"format-connected": " {num_connections} connected",
+		"tooltip-format": "{controller_alias}\t{controller_address}",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+	},
+*/

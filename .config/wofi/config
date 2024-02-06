@@ -1,0 +1,29 @@
+###################################
+#  ██╗    ██╗ ██████╗ ███████╗██╗ #
+#  ██║    ██║██╔═══██╗██╔════╝██║ #
+#  ██║ █╗ ██║██║   ██║█████╗  ██║ #
+#  ██║███╗██║██║   ██║██╔══╝  ██║ #
+#  ╚███╔███╔╝╚██████╔╝██║     ██║ #
+#   ╚══╝╚══╝  ╚═════╝ ╚═╝     ╚═╝ #
+###################################
+
+monitor=DP-1
+show=drun
+show_all=true
+term=kitty
+prompt=~
+line_wrap=word
+dynamic_lines=true
+insensitive=true
+filter_rate=1
+lines=0
+allow_images=true
+image_size=20
+allow_markup=true
+always_parse_args=true
+hide_scroll=true
+gtk_dark=true
+width=20%
+height=30%
+layer=overlay
+key_expand=tab

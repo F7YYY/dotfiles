@@ -1,0 +1,167 @@
+{
+    "Effects": [
+        {
+            "AllowOnlyFirst": false,
+            "AutoStart": false,
+            "Brightness": 100,
+            "ControllerZones": [],
+            "CustomName": "",
+            "CustomSettings": {
+                "size": 4
+            },
+            "EffectClassName": "Rain",
+            "FPS": 60,
+            "RandomColors": false,
+            "Slider2Val": 50,
+            "Speed": 60,
+            "Temperature": 0,
+            "Tint": 0,
+            "UserColors": [
+                1118481,
+                3158064,
+                7368816,
+                11184810,
+                16777215
+            ]
+        },
+        {
+            "AllowOnlyFirst": false,
+            "AutoStart": false,
+            "Brightness": 100,
+            "ControllerZones": [],
+            "CustomName": "Red-Rain",
+            "CustomSettings": {
+                "size": 4
+            },
+            "EffectClassName": "Rain",
+            "FPS": 60,
+            "RandomColors": false,
+            "Slider2Val": 50,
+            "Speed": 60,
+            "Temperature": 0,
+            "Tint": 0,
+            "UserColors": [
+                16,
+                32,
+                64,
+                96,
+                255
+            ]
+        },
+        {
+            "AllowOnlyFirst": false,
+            "AutoStart": false,
+            "Brightness": 100,
+            "ControllerZones": [],
+            "CustomName": "Purple-Rain",
+            "CustomSettings": {
+                "size": 4
+            },
+            "EffectClassName": "Rain",
+            "FPS": 60,
+            "RandomColors": false,
+            "Slider2Val": 50,
+            "Speed": 60,
+            "Temperature": 0,
+            "Tint": 0,
+            "UserColors": [
+                1900554,
+                3145744,
+                6619170,
+                12582976,
+                16711765
+            ]
+        },
+        {
+            "AllowOnlyFirst": false,
+            "AutoStart": true,
+            "Brightness": 100,
+            "ControllerZones": [
+                {
+                    "description": "ENE SMBus Device",
+                    "is_segment": false,
+                    "location": "I2C: /dev/i2c-0, address 0x72",
+                    "name": "ENE DRAM",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "",
+                    "vendor": "ENE",
+                    "version": "AUDA0-E6K5-0101",
+                    "zone_idx": 0
+                },
+                {
+                    "description": "ENE SMBus Device",
+                    "is_segment": false,
+                    "location": "I2C: /dev/i2c-0, address 0x73",
+                    "name": "ENE DRAM",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "",
+                    "vendor": "ENE",
+                    "version": "AUDA0-E6K5-0101",
+                    "zone_idx": 0
+                },
+                {
+                    "description": "ASUS Aura USB Device",
+                    "is_segment": false,
+                    "location": "HID: /dev/hidraw4",
+                    "name": "ASUS ROG STRIX X570-E GAMING",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "9876543210",
+                    "vendor": "ASUS",
+                    "version": "AULA3-6K75-0218",
+                    "zone_idx": 0
+                },
+                {
+                    "description": "ASUS Aura USB Device",
+                    "is_segment": false,
+                    "location": "HID: /dev/hidraw4",
+                    "name": "ASUS ROG STRIX X570-E GAMING",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "9876543210",
+                    "vendor": "ASUS",
+                    "version": "AULA3-6K75-0218",
+                    "zone_idx": 1
+                },
+                {
+                    "description": "ASUS Aura USB Device",
+                    "is_segment": false,
+                    "location": "HID: /dev/hidraw4",
+                    "name": "ASUS ROG STRIX X570-E GAMING",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "9876543210",
+                    "vendor": "ASUS",
+                    "version": "AULA3-6K75-0218",
+                    "zone_idx": 2
+                }
+            ],
+            "CustomName": "Bloody-Rain",
+            "CustomSettings": {
+                "size": 4
+            },
+            "EffectClassName": "Rain",
+            "FPS": 60,
+            "RandomColors": false,
+            "Slider2Val": 50,
+            "Speed": 60,
+            "Temperature": 100,
+            "Tint": 0,
+            "UserColors": [
+                16711765,
+                14483530,
+                8192042,
+                5046298,
+                1900554
+            ]
+        }
+    ],
+    "version": 2
+}

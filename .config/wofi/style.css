@@ -1,0 +1,47 @@
+@define-color black rgba(0, 0, 0, 0.66);
+@define-color white rgba(255, 255, 255, 0.66);
+
+* {
+    font-family: Sony Sketch EF;
+    font-size: 20px;
+    color: @white;
+    background-color: transparent;
+    border-radius: 20px;
+}
+
+#window {
+    background-color: @black;
+    border: 6px double @white;
+    border-radius: 30px;
+}
+
+#outer-box {
+    padding: 20px;
+}
+
+#input {
+    color: white;
+    background-color: black;
+    border: 2px solid @white;
+    padding: 6px 0px;
+}
+
+#entry {
+    color: transparent;
+    margin: 4px 0px;
+}
+
+#entry #selected {
+    background-color: @white;
+    border: 2px solid @black;
+    padding: 0px 10px;
+}
+
+#img {
+    padding: 0px 18px;
+}
+
+#selected #text,
+#selected #img {
+    color: @black;
+}

@@ -1,0 +1,151 @@
+/*////////////////////////////////////////////////////////
+//  ██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗  //
+//  ██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗ //
+//  ██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝ //
+//  ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗ //
+//  ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║ //
+//   ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ //
+//"https://github.com/Alexays/Waybar/wiki/Configuration"//
+//
+//──PRESETS─────────────────────────────────────────────*/
+@define-color black rgba(0, 0, 0, 0.66);
+@define-color white rgba(255, 255, 255, 0.66);
+
+/*──EVERYTHING──────────────────────────────────────────*/
+* {
+    min-height: 0px;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    border-radius: 0px;
+    font: italic small-caps bold 16px Sony Sketch EF;
+    box-shadow: none;
+    text-shadow: none;
+    background: transparent;
+    animation-duration: 0ms;
+    transition-duration: 0ms;
+}
+@keyframes blink {
+    to {
+        color: black;
+    }
+}
+tooltip {
+    color: white;
+    background-color: @black;
+    border: 4px double white;
+    border-radius: 20px;
+}
+
+/*──WAYBAR──────────────────────────────────────────────*/
+#waybar>* {
+    margin-top: 4px;
+    background: linear-gradient(to top, transparent calc(50% - 4px), @white 50%, transparent calc(50% + 4px), transparent);
+}
+#waybar.active{
+    background: linear-gradient(to top, transparent calc(50% - 4px), @white 50%, transparent calc(50% + 4px), transparent);
+}
+window#waybar {
+    color: white;
+    padding: 0px 10px;
+    transition-property: inherit;
+}
+window#waybar.hidden {
+    opacity: 0.2;
+}
+window>menu {
+    padding: 0px 10px;
+    color: white;
+    border: 4px double white;
+    border-radius: 16px;
+    background-color: @black;
+}
+window>menu>*:hover {
+    padding: 0px 10px;
+    color: black;
+    border: 1px double white;
+    border-radius: 24px;
+    background-color: @white;
+    margin: 0px 2px;
+}
+
+/*──MODULES─────────────────────────────────────────────*/
+/*.modules-left>*:last-child::after,
+.modules-center>*:first-child::after,
+.modules-center>*:last-child::after,
+.modules-right>*:first-child::before {
+    background: linear-gradient(to top, transparent calc(50% - 4px), @white 50%, transparent calc(50% + 4px), transparent);
+}*/
+.modules-left,
+.modules-right {
+    margin: 0px 10px;
+}
+.modules-left>widget>*,
+.modules-right>widget>* {
+    color: white;
+    padding: 0px 10px;
+    background-color: @black;
+    border: solid @white;
+    border-width: 2px 0px;
+}
+.modules-left>widget:first-child>*,
+.modules-right>widget:first-child>*,
+.modules-center>widget:first-child>*,
+.modules-center>button.urgent.first-child>* {
+    border-radius: 16px 0px 0px 16px;
+}
+.modules-left>widget:last-child>*,
+.modules-right>widget:last-child>*,
+.modules-center>widget:last-child>*,
+.modules-center>button.urgent.last-child>* {
+    border-radius: 0px 16px 16px 0px;
+}
+.modules-center>widget>* {
+    padding: 0px 10px;
+    background-color: @black;
+    border: solid @white;
+    border-width: 1px 0px;
+}
+
+/*──WORKSPACES──────────────────────────────────────────*/
+#taskbar>*,
+#tray>.passive>*,
+#tray>.active>* {
+    padding: 0px 2px;
+}
+#button,
+#battery.charging,
+#battery.plugged {
+    color: green;
+}
+#workspaces>button.hidden,
+#workspaces>button.empty {
+    color: #333333;
+}
+#workspaces,
+#workspaces>button,
+#pulseaudio.muted,
+#pulseaudio.source-muted,
+#idle_inhibitor.deactivated,
+#tray>.passive {
+    color: grey;
+}
+#workspaces>button.active,
+#workspaces>button:hover {
+    color: white;
+}
+#workspaces>button.urgent,
+#workspaces>button.persistent,
+#network.disconnected,
+#custom-pacman.pending-updates,
+#tray>.needs-attention,
+#temperature.critical,
+#battery.critical:not(.charging) {
+    color: white;
+    transition-duration: 0.1s;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

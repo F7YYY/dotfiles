@@ -1,0 +1,291 @@
+############################################################################################################################
+#                                                                                                                          #
+#     d888888o.   `8.`888b                 ,8'          .8.          `8.`8888.      ,8' 8 8888888888   `8.`8888.      ,8'  #
+#   .`8888:' `88.  `8.`888b               ,8'          .888.          `8.`8888.    ,8'  8 8888          `8.`8888.    ,8'   #
+#   8.`8888.   Y8   `8.`888b             ,8'          :88888.          `8.`8888.  ,8'   8 8888           `8.`8888.  ,8'    #
+#   `8.`8888.        `8.`888b     .b    ,8'          . `88888.          `8.`8888.,8'    8 8888            `8.`8888.,8'     #
+#    `8.`8888.        `8.`888b    88b  ,8'          .8. `88888.          `8.`88888'     8 888888888888     `8.`88888'      #
+#     `8.`8888.        `8.`888b .`888b,8'          .8`8. `88888.          `8. 8888      8 8888             .88.`8888.      #
+#      `8.`8888.        `8.`888b8.`8888'          .8' `8. `88888.          `8 8888      8 8888            .8'`8.`8888.     #
+#  8b   `8.`8888.        `8.`888`8.`88'          .8'   `8. `88888.          8 8888      8 8888           .8'  `8.`8888.    #
+#  `8b.  ;8.`8888         `8.`8' `8,`'          .888888888. `88888.         8 8888      8 8888          .8'    `8.`8888.   #
+#   `Y8888P ,88P'          `8.`   `8'          .8'       `8. `88888.        8 8888      8 8888         .8'      `8.`8888.  #
+#                                                                                                                          #
+##########################################──"https://github.com/swaywm/sway/wiki"──#########################################
+#
+##──EXECUTABLES-(DAEMONS+APPS)──────────────────────────────────────────────────────────────────────────────────────────────
+bar swaybar_command waybar
+##──RETARDED_DAEMONS
+#exec_always { $(killall -9Ieqg MIGRAINE) MIGRAINE }
+##──NORMAL_DAEMONS_WAYLAND+TRAY
+exec {
+    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+    systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+    /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+    #exec-once = dex-autostart -a $HOME/.config/autostart/*
+    wlsunset -s 22:00 -S 10:00 -d 60
+    waypaper-engine                             #$HOME/Pictures/Wallpapers/swww
+    emacs --daemon
+    autotiling
+    mako
+    blueman-manager
+    corectrl
+    openrgb
+    #easyeffects $WAYLAND $TRAY
+    #obs $WAYLAND $TRAY
+    steam $WAYLAND $TRAY
+    vesktop $WAYLAND $TRAY
+    signal-desktop-beta $WAYLAND $TRAY
+    #telegram-desktop $WAYLAND $TRAY
+    youtube-music $WAYLAND $TRAY
+    betterbird $WAYLAND
+    #teams $WAYLAND $TRAY
+    #zoom $WAYLAND $TRAY
+}
+
+##──VARIABLES───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+set {
+    $WAYLAND --enable-features=UseOzonePlatform --ozone-platform=wayland
+    $TRAY   -silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized
+    $SUPER  Mod4
+    $TERM   kitty
+    $MENU   wofi
+    $POWER  $HOME/.config/wofi/scripts/powermenu.sh
+    $FONT   pango:Sony Sketch EF 14                     # (fc-list : family | sort | uniq)
+    $LOCK   $HOME/.config/wofi/scripts/lock.sh
+    $EMOJI  wofi-emoji
+    $CALC  wofi-calc
+    $NOTIFY $HOME/.config/wofi/scripts/mako.sh
+    $DISPLAY1  DP-1 mode 1920x1080@240HZ position 0,0 scale 1
+    #─VIM_KEYS
+    $LEFT   H
+    $DOWN   J
+    $UP     K
+    $RIGHT  L
+    #─COLORS
+    $RED    #FF0000
+    $WHITE  #FFFFFF
+    $GREY   #FFFFFF33
+    $BLACK  #000000
+    $CLEAR  #00000000
+}
+
+##──KEYBINDS────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+bindsym --to-code {
+    $SUPER+Q                kill
+    $SUPER+Escape           exec $TERM
+    $SUPER+Space            exec $MENU
+    $SUPER+Alt+Escape       exec $TERM -e ranger
+    #$SUPER+Alt+R           exec swaymsg reload
+    Ctrl+Alt+Delete         exec $POWER
+    $SUPER+ALT+SPACE        exec $CALC
+    $SUPER+CTRL+SPACE       exec $EMOJI
+    $SUPER+N                exec $NOTIFY
+    #─CURSOR
+    $SUPER+$LEFT            seat - cursor move -10 0
+    $SUPER+$DOWN            seat - cursor move 0 10
+    $SUPER+$UP              seat - cursor move 0 -10
+    $SUPER+$RIGHT           seat - cursor move 10 0
+    --no-repeat $SUPER+Semicolon seat - cursor press button1
+    --release --no-repeat $SUPER+Semicolon seat - cursor release button1
+    --no-repeat $SUPER+Apostrophe seat - cursor press button2
+    --release --no-repeat $SUPER+Apostrophe seat - cursor release button2
+    #─SCREENSHOT/GIF
+    $SUPER+O                exec kooha
+    $SUPER+P                exec grimshot --notify save area $HOME/Pictures/Screenshots/Zone_$(date +%Y-%m-%d-%H%M%S).png
+    $SUPER+Ctrl+P           exec grimshot --notify save screen $HOME/Pictures/Screenshots/Screen_$(date +%Y-%m-%d-%H%M%S).png
+#───XF86_CONTROLS
+    #─BRIGHTNESS
+    XF86MonBrightnessUp     exec brightnessctl -q s +10%
+    XF86MonBrightnessDown   exec brightnessctl -q s 10%-
+    XF86KbdBrightnessUp     exec brightnessctl -d *::kbd_backlight s +10%
+    XF86KbdBrightnessDown   exec brightnessctl -d *::kbd_backlight s 10%-
+    #─PULSEAUDIO
+    XF86AudioRaiseVolume    exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    XF86AudioLowerVolume    exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    XF86AudioMute           exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    XF86AudioMicMute        exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    #─MEDIA
+    XF86AudioNext           exec playerctl next
+    XF86AudioPlay           exec playerctl play-pause
+    XF86AudioPrev           exec playerctl previous
+    XF86AudioStop           exec playerctl stop
+    #─OTHERS
+    xf86Sleep               exec '$LOCK && systemctl suspend'
+    XF86ScreenSaver         exec $LOCK
+    XF86Calculator          exec qalculate-gtk
+}
+
+##──WORKSPACES──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+set {
+    $SP scratchpad
+    $WS workspace
+    $MWS move to $WS
+    $MSP move to $SP
+    $MM move position mouse
+    #─RESIZING+ALIGNMENT
+    $FLOAT floating enable
+    $MINI minimize
+    $RENDER max_render_time
+    $IDLE inhibit_idle fullscreen
+    #─WINDOWS
+    $OPACITY 0.9
+    $OPAQUE  1.0
+}
+bindsym --to-code {
+    $SUPER+B        splith
+    $SUPER+V        splitv
+    $SUPER+Y        splitt
+    $SUPER+T        layout tabbed
+    $SUPER+S        layout toggle split
+    $SUPER+Ctrl+S   layout stacking
+    $SUPER+Alt+F    fullscreen
+    $SUPER+F        floating toggle
+    $SUPER+A        focus parent
+    $SUPER+Ctrl+F   focus mode_toggle
+    #─SWITCH_WORKSPACES
+    $SUPER+1 $WS 1
+    $SUPER+2 $WS 2
+    $SUPER+3 $WS 3
+    $SUPER+4 $WS 4
+    $SUPER+5 $WS 5
+    $SUPER+6 $WS 6
+    $SUPER+7 $WS 7
+    $SUPER+8 $WS 8
+    $SUPER+9 $WS 9
+    $SUPER+0 $WS 10
+    #─MOVE_CONTAINERS_TO_WORKSPACES
+    $SUPER+Ctrl+1 $MWS 1
+    $SUPER+Ctrl+2 $MWS 2
+    $SUPER+Ctrl+3 $MWS 3
+    $SUPER+Ctrl+4 $MWS 4
+    $SUPER+Ctrl+5 $MWS 5
+    $SUPER+Ctrl+6 $MWS 6
+    $SUPER+Ctrl+7 $MWS 7
+    $SUPER+Ctrl+8 $MWS 8
+    $SUPER+Ctrl+9 $MWS 9
+    $SUPER+Ctrl+0 $MWS 10
+    #─MOVE_CONTAINERS_TO_SCRATCHPAD
+    $SUPER+Backspace        $SP show
+    $SUPER+Ctrl+Backspace   $MSP
+    #─TAB_WORKSPACES
+    $SUPER+Shift+Tab    $WS next
+    $SUPER+Tab          $WS back_and_forth
+    #─CHANGE_FOCUSED_WINDOWS
+    $SUPER+Left         focus left
+    $SUPER+Down         focus down
+    $SUPER+Up           focus up
+    $SUPER+Right        focus right
+    #─RESIZE_FOCUSED_WINDOWS
+    $SUPER+Alt+Left     resize shrink width 10px
+    $SUPER+Alt+Down     resize grow height 10px
+    $SUPER+Alt+Up       resize shrink height 10px
+    $SUPER+Alt+Right    resize grow width 10px
+    #─MOVE_FOCUSED_WINDOWS
+    $SUPER+Ctrl+Left    move left
+    $SUPER+Ctrl+Down    move down
+    $SUPER+Ctrl+Up      move up    $SUPER+Backspace        $SP show
+
+    $SUPER+Ctrl+Right   move right
+}
+##──WINDOW_MANAGEMENT-(swaymsg -t get_tree | grep app_id)
+for_window {
+    [class="^.*"] $IDLE $OPACITY
+    [app_id="^.*"] $IDLE $OPACITY
+    [window_role="^.*"] $IDLE $OPACITY
+    [class=".*"] splitt, $MM $OPACITY
+    [app_id=".*"] splitt, $MM $OPACITY
+    [window_role=".*"] splitt, $MM $OPACITY
+    [window_role="pop-up|bubble|task_dialog|page-info|Preferences|menu|About"] $FLOAT, $MM, focus, sticky
+    [window_role="confirm|dialog|download|file_progress|notification|error|splash|confirmreset"] $FLOAT, $MM, focus, sticky
+    [window_role="Open Files|File Operation Progress"] $FLOAT, $MM, focus, sticky
+    [title="(?:Open|Save) (?:File|File Transfer*|Folder|As)"] $FLOAT, $MM, focus, sticky
+    [title="Sharing Indicator"] $FLOAT, $MM, focus, sticky
+    [app_id="mpv$|pavucontrol$|wdisplays|zenity$"] $FLOAT, $MM, focus, sticky
+    [app_id="qalculate-gtk$|openrgb$"] $FLOAT $MM, focus
+    [app_id="brave$|mpv$|imv$|zoom$"] $OPAQUE
+}
+assign {
+    [class="vesktop$"] $WS2, $MINI
+    [class="zoom$|Microsoft Teams - Preview$"] $WS9, $MINI
+    [class="betterbird$"] $WS10, $MINI
+    [class="corectrl$|com.github.wwmm.easyeffects$"] $SP, $MM, focus, $MINI
+}
+#───OTHERS
+floating_modifier               $SUPER normal
+workspace_auto_back_and_forth   no
+workspace_layout                default
+default_orientation             auto
+focus_on_window_activation      smart
+tiling_drag                     enable
+popup_during_fullscreen         smart
+scratchpad_minimize             enable
+title_align                     center
+titlebar_separator              enable
+
+##──PERIPHERALS─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+output {
+    $DISPLAY1
+    * adaptive_sync on
+}
+bindswitch {
+#───LAPTOP_AUTO-DISPLAY
+    --reload --locked lid:on output $DISPLAY1 disable
+    --reload --locked lid:off output $DISPLAY1 enable
+}
+input type:keyboard {
+    xkb_layout  us
+}
+##──MOUSE
+focus_follows_mouse no
+mouse_warping       none
+input type:mouse {
+    accel_profile   flat
+    pointer_accel   0
+}
+
+##──THEMES──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+##──FX
+blur disable
+blur_passes 5
+blur_radius 5
+blur_xray enable
+corner_radius 12
+shadows enable
+shadows_on_csd enable
+shadow_color $BLACK
+shadow_blur_radius 20
+layer_effects "notifications" blur disable; shadows enable; corner_radius 30
+default_dim_inactive 0.1
+dim_inactive_colors.unfocused $CLEAR
+dim_inactive_colors.urgent $RED
+default_border pixel 2px
+default_floating_border pixel 2px
+smart_corner_radius on
+smart_borders on
+smart_gaps on
+gaps inner 10px
+##──CLASSES                 BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+client.background           N/A         $BLACK
+client.focused              $WHITE      $BLACK      $WHITE      $WHITE      $WHITE
+client.focused_tab_title    $WHITE      $BLACK      $WHITE
+client.focused_inactive     $BLACK      $BLACK      $WHITE      $BLACK      $BLACK
+client.unfocused            $GREY       $BLACK      $GREY       $GREY       $GREY
+client.urgent               $RED        $BLACK      $RED        $RED        $RED
+
+##──SYSTEM_POWER────────────────────────────────────────────────────────────────────────────────────────────────────────────
+exec swayidle -w $( \
+    timeout 600 '$LOCK' \
+    timeout 900 'swaymsg "output * dpms off"' \
+    timeout 1200 'systemctl suspend' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'playerctl -a pause' \
+    before-sleep '$LOCK' \
+    #after-resume 'swaymsg "output * dpms on"' \
+)
+
+##──XD_WAYLAND──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+xwayland enable
+##──INCLUSION───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+include /etc/sway/config.d/*
+##──END─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
