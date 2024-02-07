@@ -45,29 +45,29 @@ exec {
 
 ##──VARIABLES───────────────────────────────────────────────────────────────────────────────────────────────────────────────
 set {
-    $WAYLAND --enable-features=UseOzonePlatform --ozone-platform=wayland
-    $TRAY   -silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized
-    $SUPER  Mod4
-    $TERM   kitty
-    $MENU   wofi
-    $POWER  $HOME/.config/wofi/scripts/powermenu.sh
-    $FONT   pango:Sony Sketch EF 14                     # (fc-list : family | sort | uniq)
-    $LOCK   $HOME/.config/wofi/scripts/lock.sh
-    $EMOJI  wofi-emoji
-    $CALC  wofi-calc
-    $NOTIFY $HOME/.config/wofi/scripts/mako.sh
-    $DISPLAY1  DP-1 mode 1920x1080@240HZ position 0,0 scale 1
+    $WAYLAND    --enable-features=UseOzonePlatform --ozone-platform=wayland
+    $TRAY       -silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized
+    $SUPER      Mod4
+    $TERM       kitty
+    $MENU       wofi
+    $POWER      $HOME/.config/wofi/scripts/powermenu.sh
+    $FONT       pango:Sony Sketch EF 14                     # (fc-list : family | sort | uniq)
+    $LOCK       $HOME/.config/wofi/scripts/lock.sh
+    $EMOJI      wofi-emoji
+    $CALC       wofi-calc
+    $NOTIFY     $HOME/.config/wofi/scripts/mako.sh
+    $DISPLAY1   DP-1 mode 1920x1080@240HZ position 0,0 scale 1
     #─VIM_KEYS
-    $LEFT   H
-    $DOWN   J
-    $UP     K
-    $RIGHT  L
+    $LEFT       H
+    $DOWN       J
+    $UP         K
+    $RIGHT      L
     #─COLORS
-    $RED    #FF0000
-    $WHITE  #FFFFFF
-    $GREY   #FFFFFF33
-    $BLACK  #000000
-    $CLEAR  #00000000
+    $RED        #FF0000
+    $WHITE      #FFFFFF
+    $GREY       #FFFFFF33
+    $BLACK      #000000
+    $CLEAR      #00000000
 }
 
 ##──KEYBINDS────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -86,10 +86,10 @@ bindsym --to-code {
     $SUPER+$DOWN            seat - cursor move 0 10
     $SUPER+$UP              seat - cursor move 0 -10
     $SUPER+$RIGHT           seat - cursor move 10 0
-    --no-repeat $SUPER+Semicolon seat - cursor press button1
-    --release --no-repeat $SUPER+Semicolon seat - cursor release button1
-    --no-repeat $SUPER+Apostrophe seat - cursor press button2
-    --release --no-repeat $SUPER+Apostrophe seat - cursor release button2
+    --no-repeat             $SUPER+Semicolon seat - cursor press button1
+    --release --no-repeat   $SUPER+Semicolon seat - cursor release button1
+    --no-repeat             $SUPER+Apostrophe seat - cursor press button2
+    --release --no-repeat   $SUPER+Apostrophe seat - cursor release button2
     #─SCREENSHOT/GIF
     $SUPER+O                exec kooha
     $SUPER+P                exec grimshot --notify save area $HOME/Pictures/Screenshots/Zone_$(date +%Y-%m-%d-%H%M%S).png
@@ -110,26 +110,22 @@ bindsym --to-code {
     XF86AudioPlay           exec playerctl play-pause
     XF86AudioPrev           exec playerctl previous
     XF86AudioStop           exec playerctl stop
-    #─OTHERS
-    xf86Sleep               exec '$LOCK && systemctl suspend'
-    XF86ScreenSaver         exec $LOCK
-    XF86Calculator          exec qalculate-gtk
 }
 
 ##──WORKSPACES──────────────────────────────────────────────────────────────────────────────────────────────────────────────
 set {
-    $SP scratchpad
-    $WS workspace
-    $MWS move to $WS
-    $MSP move to $SP
-    $MM move position mouse
+    $SP     scratchpad
+    $WS     workspace
+    $MWS    move to $WS
+    $MSP    move to $SP
+    $MM     move position mouse
     #─RESIZING+ALIGNMENT
-    $FLOAT floating enable
-    $MINI minimize
+    $FLOAT  floating enable
+    $MINI   minimize
     $RENDER max_render_time
-    $IDLE inhibit_idle fullscreen
+    $IDLE   inhibit_idle fullscreen
     #─WINDOWS
-    $OPACITY 0.9
+    $OPACITY 0.8
     $OPAQUE  1.0
 }
 bindsym --to-code {
@@ -184,32 +180,23 @@ bindsym --to-code {
     #─MOVE_FOCUSED_WINDOWS
     $SUPER+Ctrl+Left    move left
     $SUPER+Ctrl+Down    move down
-    $SUPER+Ctrl+Up      move up    $SUPER+Backspace        $SP show
-
+    $SUPER+Ctrl+Up      move up
     $SUPER+Ctrl+Right   move right
 }
-##──WINDOW_MANAGEMENT-(swaymsg -t get_tree | grep app_id)
+##──WINDOW_MANAGEMENT-(swaymsg -t get_tree | awk 'tolower($0) ~ /(app_id|class|window_role)/ && NF > 1')
 for_window {
-    [class="^.*"] $IDLE $OPACITY
-    [app_id="^.*"] $IDLE $OPACITY
-    [window_role="^.*"] $IDLE $OPACITY
-    [class=".*"] splitt, $MM $OPACITY
-    [app_id=".*"] splitt, $MM $OPACITY
-    [window_role=".*"] splitt, $MM $OPACITY
-    [window_role="pop-up|bubble|task_dialog|page-info|Preferences|menu|About"] $FLOAT, $MM, focus, sticky
-    [window_role="confirm|dialog|download|file_progress|notification|error|splash|confirmreset"] $FLOAT, $MM, focus, sticky
-    [window_role="Open Files|File Operation Progress"] $FLOAT, $MM, focus, sticky
-    [title="(?:Open|Save) (?:File|File Transfer*|Folder|As)"] $FLOAT, $MM, focus, sticky
-    [title="Sharing Indicator"] $FLOAT, $MM, focus, sticky
-    [app_id="mpv$|pavucontrol$|wdisplays|zenity$"] $FLOAT, $MM, focus, sticky
-    [app_id="qalculate-gtk$|openrgb$"] $FLOAT $MM, focus
-    [app_id="brave$|mpv$|imv$|zoom$"] $OPAQUE
+    [app_id=class=window_role=".*"] $OPACITY, $MM, focus, sticky
+    [window_role="pop-up|bubble|task_dialog|page-info|Preferences|menu|About|Sharing Indicator"] $FLOAT, $OPAQUE
+    [window_role="confirm|dialog|download|file_progress|notification|error|splash|confirmreset"] $FLOAT, $OPAQUE
+    [window_role="Open Files|File Operation Progress|(?:Open|Save) (?:File|File Transfer*|Folder|As)"] $FLOAT, $OPAQUE
+    [app_id="nm*|mpv|imv|zenity|wdisplays|pavucontrol|gpartedbin|openrgb|bleachbit|qalculate-gtk|qt5ct|gnome-tweaks"] $FLOAT, $OPAQUE
+    [app_id="qemu*|brave|zoom|electronplayer"] $OPAQUE
 }
 assign {
-    [class="vesktop$"] $WS2, $MINI
-    [class="zoom$|Microsoft Teams - Preview$"] $WS9, $MINI
-    [class="betterbird$"] $WS10, $MINI
-    [class="corectrl$|com.github.wwmm.easyeffects$"] $SP, $MM, focus, $MINI
+    [class="vesktop"] $WS 2
+    [class="zoom|teams-for-linux"] $WS 9
+    [class="betterbird"] $WS 10
+    [class="corectrl|com.github.wwmm.easyeffects"] $SP
 }
 #───OTHERS
 floating_modifier               $SUPER normal
