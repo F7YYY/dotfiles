@@ -189,9 +189,10 @@ for_window {
     [window_role="pop-up|bubble|task_dialog|page-info|Preferences|menu|About|Sharing Indicator"] $FLOAT, $OPAQUE
     [window_role="confirm|dialog|download|file_progress|notification|error|splash|confirmreset"] $FLOAT, $OPAQUE
     [window_role="Open Files|File Operation Progress|(?:Open|Save) (?:File|File Transfer*|Folder|As)"] $FLOAT, $OPAQUE
-    [app_id="nm*|mpv|imv|zenity|wdisplays|pavucontrol|gpartedbin|openrgb|bleachbit|qalculate-gtk|qt5ct|gnome-tweaks"] $FLOAT, $OPAQUE
+    [app_id="mpv|imv|zenity|wdisplays|pavucontrol|gpartedbin|openrgb|bleachbit|qalculate-gtk|qt5ct|gnome-tweaks"] $FLOAT, $OPAQUE
     [app_id="qemu*|brave|zoom|electronplayer"] $OPAQUE
 }
+#─WINDOW_DEFAULT_APPS
 assign {
     [class="vesktop"] $WS 2
     [class="zoom|teams-for-linux"] $WS 9
