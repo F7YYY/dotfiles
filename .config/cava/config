@@ -17,7 +17,7 @@
 hide_on_silence	= true
 framerate   = 240
 autosens    = 1
-bars        = 0
+bars        = 12
 bar_width   = 2
 bar_spacing = 1
 
@@ -28,7 +28,9 @@ source  = auto
 
 [output]
 ########
-data_format         = binary
+data_format         = ascii
+ascii_max_range = 9
+
 bit_format          = 255bit
 alacritty_sync      = 1
 
