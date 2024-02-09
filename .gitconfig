@@ -52,7 +52,7 @@
 [difftool]
 	prompt = false
 [sequence]
-	editor = interactive-rebase-tool
+	editor = $EDITOR
 [commit]
 	gpgsign = true
 [gitflow "prefix"]
