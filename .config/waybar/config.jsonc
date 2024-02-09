@@ -26,7 +26,7 @@
 	],
 	"modules-right": [				//__SYSTEM__
 		"idle_inhibitor",
-		"cava",
+		"custom/cava",
 		"pulseaudio",
 		"network",
 		//"custom/vpn",				// WIP ~ SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/VPN.SH -> WOFI
@@ -154,7 +154,8 @@
 		},
 		"tooltip": false
 	},
-	"cava": {
+	"custom/cava": {
+		//"exec": "sleep 3 && cava -p $HOME/.config/cava/conf | sed -u 's/;//g;s/0/0/g;s/1/1/g;s/2/2/g;s/3/3/g;s/4/4/g;s/5/5/g;s/6/6/g;s/7/7/g;s/8/8/g;s/9/9/g;'"
 		"cava_config": "$HOME/.config/cava/config",
 		"input_delay": 2,
 		"format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
@@ -174,7 +175,7 @@
 		"format-source-muted": "",
 		"format-icons": {
 			"hdmi": "",
-			"hifi": "",
+			"hifi": "🎛",
 			"headphones": "🎧",
 			"handsfree": "🎧",
 			"headset": "🎧",
