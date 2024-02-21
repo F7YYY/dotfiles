@@ -62,6 +62,8 @@
 	autoupdate = 1
 [status]
 	showUntrackedFiles = normal
+[credential]
+	helper = /usr/lib/git-core/git-credential-libsecret
 [alias]
 	dotfiles = !git --git-dir=$HOME/.$ --work-tree=$HOME
 	##########
