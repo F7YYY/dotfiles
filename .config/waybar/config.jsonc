@@ -9,7 +9,7 @@
 //
 //──LAYOUT────────────────────────────────────────────────
 {
-"position": "top",
+	"position": "top",
 	"layer": "top",
 	"pango_markup": true,
 	"modules-left": [				//__APPLICATIONS__
@@ -26,11 +26,10 @@
 	],
 	"modules-right": [				//__SYSTEM__
 		"idle_inhibitor",
-		"custom/cava",
+		"custom/cava",				// WIP ~ WITHOUT RECOMPILING
 		"pulseaudio",
-		"network",
+		"network",					// WIP ~ REPORT EXTERNAL/PUBLIC IP
 		//"custom/vpn",				// WIP ~ SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/VPN.SH -> WOFI
-		//"custom/wireguard",		// WIP ~ SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/WIREGUARD.SH -> WOFI
 		//"group/hardware",			// WIP ~ SYSTEM HARDWARE STATUS
 		"custom/powermenu",			// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU.SH
 		"custom/pacman"				// AUR: WAYBAR-UPDATES
@@ -155,7 +154,8 @@
 		"tooltip": false
 	},
 	"custom/cava": {
-		//"exec": "sleep 3 && cava -p $HOME/.config/cava/conf | sed -u 's/;//g;s/0/0/g;s/1/1/g;s/2/2/g;s/3/3/g;s/4/4/g;s/5/5/g;s/6/6/g;s/7/7/g;s/8/8/g;s/9/9/g;'"
+		"interval": 1,
+		//"exec": "sleep 3 && cava -p $HOME/.config/cava/config",
 		"cava_config": "$HOME/.config/cava/config",
 		"input_delay": 2,
 		"format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
@@ -197,15 +197,15 @@
 		"format-ethernet": "{ifname} ",
 		"format-linked": "{ifname}{essid}",
 		"format-disconnected": "⚠",
-		"tooltip-format-wifi": "{ifname}: {essid}\n Frequency: {frequency}MHz\n Strength: {signaldBm}dBm ({signalStrength}%)\n IP: {ipaddr}/{cidr}\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
-		"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
+		"tooltip-format-wifi": "{ifname}: {essid}\n Frequency: {frequency}MHz\n Strength: {signaldBm}dBm ({signalStrength}%)\n IP: {ipaddr}/{cidr}\nIP: 'curl ifconfig.me'\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
+		"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n IP: 'curl ifconfig.me'\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
         "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
 		"on-click": "$HOME/.config/wofi/scripts/nmtui.sh",
 		"on-click-right": "kitty $SHELL -c 'nmtui'",
 		"tooltip": true
 	},
 	"custom/vpn": {
-		"interval": 60,
+		"interval": 1,
 		"exec": "$HOME/.config/wofi/scripts/vpn.sh --status",
 		"format": "{output}<big>🖧</big>",
 		"format-disconnected": "{}<big> ⚠</big>",
@@ -292,10 +292,10 @@
 		},
 		"temperature": {
 			"interval": 1,
-			// "thermal-zone": 2,
-			// "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+			//"thermal-zone": 2,
+			//"hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
 			"critical-threshold": 80,
-			// "format-critical": "{temperatureC}°C {icon}",
+			//"format-critical": "{temperatureC}°C {icon}",
 			"format": "{temperatureC}°C {icon}",
 			"format-icons": ["","",""]
 		},
@@ -305,8 +305,8 @@
 			"format-charging": "{capacity}% {icon}🗲",
 			"format-plugged": "{capacity}% {icon} ",
 			"format-alt": "{time} {icon}",
-			// "format-good": "", // An empty format will hide the module
-			// "format-full": "",
+			//"format-good": "", // An empty format will hide the module
+			//"format-full": "",
 			"format-icons": ["","","","",""],
 			"states": {
 				"good": 90,
@@ -333,7 +333,7 @@
 		"format": " {status}",
 		"format-connected": " {device_alias}",
 		"format-connected-battery": " {device_alias} {device_battery_percentage}%"
-		// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+		//"format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
 		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
 		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
 		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
@@ -341,7 +341,7 @@
 	},
 	"bluetooth": {
 		"interval": 1,
-		// "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+		//"controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
 		"format": " {status}",
 		"format-disabled": "", // an empty format will hide the module
 		"format-connected": " {num_connections} connected",
