@@ -25,12 +25,12 @@ exec {
     #exec-once = dex-autostart -a $HOME/.config/autostart/*
     wlsunset -s 22:00 -S 10:00 -d 60
     waypaper-engine                             #$HOME/Pictures/Wallpapers/swww
-    emacs --daemon
+    #emacs --daemon
     autotiling
     mako
-    blueman-manager
+    blueman-manager $TRAY
     corectrl
-    openrgb
+    openrgb $TRAY
     #easyeffects $WAYLAND $TRAY
     #obs $WAYLAND $TRAY
     steam $WAYLAND $TRAY
@@ -47,15 +47,16 @@ exec {
 set {
     $WAYLAND    --enable-features=UseOzonePlatform --ozone-platform=wayland
     $TRAY       -silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized
+    $FONT       pango:Sony Sketch EF 14                       # (fc-list : family | sort | uniq)
     $SUPER      Mod4
     $TERM       kitty
     $MENU       wofi
-    $POWER      $HOME/.config/wofi/scripts/powermenu.sh
-    $FONT       pango:Sony Sketch EF 14                     # (fc-list : family | sort | uniq)
-    $LOCK       $HOME/.config/wofi/scripts/lock.sh
     $EMOJI      wofi-emoji
     $CALC       wofi-calc
+    $GIF        kooha
     $NOTIFY     $HOME/.config/wofi/scripts/mako.sh
+    $LOCK       $HOME/.config/wofi/scripts/lock.sh
+    $POWER      $HOME/.config/wofi/scripts/powermenu.sh
     $DISPLAY1   DP-1 mode 1920x1080@240HZ position 0,0 scale 1
     #─VIM_KEYS
     $LEFT       H
@@ -74,12 +75,12 @@ set {
 bindsym --to-code {
     $SUPER+Q                kill
     $SUPER+Escape           exec $TERM
+    $SUPER+Alt+Escape       exec $TERM ranger
     $SUPER+Space            exec $MENU
-    $SUPER+Alt+Escape       exec $TERM -e ranger
-    #$SUPER+Alt+R           exec swaymsg reload
-    Ctrl+Alt+Delete         exec $POWER
     $SUPER+ALT+SPACE        exec $CALC
     $SUPER+CTRL+SPACE       exec $EMOJI
+    #$SUPER+Alt+R           exec swaymsg reload
+    Ctrl+Alt+Delete         exec $POWER
     $SUPER+N                exec $NOTIFY
     #─CURSOR
     $SUPER+$LEFT            seat - cursor move -10 0
@@ -91,7 +92,7 @@ bindsym --to-code {
     --no-repeat             $SUPER+Apostrophe seat - cursor press button2
     --release --no-repeat   $SUPER+Apostrophe seat - cursor release button2
     #─SCREENSHOT/GIF
-    $SUPER+O                exec kooha
+    $SUPER+O                exec $GIF
     $SUPER+P                exec grimshot --notify save area $HOME/Pictures/Screenshots/Zone_$(date +%Y-%m-%d-%H%M%S).png
     $SUPER+Ctrl+P           exec grimshot --notify save screen $HOME/Pictures/Screenshots/Screen_$(date +%Y-%m-%d-%H%M%S).png
 #───XF86_CONTROLS
@@ -183,6 +184,7 @@ bindsym --to-code {
     $SUPER+Ctrl+Up      move up
     $SUPER+Ctrl+Right   move right
 }
+
 ##──WINDOW_MANAGEMENT-(swaymsg -t get_tree | awk 'tolower($0) ~ /(app_id|class|window_role)/ && NF > 1')
 for_window {
     [app_id=class=window_role=".*"] $OPACITY, $MM, focus, sticky
@@ -272,8 +274,8 @@ exec swayidle -w $( \
     #after-resume 'swaymsg "output * dpms on"' \
 )
 
-##──XD_WAYLAND──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+##──XD-WAYLAND──────────────────────────────────────────────────────────────────────────────────────────────────────────────
 xwayland enable
+
 ##──INCLUSION───────────────────────────────────────────────────────────────────────────────────────────────────────────────
 include /etc/sway/config.d/*
-##──END─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
