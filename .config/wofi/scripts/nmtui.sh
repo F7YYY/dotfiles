@@ -3,6 +3,13 @@
 # WOFI~NMTUI #
 ##############
 
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PASSWORD_ENTER="~ HIT ENTER/ESCAPE TO SKIP PASSWORD ~"
+WIRELESS_INTERFACES=($(nmcli device | awk '$2=="wifi" {print $1}'))
+WIRELESS_INTERFACES_PRODUCT=()
+WLAN_INT=0
+WIRED_INTERFACES=($(nmcli device | awk '$2=="ethernet" {print $1}'))
+
 # Exit on error, unset variable as error, and propagate failure in pipelines
 set -euo pipefail
 
@@ -80,9 +87,9 @@ login() {
 # Function to get user credentials
 get_credentials() {
     local input="$1"
-    local max_attempts=3  # Define the maximum number of login attempts
+    local max_attempts=2
 
-    for ((attempt = 1; attempt <= max_attempts; attempt++)); do
+    for ((attempt = 0; attempt <= max_attempts; attempt++)); do
         case "$input" in
             "password")
                 local password=$(wofi --dmenu --prompt "<Password>" --password | tr -d '\n')
@@ -207,6 +214,10 @@ hostname() {
     fi
 }
 
+radio() {
+
+}
+
 # Main function to display the network options and handle user's input
 main() {
     local lfg=false
@@ -221,10 +232,11 @@ main() {
         			"ACTIVATE CONNECTION"
         			"SPEED TEST"
         			"SYSTEM HOSTNAME"
+                    "RADIO"
         			"<----DONE---->")
         local selected1=$(wofi --dmenu --prompt "<NMTUI-MENU>" <<<"${list[@]/%/$'\n'}" | tr -d '\n')
 
-        if [ "$selected1" == "<=DONE=>" ]; then
+        if [ "$selected1" == "<----DONE---->" ]; then
             break
         fi
 
@@ -243,6 +255,9 @@ main() {
                 ;;
             "SYSTEM HOSTNAME")
                 hostname
+                ;;
+            "RADIO")
+                radio
                 ;;
             *)
                 cleanup
