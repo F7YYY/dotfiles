@@ -7,11 +7,10 @@
 #   ╚══╝╚══╝  ╚═════╝ ╚═╝     ╚═╝ #
 ###################################
 
-monitor=DP-1
 show=drun
 show_all=true
 term=kitty
-prompt=~
+prompt=❥❥❥❥❥❥❥❥❥❥❥❥❥❥❥❥❥❥❥❥
 line_wrap=word
 dynamic_lines=true
 insensitive=true
