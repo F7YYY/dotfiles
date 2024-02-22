@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 #
-# WOFI WAYBAR VPN #
-###################
+# OpenVPN & WireGuard abstraction layer for waybar and wofi
+###########################################################
+# Usage: ./wireguard.sh [menu|toggle NAME]
+# - When executed without any arguments, it prints the current WireGuard connections.
+# - When executed with "menu" as the argument, it prints all available WireGuard connections in a format compatible with Wofi.
+# - When executed with "toggle NAME" as the argument, it toggles the status of the specified WireGuard connection.
+##############################################################################################################################
 
 # Exit on error, unset variable as error, and propagate failure in pipelines
 set -euo pipefail
@@ -16,7 +21,7 @@ trap cleanup EXIT
 
 # Function to check if the required tools are installed
 requirements() {
-    local required_tools=("notify-send" "wofi" "waybar" "nmcli" "speedtest" )
+    local required_tools=("notify-send" "wofi" "waybar" "nmcli" "speedtest" "wg" "openvpn")
     local missing_tools=()
 
     for tool in "${required_tools[@]}"; do
@@ -34,97 +39,58 @@ requirements() {
     fi
 }
 
-# Function to safely get VPN status
-get_vpn_status() {
-    local vpn_info=$(nmcli -t -f NAME,TYPE,DEVICE connection show --active | grep 'vpn' | awk -F ':' '{print $1}')
-    echo "$vpn_info"
+# Function to escalate user privileges
+priv() {
+    for (( i=1; i<=3; i++ )); do
+        read -rs VARIABLE < $(wofi --password --prompt "<PASSWORD>" | tr -d '\n')
+        sha1pass <<<"$VARIABLE"
+    done
+    return $sha1pass
 }
 
-# Function to safely get VPN details
-get_vpn_details() {
-    local vpn_name="$1"
-    local vpn_details=$(nmcli -t -f NAME,GENERAL.STATE,GENERAL.DEFAULT,GENERAL.ACTIVECONNECTIONTYPE connection show "$vpn_name")
-    echo "$vpn_details"
-}
+# Function to get a list of WireGuard connections
+get_connections() {
+    local type="$1"
+    local connections
 
-# Function to safely get VPN IP addresses
-get_vpn_ip_addresses() {
-    local vpn_name="$1"
-    local vpn_details=$(get_vpn_details "$vpn_name")
-    local ipv4_address=$(echo "$vpn_details" | grep 'ipv4' | awk -F ':' '{print $2}')
-    local ipv6_address=$(echo "$vpn_details" | grep 'ipv6' | awk -F ':' '{print $2}')
-    echo -e "IPv4: $ipv4_address\nIPv6: $ipv6_address"
-}
-
-# Function to safely get VPN device and speed information
-get_vpn_device_speed_info() {
-    local device_info=$(echo "$1" | grep 'device' | awk -F ':' '{print $2}')
-    local speed_info=$(speedtest)
-    echo -e "Device: $device_info\nSpeed: $speed_info"
-}
-
-# Function to safely show VPN status and details using Wofi
-show_vpn_status_details() {
-    local vpn_name="$1"
-    local vpn_status=$(get_vpn_status)
-    #local icon="<span foreground='#928374'></span>"
-    local icon="" # Replace this with the desired icon for VPN off
-    local status="Off"
-    local tooltip="VPN is currently off"
-
-    if [[ -n "$vpn_status" ]]; then
-        icon="<span foreground='#928374'></span>"
-        icon="" # Replace this with the desired icon for VPN on
-        status="On"
-        local vpn_details=$(get_vpn_details "$vpn_name")
-        local vpn_ip_info=$(get_vpn_ip_addresses "$vpn_name")
-        local vpn_speed_info=$(get_vpn_device_speed_info "$vpn_details")
-        tooltip="VPN: $vpn_name\n$vpn_details\n$vpn_ip_info\n$vpn_speed_info"
-    else
-        # Return an empty string to hide the icon
-        echo ""
+    if [[ "$type" == "active" ]]; then
+        connections=$(wg show interfaces | awk '/^interface/ {print $2}')
+    elif [[ "$type" == "available" ]]; then
+        connections=$(wg show all | awk '/^interface/ {print $2}')
     fi
 
-    echo "{\"text\": \"$icon\", \"class\": \"$status\", \"tooltip-markup\": true, \"tooltip\": \"$tooltip\"}"
+    echo "$connections"
 }
 
-# Function to show VPN details using Wofi
-show_vpn_details() {
-    local vpn_status=$(get_vpn_status)
-    if [[ -n "$vpn_status" ]]; then
-        local vpn_list
-        vpn_list=$(nmcli -t -f NAME,TYPE connection show | grep 'vpn' | awk -F ':' '{print $1}')
-        local selected_vpn=$(echo "$vpn_list" | wofi --dmenu --prompt "VPN Details" | tr -d '\n')
-        if [[ -n "$selected_vpn" ]]; then
-            show_vpn_status_details "$selected_vpn"
+# Function to activate/deactivate OpenVPN/WireGuard connections
+connection() {
+    local type="$1"
+    local wg_status=$(wg show "$conn" | awk '/^  interface:/ {print $3}')
+    local iface="wg0"
+
+    for iface in $(ifconfig | cut -d ' ' -f1 | tr ':' '\n' | awk NF); do
+        +=("$iface")
+
+        if [[ -z $(sudo wg show) ]]
+            notify-send -u low -a "WireGuard" "$conn: $ip_address"
+        elif [[ "$iface" ==  ("interface: $iface" | tr -d " " | "listening port: ") ]]; then
+
+        else
+
+
+
+    local connections=$(get_connections "$type")
+
+    for conn in $connections; do
+        local status=$(wg show "$conn" | awk '/^  interface:/ {print $3}')
+        local ip_address=$(wg show "$conn" | awk '/^  public key:/ {print $4}')
+
+        if [[ "$status" == "up" && -n "$ip_address" ]]; then
+            notify-send -u low -a "WireGuard" "$conn: $ip_address"
+        elif [[ "$status" == "down" ]]; then
+            notify-send -u normal -a "WireGuard" "$conn"
         fi
-    fi
-}
-
-# Function to connect to a VPN using Wofi
-connect_to_vpn() {
-    local vpn_list=$(nmcli -t -f NAME,TYPE connection show | grep 'vpn' | awk -F ':' '{print $1}')
-    local selected_vpn=$(echo "$vpn_list" | wofi --dmenu --prompt "Connect to VPN" | tr -d '\n')
-    if [[ -n "$selected_vpn" ]]; then
-        nmcli connection up "$selected_vpn"
-    fi
-}
-
-# Function to disconnect from the current VPN
-disconnect_from_vpn() {
-    local vpn_status=$(get_vpn_status)
-    if [[ -n "$vpn_status" ]]; then
-        nmcli connection down "$vpn_status"
-    fi
-}
-
-# Function to safely delete a VPN connection
-delete_vpn_connection() {
-    local vpn_list=$(nmcli -t -f NAME,TYPE connection show | grep 'vpn' | awk -F ':' '{print $1}')
-    local selected_vpn=$(echo "$vpn_list" | wofi --dmenu --prompt "Delete VPN connection" | tr -d '\n')
-    if [[ -n "$selected_vpn" ]]; then
-        nmcli connection delete "$selected_vpn"
-    fi
+    done
 }
 
 # Main function to handle user input
@@ -133,10 +99,10 @@ wireguard() {
 
     case "$selected" in
         "Active")
-            print_connections "active"
+            connection #"active"
             ;;
         "Menu")
-            print_connections "available" | wofi --dmenu
+            connection "available" | wofi --dmenu
             ;;
         "Toggle")
             if [[ $# -ne 2 ]]; then
