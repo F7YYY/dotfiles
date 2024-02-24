@@ -5,7 +5,7 @@ include "/home/snakeye/.gtkrc-2.0.mine"
 gtk-theme-name="Flat-Remix-GTK-White-Darkest"
 gtk-icon-theme-name="Flat-Remix-Black-Dark"
 gtk-font-name="Sony Sketch EF 12"
-gtk-cursor-theme-name="Dot-Transparent"
+gtk-cursor-theme-name="blackarch-cursor"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_ICONS
 gtk-toolbar-icon-size=GTK_ICON_SIZE_MENU
