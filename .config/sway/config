@@ -47,7 +47,7 @@ exec {
 set {
     $WAYLAND    --enable-features=UseOzonePlatform --ozone-platform=wayland
     $TRAY       -silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized
-    $FONT       pango:Sony Sketch EF 14                       # (fc-list : family | sort | uniq)
+    $FONT       pango:Sony Sketch EF 12                       # (kitty list-fonts)
     $SUPER      Mod4
     $TERM       kitty
     $MENU       wofi
