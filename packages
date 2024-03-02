@@ -1,5 +1,3 @@
-# yay -Syyu --needed $(awk '{print $1}'  packages); yay -Ycc; yay -Sc; sudo pacman-fix-permissions; exit
-
 adobe-source-code-pro-fonts
 amd-ucode
 amdapp-sdk-nocatalyst
@@ -81,6 +79,8 @@ kbd
 keyutils
 kitty
 kooha
+libnotify
+libredefender
 linux
 linux-api-headers
 linux-firmware
@@ -104,6 +104,7 @@ noto-fonts-emoji
 obs-bin
 oh-my-bash-git
 oh-my-git
+onlyoffice-bin
 openrgb-bin
 openssh
 openssl
