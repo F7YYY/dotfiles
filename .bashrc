@@ -141,20 +141,144 @@ cpp() {
 
 # Automatically install the packages file
 install_packages() {
-	local DISTRO="$(hostnamectl | grep "Operating System:" | cut -c19-99)"
+	local DISTRO="$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -c14- | tr -d '"')"					# lsb_release -sd
+	local ID="$(cat /etc/os-release | grep -w "ID" | cut -c4-)"
     
-    if ! command -v "pacman" &>/dev/null; then
-        notify-send -u critical -a "ERROR" "$DISTRO: NOT Arch Based" ||
-        echo "$DISTRO: NOT Arch Based" 2>&1
-        return 1
-    else
-        sudo pacman -S --needed --noconfirm git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
-        cd .. && rm -fr yay-bin
-    fi
+	case $ID in
+		"arch")
+			# Validate Linux distribution, and then install better package manager
+    		if ( command -v pacman &>/dev/null ) && ( ! command -v yay &>/dev/null ); then
+    		    sudo pacman -S --needed --noconfirm git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
+    		    cd .. && rm -fr yay-bin
+    		    echo "[$DISTRO] Package Manager installed: YAY!" 2>&1
+				yay -Siq yay-bin
+    		fi
 
-	if command -v "yay" &>/dev/null; then
-        yay -Syyu --needed $(awk '{print $1}' packages) && yay -Ycc && yay -Sc && sudo pacman-fix-permissions && exit
-        notify-send -u low -a "INSTALLED" "$DISTRO: Updated && Packaged" ||
-        echo "$DISTRO: Updated && Packaged" 2>&1
-    fi
+			# Install PACKAGES file with better package manager
+			if ( command -v yay &>/dev/null ); then
+    		    yay -Syyu --needed $(cat $HOME/PACKAGES) && yay -Ycc && yay -Sc && sudo pacman-fix-permissions && exit
+    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
+    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
+    		fi
+		;;
+		"debian")
+			# Validate Linux distribution, and then install better package manager
+    		if ( command -v apt &>/dev/null ) && ( ! command -v aptitude &>/dev/null ); then
+    		    sudo apt-get -y install aptitude
+    		    echo "[$DISTRO] Package Manager installed: Aptitude!" 2>&1
+				aptitude show aptitude
+    		fi
+
+			# Install PACKAGES file with better package manager
+			if ( command -v aptitude &>/dev/null ); then
+    		    aptitude install $(cat $HOME/PACKAGES) && aptitude autoclean && exit
+    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
+    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
+    		fi
+		;;
+		"slackware")	#FEEL FREE TO UPDATE THIS CASE, PLEASE!
+			## Validate Linux distribution, and then install better package manager
+    		#if ( command -v slackpkg &>/dev/null ) && ( ! command -v NEW &>/dev/null ); then
+    		#	sudo slackpkg install NEW
+    		#	echo "[$DISTRO] Package Manager installed: NEW!" 2>&1
+			#	NEW info NEW
+    		#fi
+
+			# Install PACKAGES file with better package manager
+			if ( command -v slackpkg &>/dev/null ); then
+    		    slackpkg install $(cat $HOME/PACKAGES) && slackpkg autoclean && exit
+    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
+    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
+    		fi
+		;;
+		"rhel")		#FEEL FREE TO UPDATE THIS CASE, PLEASE!
+			## Validate Linux distribution, and then install better package manager
+    		#if ( command -v yum &>/dev/null ) && ( ! command -v NEW &>/dev/null ); then
+    		#	sudo yum install NEW
+    		#	echo "[$DISTRO] Package Manager installed: NEW!" 2>&1
+			#	NEW info NEW
+    		#fi
+
+			# Install PACKAGES file with better package manager
+			if ( command -v yum &>/dev/null ); then
+    		    yum install $(cat $HOME/PACKAGES) && yum clean && exit
+    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
+    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
+    		fi
+		;;
+		"opensuse")	#FEEL FREE TO UPDATE THIS CASE, PLEASE!
+			## Validate Linux distribution, and then install better package manager
+    		#if ( command -v zypper &>/dev/null ) && ( ! command -v NEW &>/dev/null ); then
+    		#	sudo zypper install NEW
+    		#	echo "[$DISTRO] Package Manager installed: NEW!" 2>&1
+			#	NEW info NEW
+    		#fi
+
+			# Install PACKAGES file with better package manager
+			if ( command -v zypper &>/dev/null ); then
+    		    zypper install $(cat $HOME/PACKAGES) && zypper clean -a && exit
+    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
+    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
+    		fi
+		;;
+		"gentoo")	#FEEL FREE TO UPDATE THIS CASE, PLEASE!
+			## Validate Linux distribution, and then install better package manager
+    		#if ( command -v emerge &>/dev/null ) && ( ! command -v NEW &>/dev/null ); then
+    		#	sudo emerge -a NEW
+    		#	echo "[$DISTRO] Package Manager installed: NEW!" 2>&1
+			#	NEW -av NEW
+    		#fi
+
+			# Install PACKAGES file with better package manager
+			if ( command -v emerge &>/dev/null ); then
+    		    emerge  -a $(cat $HOME/PACKAGES) && emerge --ask --verbose --depclean && exit
+    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
+    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
+    		fi
+		;;
+		"alpine")	#FEEL FREE TO UPDATE THIS CASE, PLEASE!
+			## Validate Linux distribution, and then install better package manager
+    		#if ( command -v apk &>/dev/null ) && ( ! command -v NEW &>/dev/null ); then
+    		#	sudo apk add NEW
+    		#	echo "[$DISTRO] Package Manager installed: NEW!" 2>&1
+			#	NEW info NEW
+    		#fi
+
+			# Install PACKAGES file with better package manager
+			if ( command -v apk &>/dev/null ); then
+    		    apk add $(cat $HOME/PACKAGES) && apk cache clean && exit
+    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
+    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
+    		fi
+		;;
+		*)
+			notify-send -u critical -a "ERROR" "[$DISTRO]: DISTRO NOT IMPLEMENTED" ||
+    	    echo "[$DISTRO]: DISTRO NOT IMPLEMENTED" 2>&1
+    	    return 1
+		;;
+	esac
+
+	echo "
+─────────▀▀▀▀▀▀──────────▀▀▀▀▀▀▀
+──────▀▀▀▀▀▀▀▀▀▀▀▀▀───▀▀▀▀▀▀▀▀▀▀▀▀▀
+────▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀──────────▀▀▀
+───▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀──────────────▀▀
+──▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀──────────────▀▀
+─▀▀▀▀▀▀▀▀▀▀▀▀───▀▀▀▀▀▀▀───────────────▀▀
+─▀▀▀▀▀▀▀▀▀▀▀─────▀▀▀▀▀▀▀──────────────▀▀
+─▀▀▀▀▀▀▀▀▀▀▀▀───▀▀▀▀▀▀▀▀──────────────▀▀
+─▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀
+─▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀
+─▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀
+──▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀
+───▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀▀
+─────▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀▀
+──────▀▀▀▀▀▀▀▀▀▀▀───▀▀▀────────▀▀▀
+────────▀▀▀▀▀▀▀▀▀──▀▀▀▀▀────▀▀▀▀
+───────────▀▀▀▀▀▀───▀▀▀───▀▀▀▀
+─────────────▀▀▀▀▀─────▀▀▀▀
+────────────────▀▀▀──▀▀▀▀
+──────────────────▀▀▀▀
+───────────────────▀▀
+"
 }
