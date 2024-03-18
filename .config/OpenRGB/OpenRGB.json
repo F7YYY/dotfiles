@@ -1300,13 +1300,13 @@
         "geometry": {
             "height": 0,
             "load_geometry": false,
-            "save_on_exit": false,
+            "save_on_exit": true,
             "width": 0,
             "x": 0,
             "y": 0
         },
         "greyscale_tray_icon": false,
-        "language": "English - US",
+        "language": "System Default",
         "minimize_on_close": true
     }
 }
