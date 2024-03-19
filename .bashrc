@@ -135,7 +135,7 @@ ftext() {
 }
 
 # Copy file with a progress bar
-cpp() {
+rcp() {
     rsync -r --progress "${1}" "${2}" 
 }
 
