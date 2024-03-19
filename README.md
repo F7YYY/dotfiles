@@ -11,11 +11,11 @@
 - **Status Bar**: *([waybar](https://github.com/Alexays/Waybar)+[waybar-updates](https://github.com/L11R/waybar-updates)+[wttrbar](https://github.com/bjesus/wttrbar))*
 - **Notification Daemon**: *[mako](https://github.com/emersion/mako)*
 - **Terminal**: *[kitty](https://github.com/kovidgoyal/kitty)*
-- **Shell**: *([bash](https://git.savannah.gnu.org/cgit/bash.git)+[oh-my-bash-git](https://github.com/ohmybash/oh-my-bash)) & ([fish](https://github.com/fish-shell/fish-shell)+[Oh My Fish](https://github.com/oh-my-fish/oh-my-fish)/[fish-tide-git](https://github.com/IlanCosman/tide)) & ([git](https://github.com/git/git)+[oh-my-git](https://github.com/arialdomartini/oh-my-git)) & [github-cli](https://github.com/cli/cli)*
+- **Shell**: *([bash](https://git.savannah.gnu.org/cgit/bash.git)+[oh-my-bash-git](https://github.com/ohmybash/oh-my-bash)) & ([fish](https://github.com/fish-shell/fish-shell)+([Oh My Fish](https://github.com/oh-my-fish/oh-my-fish) / [fish-tide-git](https://github.com/IlanCosman/tide))) & ([git](https://github.com/git/git)+[oh-my-git](https://github.com/arialdomartini/oh-my-git)) & [github-cli](https://github.com/cli/cli)*
 - **Font**: *[sony-sketch-ef-font](http://www.ffonts.net/Sony-Sketch-EF.font) & [ttf-maple](https://github.com/subframe7536/maple-font)*
 - **Package Manager**: *[yay-bin](https://github.com/Jguer/yay)*
 - **Application Launcher**: *([wofi](https://hg.sr.ht/~scoopta/wofi)+[wofi-calc](https://github.com/Zeioth/wofi-calc.git)+[wofi-emoji](https://github.com/Zeioth/wofi-emoji))*
-- **Wallpaper Setter**: [waypaper-engine](https://github.com/0bCdian/Waypaper-Engine)*
+- **Wallpaper Setter**: *[waypaper-engine](https://github.com/0bCdian/Waypaper-Engine)*
 - **File Manager**: *[thunar](https://docs.xfce.org/xfce/thunar/start) & [ranger](https://github.com/ranger/ranger)*
 - **Text Editor**: *[neovim](https://github.com/neovim/neovim) & [vscodium-bin](https://github.com/VSCodium/vscodium)*
 - **Media**: *[imv](https://sr.ht/~exec64/imv/) & [mpv](https://github.com/mpv-player/mpv) & [youtube-music-bin](https://github.com/th-ch/youtube-music) & [cava](https://github.com/karlstav/cava)*
@@ -24,15 +24,17 @@
 - **OTHER**: *[PACKAGES](PACKAGES)*
 
 ## Additionals
-- [LICENSE](LICENSE): ***MIT** - (All new and improved commits are welcomed! 😁)*
 1. [Wofi Scripts](.config/wofi/scripts)
    - [mako.sh](.config/wofi/scripts/mako.sh): *Notification Dismissal, Disable, and Enable.*
    - [powermenu.sh](.config/wofi/scripts/powermenu.sh): *None in AUR.*
      - [lock.sh](.config/wofi/scripts/lock.sh): *Alternative to [swaylock-corrupter](https://github.com/r00tman/corrupter) without **"Red Screen of Death"**.*
-   - [nmtui.sh](.config/wofi/scripts/nmtui.sh) - **WIP**: *Feature rich nmtui style.*
-   - [vpn.sh](.config/wofi/scripts/vpn.sh) - **WIP**: *Feature rich OpenVPN and WireGuard configurator also integrated for waybar.*
+   - [nmtui.sh](.config/wofi/scripts/nmtui.sh): *Feature rich nmtui style GUI.*
+   - [vpn.sh](.config/wofi/scripts/vpn.sh): *Feature rich OpenVPN and WireGuard configurator also integrated for waybar.*
 2. WIP.configs
-   - [.bashrc](.bashrc): *More room for improvement & install_packages() method.*
+   - [.bashrc](.bashrc): *More room for improvement, and install_packages() method.*
    - [waybar style.css](.config/waybar/style.css): *Adjusting center-line visibility between modules only.*
    - [nmtui.sh](.config/wofi/scripts/nmtui.sh): *30% Done, including logic in nmtui++, but I'm struggling.*
    - [vpn.sh](.config/wofi/scripts/vpn.sh): *60% Done, including logic in vpn++, but I'm struggling.*
+
+## License
+***[MIT LICENSE](LICENSE)** - `Welcoming all new and improved commits! 😁`*
