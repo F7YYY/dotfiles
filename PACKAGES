@@ -4,7 +4,6 @@ amdapp-sdk-nocatalyst
 archlinux-keyring
 autoconf
 automake
-avahi
 base
 base-devel
 bash
@@ -27,7 +26,6 @@ default-cursors
 easyeffects
 electron
 electronplayer
-ettercap-gtk
 f2fs-tools
 fastfetch
 ffmpeg
@@ -87,6 +85,7 @@ linux-xanmod-bin
 linux-zen
 lutris
 ly
+lynis
 make
 mako
 mesa
@@ -116,7 +115,6 @@ pavucontrol
 pipewire
 pipewire-alsa
 pipewire-audio
-pipewire-docs
 pipewire-ffado
 pipewire-jack
 pipewire-pulse
@@ -143,6 +141,7 @@ radeontop
 ranger
 refind
 refind-theme-darkmini-git
+rkhunter
 rsync
 sbctl
 seahorse
