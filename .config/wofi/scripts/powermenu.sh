@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 #
 # WOFI POWER-MENU #
 ###################
@@ -13,6 +13,26 @@ cleanup() {
     exit 0
 }
 trap cleanup EXIT
+
+# Function to check if the required tools are installed
+requirements() {
+    local required_tools=("wofi" "systemctl" "swaymsg" "hyprctl" "hyprlock")
+    local missing_tools=()
+
+    for tool in "${required_tools[@]}"; do
+        if ! [ command -v "$tool" &>/dev/null ] || [ command -v "$tool" &>/dev/null ]; then
+            missing_tools+=("$tool")
+        fi
+    done
+
+    if [ ${#missing_tools[@]} -gt 0 ]; then
+        notify-send -u critical -a "$0" "Missing tools: ${missing_tools[@]}" ||
+        echo "Missing tools: ${missing_tools[@]}" 2>&1
+        return 1
+    else
+        return 0
+    fi
+}
 
 # Function to handle power menu options
 powermenu() {
@@ -30,10 +50,10 @@ powermenu() {
             fi
             ;;
         "Lock")
-            "$lock"
+            "$LOCK"
             ;;
         "Suspend")
-            systemctl suspend && "$lock"
+            systemctl suspend && "$LOCK"
             ;;
         "Logout")
             if [[ $XDG_SESSION_DESKTOP =~ ^sway* ]]; then
@@ -62,7 +82,7 @@ powermenu() {
 
 # Main function to display the power menu
 main() {
-    local lock=$HOME/.config/wofi/scripts/lock.sh
+    local LOCK=(hyprlock -q)
     local menu=("Reload"
     			"Lock"
     			"Suspend"
