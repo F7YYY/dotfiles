@@ -19,16 +19,18 @@ bar swaybar_command waybar
 #exec_always { $(killall -9Ieqg MIGRAINE) MIGRAINE }
 ##──NORMAL_DAEMONS_WAYLAND+TRAY
 exec {
-    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-    systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+    dbus-update-activation-environment --all
+    sleep 1 && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
     /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-    #exec-once = dex-autostart -a $HOME/.config/autostart/*
+    gnome-keyring-daemon --start --components=secrets
+    #dex-autostart -a $HOME/.config/autostart/*
     wlsunset -s 22:00 -S 10:00 -d 60
     waypaper-engine                             #$HOME/Pictures/Wallpapers/swww
     #emacs --daemon
     autotiling
     mako
-    blueman-manager $TRAY
+    blueman-applet
+    nm-applet
     corectrl
     openrgb $TRAY
     #easyeffects $WAYLAND $TRAY
@@ -41,13 +43,15 @@ exec {
     betterbird $WAYLAND
     #teams $WAYLAND $TRAY
     #zoom $WAYLAND $TRAY
+    wl-paste --type text --watch cliphist store     # clipboard store text data
+    wl-paste --type image --watch cliphist store    # clipboard store image data
 }
 
 ##──VARIABLES───────────────────────────────────────────────────────────────────────────────────────────────────────────────
 set {
     $WAYLAND    --enable-features=UseOzonePlatform --ozone-platform=wayland
     $TRAY       -silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized
-    $FONT       pango:Sony Sketch EF 12                       # (kitty list-fonts)
+    $FONT       Sony Sketch EF 12                       # (kitty list-fonts)
     $SUPER      Mod4
     $TERM       kitty
     $MENU       wofi
@@ -55,7 +59,7 @@ set {
     $CALC       wofi-calc
     $GIF        kooha
     $NOTIFY     $HOME/.config/wofi/scripts/mako.sh
-    $LOCK       $HOME/.config/wofi/scripts/lock.sh
+    $LOCK       hyprlock -q
     $POWER      $HOME/.config/wofi/scripts/powermenu.sh
     $DISPLAY1   DP-1 mode 1920x1080@240HZ position 0,0 scale 1
     #─VIM_KEYS
@@ -188,18 +192,18 @@ bindsym --to-code {
 ##──WINDOW_MANAGEMENT-(swaymsg -t get_tree | awk 'tolower($0) ~ /(app_id|class|window_role)/ && NF > 1')
 for_window {
     [app_id=class=window_role=".*"] $OPACITY, $MM, focus, sticky
-    [window_role="pop-up|bubble|task_dialog|page-info|Preferences|menu|About|Sharing Indicator"] $FLOAT, $OPAQUE
-    [window_role="confirm|dialog|download|file_progress|notification|error|splash|confirmreset"] $FLOAT, $OPAQUE
-    [window_role="Open Files|File Operation Progress|(?:Open|Save) (?:File|File Transfer*|Folder|As)"] $FLOAT, $OPAQUE
-    [app_id="mpv|imv|zenity|wdisplays|pavucontrol|gpartedbin|openrgb|bleachbit|qalculate-gtk|qt5ct|gnome-tweaks"] $FLOAT, $OPAQUE
+    [window_role="pop-up|bubble|task_dialog|page-info|Preferences|menu|About|Sharing Indicator"] $FLOAT
+    [window_role="confirm|dialog|download|file_progress|notification|error|splash|confirmreset"] $FLOAT
+    [window_role="Open File|Open Folder|File Operation Progress|Save As|Library|(?:Open|Save) (?:File|File Transfer*|Folder|As)"] $FLOAT
+    [windowrule="qemu*|brave|mpv|imv|zenity|wdisplays|pavucontrol|gparted|openrgb|bleachbit|zoom|electronplayer|qalculate-gtk"] $OPAQUE
     [app_id="qemu*|brave|zoom|electronplayer"] $OPAQUE
+    [app_id="mpv|imv|zenity|wdisplays|pavucontrol|gparted|openrgb|bleachbit|qalculate-gtk|qt5ct|gnome-tweaks"] $FLOAT
 }
 #─WINDOW_DEFAULT_APPS
 assign {
-    [class="vesktop"] $WS 2
     [class="zoom|teams-for-linux"] $WS 9
     [class="betterbird"] $WS 10
-    [class="corectrl|com.github.wwmm.easyeffects"] $SP
+    [class="com.github.wwmm.easyeffects"] $SP
 }
 #───OTHERS
 floating_modifier               $SUPER normal
@@ -264,13 +268,13 @@ client.unfocused            $GREY       $BLACK      $GREY       $GREY       $GRE
 client.urgent               $RED        $BLACK      $RED        $RED        $RED
 
 ##──SYSTEM_POWER────────────────────────────────────────────────────────────────────────────────────────────────────────────
-exec swayidle -w $( \
+exec bash -c $(swayidle -w \
     timeout 600 '$LOCK' \
-    timeout 900 'swaymsg "output * dpms off"' \
+    timeout 300 'if pgrep -x "$LOCK" > /dev/null; then swaymsg "output * dpms off"; fi' \
     timeout 1200 'systemctl suspend' \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'playerctl -a pause' \
-    before-sleep '$LOCK' \
+    before-sleep 'if ! pgrep -x "$LOCK" > /dev/null; then '$LOCK'; fi' \
     #after-resume 'swaymsg "output * dpms on"' \
 )
 
