@@ -197,7 +197,7 @@ for_window {
     [window_role="Open File|Open Folder|File Operation Progress|Save As|Library|(?:Open|Save) (?:File|File Transfer*|Folder|As)"] $FLOAT
     [windowrule="qemu*|brave|mpv|imv|zenity|wdisplays|pavucontrol|gparted|openrgb|bleachbit|zoom|electronplayer|qalculate-gtk"] $OPAQUE
     [app_id="qemu*|brave|zoom|electronplayer"] $OPAQUE
-    [app_id="mpv|imv|zenity|wdisplays|pavucontrol|gparted|openrgb|bleachbit|qalculate-gtk|qt5ct|gnome-tweaks"] $FLOAT
+    [app_id="nm-*|mpv|imv|zenity|wdisplays|pavucontrol|gparted|openrgb|bleachbit|qalculate-gtk|qt5ct|gnome-tweaks"] $FLOAT
 }
 #─WINDOW_DEFAULT_APPS
 assign {
