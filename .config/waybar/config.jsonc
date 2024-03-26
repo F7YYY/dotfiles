@@ -29,8 +29,7 @@
 		"custom/cava",				// WIP ~ WITHOUT RECOMPILING
 		"pulseaudio",
 		"network",					// WIP ~ REPORT EXTERNAL/PUBLIC IP
-		//"custom/vpn",				// WIP ~ SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/VPN.SH -> WOFI
-		//"group/hardware",			// WIP ~ SYSTEM HARDWARE STATUS
+		"group/hardware",			// WIP ~ SYSTEM HARDWARE STATUS
 		"custom/powermenu",			// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU.SH
 		"custom/pacman"				// AUR: WAYBAR-UPDATES
 	],
@@ -193,6 +192,7 @@
 	},
 	"network": {
 		"interval": 1,
+		"format": "{output}<big>🖧</big>",
 		"format-wifi": "{essid} {icon}",
 		"format-ethernet": "{ifname} ",
 		"format-linked": "{ifname}{essid}",
@@ -200,27 +200,8 @@
 		"tooltip-format-wifi": "{ifname}: {essid}\n Frequency: {frequency}MHz\n Strength: {signaldBm}dBm ({signalStrength}%)\n IP: {ipaddr}/{cidr}\nIP: 'curl ifconfig.me'\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
 		"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n IP: 'curl ifconfig.me'\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
         "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
-		"on-click": "$HOME/.config/wofi/scripts/nmtui.sh",
-		"on-click-right": "kitty $SHELL -c 'nmtui'",
-		"tooltip": true
-	},
-	"custom/vpn": {
-		"interval": 1,
-		"exec": "$HOME/.config/wofi/scripts/vpn.sh --status",
-		"format": "{output}<big>🖧</big>",
-		"format-disconnected": "{}<big> ⚠</big>",
-		"tooltip-format-linked": "{ifname}\nIP: {ipaddr}/{cidr}\n⬆: {bandwidthUpBits} ⬇: {bandwidthDownBits}",
-		"on-click": "$HOME/.config/wofi/scripts/vpn.sh show_vpn_menu",
-		"return-type": "json",
-		"tooltip": true
-	},
-	"custom/wireguard": {
-		"interval": 1,
-		"format": "{}<big>🖧</big>",
-		"format-disconnected": "{}<big> ⚠</big>",
-		"exec": "$HOME/.config/wofi/scripts/wireguard.sh --status",
-		"on-click": "$HOME/.config/wofi/scripts/wireguard.sh --menu",
-		"signal": 6,
+		"on-click": "nm-connection-editor",
+		"on-click-right": "nm-connection-editor",
 		"tooltip": true
 	},
 	"custom/powermenu": {
