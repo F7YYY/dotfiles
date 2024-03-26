@@ -27,13 +27,9 @@
 1. [Wofi Scripts](.config/wofi/scripts)
    - [mako.sh](.config/wofi/scripts/mako.sh): *Notification Dismissal, Disable, and Enable.*
    - [powermenu.sh](.config/wofi/scripts/powermenu.sh): *None in AUR.*
-   - [nmtui.sh](.config/wofi/scripts/nmtui.sh): *Feature rich nmtui style GUI.*
-   - [vpn.sh](.config/wofi/scripts/vpn.sh): *Feature rich OpenVPN and WireGuard configurator also integrated for waybar.*
 2. WIP.configs
    - [.bashrc](.bashrc): *More room for improvement, including install_packages() method.*
    - [waybar style.css](.config/waybar/style.css): *Adjusting center-line visibility between modules only.*
-   - [nmtui.sh](.config/wofi/scripts/nmtui.sh): *30% Done, including logic in nmtui++, but I'm struggling.*
-   - [vpn.sh](.config/wofi/scripts/vpn.sh): *60% Done, including logic in vpn++, but I'm struggling.*
 
 ## License
 ***[MIT LICENSE](LICENSE)** - `Welcoming all new and improved commits! 😁`*
