@@ -7,7 +7,7 @@
 - **Boot Manager**: *([refind](https://www.rodsbooks.com/refind)+[refind-theme-darkmini-git](https://github.com/LightAir/darkmini))*
 - **Display Manager**: *[ly](https://github.com/fairyglade/ly)*
 - **Window Manager**: *[swayfx](https://github.com/WillPower3309/swayfx) & [hyprland](https://github.com/hyprwm/Hyprland)*
-- **Lock Screen**: *([hyprlock](https://github.com/hyprwm/hyprlock) / ~~[swaylock-corrupter](https://github.com/r00tman/corrupter)~~ - **"Red Screen of Death"***
+- **Lock Screen**: *[hyprlock](https://github.com/hyprwm/hyprlock) / (~~[swaylock-corrupter](https://github.com/r00tman/corrupter)~~ - **"Red Screen of Death"**)*
 - **Status Bar**: *([waybar](https://github.com/Alexays/Waybar)+[waybar-updates](https://github.com/L11R/waybar-updates)+[wttrbar](https://github.com/bjesus/wttrbar))*
 - **Notification Daemon**: *[mako](https://github.com/emersion/mako)*
 - **Terminal**: *[kitty](https://github.com/kovidgoyal/kitty)*
@@ -20,7 +20,7 @@
 - **Text Editor**: *[neovim](https://github.com/neovim/neovim) & [vscodium-bin](https://github.com/VSCodium/vscodium)*
 - **Media**: *[imv](https://sr.ht/~exec64/imv/) & [mpv](https://github.com/mpv-player/mpv) & [youtube-music-bin](https://github.com/th-ch/youtube-music) & [cava](https://github.com/karlstav/cava)*
 - **System Monitor**: *[btop](https://github.com/aristocratos/btop) & [radeontop](https://github.com/clbr/radeontop)*
-- **Tweak**: *[gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) & ([qt5ct](https://qt5ct.sourceforge.io/)+[qt6ct](https://github.com/trialuser02/qt6ct)) & (~~[archlinux-tweak-tool-git](https://github.com/arcolinux/archlinux-tweak-tool)~~ ***"Underdeveloped"***)*
+- **Tweak**: *[gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) & ([qt5ct](https://qt5ct.sourceforge.io/)+[qt6ct](https://github.com/trialuser02/qt6ct)) & (~~[archlinux-tweak-tool-git](https://github.com/arcolinux/archlinux-tweak-tool)~~ - **"Underdeveloped"**)*
 - **OTHER**: *[PACKAGES](PACKAGES)*
 
 ## Additionals
