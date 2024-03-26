@@ -6,7 +6,6 @@
 #######################################################
 # SOURCED
 #######################################################
-#
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -23,22 +22,21 @@ elif [ -f /etc/bash_completion ]; then
 fi
 
 #######################################################
-# ALIAS
+# ALIASES
 #######################################################
-#
-# Aliases
-alias ll='ls -la --color=auto'
+# Listing
+alias ll='ls -l --color=auto'
+alias la='ls -la --color=auto'
 alias grep='grep --color=auto'
 alias sudo='sudo -v; sudo '
 PS1='[\u@\h \W]\$ '
-# Change directory aliases
+# Changing directories
 alias home='cd ~'
-alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-# Alias's for archives
+# Archives
 alias mktar='tar -cvf'
 alias mkbz2='tar -cvjf'
 alias mkgz='tar -cvzf'
@@ -52,52 +50,49 @@ alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 #######################################################
-# EXPORTS
+# EXPORT ENVIRONMENTAL VARIABLES - (/etc/environment)
 #######################################################
-#
-# Expand the history size
-export HISTFILESIZE=10000
-export HISTSIZE=500
-# Don't put duplicate lines in the history and do not add lines that start with a space
+#export HISTFILESIZE=10000
+#export HISTSIZE=500
 export HISTCONTROL=erasedups:ignoredups:ignorespace
-# Envioronmental Variables
 export _JAVA_AWT_WM_NONREPARENTING=1
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+#export PATH=$HOME/bin:/usr/local/bin:$PATH
 #export MANPATH="/usr/local/man:$MANPATH"
-export HISTCONTROL=erasedups:ignoredups:ignorespace
 export EDITOR="code -w"
 export GPG_TTY=$(tty)
+export QT_QPA_PLATFORMTHEME=qt6ct
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export VDPAU_DRIVER=radeonsi
+export LIBVA_DRIVER_NAME=radeonsi
 
 # Official WAY-(to_define_your)-LAND
 if [[ $XDG_BACKEND == "wayland" ]]; then
-    #export DISPLAY=$WAYLAND_DISPLAY          # ONLY EXPORT IF XWAYLAND=DISABLED
-    #export XDG_RUNTIME_DIR=$XDG_SESSION_TYPE # GENERALLY /run/user/$UID
+    export DISPLAY=$WAYLAND_DISPLAY:0				# ONLY EXPORT IF XWAYLAND=DISABLED
+    #export DESKTOP_SESSION=$XDG_SESSION_DESKTOP
+	#export XDG_CURRENT_DESKTOP=$XDG_SESSION_DESKTOP
+    #export XDG_RUNTIME_DIR=$XDG_SESSION_TYPE		# GENERALLY "/run/user/$UID"
     #export GDK_BACKEND=$XDG_SESSION_TYPE
     export SDL_VIDEODRIVER=$XDG_SESSION_TYPE
-    #export MOZ_ENABLE_WAYLAND=1 # USE BRAVE BROWSER APE
-    #export QT_QPA_PLATFORM=$XDG_SESSION_TYPE # ONLY EXPORT IF REQUIRED
-    #export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+    export QT_QPA_PLATFORM=$XDG_SESSION_TYPE		# ONLY EXPORT IF REQUIRED
+	export QT_WAYLAND_FORCE_DPI=physical
+    #export QT_WAYLAND_DISABLE_WINDOWDECORATION=0
+	export ECORE_EVAS_ENGINE=$XDG_SESSION_TYPE
+	export ELM_ENGINE=$XDG_SESSION_TYPE
     export _JAVA_AWT_WM_NONREPARENTING=1
-    #export XDG_CURRENT_DESKTOP=$XDG_SESSION_DESKTOP
-    #export DESKTOP_SESSION=$XDG_SESSION_DESKTOP
-    #export VDPAU_DRIVER=radeonsi
-    #export LIBVA_DRIVER_NAME=radeonsi
+	export MOZ_ENABLE_WAYLAND=1						# USE BRAVE BROWSER (-_-)
 fi
 
 #######################################################
 # THEME
 #######################################################
-#
-# Theme
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
 . /usr/share/powerline/bindings/bash/powerline.sh
 
 #######################################################
-# SPECIAL FUNCTIONS
+# CUSTOM FUNCTIONS
 #######################################################
-#
 # Extracts any archive(s) (if unp isn't installed)
 extract() {
 	for archive in $*; do
@@ -114,10 +109,10 @@ extract() {
 				*.zip)       unzip $archive       ;;
 				*.Z)         uncompress $archive  ;;
 				*.7z)        7z x $archive        ;;
-				*)           echo "don't know how to extract '$archive'..." ;;
+				*)           echo "Requires manual extraction: '$archive'" ;;
 			esac
 		else
-			echo "'$archive' is not a valid file!"
+			echo "Invalid file: '$archive'"
 		fi
 	done
 }
@@ -139,146 +134,71 @@ rcp() {
     rsync -r --progress "${1}" "${2}" 
 }
 
-# Automatically install the packages file
+# Automatically install packages listed in the PACKAGES file
 install_packages() {
 	local DISTRO="$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -c14- | tr -d '"')"					# lsb_release -sd
 	local ID="$(cat /etc/os-release | grep -w "ID" | cut -c4-)"
-    
+	local URL=(https://raw.githubusercontent.com/F7YYY/dotfiles/master/PACKAGES)	
+	
+echo "##############################
+           _ _
+          ( Y )
+           \ /
+            V
+    ________H_  ,%%&%,
+   /\     _   \ %&&%%&%
+  /  \___/^\___\&%&%%&&
+  |  |[I]   [I]| %YY&%'
+  |  |   .-.   |  ||
+~~%._!@@_|-|_@@!~~||
+~~~~~~~~~)=)~~~~~~~~
+##############################
+Home:		$(pwd)
+Distribution:	$DISTRO
+Architecture:	$ID
+##############################"
+
+	cd $HOME
+	if [ ! -f PACKAGES ]; then
+		echo -e "\nDownloading the latest repo:PACKAGES file..."
+		while [[ -f PACKAGES ]]; do
+			if [ -v wget &>/dev/null ]; then
+				wget $URL
+			elif [ -v curl &>/dev/null ]; then
+				curl $URL -o PACKAGES
+			else 
+				sudo pacman -S --needed --noconfirm wget
+			fi
+		done
+	fi
+
+	echo -e "\nObtained the latest repo:PACKAGES file...\n$(ll PACKAGES)\n\n##############################"
+
 	case $ID in
 		"arch")
-			# Validate Linux distribution, and then install better package manager
-    		if ( command -v pacman &>/dev/null ) && ( ! command -v yay &>/dev/null ); then
+			# Install a better package manager
+    		if ! command -v "yay" &>/dev/null; then
     		    sudo pacman -S --needed --noconfirm git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
-    		    cd .. && rm -fr yay-bin
+    		    cd $HOME && sudo find / -type d -name "yay-bin" -exec rm -fr "{}" +
     		    echo "[$DISTRO] Package Manager installed: YAY!" 2>&1
 				yay -Siq yay-bin
     		fi
 
-			# Install PACKAGES file with better package manager
-			if ( command -v yay &>/dev/null ); then
-    		    yay -Syyu --needed $(cat $HOME/PACKAGES) && yay -Ycc && yay -Sc && sudo pacman-fix-permissions && exit
-    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
-    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
+			# Installs packages listed in PACKAGES file
+			if command -v yay &>/dev/null; then
+    		    yay -Syyu --needed --removemake --cleanafter - < PACKAGES && yay -Ycc && yay -Sc && sudo pacman-fix-permissions
+    		    notify-send -u low -a "PACKAGES" "[$DISTRO]: Updated && Packaged!" ||
+    		    echo "[$DISTRO]: Updated && Packaged!" 2>&1
     		fi
 		;;
-		"debian")
-			# Validate Linux distribution, and then install better package manager
-    		if ( command -v apt &>/dev/null ) && ( ! command -v aptitude &>/dev/null ); then
-    		    sudo apt-get -y install aptitude
-    		    echo "[$DISTRO] Package Manager installed: Aptitude!" 2>&1
-				aptitude show aptitude
-    		fi
-
-			# Install PACKAGES file with better package manager
-			if ( command -v aptitude &>/dev/null ); then
-    		    aptitude install $(cat $HOME/PACKAGES) && aptitude autoclean && exit
-    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
-    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
-    		fi
-		;;
-		"slackware")	#FEEL FREE TO UPDATE THIS CASE, PLEASE!
-			## Validate Linux distribution, and then install better package manager
-    		#if ( command -v slackpkg &>/dev/null ) && ( ! command -v NEW &>/dev/null ); then
-    		#	sudo slackpkg install NEW
-    		#	echo "[$DISTRO] Package Manager installed: NEW!" 2>&1
-			#	NEW info NEW
-    		#fi
-
-			# Install PACKAGES file with better package manager
-			if ( command -v slackpkg &>/dev/null ); then
-    		    slackpkg install $(cat $HOME/PACKAGES) && slackpkg autoclean && exit
-    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
-    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
-    		fi
-		;;
-		"rhel")		#FEEL FREE TO UPDATE THIS CASE, PLEASE!
-			## Validate Linux distribution, and then install better package manager
-    		#if ( command -v yum &>/dev/null ) && ( ! command -v NEW &>/dev/null ); then
-    		#	sudo yum install NEW
-    		#	echo "[$DISTRO] Package Manager installed: NEW!" 2>&1
-			#	NEW info NEW
-    		#fi
-
-			# Install PACKAGES file with better package manager
-			if ( command -v yum &>/dev/null ); then
-    		    yum install $(cat $HOME/PACKAGES) && yum clean && exit
-    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
-    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
-    		fi
-		;;
-		"opensuse")	#FEEL FREE TO UPDATE THIS CASE, PLEASE!
-			## Validate Linux distribution, and then install better package manager
-    		#if ( command -v zypper &>/dev/null ) && ( ! command -v NEW &>/dev/null ); then
-    		#	sudo zypper install NEW
-    		#	echo "[$DISTRO] Package Manager installed: NEW!" 2>&1
-			#	NEW info NEW
-    		#fi
-
-			# Install PACKAGES file with better package manager
-			if ( command -v zypper &>/dev/null ); then
-    		    zypper install $(cat $HOME/PACKAGES) && zypper clean -a && exit
-    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
-    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
-    		fi
-		;;
-		"gentoo")	#FEEL FREE TO UPDATE THIS CASE, PLEASE!
-			## Validate Linux distribution, and then install better package manager
-    		#if ( command -v emerge &>/dev/null ) && ( ! command -v NEW &>/dev/null ); then
-    		#	sudo emerge -a NEW
-    		#	echo "[$DISTRO] Package Manager installed: NEW!" 2>&1
-			#	NEW -av NEW
-    		#fi
-
-			# Install PACKAGES file with better package manager
-			if ( command -v emerge &>/dev/null ); then
-    		    emerge  -a $(cat $HOME/PACKAGES) && emerge --ask --verbose --depclean && exit
-    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
-    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
-    		fi
-		;;
-		"alpine")	#FEEL FREE TO UPDATE THIS CASE, PLEASE!
-			## Validate Linux distribution, and then install better package manager
-    		#if ( command -v apk &>/dev/null ) && ( ! command -v NEW &>/dev/null ); then
-    		#	sudo apk add NEW
-    		#	echo "[$DISTRO] Package Manager installed: NEW!" 2>&1
-			#	NEW info NEW
-    		#fi
-
-			# Install PACKAGES file with better package manager
-			if ( command -v apk &>/dev/null ); then
-    		    apk add $(cat $HOME/PACKAGES) && apk cache clean && exit
-    		    notify-send -u low -a "INSTALLED" "[$DISTRO]: Updated && Packaged" ||
-    		    echo "[$DISTRO]: Updated && Packaged" 2>&1
-    		fi
-		;;
+		#"ID")
+		#	Template (copy>Paste>Modify) the "arch" case (Example: This #block) for your Distribution(s).
+		#;;
 		*)
-			notify-send -u critical -a "ERROR" "[$DISTRO]: DISTRO NOT IMPLEMENTED" ||
-    	    echo "[$DISTRO]: DISTRO NOT IMPLEMENTED" 2>&1
+			notify-send -u critical -a "ERROR" "[$DISTRO]: DISTRIBUTION NOT IMPLEMENTED!" ||
+    	    echo "[$DISTRO]: DISTRIBUTION NOT IMPLEMENTED!" 2>&1
+			echo "Welcoming all new and improved commits! 😁"
     	    return 1
 		;;
 	esac
-
-	echo "
-─────────▀▀▀▀▀▀──────────▀▀▀▀▀▀▀
-──────▀▀▀▀▀▀▀▀▀▀▀▀▀───▀▀▀▀▀▀▀▀▀▀▀▀▀
-────▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀──────────▀▀▀
-───▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀──────────────▀▀
-──▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀──────────────▀▀
-─▀▀▀▀▀▀▀▀▀▀▀▀───▀▀▀▀▀▀▀───────────────▀▀
-─▀▀▀▀▀▀▀▀▀▀▀─────▀▀▀▀▀▀▀──────────────▀▀
-─▀▀▀▀▀▀▀▀▀▀▀▀───▀▀▀▀▀▀▀▀──────────────▀▀
-─▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀
-─▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀
-─▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀
-──▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀
-───▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀▀
-─────▀▀▀▀▀▀▀▀▀▀▀▀▀───────────────▀▀▀
-──────▀▀▀▀▀▀▀▀▀▀▀───▀▀▀────────▀▀▀
-────────▀▀▀▀▀▀▀▀▀──▀▀▀▀▀────▀▀▀▀
-───────────▀▀▀▀▀▀───▀▀▀───▀▀▀▀
-─────────────▀▀▀▀▀─────▀▀▀▀
-────────────────▀▀▀──▀▀▀▀
-──────────────────▀▀▀▀
-───────────────────▀▀
-"
 }
