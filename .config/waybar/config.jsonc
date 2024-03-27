@@ -150,6 +150,7 @@
 			"activated": "🏶",
 			"deactivated": "🏵"
 		},
+		"on-click-right": "$HOME/.config/wofi/scripts/mako.sh",
 		"tooltip": false
 	},
 	"custom/cava": {
@@ -192,15 +193,17 @@
 	},
 	"network": {
 		"interval": 1,
-		"format": "{output}<big>🖧</big>",
+		//"exec-if": "timeout 3600",
+		//"exec": "curl ifconfig.me",		# "if [ pgrep timeout 3600 ]; then else curl ifconfig.me fi"
 		"format-wifi": "{essid} {icon}",
 		"format-ethernet": "{ifname} ",
-		"format-linked": "{ifname}{essid}",
+		"format-linked": "{ifname}{essid} 🖧",
 		"format-disconnected": "⚠",
-		"tooltip-format-wifi": "{ifname}: {essid}\n Frequency: {frequency}MHz\n Strength: {signaldBm}dBm ({signalStrength}%)\n IP: {ipaddr}/{cidr}\nIP: 'curl ifconfig.me'\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
-		"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n IP: 'curl ifconfig.me'\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
+		"tooltip-format-wifi": "{ifname}: {essid}\n Frequency: {frequency}MHz\n Strength: {signaldBm}dBm ({signalStrength}%)\n IP: {ipaddr}/{cidr}\nIP: {}\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
+		"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n IP: {}\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
         "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
 		"on-click": "nm-connection-editor",
+		"on-click-middle": "nm-connection-editor",
 		"on-click-right": "nm-connection-editor",
 		"tooltip": true
 	},
