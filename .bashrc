@@ -52,34 +52,30 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 #######################################################
 # EXPORT ENVIRONMENTAL VARIABLES - (/etc/environment)
 #######################################################
-export HISTFILESIZE=1000
 export HISTSIZE=1000
+export HISTFILESIZE=1000
 export HISTCONTROL=erasedups:ignoredups:ignorespace
-export _JAVA_AWT_WM_NONREPARENTING=1
-#export PATH=$HOME/bin:/usr/local/bin:$PATH
-#export MANPATH="/usr/local/man:$MANPATH"
 export EDITOR="codium -w"
 export GPG_TTY=$(tty)
 export QT_QPA_PLATFORMTHEME=qt6ct
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export _JAVA_AWT_WM_NONREPARENTING=1
 export VDPAU_DRIVER=radeonsi
 export LIBVA_DRIVER_NAME=radeonsi
 
 # Official WAY-(to_define_your)-LAND
 if [ $XDG_BACKEND == "wayland" ]; then
-    #export DESKTOP_SESSION=$XDG_SESSION_DESKTOP
-	#export XDG_CURRENT_DESKTOP=$XDG_SESSION_DESKTOP
-    #export XDG_RUNTIME_DIR=$XDG_SESSION_TYPE		# GENERALLY "/run/user/$UID"
-    #export GDK_BACKEND=$XDG_SESSION_TYPE
-    export DISPLAY=$WAYLAND_DISPLAY:0				# ONLY EXPORT IF XWAYLAND=DISABLED
+	#export WAYLAND_DEBUG=1								# (1, client, server)
+	#export XDG_CURRENT_DESKTOP=$XDG_SESSION_DESKTOP	# ONLY EXPORT IF NOT DEFAULTING TO WM/DE
+    #export GDK_BACKEND=$XDG_SESSION_TYPE				# ONLY EXPORT IF NOT DEFAULTING TO WAYLAND
+    #export DISPLAY=$WAYLAND_DISPLAY					# ONLY EXPORT FOR SPECIFIC APPLICATIONS
     export SDL_VIDEODRIVER=$XDG_SESSION_TYPE
-    export QT_QPA_PLATFORM=$XDG_SESSION_TYPE		# ONLY EXPORT IF REQUIRED
+    export QT_QPA_PLATFORM=wayland-egl
 	export QT_WAYLAND_FORCE_DPI=physical
     export QT_WAYLAND_DISABLE_WINDOWDECORATION=0
 	export ECORE_EVAS_ENGINE=$XDG_SESSION_TYPE
 	export ELM_ENGINE=$XDG_SESSION_TYPE
-    export _JAVA_AWT_WM_NONREPARENTING=1
-	export MOZ_ENABLE_WAYLAND=1						# USE BRAVE BROWSER (-_-)
+	export MOZ_ENABLE_WAYLAND=1
 fi
 
 #######################################################
@@ -183,7 +179,6 @@ Architecture:	$ID
     		    echo "[$DISTRO] Package Manager installed: YAY!" 2>&1
 				yay -Siq yay-bin
     		fi
-
 			# Installs packages listed in PACKAGES file
 			if command -v yay &>/dev/null; then
     		    yay -Syyu --needed --removemake --cleanafter - < PACKAGES && yay -Ycc && yay -Sc && sudo pacman-fix-permissions
