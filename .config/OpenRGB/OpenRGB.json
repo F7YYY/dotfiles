@@ -1289,7 +1289,7 @@
         ]
     },
     "Theme": {
-        "theme": "dark"
+        "theme": "auto"
     },
     "UserInterface": {
         "RunZoneChecks": false,
