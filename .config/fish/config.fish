@@ -57,3 +57,4 @@ complete -c libredefender -n "__fish_seen_subcommand_from help; and not __fish_s
 complete -c libredefender -n "__fish_seen_subcommand_from help; and not __fish_seen_subcommand_from scan; and not __fish_seen_subcommand_from scheduler; and not __fish_seen_subcommand_frominfections; and not __fish_seen_subcommand_from test-notify; and not __fish_seen_subcommand_from dump-config; and not __fish_seen_subcommand_from completions; and not __fish_seen_subcommand_from help" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'
 
 set fish_greeting
+#fetch
