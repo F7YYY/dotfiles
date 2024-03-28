@@ -2,7 +2,7 @@
 #
 # WOFI POWER-MENU #
 ###################
-
+#
 # Exit on error, unset variable as error, and propagate failure in pipelines
 set -euo pipefail
 
@@ -37,6 +37,9 @@ requirements() {
 # Function to handle power menu options
 powermenu() {
     local selected="$1"
+    local swaylock=(swaylock-corrupter)
+    local hyprlock=(hyprlock -q)
+    local uprocesses=(killall -u username)
 
     case "$selected" in
         "Reload")
@@ -48,41 +51,47 @@ powermenu() {
                 systemctl --user daemon-reload
                 systemctl --user daemon-reexec
             fi
-            ;;
+        ;;
         "Lock")
-            "$LOCK"
-            ;;
+            if [[ $XDG_SESSION_DESKTOP =~ ^sway* ]]; then
+                $swaylock
+            elif [ $XDG_SESSION_DESKTOP == "hyprland" ]; then
+                $hyprlock
+            else
+                loginctl lock-session
+            fi
+        ;;
         "Suspend")
             systemctl suspend && "$LOCK"
-            ;;
+        ;;
         "Logout")
             if [[ $XDG_SESSION_DESKTOP =~ ^sway* ]]; then
-                swaymsg exit
+                swaymsg exit && $uprocesses
             elif [ $XDG_SESSION_DESKTOP == "hyprland" ]; then
-                hyprctl dispatch exit
+                hyprctl dispatch exit && $uprocesses
             else
                 loginctl terminate-session "$XDG_SESSION_ID"
                 loginctl kill-user $(whoami)
+                $uprocesses
             fi
-            ;;
+        ;;
         "Reboot")
             systemctl reboot
-            ;;
+        ;;
         "Reboot>BIOS")
             systemctl reboot --firmware-setup
-            ;;
+        ;;
         "Shutdown")
             systemctl poweroff
-            ;;
+        ;;
         *)
             cleanup
-            ;;
+        ;;
     esac
 }
 
 # Main function to display the power menu
 main() {
-    local LOCK=(hyprlock -q)
     local menu=("Reload"
     			"Lock"
     			"Suspend"
