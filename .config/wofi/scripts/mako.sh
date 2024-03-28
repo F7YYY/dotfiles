@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
-# MAKO NOTIFICATIONS
-####################
-
+# WOFI MAKO-MENU
+################
+#
 # Exit on error, unset variable as error, and propagate failure in pipelines
 set -euo pipefail
 
@@ -20,7 +20,7 @@ requirements() {
     local missing_tools=()
 
     for tool in "${required_tools[@]}"; do
-        if ! command -v "$tool" &>/dev/null; then
+        if [ ! command -v "$tool" &>/dev/null ]; then
             missing_tools+=("$tool")
         fi
     done
@@ -41,16 +41,16 @@ notify() {
     case "$selected" in
         "Yes")
             makoctl set-mode default
-            ;;
+        ;;
         "No")
             makoctl set-mode do-not-disturb
-            ;;
+        ;;
         "Dismiss")
             makoctl dismiss -a
-            ;;
+        ;;
         *)
             cleanup
-            ;;
+        ;;
     esac
 }
 
