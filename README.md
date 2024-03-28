@@ -1,4 +1,6 @@
-# Arch Linux Wayland Setup
+<div align="center">
+    <h1>【 Arch Linux Wayland Rice 】</h1>
+</div>
 <div align="center">
 
 [![](https://img.shields.io/github/last-commit/f7yyy/dotfiles?&style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=222222)](https://github.com/F7YYY/dotfiles/activity)
@@ -30,7 +32,7 @@
 - **Text Editor**: *[vscodium-bin](https://github.com/VSCodium/vscodium) & [neovim](https://github.com/neovim/neovim)*
 - **Media**: *[youtube-music-bin](https://github.com/th-ch/youtube-music) & [imv](https://sr.ht/~exec64/imv/) & [mpv](https://github.com/mpv-player/mpv) & [cava](https://github.com/karlstav/cava)*
 - **System Monitor**: *[btop](https://github.com/aristocratos/btop)*
-- **Tweak**: *[gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) & ([qt5ct](https://qt5ct.sourceforge.io/)+[qt6ct](https://github.com/trialuser02/qt6ct)) & (~~[archlinux-tweak-tool-git](https://github.com/arcolinux/archlinux-tweak-tool)~~ - **"Underdeveloped"**)*
+- **Tweak**: *[gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) & ([qt5ct](https://qt5ct.sourceforge.io/)+[qt6ct](https://github.com/trialuser02/qt6ct)) & (~~[archlinux-tweak-tool-git](https://github.com/arcolinux/archlinux-tweak-tool)~~ - "Underdeveloped")*
 - **OTHER**: *[PACKAGES](PACKAGES)*
 
 ## Additionals
