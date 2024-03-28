@@ -7,7 +7,7 @@
 - **Boot Manager**: *([refind](https://www.rodsbooks.com/refind)+[refind-theme-darkmini-git](https://github.com/LightAir/darkmini))*
 - **Display Manager**: *[ly](https://github.com/fairyglade/ly)*
 - **Window Manager**: *[hyprland](https://github.com/hyprwm/Hyprland) & [swayfx](https://github.com/WillPower3309/swayfx)*
-- **Lock Screen**: *[hyprlock](https://github.com/hyprwm/hyprlock) /[swaylock-corrupter](https://github.com/r00tman/corrupter)*
+- **Lock Screen**: *[hyprlock](https://github.com/hyprwm/hyprlock) / [swaylock-corrupter](https://github.com/r00tman/corrupter)*
 - **Status Bar**: *([waybar](https://github.com/Alexays/Waybar)+[waybar-updates](https://github.com/L11R/waybar-updates)+[wttrbar](https://github.com/bjesus/wttrbar))*
 - **Notification Daemon**: *[mako](https://github.com/emersion/mako)*
 - **Terminal**: *[kitty](https://github.com/kovidgoyal/kitty)*
@@ -24,9 +24,11 @@
 - **OTHER**: *[PACKAGES](PACKAGES)*
 
 ## Additionals
-1. [Wofi Scripts](.config/wofi/scripts)
+1. Scripts
    - [mako.sh](.config/wofi/scripts/mako.sh): *Notification Dismissal, Disable, and Enable.*
    - [powermenu.sh](.config/wofi/scripts/powermenu.sh): *None in AUR.*
+   - [battery.sh](.config/hypr/scripts/battery.sh): Thanks to [end-4](https://github.com/end-4/dots-hyprland/blob/main/.config/hypr/hyprlock/status.sh)!
+   - 😔 *'I had more, but my brain wasn't braining enough to better compile them.'*
 2. WIP.configs
    - [.bashrc](.bashrc): *More room for improvement, including install_packages() method.*
    - [waybar style.css](.config/waybar/style.css): *Adjusting center-line visibility between modules only.*
@@ -34,4 +36,12 @@
 ## Notes
 😁 *`Welcoming all new and improved commits!`*
 
-<p align="center"><a href="LICENSE"><img src="https://img.shields.io/static/v1.svg?style=flat-square&label=License&message=MIT&logoColor=eceff4&logo=github&colorA=1A1B26&colorB=F7768E"/></a></p>
+<div align="center"> 
+[![](https://img.shields.io/github/last-commit/f7yyy/dotfiles?&style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=222222)](https://github.com/F7YYY/dotfiles/activity)
+[![](https://img.shields.io/github/stars/f7yyy/dotfiles?style=for-the-badge&logo=andela&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://youtu.be/dQw4w9WgXcQ?si=mAbUCyPRQY2MODCu)
+[![](https://img.shields.io/github/repo-size/f7yyy/dotfiles?color=DDDDDD&label=SIZE&logo=googledrive&style=for-the-badge&logoColor=DDDDDD&labelColor=333333)](https://github.com/f7yyy/dotfiles)
+[![](https://img.shields.io/badge/issues-brain-green?style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://avatars.githubusercontent.com/u/38305613?v=4)
+[![](https://img.shields.io/static/v1.svg?style=flat-square&label=LICENSE%20&message=MIT&logoColor=DDDDDD&logo=github&colorA=333333&colorB=DDDDDD)](LICENSE)
+</a>
+
+</div>
