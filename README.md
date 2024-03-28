@@ -6,8 +6,8 @@
 ## Features
 - **Boot Manager**: *([refind](https://www.rodsbooks.com/refind)+[refind-theme-darkmini-git](https://github.com/LightAir/darkmini))*
 - **Display Manager**: *[ly](https://github.com/fairyglade/ly)*
-- **Window Manager**: *[swayfx](https://github.com/WillPower3309/swayfx) & [hyprland](https://github.com/hyprwm/Hyprland)*
-- **Lock Screen**: *[hyprlock](https://github.com/hyprwm/hyprlock) / (~~[swaylock-corrupter](https://github.com/r00tman/corrupter)~~ - **"Red Screen of Death"**)*
+- **Window Manager**: *[hyprland](https://github.com/hyprwm/Hyprland) & [swayfx](https://github.com/WillPower3309/swayfx)*
+- **Lock Screen**: *[hyprlock](https://github.com/hyprwm/hyprlock) /[swaylock-corrupter](https://github.com/r00tman/corrupter)*
 - **Status Bar**: *([waybar](https://github.com/Alexays/Waybar)+[waybar-updates](https://github.com/L11R/waybar-updates)+[wttrbar](https://github.com/bjesus/wttrbar))*
 - **Notification Daemon**: *[mako](https://github.com/emersion/mako)*
 - **Terminal**: *[kitty](https://github.com/kovidgoyal/kitty)*
@@ -17,8 +17,8 @@
 - **Application Launcher**: *([wofi](https://hg.sr.ht/~scoopta/wofi)+[wofi-calc](https://github.com/Zeioth/wofi-calc.git)+[wofi-emoji](https://github.com/Zeioth/wofi-emoji))*
 - **Wallpaper Setter**: *[waypaper-engine](https://github.com/0bCdian/Waypaper-Engine)*
 - **File Manager**: *[thunar](https://docs.xfce.org/xfce/thunar/start) & [ranger](https://github.com/ranger/ranger)*
-- **Text Editor**: *[neovim](https://github.com/neovim/neovim) & [vscodium-bin](https://github.com/VSCodium/vscodium)*
-- **Media**: *[imv](https://sr.ht/~exec64/imv/) & [mpv](https://github.com/mpv-player/mpv) & [youtube-music-bin](https://github.com/th-ch/youtube-music) & [cava](https://github.com/karlstav/cava)*
+- **Text Editor**: *[vscodium-bin](https://github.com/VSCodium/vscodium) & [neovim](https://github.com/neovim/neovim)*
+- **Media**: *[youtube-music-bin](https://github.com/th-ch/youtube-music) & [imv](https://sr.ht/~exec64/imv/) & [mpv](https://github.com/mpv-player/mpv) & [cava](https://github.com/karlstav/cava)*
 - **System Monitor**: *[btop](https://github.com/aristocratos/btop) & [radeontop](https://github.com/clbr/radeontop)*
 - **Tweak**: *[gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) & ([qt5ct](https://qt5ct.sourceforge.io/)+[qt6ct](https://github.com/trialuser02/qt6ct)) & (~~[archlinux-tweak-tool-git](https://github.com/arcolinux/archlinux-tweak-tool)~~ - **"Underdeveloped"**)*
 - **OTHER**: *[PACKAGES](PACKAGES)*
@@ -31,5 +31,7 @@
    - [.bashrc](.bashrc): *More room for improvement, including install_packages() method.*
    - [waybar style.css](.config/waybar/style.css): *Adjusting center-line visibility between modules only.*
 
-## License
-***[MIT LICENSE](LICENSE)** - `Welcoming all new and improved commits! 😁`*
+## Notes
+😁 *`Welcoming all new and improved commits!`*
+
+<p align="center"><a href="LICENSE"><img src="https://img.shields.io/static/v1.svg?style=flat-square&label=License&message=MIT&logoColor=eceff4&logo=github&colorA=1A1B26&colorB=F7768E"/></a></p>
