@@ -1,4 +1,14 @@
 # Arch Linux Wayland Setup
+<div align="center">
+
+[![](https://img.shields.io/github/last-commit/f7yyy/dotfiles?&style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=222222)](https://github.com/F7YYY/dotfiles/activity)
+[![](https://img.shields.io/github/repo-size/f7yyy/dotfiles?style=for-the-badge&logo=googledrive&label=SIZE&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://github.com/f7yyy/dotfiles)
+[![](https://img.shields.io/github/stars/f7yyy/dotfiles?style=for-the-badge&logo=andela&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://youtu.be/dQw4w9WgXcQ?si=mAbUCyPRQY2MODCu)
+[![](https://img.shields.io/badge/issues-brain-green/f7yyy/dotfiles?style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://avatars.githubusercontent.com/u/38305613?v=4)
+[![](https://img.shields.io/github/license/f7yyy/dotfiles?style=for-the-badge&logo=GITHUB&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](LICENSE)
+</a>
+
+</div>
 <img src="Pictures/Screenshots/.1.png">
 <img src="Pictures/Screenshots/.2.png">
 <img src="Pictures/Screenshots/.3.png">
@@ -6,7 +16,7 @@
 ## Features
 - **Boot Manager**: *([refind](https://www.rodsbooks.com/refind)+[refind-theme-darkmini-git](https://github.com/LightAir/darkmini))*
 - **Display Manager**: *[ly](https://github.com/fairyglade/ly)*
-- **Window Manager**: *[hyprland](https://github.com/hyprwm/Hyprland) & [swayfx](https://github.com/WillPower3309/swayfx)*
+- **Window Manager**: *[hyprland](https://github.com/hyprwm/Hyprland) / [swayfx](https://github.com/WillPower3309/swayfx)*
 - **Lock Screen**: *[hyprlock](https://github.com/hyprwm/hyprlock) / [swaylock-corrupter](https://github.com/r00tman/corrupter)*
 - **Status Bar**: *([waybar](https://github.com/Alexays/Waybar)+[waybar-updates](https://github.com/L11R/waybar-updates)+[wttrbar](https://github.com/bjesus/wttrbar))*
 - **Notification Daemon**: *[mako](https://github.com/emersion/mako)*
@@ -19,29 +29,24 @@
 - **File Manager**: *[thunar](https://docs.xfce.org/xfce/thunar/start) & [ranger](https://github.com/ranger/ranger)*
 - **Text Editor**: *[vscodium-bin](https://github.com/VSCodium/vscodium) & [neovim](https://github.com/neovim/neovim)*
 - **Media**: *[youtube-music-bin](https://github.com/th-ch/youtube-music) & [imv](https://sr.ht/~exec64/imv/) & [mpv](https://github.com/mpv-player/mpv) & [cava](https://github.com/karlstav/cava)*
-- **System Monitor**: *[btop](https://github.com/aristocratos/btop) & [radeontop](https://github.com/clbr/radeontop)*
+- **System Monitor**: *[btop](https://github.com/aristocratos/btop)*
 - **Tweak**: *[gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) & ([qt5ct](https://qt5ct.sourceforge.io/)+[qt6ct](https://github.com/trialuser02/qt6ct)) & (~~[archlinux-tweak-tool-git](https://github.com/arcolinux/archlinux-tweak-tool)~~ - **"Underdeveloped"**)*
 - **OTHER**: *[PACKAGES](PACKAGES)*
 
 ## Additionals
-1. Scripts
-   - [mako.sh](.config/wofi/scripts/mako.sh): *Notification Dismissal, Disable, and Enable.*
-   - [powermenu.sh](.config/wofi/scripts/powermenu.sh): *None in AUR.*
-   - [battery.sh](.config/hypr/scripts/battery.sh): Thanks to [end-4](https://github.com/end-4/dots-hyprland/blob/main/.config/hypr/hyprlock/status.sh)!
-   - 😔 *'I had more, but my brain wasn't braining enough to better compile them.'*
-2. WIP.configs
+1. **Scripts:**
+   - [mako.sh](.config/wofi/scripts/mako.sh): *Wofi notification Dismissal, Disable, and Enable.*
+   - [powermenu.sh](.config/wofi/scripts/powermenu.sh): *No Wofi powermenu package in AUR, though I'm considering [wlogout](https://github.com/ArtsyMacaw/wlogout) or [eww](https://github.com/elkowar/eww).*
+   - [battery.sh](.config/hypr/scripts/battery.sh): Thanks to [end-4](https://github.com/end-4) for the hyprlock battery [status.sh](https://github.com/end-4/dots-hyprland/blob/main/.config/hypr/hyprlock/status.sh) script!
+   - 😵 - *`I had more, but I'm brain dead (check older activity).`*
+2. **WIP.configs:**
    - [.bashrc](.bashrc): *More room for improvement, including install_packages() method.*
-   - [waybar style.css](.config/waybar/style.css): *Adjusting center-line visibility between modules only.*
+   - [config.jsonc](.config/waybar/config.jsonc): *Explained in Waybar modules layout.*
+   - [style.css](.config/waybar/style.css): *Adjusting center-line visibility between Waybar modules only.*
 
-## Notes
-😁 *`Welcoming all new and improved commits!`*
+## ✨Thank You
+   😁 - *`Welcoming all new and improved commits!`*
 
-<div align="center"> 
-[![](https://img.shields.io/github/last-commit/f7yyy/dotfiles?&style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=222222)](https://github.com/F7YYY/dotfiles/activity)
-[![](https://img.shields.io/github/stars/f7yyy/dotfiles?style=for-the-badge&logo=andela&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://youtu.be/dQw4w9WgXcQ?si=mAbUCyPRQY2MODCu)
-[![](https://img.shields.io/github/repo-size/f7yyy/dotfiles?color=DDDDDD&label=SIZE&logo=googledrive&style=for-the-badge&logoColor=DDDDDD&labelColor=333333)](https://github.com/f7yyy/dotfiles)
-[![](https://img.shields.io/badge/issues-brain-green?style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://avatars.githubusercontent.com/u/38305613?v=4)
-[![](https://img.shields.io/static/v1.svg?style=flat-square&label=LICENSE%20&message=MIT&logoColor=DDDDDD&logo=github&colorA=333333&colorB=DDDDDD)](LICENSE)
+<a href="https://github.com/f7yyy/dotfiles/graphs/contributors">
+   <img src="https://contrib.rocks/image?repo=f7yyy/dotfiles" />
 </a>
-
-</div>
