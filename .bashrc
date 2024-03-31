@@ -29,7 +29,6 @@ alias ll='ls -l --color=auto'
 alias la='ls -la --color=auto'
 alias grep='grep --color=auto'
 alias sudo='sudo -v; sudo '
-PS1='[\u@\h \W]\$ '
 # Changing directories
 alias home='cd ~'
 alias ..='cd ..'
