@@ -71,11 +71,7 @@
 		"markup": true,
 		"sort-by-app-id": true,
         "format": "{icon}",
-        "ignore-list": [
-            "kitty",
-            "Alacritty",
-            "wezterm"
-		],
+        "ignore-list": "$TERM",
 		"on-click": "activate",
         "on-click-middle": "close",
         "on-click-right": "minimize-raise",
@@ -193,18 +189,16 @@
 	},
 	"network": {
 		"interval": 1,
-		//"exec-if": "timeout 3600",
-		//"exec": "curl ifconfig.me",		# "if [ pgrep timeout 3600 ]; then else curl ifconfig.me fi"
 		"format-wifi": "{essid} {icon}",
 		"format-ethernet": "{ifname} ",
 		"format-linked": "{ifname}{essid} 🖧",
 		"format-disconnected": "⚠",
-		"tooltip-format-wifi": "{ifname}: {essid}\n Frequency: {frequency}MHz\n Strength: {signaldBm}dBm ({signalStrength}%)\n IP: {ipaddr}/{cidr}\nIP: {}\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
-		"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n IP: {}\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
+		"tooltip-format-wifi": "{ifname}: {essid}\n Frequency: {frequency}MHz\n Strength: {signaldBm}dBm ({signalStrength}%)\n IP: {ipaddr}/{cidr}\nIP: $(curl ifconfig.me)\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
+		"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n IP: $(curl ifconfig.me)\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
         "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
 		"on-click": "nm-connection-editor",
-		"on-click-middle": "nm-connection-editor",
-		"on-click-right": "nm-connection-editor",
+		"on-click-middle": "notify-send -u normal -a 'IP' 'EXTERNAL: $(curl ifconfig.me'",
+		"on-click-right": "kitty --detach $SHELL -c 'nmtui'",
 		"tooltip": true
 	},
 	"custom/powermenu": {
@@ -221,8 +215,8 @@
 		"format-icons": {
 			"pending-updates": "🡇"
 		},
-		"on-click": "kitty $SHELL -c 'yay -Syyu && yay -Ycc && yay -Sc'",
-		"on-right-click": "kitty $SHELL -c 'yay -Syyu && yay -Ycc && yay -Sc'",
+		"on-click": "kitty --detach $SHELL -c 'yay && yay -Ycc && yay -Sc'",
+		"on-right-click": "pkexec reflector > /etc/pacman.d/mirrorlist",
 		"return-type": "json",
 		"tooltip": true
 	},
@@ -249,8 +243,8 @@
 			"on-click-right": "mode",
 			"on-click-forward": "tz_up",
 			"on-click-backward": "tz_down",
-			"on-scroll-up": "switch_monitor_up",   // Updated action for scrolling up
-			"on-scroll-down": "switch_monitor_down" // Updated action for scrolling down
+			"on-scroll-up": "switch_monitor_up",
+			"on-scroll-down": "switch_monitor_down"
 		},
 		"cpu": {
 			"interval": 1,
