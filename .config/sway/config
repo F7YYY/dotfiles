@@ -53,7 +53,7 @@ set {
     $TRAY       -silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized
     $FONT       Sony Sketch EF 12                   # (kitty list-fonts)
     $SUPER      Mod4
-    $TERM       kitty
+    $TERM       kitty --detach
     $MENU       wofi
     $EMOJI      wofi-emoji
     $CALC       wofi-calc
