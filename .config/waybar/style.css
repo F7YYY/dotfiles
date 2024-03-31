@@ -38,11 +38,7 @@ tooltip {
 }
 
 /*──WAYBAR──────────────────────────────────────────────*/
-#waybar>* {
-    margin-top: 4px;
-    background: linear-gradient(to top, transparent calc(50% - 4px), @white 50%, transparent calc(50% + 4px), transparent);
-}
-#waybar.active{
+#waybar {
     background: linear-gradient(to top, transparent calc(50% - 4px), @white 50%, transparent calc(50% + 4px), transparent);
 }
 window#waybar {
