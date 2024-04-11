@@ -1254,6 +1254,11 @@
             "Z370 AORUS Ultra Gaming-CF"
         ]
     },
+    "LogManager": {
+        "dialog_no_show_hashes": [
+            14306703760882907409
+        ]
+    },
     "Plugins": {
         "plugins": [
             {
@@ -1294,13 +1299,13 @@
     "UserInterface": {
         "RunZoneChecks": false,
         "exit_profile": {
-            "profile_name": "WHITE",
+            "profile_name": "CF-WHITE",
             "set_on_exit": true
         },
         "geometry": {
             "height": 0,
-            "load_geometry": true,
-            "save_on_exit": true,
+            "load_geometry": false,
+            "save_on_exit": false,
             "width": 0,
             "x": 0,
             "y": 0
