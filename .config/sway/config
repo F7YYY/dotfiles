@@ -194,7 +194,7 @@ for_window {
     [window_role=".*"] $OPACITY, $MM, focus, sticky
     [class=".*"] $OPACITY, $MM, focus, sticky
     [app_id=".*"] $OPACITY, $MM, focus, sticky
-    [title="(?:Open|Save)(?:File|Folder|As)(?:Select|Choose|Library)"] $FLOAT
+    [title="(?:Open|Save|File|Folder|As|Select|Choose|Library|Password)"] $FLOAT
     [app_id="nm-*|mpv|imv|zenity|wdisplays|pavucontrol|gparted|openrgb|gnome-tweaks|qt5ct|qt6ct|bleachbit|zoom|electronplayer|qalculate-gtk"] $FLOAT, $OPAQUE
 }
 #─WINDOW_DEFAULT_APPS
