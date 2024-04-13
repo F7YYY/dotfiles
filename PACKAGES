@@ -81,6 +81,7 @@ kbd
 keyutils
 kitty
 kooha
+krita
 less
 libgnome-keyring
 libnotify
@@ -94,7 +95,6 @@ linux-headers
 linux-rt
 linux-rt-headers
 linux-xanmod-bin
-linux-xanmod-bin-headers
 linux-zen
 linux-zen-headers
 lutris
@@ -108,6 +108,7 @@ mesa-vdpau
 minecraft-launcher
 mkinitcpio-firmware
 mpv
+nemo
 neovim
 network-manager-applet
 noto-fonts-emoji
@@ -183,10 +184,6 @@ swaymgr
 swww
 teams-for-linux-bin
 telegram-desktop-bin
-thunar
-thunar-archive-plugin
-thunar-media-tags-plugin
-thunar-volman
 tor
 torbrowser-launcher
 traceroute
@@ -221,7 +218,7 @@ waybar
 waybar-updates
 wayland
 wayland-protocols
-waypaper-engine
+waypaper
 wdisplays
 wf-recorder
 wget
