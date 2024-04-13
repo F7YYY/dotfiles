@@ -28,7 +28,7 @@
 - **Package Manager**: *[yay-bin](https://github.com/Jguer/yay)*
 - **Application Launcher**: *([wofi](https://hg.sr.ht/~scoopta/wofi)+[wofi-calc](https://github.com/Zeioth/wofi-calc.git)+[wofi-emoji](https://github.com/Zeioth/wofi-emoji))*
 - **Wallpaper Setter**: *[waypaper-engine](https://github.com/0bCdian/Waypaper-Engine)*
-- **File Manager**: *[thunar](https://docs.xfce.org/xfce/thunar/start) & [ranger](https://github.com/ranger/ranger)*
+- **File Manager**: *[nemo](https://github.com/linuxmint/nemo) & [ranger](https://github.com/ranger/ranger)*
 - **Text Editor**: *[vscodium-bin](https://github.com/VSCodium/vscodium) & [neovim](https://github.com/neovim/neovim)*
 - **Media**: *[youtube-music-bin](https://github.com/th-ch/youtube-music) & [imv](https://sr.ht/~exec64/imv/) & [mpv](https://github.com/mpv-player/mpv) & [cava](https://github.com/karlstav/cava)*
 - **System Monitor**: *[btop](https://github.com/aristocratos/btop)*
@@ -38,13 +38,13 @@
 ## Additionals
 1. **Scripts:**
    - [mako.sh](.config/wofi/scripts/mako.sh): *Wofi notification Dismissal, Disable, and Enable.*
-   - [powermenu.sh](.config/wofi/scripts/powermenu.sh): *No Wofi powermenu package in AUR, though I'm considering [wlogout](https://github.com/ArtsyMacaw/wlogout) or [eww](https://github.com/elkowar/eww).*
+   - [powermenu.sh](.config/wofi/scripts/powermenu.sh): *No Wofi powermenu package in AUR, I've considered [wlogout](https://github.com/ArtsyMacaw/wlogout) or [eww](https://github.com/elkowar/eww).*
    - [battery.sh](.config/hypr/scripts/battery.sh): Thanks to [end-4](https://github.com/end-4) for the hyprlock battery [status.sh](https://github.com/end-4/dots-hyprland/blob/main/.config/hypr/hyprlock/status.sh) script!
    - 😵 - *`I had more, but I'm brain dead (check older activity).`*
 2. **WIP.configs:**
-   - [.bashrc](.bashrc): *More room for improvement, including install_packages() method.*
+   - [.bashrc](.bashrc): *Needs improvements, including install_packages() method.*
    - [config.jsonc](.config/waybar/config.jsonc): *Explained in Waybar modules layout.*
-   - [style.css](.config/waybar/style.css): *Adjusting center-line visibility between Waybar modules only.*
+   - [style.css](.config/waybar/style.css): *Adjusting center-line visibility between Waybar modules only, and grouping system stats cleanly.*
 
 ## ✨Thank You
    😁 - *`Welcoming all new and improved commits!`*
