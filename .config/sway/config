@@ -29,8 +29,8 @@ exec {
     #emacs --daemon
     swaymgr
     mako
-    blueman-applet
     nm-applet
+    blueman-applet
     corectrl
     openrgb $TRAY
     #easyeffects $WAYLAND $TRAY
@@ -112,81 +112,81 @@ bindsym --to-code {
 
 #───WORKSPACES──────────────────────────────────────────────────────────────────────────────────────────────────────────────
 set {
-    $SP                 scratchpad
-    $WS                 workspace
-    $MWS                move to $WS
-    $MSP                move to $SP
-    $MM                 move position mouse
+    $SP                     scratchpad
+    $WS                     workspace
+    $MWS                    move to $WS
+    $MSP                    move to $SP
+    $MM                     move position mouse
     #─RESIZING+ALIGNMENT
-    $FLOAT              floating enable
-    $MINI               minimize
-    $RENDER             max_render_time
-    $IDLE               inhibit_idle fullscreen
+    $FLOAT                  floating enable
+    $MINI                   minimize
+    $RENDER                 max_render_time
+    $IDLE                   inhibit_idle fullscreen
     #─WINDOWS
-    $OPACITY            0.8
-    $OPAQUE             1.0
+    $OPACITY                0.8
+    $OPAQUE                 1.0
 }
 bindsym --to-code {
-    $SUPER+B            splith
-    $SUPER+V            splitv
-    $SUPER+Y            splitt
-    $SUPER+T            layout tabbed
-    $SUPER+S            layout toggle split
-    $SUPER+Ctrl+S       layout stacking
-    $SUPER+Alt+F        fullscreen
-    $SUPER+F            floating toggle
-    $SUPER+A            focus parent
-    $SUPER+Ctrl+F       focus mode_toggle
+    $SUPER+B                splith
+    $SUPER+V                splitv
+    $SUPER+Y                splitt
+    $SUPER+T                layout tabbed
+    $SUPER+S                layout toggle split
+    $SUPER+Ctrl+S           layout stacking
+    $SUPER+Alt+F            fullscreen
+    $SUPER+F                floating toggle
+    $SUPER+A                focus parent
+    $SUPER+Ctrl+F           focus mode_toggle
     #─SWITCH_WORKSPACES
-    $SUPER+1            $WS 1
-    $SUPER+2            $WS 2
-    $SUPER+3            $WS 3
-    $SUPER+4            $WS 4
-    $SUPER+5            $WS 5
-    $SUPER+6            $WS 6
-    $SUPER+7            $WS 7
-    $SUPER+8            $WS 8
-    $SUPER+9            $WS 9
-    $SUPER+0            $WS 10
+    $SUPER+1                $WS 1
+    $SUPER+2                $WS 2
+    $SUPER+3                $WS 3
+    $SUPER+4                $WS 4
+    $SUPER+5                $WS 5
+    $SUPER+6                $WS 6
+    $SUPER+7                $WS 7
+    $SUPER+8                $WS 8
+    $SUPER+9                $WS 9
+    $SUPER+0                $WS 10
     #─MOVE_CONTAINERS_TO_WORKSPACES
-    $SUPER+Ctrl+1       $MWS 1
-    $SUPER+Ctrl+2       $MWS 2
-    $SUPER+Ctrl+3       $MWS 3
-    $SUPER+Ctrl+4       $MWS 4
-    $SUPER+Ctrl+5       $MWS 5
-    $SUPER+Ctrl+6       $MWS 6
-    $SUPER+Ctrl+7       $MWS 7
-    $SUPER+Ctrl+8       $MWS 8
-    $SUPER+Ctrl+9       $MWS 9
-    $SUPER+Ctrl+0       $MWS 10
+    $SUPER+Ctrl+1           $MWS 1
+    $SUPER+Ctrl+2           $MWS 2
+    $SUPER+Ctrl+3           $MWS 3
+    $SUPER+Ctrl+4           $MWS 4
+    $SUPER+Ctrl+5           $MWS 5
+    $SUPER+Ctrl+6           $MWS 6
+    $SUPER+Ctrl+7           $MWS 7
+    $SUPER+Ctrl+8           $MWS 8
+    $SUPER+Ctrl+9           $MWS 9
+    $SUPER+Ctrl+0           $MWS 10
     #─MOVE_CONTAINERS_TO_SCRATCHPAD
     $SUPER+Backspace        $SP show
     $SUPER+Ctrl+Backspace   $MSP
     #─TAB_WORKSPACES
-    $SUPER+Shift+Tab    $WS next
-    $SUPER+Tab          $WS back_and_forth
+    $SUPER+Shift+Tab        $WS next
+    $SUPER+Tab              $WS back_and_forth
     #─CHANGE_FOCUSED_WINDOWS
-    $SUPER+Left         focus left
-    $SUPER+Down         focus down
-    $SUPER+Up           focus up
-    $SUPER+Right        focus right
+    $SUPER+Left             focus left
+    $SUPER+Down             focus down
+    $SUPER+Up               focus up
+    $SUPER+Right            focus right
     #─RESIZE_FOCUSED_WINDOWS
-    $SUPER+Alt+Left     resize shrink width 10px
-    $SUPER+Alt+Down     resize grow height 10px
-    $SUPER+Alt+Up       resize shrink height 10px
-    $SUPER+Alt+Right    resize grow width 10px
+    $SUPER+Alt+Left         resize shrink width 10px
+    $SUPER+Alt+Down         resize grow height 10px
+    $SUPER+Alt+Up           resize shrink height 10px
+    $SUPER+Alt+Right        resize grow width 10px
     #─MOVE_FOCUSED_WINDOWS
-    $SUPER+Ctrl+Left    move left
-    $SUPER+Ctrl+Down    move down
-    $SUPER+Ctrl+Up      move up
-    $SUPER+Ctrl+Right   move right
+    $SUPER+Ctrl+Left        move left
+    $SUPER+Ctrl+Down        move down
+    $SUPER+Ctrl+Up          move up
+    $SUPER+Ctrl+Right       move right
 }
 
 #───WINDOW_MANAGEMENT_(swaymsg -t get_tree | awk 'tolower($0) ~ /(app_id|class|window_role)/ && NF > 1')
 for_window {
-    [window_role=".*"] $OPACITY, $MM, focus, sticky
-    [class=".*"] $OPACITY, $MM, focus, sticky
-    [app_id=".*"] $OPACITY, $MM, focus, sticky
+    [window_role=".*"]      $OPACITY, $MM, focus, sticky
+    [class=".*"]            $OPACITY, $MM, focus, sticky
+    [app_id=".*"]           $OPACITY, $MM, focus, sticky
     [title="(?:Open|Save|File|Folder|As|Select|Choose|Library|Password)"] $FLOAT
     [app_id="nm-*|mpv|imv|zenity|wdisplays|pavucontrol|gparted|openrgb|gnome-tweaks|qt5ct|qt6ct|bleachbit|zoom|electronplayer|qalculate-gtk"] $FLOAT, $OPAQUE
 }
@@ -211,7 +211,7 @@ titlebar_separator              enable
 #───PERIPHERALS─────────────────────────────────────────────────────────────────────────────────────────────────────────────
 output {
     $DISPLAY1
-    * adaptive_sync         on
+    * adaptive_sync             on
 }
 bindswitch {
 #───LAPTOP_AUTO_DISPLAY
@@ -219,43 +219,43 @@ bindswitch {
     --reload --locked lid:off output $DISPLAY1 enable
 }
 input type:keyboard {
-    xkb_layout              us
+    xkb_layout                  us
 }
 #───MOUSE
-focus_follows_mouse         no
-mouse_warping               none
+focus_follows_mouse             no
+mouse_warping                   none
 input type:mouse {
-    accel_profile           flat
-    pointer_accel           0
+    accel_profile               flat
+    pointer_accel               0
 }
 
 #───THEME_FX────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-blur                        disable
-blur_passes                 4
-blur_radius                 4
-blur_xray                   enable
-corner_radius               12
-shadows                     enable
-shadows_on_csd              enable
-shadow_color                $BLACK
-shadow_blur_radius          20
-layer_effects               "notifications" blur disable; shadows enable; corner_radius 30
-default_dim_inactive        0.1
-dim_inactive_colors.unfocused $CLEAR
-dim_inactive_colors.urgent  $RED
-default_border              pixel 1px
-default_floating_border     pixel 1px
-smart_corner_radius         on
-smart_borders               on
-smart_gaps                  on
-gaps inner                  10px
-#───CLASSES                 BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
-client.background           N/A         $BLACK
-client.focused              $WHITE      $BLACK      $WHITE      $WHITE      $WHITE
-client.focused_tab_title    $WHITE      $BLACK      $WHITE
-client.focused_inactive     $BLACK      $BLACK      $WHITE      $BLACK      $BLACK
-client.unfocused            $GREY       $BLACK      $GREY       $GREY       $GREY
-client.urgent               $RED        $BLACK      $RED        $RED        $RED
+blur                            disable
+blur_passes                     4
+blur_radius                     4
+blur_xray                       enable
+corner_radius                   12
+shadows                         enable
+shadows_on_csd                  enable
+shadow_color                    $BLACK
+shadow_blur_radius              20
+layer_effects                   "notifications" blur disable; shadows enable; corner_radius 30
+default_dim_inactive            0.1
+dim_inactive_colors.unfocused   $CLEAR
+dim_inactive_colors.urgent      $RED
+default_border                  pixel 1px
+default_floating_border         pixel 1px
+smart_corner_radius             on
+smart_borders                   on
+smart_gaps                      on
+gaps inner                      10px
+#───CLASSES                     BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+client.background               N/A         $BLACK
+client.focused                  $WHITE      $BLACK      $WHITE      $WHITE      $WHITE
+client.focused_tab_title        $WHITE      $BLACK      $WHITE
+client.focused_inactive         $BLACK      $BLACK      $WHITE      $BLACK      $BLACK
+client.unfocused                $GREY       $BLACK      $GREY       $GREY       $GREY
+client.urgent                   $RED        $BLACK      $RED        $RED        $RED
 
 #───SYSTEM_POWER────────────────────────────────────────────────────────────────────────────────────────────────────────────
 exec bash -c $(swayidle -w \
