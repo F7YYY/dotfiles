@@ -25,12 +25,12 @@ exec {
     gnome-keyring-daemon --start --components=secrets
     #dex-autostart -a $HOME/.config/autostart/*
     wlsunset -s 22:00 -S 10:00 -d 60
+    nm-applet
+    blueman-applet
     waypaper
     #emacs --daemon
     swaymgr
     mako
-    nm-applet
-    blueman-applet
     corectrl
     openrgb $TRAY
     #easyeffects $WAYLAND $TRAY
@@ -184,9 +184,9 @@ bindsym --to-code {
 
 #───WINDOW_MANAGEMENT_(swaymsg -t get_tree | awk 'tolower($0) ~ /(app_id|class|window_role)/ && NF > 1')
 for_window {
-    [window_role=".*"]      $OPACITY, $MM, focus, sticky
-    [class=".*"]            $OPACITY, $MM, focus, sticky
     [app_id=".*"]           $OPACITY, $MM, focus, sticky
+    [class=".*"]            $OPACITY, $MM, focus, sticky
+    [window_role=".*"]      $OPACITY, $MM, focus, sticky
     [title="(?:Open|Save|File|Folder|As|Select|Choose|Library|Password)"] $FLOAT
     [app_id="nm-*|mpv|imv|zenity|wdisplays|pavucontrol|gparted|openrgb|gnome-tweaks|qt5ct|qt6ct|bleachbit|zoom|electronplayer|qalculate-gtk"] $FLOAT, $OPAQUE
 }
