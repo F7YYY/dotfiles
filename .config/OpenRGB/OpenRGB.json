@@ -1304,13 +1304,13 @@
         },
         "geometry": {
             "height": 0,
-            "load_geometry": false,
+            "load_geometry": true,
             "save_on_exit": false,
             "width": 0,
             "x": 0,
             "y": 0
         },
-        "greyscale_tray_icon": false,
+        "greyscale_tray_icon": true,
         "language": "System Default",
         "minimize_on_close": true
     }
