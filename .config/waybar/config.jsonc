@@ -12,13 +12,15 @@
 	"position": "top",
 	"layer": "top",
 	"pango_markup": true,
+	"reload_style_on_change": true,
 	"modules-left": [				//__APPLICATIONS__
 		"custom/appmenu",
 		"hyprland/workspaces",		// WIP ~ CONVERT TO "wlr/workspaces",
 		"wlr/taskbar",
 		"sway/scratchpad",			// WIP ~ CONVERT TO "wlr/scratchpad",
 		"tray",
-		"gamemode"
+		"gamemode",
+		"custom/recorder"
 	],
 	"modules-center": [				//__STATUS__
 		"custom/weather",			// AUR: WTTRBAR
@@ -27,13 +29,14 @@
 	"modules-right": [				//__SYSTEM__
 		"idle_inhibitor",
 		"custom/cava",				// WIP ~ WITHOUT RECOMPILING
-		"pulseaudio",
+		"group/pulse-sink",			// WIP ~ PREVENT TOGGLING SINK+SOURCE & STYLE.CSS
+		"group/pulse-source",		// WIP ~ REPORT CORRECT VOLUME & STYLE.CSS
 		"network",					// WIP ~ REPORT EXTERNAL/PUBLIC IP
 		"group/hardware",			// WIP ~ SYSTEM HARDWARE STATUS
 		"custom/powermenu",			// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU.SH
 		"custom/pacman"				// AUR: WAYBAR-UPDATES
 	],
-	//──CONFIGURATION─────────────────────────────────────
+	//──MODULES_LEFT────────────────────────────────────
 	"custom/appmenu": {
 		"format": "⌘",
 		"on-click": "wofi",
@@ -101,6 +104,15 @@
 		"icon-size": 20,
 		"tooltip": true
 	},
+	"custom/recorder": {
+		"interval": 1,
+		"exec": "echo '{\"class\": \"recording\"}'",
+		"exec-if": "pgrep wf-recorder || pgrep ffmpeg",
+		"format": "",
+		"return-type": "json"
+
+	},
+	//──MODULES_CENTER────────────────────────────────────
 	"custom/weather": {
 		"interval": 3600,
 		"exec": "wttrbar",
@@ -116,15 +128,14 @@
 		"format-alt": "    {:%a: %D}",
 		"tooltip-format": "<tt><small>{calendar}</small></tt>",
 		"calendar": {
-			"mode": "year",
-			"mode-mon-col": 3,
-			"weeks-pos": "right",
+			"mode-mon-col": 2,
+			"weeks-pos": "left",
 			"on-scroll": 1,
 			"on-click-right": "mode",
 			"format": {
 				"months": "<span color='#FFFFFF'><b>{}</b></span>",
 				"days": "<span color='#DDDDDD'><b>{}</b></span>",
-				"weeks": "<span color='#777777'><b>W{}</b></span>",
+				"weeks": "<span color='#777777'><b>{}</b></span>",
 				"weekdays": "<span color='#777777'><b>{}</b></span>",
 				"today": "<span color='#FF0000'><b><u>{}</u></b></span>"
 			}
@@ -139,6 +150,7 @@
 		"on-click-middle": "wl-copy $(date '+%F_%T')",
 		"tooltip": true
 	},
+	//──MODULES_RIGHT────────────────────────────────────
 	"idle_inhibitor": {
 		"what": "handle-lid-switch",
 		"format": "{icon}",
@@ -160,15 +172,46 @@
 		},
 		"tooltip": false
 	},
-	"pulseaudio": {
+	"group/pulse-sink": {
+		"orientation": "inherit",
+		"drawer": {
+		  "transition-duration": 300,
+		  "children-class": "drawer-child",
+		  "transition-left-to-right": false
+		},
+		"modules": [
+			"pulseaudio#sink",
+			//"pulseaudio/slider",
+			"pulseaudio#sink/volume"
+		]
+	},
+	"group/pulse-source": {
+		"orientation": "inherit",
+		"drawer": {
+		  "transition-duration": 300,
+		  "children-class": "drawer-child",
+		  "transition-left-to-right": false
+		},
+		"modules": [
+			"pulseaudio#source",
+			//"pulseaudio/slider",
+			"pulseaudio#source"	///volume"
+		]
+	},
+	"pulseaudio/slider": {
+		"min": 0,
+		"max": 100,
+		"orientation": "horizontal"
+	},
+	"pulseaudio#sink": {
 		"interval": 1,
-		"scroll-step": 10,
-		"format": "{volume}% {icon} {format_source}",
-		"format-bluetooth": " {volume}% {icon} {format_source}",
-		"format-bluetooth-muted": " {format_source}",
-		"format-muted": "󰝟 {format_source}",
-		"format-source": "{volume}% ",
-		"format-source-muted": "",
+		"max-volume": 100,
+		"scroll-step": 1,
+		"smooth-scrolling-threshold": 1,
+		"format": "{icon}",
+		"format-bluetooth": "{icon}",
+		"format-bluetooth-muted": "{icon}",
+		"format-muted": "󰝟",
 		"format-icons": {
 			"hdmi": "",
 			"hifi": "🎛",
@@ -181,10 +224,37 @@
 			"default": ["🕨","🕩","🕪"]
 		},
 		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-		"on-click-middle": "pavucontrol",
-		"on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+		"on-click-right": "pavucontrol -t 3",
 		"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
 		"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+		"tooltip": true
+	},
+	"pulseaudio#source": {
+		"interval": 1,
+		"max-volume": 100,
+		"scroll-step": 1,
+		"smooth-scrolling-threshold": 1,
+		"format-bluetooth": "{icon}",
+		"format-bluetooth-muted": "{format_source}",
+		"format": "{format_source}",
+		"format-muted": "",
+		"format-source": "",
+		"format-source-muted": "",
+		"format-icons": {
+			"hdmi": "",
+			"hifi": "🎛",
+			"headphones": "🎧",
+			"handsfree": "🎧",
+			"headset": "🎧",
+			"phone": "📱",
+			"portable": "📱",
+			"car": "",
+			"default": ""
+		},
+		"on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+		"on-click-right": "pavucontrol -t 4",
+		"on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
+		"on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
 		"tooltip": true
 	},
 	"network": {
@@ -197,7 +267,7 @@
 		"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n IP: $(curl ifconfig.me)\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
         "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
 		"on-click": "nm-connection-editor",
-		"on-click-middle": "notify-send -u normal -a 'IP' 'EXTERNAL: $(curl ifconfig.me'",
+		"on-click-middle": "extipv4=$(curl -s ipinfo.io/ip) && extipv6=$(curl -s ipv6.icanhazip.com) && notify-send -u normal -a 'IP' \"EXTERNAL\nIPv4: $extipv4\nIPv6: $extipv6\"",
 		"on-click-right": "kitty --detach $SHELL -c 'nmtui'",
 		"tooltip": true
 	},
@@ -213,14 +283,15 @@
 		"exec": "waybar-updates",
 		"format": "{icon}",
 		"format-icons": {
-			"pending-updates": "🡇"
+			"pending-updates": "🡇",
+			"updated": ""
 		},
 		"on-click": "kitty --detach $SHELL -c 'yay && yay -Ycc && yay -Sc'",
 		"on-right-click": "pkexec reflector > /etc/pacman.d/mirrorlist",
 		"return-type": "json",
 		"tooltip": true
 	},
-	//──HARDWARE_STATUS───────────────────────────────────
+	//──CUSTOM_HARDWARE_STATUS───────────────────────────────────
 	"group/hardware": { // 
 		"orientation": "inherit",
 		"drawer": {
@@ -280,12 +351,13 @@
 		"battery": {
 			"interval": 1,
 			"format": "{capacity}% {icon}",
+			"format-alt": "{time} {icon}",
 			"format-charging": "{capacity}% {icon}🗲",
 			"format-plugged": "{capacity}% {icon} ",
-			"format-alt": "{time} {icon}",
 			//"format-good": "", // An empty format will hide the module
 			//"format-full": "",
 			"format-icons": ["","","","",""],
+			"full-at": 100,
 			"states": {
 				"good": 90,
 				"warning": 30,
@@ -294,12 +366,12 @@
 		},
 		"backlight": {
 			"device": "intel_backlight",
-			"format": "{icon}",
-			"format-alt": "{percent}% {icon}",
+			"format": "{percent}% {icon}",
 			"format-alt-click": "click-right",
 			"format-icons": ["󰃞", "󰃟", "󰃝", "󰃠"],
-			"on-scroll-down": "brightnessctl -q s +10%",
-			"on-scroll-up": "brightnessctl -q s 10%-"
+			"on-scroll-up": "brightnessctl -q s 10+",
+			"on-scroll-down": "brightnessctl -q s 10-",
+			"smooth-scrolling-threshold": 1
 		}
 	}
 }
@@ -327,4 +399,5 @@
 		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
 		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
 	},
+}
 */

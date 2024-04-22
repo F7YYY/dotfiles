@@ -22,12 +22,13 @@
     box-shadow: none;
     text-shadow: none;
     background: transparent;
-    animation-duration: 0ms;
-    transition-duration: 0ms;
+    background-color: transparent;
+    animation-duration: 0s;
+    transition-duration: 0s;
 }
 @keyframes blink {
     to {
-        color: black;
+        color: transparent;
     }
 }
 tooltip {
@@ -39,24 +40,22 @@ tooltip {
 
 /*──WAYBAR──────────────────────────────────────────────*/
 #waybar {
-    background: linear-gradient(to top, transparent calc(50% - 4px), @white 50%, transparent calc(50% + 4px), transparent);
-}
-window#waybar {
     color: white;
     padding: 0px 10px;
     transition-property: inherit;
+    background: linear-gradient(transparent calc(50%-2px), white, transparent calc(50%+2px));
 }
-window#waybar.hidden {
+#waybar.hidden {
     opacity: 0.2;
 }
-window>menu {
+menu {
     padding: 0px 10px;
     color: white;
     border: 4px double white;
     border-radius: 16px;
     background-color: @black;
 }
-window>menu>*:hover {
+menu>*:hover {
     padding: 0px 10px;
     color: black;
     border: 1px double white;
@@ -66,23 +65,21 @@ window>menu>*:hover {
 }
 
 /*──MODULES─────────────────────────────────────────────*/
-/*.modules-left>*:last-child::after,
-.modules-center>*:first-child::after,
-.modules-center>*:last-child::after,
-.modules-right>*:first-child::before {
-    background: linear-gradient(to top, transparent calc(50% - 4px), @white 50%, transparent calc(50% + 4px), transparent);
-}*/
 .modules-left,
+.modules-center,
 .modules-right {
     margin: 0px 10px;
+    background: transparent;
 }
 .modules-left>widget>*,
-.modules-right>widget>* {
+.modules-center>widget>*,
+.modules-right>widget>*,
+.modules-right>group {
     color: white;
     padding: 0px 10px;
     background-color: @black;
     border: solid @white;
-    border-width: 2px 0px;
+    border-width: 1.2px 0px;
 }
 .modules-left>widget:first-child>*,
 .modules-right>widget:first-child>*,
@@ -96,12 +93,6 @@ window>menu>*:hover {
 .modules-center>button.urgent.last-child>* {
     border-radius: 0px 16px 16px 0px;
 }
-.modules-center>widget>* {
-    padding: 0px 10px;
-    background-color: @black;
-    border: solid @white;
-    border-width: 1px 0px;
-}
 
 /*──WORKSPACES──────────────────────────────────────────*/
 #taskbar>*,
@@ -114,20 +105,20 @@ window>menu>*:hover {
 #battery.plugged {
     color: green;
 }
-#workspaces>button.hidden,
-#workspaces>button.empty {
-    color: #333333;
-}
 #workspaces,
 #workspaces>button,
-#pulseaudio.muted,
-#pulseaudio.source-muted,
+#workspaces>button.hidden,
+#workspaces>button.empty,
 #idle_inhibitor.deactivated,
+#pulseaudio.sink.muted,
+#pulseaudio.source.muted,
 #tray>.passive {
     color: grey;
 }
 #workspaces>button.active,
-#workspaces>button:hover {
+#workspaces>button:hover,
+#pulseaudio.sink,
+#pulseaudio.source {
     color: white;
 }
 #workspaces>button.urgent,
@@ -135,13 +126,38 @@ window>menu>*:hover {
 #network.disconnected,
 #custom-pacman.pending-updates,
 #tray>.needs-attention,
-#temperature.critical,
-#battery.critical:not(.charging) {
+.warning, .critical, .urgent {
     color: white;
-    transition-duration: 0.1s;
     animation-name: blink;
-    animation-duration: 0.5s;
+    animation-duration: 500ms;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+#temperature.critical,
+#battery.critical:not(.charging) {
+    color:red;
+}
+
+/*──PULSEAUDIO──────────────────────────────────────────*/
+#pulseaudio-slider slider {
+    min-height: 10px;
+    min-width: 5px;
+    opacity: 0;
+    border: red 1px solid;
+    border-radius: 10px;
+    background-color: red;
+}
+#pulseaudio-slider trough {
+    min-height: 10px;
+    min-width: 100px;
+    border: @white 1px solid;
+    border-radius: 10px;
+    background-color: black;
+}
+#pulseaudio-slider highlight {
+    min-width: 0px;
+    border: @white 1px solid;
+    border-radius: 10px;
+    background-color: white;
 }
