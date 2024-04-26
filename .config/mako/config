@@ -11,42 +11,30 @@
 #  ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌  ▐░▌▐░░░░░░░░░░░▌  #
 #   ▀         ▀  ▀         ▀  ▀    ▀  ▀▀▀▀▀▀▀▀▀▀▀   #
 #####################################################
-
-output=DP-1
-font=Sony Sketch EF 12
-format=<b>%a ⏵</b> %s\n%b
-icons=1
-max-icon-size=64
+#
+#──DISPLAY───────────────────────────────────────────────
 layer=overlay
 anchor=top-center
-sort=-time
+font=Sony Sketch EF 12
+format=<b><u>%a</u></b>\n<i>%b 🢖 %s</i>
 group-by=summary
 default-timeout=60000
+border-radius=10
+background-color=#FFFFFFEE
+progress-color=source #FF0000EE
+text-color=#000000EE
 
-width=300
-height=160
-margin=6
-padding=0,5,10
-border-size=4
-border-radius=20
-
-border-color=#000000
-background-color=#FFFFFF
-progress-color=over #000000
-text-color=#000000
-
-[urgency=critical]
-border-color=#FF0000
-default-timeout=0
-
-[urgency=normal]
-border-color=#FF00FF
-
+#──STATES───────────────────────────────────────────────
 [urgency=low]
-border-color=#000000
+border-color=#000000AA
+[urgency=normal]
+border-color=#FF00FFAA
+[urgency=critical]
+border-color=#FF0000AA
+default-timeout=0
+[mode=do-not-disturb]
+invisible=1
 
-[app-name=youtube-music]
-default-timeout=6000
-
+#──APPS───────────────────────────────────────────────
 [summary~="log-.*"]
-border-color=#FF6400
+border-color=#808080AA

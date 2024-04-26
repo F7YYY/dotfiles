@@ -55,7 +55,7 @@ set {
     $FONT       Sony Sketch EF 12                   # (kitty list-fonts)
     $SUPER      Mod4
     $TERM       kitty --detach
-    $LOCK       swaylock-corrupter -f
+    $LOCK       swaylock-corrupter --daemonize
     $DISPLAY1   DP-1 mode 1920x1080@240HZ position 0,0 scale 1
     #─VIM_KEYS
     $LEFT       H
@@ -92,13 +92,13 @@ bindsym --to-code {
     --release --no-repeat   $SUPER+Apostrophe seat - cursor release button2
     #─SCREENSHOT/GIF
     $SUPER+O                exec kooha
-    $SUPER+P                exec grimshot --notify save anything - | swappy -f -
+    $SUPER+P                exec grimshot --notify save anything - | swappy --file -
 #───XF86_CONTROLS
     #─BRIGHTNESS
-    XF86MonBrightnessUp     exec brightnessctl -q s +10%
-    XF86MonBrightnessDown   exec brightnessctl -q s 10%-
-    XF86KbdBrightnessUp     exec brightnessctl -d *::kbd_backlight s +10%
-    XF86KbdBrightnessDown   exec brightnessctl -d *::kbd_backlight s 10%-
+    XF86MonBrightnessUp     exec brightnessctl --quiet set 10%+
+    XF86MonBrightnessDown   exec brightnessctl --quiet set 10%-
+    XF86KbdBrightnessUp     exec brightnessctl --quiet --device *::kbd_backlight set 10%+
+    XF86KbdBrightnessDown   exec brightnessctl --quiet --device *::kbd_backlight set 10%-
     #─PULSEAUDIO
     XF86AudioRaiseVolume    exec pactl set-sink-volume @DEFAULT_SINK@ +5%
     XF86AudioLowerVolume    exec pactl set-sink-volume @DEFAULT_SINK@ -5%

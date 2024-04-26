@@ -9,15 +9,20 @@
 //
 //──LAYOUT────────────────────────────────────────────────
 {
-	"position": "top",
 	"layer": "top",
+	"position": "top",
+	"mod": "dock",
+	"exclusive": true,
+	"passthrough": false,
+	"gtk-layer-shell": true,
 	"pango_markup": true,
 	"reload_style_on_change": true,
 	"modules-left": [				//__APPLICATIONS__
-		"custom/appmenu",
-		"hyprland/workspaces",		// WIP ~ CONVERT TO "wlr/workspaces",
+		"custom/appmenu",			// WIP ~ REPORT "tooltip-format"
+		"sway/workspaces",			// WIP ~ CONVERT TO "wlr/workspaces"
+		"sway/scratchpad",			// PROPRIETARY SWAY MODULE
+		"hyprland/workspaces",		// WIP ~ CONVERT TO "wlr/workspaces"
 		"wlr/taskbar",
-		"sway/scratchpad",			// WIP ~ CONVERT TO "wlr/scratchpad",
 		"tray",
 		"gamemode",
 		"custom/recorder"
@@ -27,12 +32,16 @@
 		"clock"
 	],
 	"modules-right": [				//__SYSTEM__
-		"idle_inhibitor",
-		"custom/cava",				// WIP ~ WITHOUT RECOMPILING
-		"group/pulse-sink",			// WIP ~ PREVENT TOGGLING SINK+SOURCE & STYLE.CSS
-		"group/pulse-source",		// WIP ~ REPORT CORRECT VOLUME & STYLE.CSS
-		"network",					// WIP ~ REPORT EXTERNAL/PUBLIC IP
-		"group/hardware",			// WIP ~ SYSTEM HARDWARE STATUS
+		"group/stats-idle",			// WIP ~ idle_inhibitor NOT WORKING IN HYPRLAND
+		"group/pulse-sink",			// WIP ~ STYLE.CSS GREYOUT SOURCE ON MUTE & FIX "format-alt": "{format_source} {icon}" MUTE 
+		"group/pulse-source",		// WIP ~ REPORT CORRECT VOLUME SLIDER
+		"temperature",				// WIP ~ REPORT CORRECT HARDWARE STATS
+		"cpu",
+		"custom/gpu",
+		"memory",
+		"disk",
+		"battery",
+		"network",					// WIP ~ REPORT EXTERNAL IP IN TOOLTIP W/O DOS
 		"custom/powermenu",			// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU.SH
 		"custom/pacman"				// AUR: WAYBAR-UPDATES
 	],
@@ -42,12 +51,16 @@
 		"on-click": "wofi",
 		"on-click-middle": "wofi-emoji",
 		"on-click-right": "wofi-calc",
-		"tooltip": false
+		"tooltip-format": "❶ᐩ❷⁼<span color='#FFFFFF'><b><u>MENU</u></b></span>\n↤🖱  LAUNCHER\n↧🖱  EMOJIS\n↦🖱  CALCULATOR",
+		"tooltip": true
 	},
-	"hyprland/workspaces": {
+	"sway/workspaces": {
+		"disable-scroll": true,
 		"active-only": false,
-		"all-outputs": true,
+		"all-outputs": false,
+		"current-only": true,
 		"sort-by-number": true,
+		"workspace_auto_back_and_forth": false,
 		"format": "{icon}",
 		"format-icons": {
 			"1": "①",
@@ -60,19 +73,57 @@
 			"8": "⑧",
 			"9": "⑨",
 			"10": "⑩",
-			"default": "",
-			"focused": "",
-			"persistent": "",
-			"urgent": ""	// 
+			"special": "☯",
+			"default": "○",
+			"focused": "◉",
+			"persistent": "●",
+			"urgent": "✪"
 		},
 		"on-click": "activate",
-		"on-click-right": "close",
+		"on-click-middle": "close",
+		"tooltip": false
+	},
+	"sway/scratchpad": {
+        "format": "{icon}",
+        "format-alt": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["","☯"],
+        "tooltip-format": "{app}: {title}",
+		"tooltip": true
+	},
+	"hyprland/workspaces": {
+		"active-only": false,
+		"all-outputs": false,
+		"current-only": true,
+		"sort-by-number": true,
+		"show-special": true,
+		"format": "{icon}",
+		"format-icons": {
+			"1": "①",
+			"2": "②",
+			"3": "③",
+			"4": "④",
+			"5": "⑤",
+			"6": "⑥",
+			"7": "⑦",
+			"8": "⑧",
+			"9": "⑨",
+			"10": "⑩",
+			"special": "☯",
+			"default": "○",
+			"focused": "◉",
+			"persistent": "●",
+			"urgent": "✪"
+		},
+		"on-click": "activate",
+		"on-click-middle": "close",
 		"tooltip": false
 	},
 	"wlr/taskbar": {
-		"all-outputs": true,
+		"all-outputs": false,
 		"markup": true,
-		"sort-by-app-id": true,
+		"sort-by-app-id": true,			// ⮫  ONE OR   ⮪
+		//"active-first": true,			// ⮩ THE OTHER ⮨
         "format": "{icon}",
         "ignore-list": "$TERM",
 		"on-click": "activate",
@@ -81,27 +132,20 @@
 		"tooltip-format": "{title}",
 		"tooltip": true
     },
-	"sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", "☯"],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    },
 	"tray": {
 		"interval": 1,
-		"show-passive-items": true
+		"show-passive-items": false,
+		"smooth-scrolling-threshold": 1
 	},
 	"gamemode": {
 		"format": "{glyph}",
 		"format-alt": "{glyph} {count}",
-		"tooltip-format": "Games running: {count}",
-		"glyph": "",
+		"format-alt-click": "click-right",
+		"glyph": "",							// ⮫  ONE OR   ⮪
+		"use-icon": true,						// ⮩ THE OTHER ⮨
 		"hide-not-running": true,
-		"use-icon": true,
 		"icon-name": "input-gaming-symbolic",
-		"icon-spacing": 4,
-		"icon-size": 20,
+		"tooltip-format": "Games running: {count}",
 		"tooltip": true
 	},
 	"custom/recorder": {
@@ -109,24 +153,27 @@
 		"exec": "echo '{\"class\": \"recording\"}'",
 		"exec-if": "pgrep wf-recorder || pgrep ffmpeg",
 		"format": "",
+		"format-alt": " {}",
+		"format-alt-click": "click-right",
 		"return-type": "json"
-
 	},
 	//──MODULES_CENTER────────────────────────────────────
 	"custom/weather": {
 		"interval": 3600,
 		"exec": "wttrbar",
-		"format": "{}°C",
+		"format": "{}°F",
+		"format-alt": "{}°C",
+		"format-alt-click": "click-right",
 		"on-click": "exec",
-		"on-click-right": "xdg-open https://wttr.in/",
+		"on-click-middle": "xdg-open https://wttr.in/",
 		"return-type": "json",
 		"tooltip": true
 	},
 	"clock": {
 		"interval": 1,
-		"format": "ⴵ  {:%T %Z}",
-		"format-alt": "    {:%a: %D}",
-		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"format": "ⴵ {:%T %Z}",
+		"format-alt": " {:%a: %D}",
+		"format-alt-click": "click-right",
 		"calendar": {
 			"mode-mon-col": 2,
 			"weeks-pos": "left",
@@ -134,10 +181,10 @@
 			"on-click-right": "mode",
 			"format": {
 				"months": "<span color='#FFFFFF'><b>{}</b></span>",
-				"days": "<span color='#DDDDDD'><b>{}</b></span>",
-				"weeks": "<span color='#777777'><b>{}</b></span>",
-				"weekdays": "<span color='#777777'><b>{}</b></span>",
-				"today": "<span color='#FF0000'><b><u>{}</u></b></span>"
+				"days": "<span color='#DDDDDD'>{}</span>",
+				"weeks": "<span color='#777777'>{}</span>",
+				"weekdays": "<span color='#777777'>{}</span>",
+				"today": "<span color='#FF0000'><b>{}</b></span>"
 			}
 		},
 		"actions": {
@@ -147,30 +194,59 @@
 			"on-scroll-up": "shift_up",
 			"on-scroll-down": "shift_down"
 		},
-		"on-click-middle": "wl-copy $(date '+%F_%T')",
+		"on-click": "wl-copy $(date '+%F_%T')",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
 		"tooltip": true
 	},
 	//──MODULES_RIGHT────────────────────────────────────
+	"group/stats-idle": {
+		"orientation": "inherit",
+		"drawer": {
+		  "transition-duration": 300,
+		  "children-class": "drawer-child",
+		  "transition-left-to-right": false
+		},
+		"modules": [
+			"idle_inhibitor",
+			"sway/window",
+			"hyprland/window"
+		]
+	},
+	"sway/window": {
+		"all-outputs": false,
+		"min-length": 0,
+		"max-length": 100,
+		"align": 1,
+		"smooth-scrolling-threshold": 1,
+		"format": "{}",
+		"rewrite": {
+			"(.*) - Mozilla Firefox": "🌐 $1",
+			"(.*) - Brave": "🌐 $1",
+			"(.*) - $TERM": "> [$1]"
+		},
+		"tooltip": false
+	},
+	"hyprland/window": {
+		"min-length": 0,
+		"max-length": 100,
+		"separate-outputs": true,
+		"format": "{}",
+		"rewrite": {
+			"(.*) - Mozilla Firefox": "🌐 $1",
+			"(.*) - Brave": "🌐 $1",
+			"(.*) - $TERM": "> [$1]"
+		}
+	},
 	"idle_inhibitor": {
 		"what": "handle-lid-switch",
 		"format": "{icon}",
 		"format-icons": {
-			"activated": "🏶",
+			"activated": "💮",
 			"deactivated": "🏵"
 		},
 		"on-click-right": "$HOME/.config/wofi/scripts/mako.sh",
-		"tooltip": false
-	},
-	"custom/cava": {
-		"interval": 1,
-		//"exec": "sleep 3 && cava -p $HOME/.config/cava/config",
-		"cava_config": "$HOME/.config/cava/config",
-		"input_delay": 2,
-		"format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
-		"actions": {
-			"on-click-right": "mode"
-		},
-		"tooltip": false
+		"tooltip-format-alt": "{status}",
+		"tooltip": true
 	},
 	"group/pulse-sink": {
 		"orientation": "inherit",
@@ -181,8 +257,7 @@
 		},
 		"modules": [
 			"pulseaudio#sink",
-			//"pulseaudio/slider",
-			"pulseaudio#sink/volume"
+			"pulseaudio/slider"
 		]
 	},
 	"group/pulse-source": {
@@ -194,8 +269,7 @@
 		},
 		"modules": [
 			"pulseaudio#source",
-			//"pulseaudio/slider",
-			"pulseaudio#source"	///volume"
+			"pulseaudio/slider"		
 		]
 	},
 	"pulseaudio/slider": {
@@ -206,15 +280,18 @@
 	"pulseaudio#sink": {
 		"interval": 1,
 		"max-volume": 100,
-		"scroll-step": 1,
+		"scroll-step": 5,
 		"smooth-scrolling-threshold": 1,
 		"format": "{icon}",
-		"format-bluetooth": "{icon}",
-		"format-bluetooth-muted": "{icon}",
+		"format-alt": "{volume}% {icon}",
 		"format-muted": "󰝟",
+		"format-bluetooth": "{icon}",
+		"format-bluetooth-muted": "",
+		"format-alt-click": "click-right",
 		"format-icons": {
 			"hdmi": "",
 			"hifi": "🎛",
+			"speaker": "󰜟",
 			"headphones": "🎧",
 			"handsfree": "🎧",
 			"headset": "🎧",
@@ -223,26 +300,41 @@
 			"car": "",
 			"default": ["🕨","🕩","🕪"]
 		},
+		"custom/cava": {
+			"interval": 1,
+			"cava_config": "$HOME/.config/cava/config",
+			"input_delay": 2,
+			"format": "|{icon}{icon}{icon}|",
+			"format-icons" : ["▁","▂","▃","▄","▅","▆","▇","█"],
+			"actions": {
+				"on-click-right": "mode"
+			},
+			"tooltip": false
+		},
+		"ignored-sinks": ["Easy Effects Sink"],
 		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-		"on-click-right": "pavucontrol -t 3",
+		"on-click-middle": "pavucontrol -t 3",
 		"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
 		"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+		"tooltip-format": "{custom/cava} {icon} {desc}",
 		"tooltip": true
 	},
 	"pulseaudio#source": {
 		"interval": 1,
 		"max-volume": 100,
-		"scroll-step": 1,
+		"scroll-step": 5,
 		"smooth-scrolling-threshold": 1,
-		"format-bluetooth": "{icon}",
-		"format-bluetooth-muted": "{format_source}",
 		"format": "{format_source}",
-		"format-muted": "",
+		"format-alt": "{source_volume}% {format_source}",
 		"format-source": "",
 		"format-source-muted": "",
+		"format-bluetooth": "{icon}",
+		"format-bluetooth-muted": "",
+		"format-alt-click": "click-right",
 		"format-icons": {
 			"hdmi": "",
 			"hifi": "🎛",
+			"speaker": "󰜟",
 			"headphones": "🎧",
 			"handsfree": "🎧",
 			"headset": "🎧",
@@ -251,24 +343,34 @@
 			"car": "",
 			"default": ""
 		},
+		"ignored-sinks": ["Easy Effects Source"],
 		"on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-		"on-click-right": "pavucontrol -t 4",
+		"on-click-middle": "pavucontrol -t 4",
 		"on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
 		"on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
+		"tooltip-format": "{icon} {desc}",
 		"tooltip": true
 	},
 	"network": {
 		"interval": 1,
-		"format-wifi": "{essid} {icon}",
-		"format-ethernet": "{ifname} ",
-		"format-linked": "{ifname}{essid} 🖧",
-		"format-disconnected": "⚠",
-		"tooltip-format-wifi": "{ifname}: {essid}\n Frequency: {frequency}MHz\n Strength: {signaldBm}dBm ({signalStrength}%)\n IP: {ipaddr}/{cidr}\nIP: $(curl ifconfig.me)\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
+		"format-wifi": "{icon}",
+		"format-wifi-alt": "{essid} {icon}",
+		"format-ethernet": "{icon}",
+		"format-ethernet-alt": "{ifname} {icon}",
+		"format-linked": "{icon}",
+		"format-linked-alt": "{ifname}: {ipaddr}/{cidr} {ifname}: {essid} {icon}",
+		"format-disconnected": "⛓️‍💥",
+		"tooltip-format-wifi": "❖ {ifname}: {essid}\n⮩ Frequency: {frequency}MHz\n⮩ Strength: {signaldBm}dBm ({signalStrength}%)\n⮩ IN-IP: {ipaddr}/{cidr}\n⮩ EX-IP: $(curl ifconfig.me)\n⬆: {bandwidthUpBits}\n⬇: {bandwidthDownBits}",
 		"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n IP: $(curl ifconfig.me)\n ⬆: {bandwidthUpBits}\n ⬇: {bandwidthDownBits}",
-        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
-		"on-click": "nm-connection-editor",
+		"format-alt-click": "click-right",
+		"format-icons": {
+			"wifi": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+			"ethernet": "",
+			"linked": "🖧"
+			//"disconnected": "⛓️‍💥"
+		},
+		"on-click": "nm-connection-editor",	// "kitty --detach $SHELL -c 'nmtui'",
 		"on-click-middle": "extipv4=$(curl -s ipinfo.io/ip) && extipv6=$(curl -s ipv6.icanhazip.com) && notify-send -u normal -a 'IP' \"EXTERNAL\nIPv4: $extipv4\nIPv6: $extipv6\"",
-		"on-click-right": "kitty --detach $SHELL -c 'nmtui'",
 		"tooltip": true
 	},
 	"custom/powermenu": {
@@ -279,100 +381,112 @@
 		"tooltip": false
 	},
 	"custom/pacman": {
-		"exec-if": "which waybar-updates",
 		"exec": "waybar-updates",
+		"exec-if": "which waybar-updates > /dev/null",
 		"format": "{icon}",
 		"format-icons": {
-			"pending-updates": "🡇",
-			"updated": ""
+			"pending-updates": "⮯",
+			"updated": ""	// An empty format will hide the module
 		},
 		"on-click": "kitty --detach $SHELL -c 'yay && yay -Ycc && yay -Sc'",
 		"on-right-click": "pkexec reflector > /etc/pacman.d/mirrorlist",
 		"return-type": "json",
 		"tooltip": true
 	},
-	//──CUSTOM_HARDWARE_STATUS───────────────────────────────────
-	"group/hardware": { // 
-		"orientation": "inherit",
-		"drawer": {
-			"transition-duration": 300,
-			"children-class": "not-memory",
-			"transition-left-to-right": false
-		},
+	//──CUSTOM_HARDWARE_STATUS───────────────────────────────────	// ?
+	"temperature": {
 		"interval": 1,
-		"format": "{modules}",
-		"modules": [
-			"cpu",
-			"custom/gpu",
-			"memory",
-			"custom/storage",
-			"temperature",
-			"battery",
-			"backlight"
-		],
-		"actions": {
-			"on-click-right": "mode",
-			"on-click-forward": "tz_up",
-			"on-click-backward": "tz_down",
-			"on-scroll-up": "switch_monitor_up",
-			"on-scroll-down": "switch_monitor_down"
+		//"thermal-zone": 2,
+		"hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+		"critical-threshold": 80,
+		"format": "{icon}",
+		"format-alt": "{temperatureC}°C {icon}",
+		"format-alt-click": "click-right",
+		"format-critical": "{icon}",
+		"format-critical-alt": "{temperatureC}°C {icon}",
+		"format-icons": ["","",""],
+		"on-click":	"",
+		"on-click-middle": "corectrl",
+		"tooltip": true
+	},
+	"cpu": {
+		"interval": 1,
+		"format": "{icon}",	//  ﬙
+		"format-alt": "{usage:>2}% {icon}",	//  ﬙
+		"format-alt-click": "click-right",
+		"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
+		"on-click":	"",
+		"on-click-middle": "corectrl",
+		"tooltip": true
+	},
+	"custom/gpu": {
+		"interval": 1,
+		"exec": "radeontop -d - -i 1 -c -T -l 1 | cut -c 32-33 | tr -d '\n'",
+		"exec-if": "which radeontop > /dev/null",
+		"format": "󰍛",
+		"format-alt": "{}% 󰍛",
+		"format-alt-click": "click-right",
+		//"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
+		"on-click":	"exec",
+		"on-click-middle": "corectrl",
+		"tooltip-format": "❖ IGPU: {}%\n❖ EGPU: {}%",
+		"tooltip": true
+	},
+	"memory": {
+		"interval": 1,
+		"format": "Ⅱ",
+		"format-alt": "{percentage}% Ⅱ",
+		"format-alt-click": "click-right",
+		//"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
+		//"format-icons": ["♺","♳","♴","♵","♶","♷","♸","♹"],
+		"on-click":	"",
+		"on-click-middle": "corectrl",
+		"tooltip-format": "♳ MEMORY: {used} / {total} GiB\n♴ SWAP: {swapUsed} / {swapAvail} GiB ({swapPercentage}%)",
+		"tooltip": true
+	},
+	"disk": {
+		"interval": 30,
+		"format": "󰆼",	// ❖
+		"format-alt": "{percentage_used}% 󰆼",	// ❖
+		"format-alt-click": "click-right",
+		"on-click":	"",
+		"on-click-middle": "corectrl",
+		"tooltip-format": " PATH: ( {path} )\n⮩ {used} / {total}",
+		"tooltip": true
+	},
+	"battery": {
+		"interval": 1,
+		"format": "{icon}",
+		"format-alt": "{capacity}% {icon}",
+		"format-charging": "{capacity}% {icon}🗲",
+		"format-plugged": "{capacity}% {icon} ",
+		"format-alt-click": "click-right",
+		//"format-good": "",	// An empty format will hide the module
+		//"format-full": "",	// An empty format will hide the module
+		"format-icons": ["","","","",""],
+		"full-at": 100,
+		"states": {
+			"good": 90,
+			"warning": 30,
+			"critical": 15
 		},
-		"cpu": {
-			"interval": 1,
-			"format": "{icon} {usage:>2}% ﬙",
-			"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"]
-		},
-		"custom/gpu": {
-			"interval": 1,
-			"exec": "radeontop -d -l 1 -i 1 - | cut -c 32-35 -",
-			"format": "{}% ﬙",
-			"return-type": ""
-		},
-		"memory": {
-			"interval": 1,
-			"format": "{used:0.1f}G/{total:0.1f}G 𝍬"
-		},
-		"custom/storage": {
-			"interval": 1,
-			"format": "{percentage_free}% free on {path} {icon}",
-			"format-alt": "{percentage}% {icon}",
-			"format-alt-click": "click-right",
-			"format-icons": [""]
-		},
-		"temperature": {
-			"interval": 1,
-			//"thermal-zone": 2,
-			//"hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-			"critical-threshold": 80,
-			//"format-critical": "{temperatureC}°C {icon}",
-			"format": "{temperatureC}°C {icon}",
-			"format-icons": ["","",""]
-		},
-		"battery": {
-			"interval": 1,
-			"format": "{capacity}% {icon}",
-			"format-alt": "{time} {icon}",
-			"format-charging": "{capacity}% {icon}🗲",
-			"format-plugged": "{capacity}% {icon} ",
-			//"format-good": "", // An empty format will hide the module
-			//"format-full": "",
-			"format-icons": ["","","","",""],
-			"full-at": 100,
-			"states": {
-				"good": 90,
-				"warning": 30,
-				"critical": 15
-			}
-		},
-		"backlight": {
-			"device": "intel_backlight",
-			"format": "{percent}% {icon}",
-			"format-alt-click": "click-right",
-			"format-icons": ["󰃞", "󰃟", "󰃝", "󰃠"],
-			"on-scroll-up": "brightnessctl -q s 10+",
-			"on-scroll-down": "brightnessctl -q s 10-",
-			"smooth-scrolling-threshold": 1
-		}
+		"on-click":	"",
+		"on-click-middle": "corectrl",
+		"tooltip-format": "ⴵ {time}",
+		"tooltip": true
+	},
+	"backlight": {
+		"device": "intel_backlight",
+		"format": "{icon}",
+		"format-alt": "{percent}%",
+		"format-alt-click": "click-right",
+		"format-icons": ["󰃞","󰃟","󰃝","󰃠"],
+		"smooth-scrolling-threshold": 1,
+		"on-scroll-up": "brightnessctl --quiet set 10%+",
+		"on-scroll-down": "brightnessctl --quiet set 10%-",
+		"on-click":	"",
+		"on-click-middle": "corectrl",
+		"tooltip": true
 	}
 }
 
@@ -387,7 +501,8 @@
 		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
 		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
 		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+		"tooltip": true
 	},
 	"bluetooth": {
 		"interval": 1,
@@ -397,7 +512,8 @@
 		"format-connected": " {num_connections} connected",
 		"tooltip-format": "{controller_alias}\t{controller_address}",
 		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+		"tooltip": true
 	},
 }
 */

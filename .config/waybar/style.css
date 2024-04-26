@@ -13,18 +13,8 @@
 
 /*──EVERYTHING──────────────────────────────────────────*/
 * {
-    min-height: 0px;
-    margin: 0px;
-    padding: 0px;
-    border: none;
-    border-radius: 0px;
-    font: italic small-caps bold 16px Sony Sketch EF;
-    box-shadow: none;
-    text-shadow: none;
-    background: transparent;
-    background-color: transparent;
-    animation-duration: 0s;
-    transition-duration: 0s;
+    all: unset;
+    font: italic small-caps bold 16px "Sony Sketch EF, Symbols Nerd Font";
 }
 @keyframes blink {
     to {
@@ -34,64 +24,65 @@
 tooltip {
     color: white;
     background-color: @black;
-    border: 4px double white;
-    border-radius: 20px;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+tooltip label {
+	color: white;
 }
 
 /*──WAYBAR──────────────────────────────────────────────*/
-#waybar {
+window {
     color: white;
-    padding: 0px 10px;
     transition-property: inherit;
     background: linear-gradient(transparent calc(50%-2px), white, transparent calc(50%+2px));
 }
-#waybar.hidden {
-    opacity: 0.2;
+#waybar.hidden,
+#waybar.empty,
+#waybar.empty #window {
+    background-color: transparent;
 }
 menu {
-    padding: 0px 10px;
+    padding: 6px 10px;
     color: white;
-    border: 4px double white;
-    border-radius: 16px;
     background-color: @black;
+    border: 2px solid white;
+    border-radius: 10px;
 }
 menu>*:hover {
-    padding: 0px 10px;
     color: black;
-    border: 1px double white;
-    border-radius: 24px;
-    background-color: @white;
-    margin: 0px 2px;
+    background-color: white;
+    border: 2px solid @black;
+    border-radius: 8px;
 }
-
 /*──MODULES─────────────────────────────────────────────*/
 .modules-left,
 .modules-center,
 .modules-right {
     margin: 0px 10px;
-    background: transparent;
-}
-.modules-left>widget>*,
-.modules-center>widget>*,
-.modules-right>widget>*,
-.modules-right>group {
     color: white;
-    padding: 0px 10px;
     background-color: @black;
-    border: solid @white;
-    border-width: 1.2px 0px;
+    border: 1px solid white;
+    border-radius: 16px;
+    border-width: .4px 1px;
 }
-.modules-left>widget:first-child>*,
-.modules-right>widget:first-child>*,
-.modules-center>widget:first-child>*,
-.modules-center>button.urgent.first-child>* {
-    border-radius: 16px 0px 0px 16px;
+.modules-left>*,
+.modules-center>*,
+.modules-right>*,
+.modules-left>*>*,
+.modules-center>*>*,
+.modules-right>*>* {
+    padding: 0px 7px;
 }
-.modules-left>widget:last-child>*,
-.modules-right>widget:last-child>*,
-.modules-center>widget:last-child>*,
-.modules-center>button.urgent.last-child>* {
-    border-radius: 0px 16px 16px 0px;
+.modules-left>*:first-child>*,
+.modules-center>*:first-child>*,
+.modules-right>*:first-child>* {
+    border-radius: 16px;
+}
+.modules-left>*:last-child>*,
+.modules-center>*:last-child>*,
+.modules-right>*:last-child>* {
+    border-radius: 16px;
 }
 
 /*──WORKSPACES──────────────────────────────────────────*/
@@ -140,7 +131,7 @@ menu>*:hover {
 }
 
 /*──PULSEAUDIO──────────────────────────────────────────*/
-#pulseaudio-slider slider {
+slider {
     min-height: 10px;
     min-width: 5px;
     opacity: 0;
@@ -148,14 +139,14 @@ menu>*:hover {
     border-radius: 10px;
     background-color: red;
 }
-#pulseaudio-slider trough {
+trough {
     min-height: 10px;
     min-width: 100px;
     border: @white 1px solid;
     border-radius: 10px;
     background-color: black;
 }
-#pulseaudio-slider highlight {
+highlight {
     min-width: 0px;
     border: @white 1px solid;
     border-radius: 10px;
