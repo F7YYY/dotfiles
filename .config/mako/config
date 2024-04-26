@@ -23,6 +23,7 @@ border-radius=10
 background-color=#FFFFFFEE
 progress-color=source #FF0000EE
 text-color=#000000EE
+on-button-right=dismiss-all
 
 #──STATES───────────────────────────────────────────────
 [urgency=low]
@@ -34,6 +35,9 @@ border-color=#FF0000AA
 default-timeout=0
 [mode=do-not-disturb]
 invisible=1
+on-notify=none
+[mode=silent]
+on-notify=none
 
 #──APPS───────────────────────────────────────────────
 [summary~="log-.*"]
