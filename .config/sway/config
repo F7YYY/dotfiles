@@ -1,26 +1,26 @@
-############################################################################################################################
-#                                                                                                                          #
-#     d888888o.   `8.`888b                 ,8'          .8.          `8.`8888.      ,8' 8 8888888888   `8.`8888.      ,8'  #
-#   .`8888:' `88.  `8.`888b               ,8'          .888.          `8.`8888.    ,8'  8 8888          `8.`8888.    ,8'   #
-#   8.`8888.   Y8   `8.`888b             ,8'          :88888.          `8.`8888.  ,8'   8 8888           `8.`8888.  ,8'    #
-#   `8.`8888.        `8.`888b     .b    ,8'          . `88888.          `8.`8888.,8'    8 8888            `8.`8888.,8'     #
-#    `8.`8888.        `8.`888b    88b  ,8'          .8. `88888.          `8.`88888'     8 888888888888     `8.`88888'      #
-#     `8.`8888.        `8.`888b .`888b,8'          .8`8. `88888.          `8. 8888      8 8888             .88.`8888.      #
-#      `8.`8888.        `8.`888b8.`8888'          .8' `8. `88888.          `8 8888      8 8888            .8'`8.`8888.     #
-#  8b   `8.`8888.        `8.`888`8.`88'          .8'   `8. `88888.          8 8888      8 8888           .8'  `8.`8888.    #
-#  `8b.  ;8.`8888         `8.`8' `8,`'          .888888888. `88888.         8 8888      8 8888          .8'    `8.`8888.   #
-#   `Y8888P ,88P'          `8.`   `8'          .8'       `8. `88888.        8 8888      8 8888         .8'      `8.`8888.  #
-#                                                                                                                          #
-#########################################───"https://github.com/swaywm/sway/wiki"──#########################################
+##############################################################################################################################
+#|──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────|#
+#|     d888888o.   `8.`888b                 ,8'          .8.          `8.`8888.      ,8' 8 8888888888   `8.`8888.      ,8'  |#
+#|   .`8888:' `88.  `8.`888b               ,8'          .888.          `8.`8888.    ,8'  8 8888          `8.`8888.    ,8'   |#
+#|   8.`8888.   Y8   `8.`888b             ,8'          :88888.          `8.`8888.  ,8'   8 8888           `8.`8888.  ,8'    |#
+#|   `8.`8888.        `8.`888b     .b    ,8'          . `88888.          `8.`8888.,8'    8 8888            `8.`8888.,8'     |#
+#|    `8.`8888.        `8.`888b    88b  ,8'          .8. `88888.          `8.`88888'     8 888888888888     `8.`88888'      |#
+#|     `8.`8888.        `8.`888b .`888b,8'          .8`8. `88888.          `8. 8888      8 8888             .88.`8888.      |#
+#|      `8.`8888.        `8.`888b8.`8888'          .8' `8. `88888.          `8 8888      8 8888            .8'`8.`8888.     |#
+#|  8b   `8.`8888.        `8.`888`8.`88'          .8'   `8. `88888.          8 8888      8 8888           .8'  `8.`8888.    |#
+#|  `8b.  ;8.`8888         `8.`8' `8,`'          .888888888. `88888.         8 8888      8 8888          .8'    `8.`8888.   |#
+#|   `Y8888P ,88P'          `8.`   `8'          .8'       `8. `88888.        8 8888      8 8888         .8'      `8.`8888.  |#
+#|──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────|#
+##########################################──"https://github.com/swaywm/sway/wiki/"──##########################################
 #
-#───EXECUTABLES_(DAEMONS+APPS)──────────────────────────────────────────────────────────────────────────────────────────────
+#───EXECUTABLES_(DAEMONS+APPS)────────────────────────────────────────────────────────────────────────────────────────────────
 bar swaybar_command waybar
 #───RETARDED_DAEMONS
 #exec_always { $(killall -9Ieqg MIGRAINE) MIGRAINE }
 #───NORMAL_DAEMONS_WAYLAND+TRAY
 exec {
-    dbus-update-activation-environment --all
-    sleep 1 && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+    bash                                            # $HOME/.bashrc ('exp_env')
+    dbus-update-activation-environment --systemd --all
     /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
     gnome-keyring-daemon --start --components=secrets
     #dex-autostart -a $HOME/.config/autostart/*
@@ -48,11 +48,11 @@ exec {
     wl-paste --type image --watch cliphist store    # clipboard store image data
 }
 
-#───VARIABLES───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#───VARIABLES─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 set {
     $WAYLAND    --enable-features=UseOzonePlatform --ozone-platform=wayland
     $TRAY       -silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized
-    $FONT       Sony Sketch EF 12                   # (kitty list-fonts)
+    $FONT       Sony Sketch EF 12, Symbols Nerd Font Mono 12       # (kitty list-fonts)
     $SUPER      Mod4
     $TERM       kitty --detach
     $LOCK       swaylock-corrupter --daemonize
@@ -70,7 +70,7 @@ set {
     $CLEAR      #00000000
 }
 
-#───KEYBINDS────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#───KEYBINDS──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 bindsym --to-code {
     $SUPER+Q                kill
     $SUPER+Escape           exec $TERM
@@ -111,7 +111,7 @@ bindsym --to-code {
     XF86AudioStop           exec playerctl stop
 }
 
-#───WORKSPACES──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#───WORKSPACES────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 set {
     $SP                     scratchpad
     $WS                     workspace
@@ -191,7 +191,7 @@ for_window {
     [title="(?:Open|Save|File|Folder|As|Select|Choose|Library|Password)"] $FLOAT
     [app_id="nm-*|mpv|imv|zenity|wdisplays|pavucontrol|gparted|openrgb|gnome-tweaks|qt5ct|qt6ct|waypaper*|bleachbit|zoom|electronplayer|qalculate-gtk"] $FLOAT, $OPAQUE
 }
-#─WINDOW_DEFAULT_APPS
+#───WINDOW_DEFAULT_APPS
 assign {
     [class="zoom|teams*"] $WS 9
     [app_id="betterbird"] $WS 10
@@ -209,7 +209,7 @@ scratchpad_minimize             enable
 title_align                     center
 titlebar_separator              enable
 
-#───PERIPHERALS─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#───PERIPHERALS───────────────────────────────────────────────────────────────────────────────────────────────────────────────
 output {
     $DISPLAY1
     * adaptive_sync             on
@@ -230,7 +230,7 @@ input type:mouse {
     pointer_accel               0
 }
 
-#───THEME_FX────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#───THEME_FX──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 blur                            disable
 blur_passes                     4
 blur_radius                     4
@@ -250,7 +250,7 @@ smart_corner_radius             on
 smart_borders                   on
 smart_gaps                      on
 gaps inner                      10px
-#───CLASSES                     BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+#───CLASSES─────────────────────BORDER──────BACKGROUND──TEXT────────INDICATOR───CHILD_BORDER
 client.background               N/A         $BLACK
 client.focused                  $WHITE      $BLACK      $WHITE      $WHITE      $WHITE
 client.focused_tab_title        $WHITE      $BLACK      $WHITE
@@ -258,7 +258,7 @@ client.focused_inactive         $BLACK      $BLACK      $WHITE      $BLACK      
 client.unfocused                $GREY       $BLACK      $GREY       $GREY       $GREY
 client.urgent                   $RED        $BLACK      $RED        $RED        $RED
 
-#───SYSTEM_POWER────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#───SYSTEM_POWER──────────────────────────────────────────────────────────────────────────────────────────────────────────────
 exec bash -c $(swayidle -w \
     timeout 600 '$LOCK' \
     timeout 300 'if pgrep -x "$LOCK" > /dev/null; then swaymsg "output * dpms off"; fi' \
@@ -269,8 +269,8 @@ exec bash -c $(swayidle -w \
     #after-resume 'swaymsg "output * dpms on"' \
 )
 
-#───XD_WAYLAND──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#───XD_WAYLAND────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 xwayland enable
 
-#───INCLUSION───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#───INCLUSION─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 include /etc/sway/config.d/*

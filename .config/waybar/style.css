@@ -1,123 +1,126 @@
-/*////////////////////////////////////////////////////////
-//  ██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗  //
-//  ██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗ //
-//  ██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝ //
-//  ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗ //
-//  ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║ //
-//   ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ //
-//"https://github.com/Alexays/Waybar/wiki/Configuration"//
-//
-//──PRESETS─────────────────────────────────────────────*/
-@define-color black rgba(0, 0, 0, 0.66);
-@define-color white rgba(255, 255, 255, 0.66);
+/*******************************************************
+*  ██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗  *
+*  ██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗ *
+*  ██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝ *
+*  ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗ *
+*  ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║ *
+*   ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ *
+*"https://github.com/Alexays/Waybar/wiki/Configuration"*
+*
+**──PRESETS───────────────────────────────────────────*/
+@define-color black rgba(0,0,0,0.66);
+@define-color white rgba(255,255,255,0.66);
 
-/*──EVERYTHING──────────────────────────────────────────*/
+/*──EVERYTHING────────────────────────────────────────*/
 * {
-    all: unset;
+    /*all: unset;*/
     font: italic small-caps bold 16px "Sony Sketch EF, Symbols Nerd Font";
+    background: transparent;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    border: none;
 }
 @keyframes blink {
     to {
         color: transparent;
     }
 }
+
+/*──WAYBAR────────────────────────────────────────────*/
 tooltip {
     color: white;
     background-color: @black;
     border: 2px solid white;
     border-radius: 10px;
 }
-tooltip label {
-	color: white;
-}
-
-/*──WAYBAR──────────────────────────────────────────────*/
-window {
+window, #waybar {
     color: white;
     transition-property: inherit;
     background: linear-gradient(transparent calc(50%-2px), white, transparent calc(50%+2px));
 }
-#waybar.hidden,
-#waybar.empty,
-#waybar.empty #window {
-    background-color: transparent;
+button menu {
+    all: unset;
 }
 menu {
-    padding: 6px 10px;
-    color: white;
-    background-color: @black;
-    border: 2px solid white;
-    border-radius: 10px;
-}
-menu>*:hover {
-    color: black;
-    background-color: white;
-    border: 2px solid @black;
-    border-radius: 8px;
-}
-/*──MODULES─────────────────────────────────────────────*/
-.modules-left,
-.modules-center,
-.modules-right {
-    margin: 0px 10px;
+    padding: 0px;
+    padding-top: 10px;
+	padding-bottom: 10px;
     color: white;
     background-color: @black;
     border: 1px solid white;
-    border-radius: 16px;
+    border-radius: 10px;
+}
+*menu>*:hover {
+    /*all: unset;*/
+    margin: 0;
+    color: black;
+    background-color: white;
+    border: 1px solid @black;
+    border-radius: 999px;
+    animation-duration: 0;
+}
+#taskbar>* {
+	padding: 0px 2px;
+}
+*menuitem:hover {
+    /*all: unset;*/
+    background-color: @white;
+}
+/*──MODULES───────────────────────────────────────────*/
+#workspaces>* {
+    padding: 0px 1px;
+}
+*.module, .module>* {
+    padding: 0px 10px;
+}
+*.modules-left,
+*.modules-center,
+*.modules-right {
+    color: white;
+    background-color: @black;
+    border: 1px solid white;
+    border-radius: 999px;
     border-width: .4px 1px;
 }
-.modules-left>*,
-.modules-center>*,
-.modules-right>*,
-.modules-left>*>*,
-.modules-center>*>*,
-.modules-right>*>* {
-    padding: 0px 7px;
+
+/*──PULSEAUDIO_SLIDER──*/
+*slider {
+    min-height: 0px;
+    min-width: 0px;
+    opacity: 0;
+    border: 1px solid red;
+    border-radius: 9px 0px 9px 0px;
+    background-color: black;
 }
-.modules-left>*:first-child>*,
-.modules-center>*:first-child>*,
-.modules-right>*:first-child>* {
-    border-radius: 16px;
+*trough {
+    min-height: 1px;
+    min-width: 100px;
+    border: 1px solid white;
+    border-radius: 999px;
+    background-color: @black;
 }
-.modules-left>*:last-child>*,
-.modules-center>*:last-child>*,
-.modules-right>*:last-child>* {
-    border-radius: 16px;
+*highlight {
+    min-width: 1px;
+    border: 1px solid white;
+    border-radius: 999px;
+    background-color: white;
 }
 
-/*──WORKSPACES──────────────────────────────────────────*/
-#taskbar>*,
-#tray>.passive>*,
-#tray>.active>* {
-    padding: 0px 2px;
+/*──AUTOMATION────────────────────────────────────────*/
+#bluetooth:hover, *:hover {
+    color: red;
 }
-#button,
-#battery.charging,
-#battery.plugged {
-    color: green;
+*.empty {
+    background-color: transparent;
 }
-#workspaces,
-#workspaces>button,
-#workspaces>button.hidden,
-#workspaces>button.empty,
-#idle_inhibitor.deactivated,
-#pulseaudio.sink.muted,
-#pulseaudio.source.muted,
-#tray>.passive {
+button, *.hidden *.deactivated, *.passive, *.off, *.inactive {
     color: grey;
 }
-#workspaces>button.active,
-#workspaces>button:hover,
-#pulseaudio.sink,
-#pulseaudio.source {
+*.focused, *.active, *.on, *.connected, *.pairable {
     color: white;
 }
-#workspaces>button.urgent,
-#workspaces>button.persistent,
-#network.disconnected,
-#custom-pacman.pending-updates,
-#tray>.needs-attention,
-.warning, .critical, .urgent {
+*.persistent, *.disconnected, *.pending-updates, *.needs-attention {
     color: white;
     animation-name: blink;
     animation-duration: 500ms;
@@ -125,30 +128,14 @@ menu>*:hover {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
-#temperature.critical,
-#battery.critical:not(.charging) {
+*.warning, *.urgent, *.critical, .critical:not(.charging) {
     color:red;
+    animation-name: blink;
+    animation-duration: 500ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
-
-/*──PULSEAUDIO──────────────────────────────────────────*/
-slider {
-    min-height: 10px;
-    min-width: 5px;
-    opacity: 0;
-    border: red 1px solid;
-    border-radius: 10px;
-    background-color: red;
-}
-trough {
-    min-height: 10px;
-    min-width: 100px;
-    border: @white 1px solid;
-    border-radius: 10px;
-    background-color: black;
-}
-highlight {
-    min-width: 0px;
-    border: @white 1px solid;
-    border-radius: 10px;
-    background-color: white;
+*.charging, *.plugged {
+    color: green;
 }
