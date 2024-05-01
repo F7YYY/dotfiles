@@ -32,7 +32,7 @@ tooltip {
     color: white;
     background-color: @black;
     border: 2px solid white;
-    border-radius: 10px;
+    border-radius: 16px;
 }
 window, #waybar {
     color: white;
@@ -43,67 +43,56 @@ button menu {
     all: unset;
 }
 menu {
-    padding: 0px;
-    padding-top: 10px;
-	padding-bottom: 10px;
     color: white;
     background-color: @black;
     border: 1px solid white;
-    border-radius: 10px;
+    border-radius: 16px;
 }
 *menu>*:hover {
-    /*all: unset;*/
-    margin: 0;
     color: black;
-    background-color: white;
+    background-color: @white;
     border: 1px solid @black;
-    border-radius: 999px;
+    border-radius: 16px;
     animation-duration: 0;
 }
-#taskbar>* {
-	padding: 0px 2px;
+#tray>**, *button {
+    padding: 0px 2px;
 }
-*menuitem:hover {
-    /*all: unset;*/
-    background-color: @white;
-}
+
 /*──MODULES───────────────────────────────────────────*/
-#workspaces>* {
-    padding: 0px 1px;
-}
-*.module, .module>* {
+*.module {
     padding: 0px 10px;
 }
 *.modules-left,
 *.modules-center,
 *.modules-right {
     color: white;
+    padding: 0px 10px;
     background-color: @black;
     border: 1px solid white;
-    border-radius: 999px;
+    border-radius: 16px;
     border-width: .4px 1px;
 }
 
 /*──PULSEAUDIO_SLIDER──*/
 *slider {
-    min-height: 0px;
-    min-width: 0px;
-    opacity: 0;
+    min-height: 1px;
+    min-width: 1px;
     border: 1px solid red;
-    border-radius: 9px 0px 9px 0px;
+    border-radius: 16px;
     background-color: black;
 }
 *trough {
     min-height: 1px;
     min-width: 100px;
     border: 1px solid white;
-    border-radius: 999px;
+    border-radius: 16px;
     background-color: @black;
 }
 *highlight {
     min-width: 1px;
     border: 1px solid white;
-    border-radius: 999px;
+    border-radius: 16px;
     background-color: white;
 }
 
@@ -111,10 +100,7 @@ menu {
 #bluetooth:hover, *:hover {
     color: red;
 }
-*.empty {
-    background-color: transparent;
-}
-button, *.hidden *.deactivated, *.passive, *.off, *.inactive {
+*.hidden *.deactivated, *.passive, *.off, *.inactive, *.empty, *.visible, *.hosting-monitor, *.current_output {
     color: grey;
 }
 *.focused, *.active, *.on, *.connected, *.pairable {
@@ -128,7 +114,7 @@ button, *.hidden *.deactivated, *.passive, *.off, *.inactive {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
-*.warning, *.urgent, *.critical, .critical:not(.charging) {
+*.warning, *.urgent, *.critical, *.critical:not(.charging) {
     color:red;
     animation-name: blink;
     animation-duration: 500ms;

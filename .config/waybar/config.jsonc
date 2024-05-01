@@ -20,10 +20,10 @@
 	"spacing": 0,
 	"modules-left": [				//__APPLICATIONS__
 		"custom/appmenu",
-		//"wlr/workspaces",			// COPY>PASTE<<"HYPRLAND/WORKSPACES"
-		"sway/workspaces",			// WIP ~ CONVERT TO "wlr/workspaces"
-		"sway/scratchpad",			// PROPRIETARY SWAY IPC MODULE
-		"hyprland/workspaces",		// WIP ~ CONVERT TO "wlr/workspaces"
+		"sway/workspaces",			// ⮶ REPLACE W/"wlr/workspaces"
+		"sway/scratchpad",			// ⮶ REPLACE W/"wlr/workspaces"
+		"hyprland/workspaces",		// ⮶ RENAME W/"wlr/workspaces"
+		//"wlr/workspaces",			// WIP ~ IMPLEMENTATION
 		"wlr/taskbar",
 		"tray",
 		"gamemode",
@@ -34,24 +34,22 @@
 		"custom/weather"			// AUR: WTTRBAR | WIP ~ FORMAT BETWEEN ℉/℃
 	],
 	"modules-right": [				//__SYSTEM__
-		"group/window",				// WIP ~ FIX HYPRLAND IDLE_INHIBITOR
-		"bluetooth",
-		"group/sink",				// WIP ~ FIX ALT MUTE % & STYLE.CSS
-		"group/source",				// WIP ~ FIX SLIDER & TOOLTIP & STYLE.CSS
+		"group/window",				// WIP ~ FIX HYPRLAND "idle_inhibitor"
+		"bluetooth",				// WIP ~ REPALCE W/	"wlr/window"
+		"group/sink",				// WIP ~ FIX ALT MUTE 0% & STYLE.CSS
+		"group/source",				// WIP ~ FIX "pulseaudio#source/slider" & TOOLTIP & STYLE.CSS
 		"temperature",
 		"cpu",
 		"custom/gpu",
 		"memory",
 		"disk",
 		"battery",
+		"group/backlight",
 		"network",					// WIP ~ REPORT EXTERNAL IP IN TOOLTIP W/O DDOS
 		"custom/powermenu",			// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU.SH
 		"custom/pacman"				// AUR: WAYBAR-UPDATES
 	],
 	//──MODULES_LEFT──────────────────────────────────────
-	"wlr/workspaces": {
-		// COPY>PASTE<<"HYPRLAND/WORKSPACES"
-	},
 	"custom/appmenu": {
 		"format": "⌘",
 		"on-click": "wofi",
@@ -97,6 +95,7 @@
         "tooltip-format": "{app}: {title}",
 		"tooltip": true
 	},
+	//"wlr/workspaces": {
 	"hyprland/workspaces": {
 		"active-only": false,
 		"all-outputs": false,
@@ -214,7 +213,8 @@
 		"modules": [
 			"idle_inhibitor",
 			"sway/window",
-			"hyprland/window"
+			"hyprland/window",
+			"wlr/window"
 		]
 	},
 	"sway/window": {
@@ -227,6 +227,7 @@
 		},
 		"tooltip": false
 	},
+	//"wlr/window": {
 	"hyprland/window": {
 		"format": "{}",
 		"separate-outputs": true,
@@ -264,8 +265,8 @@
 		"format-alt": "{device_battery_percentage}% {icon}",
 		"format-alt-click": "click-right",
 		"format-icons": {
-			"off": "",
-			"on": "󰂳",
+			"disabled": "",
+			"enabled": "󰂳",
 			"connected": "󰂱"
 		},
 		"on-click-middle": "blueman-manager",
@@ -312,8 +313,6 @@
 		"format": "{icon}",
 		"format-alt": "{volume}% {icon}",
 		"format-muted": "󰖁",
-		//"format-bluetooth": "{icon}",
-		//"format-bluetooth-muted": "󰖁",
 		"format-alt-click": "click-right",
 		"format-icons": {
 			"hdmi": "",	// "",
@@ -344,8 +343,6 @@
 		"format-alt": "{source_volume}% {format_source}",
 		"format-source": "",
 		"format-source-muted": "",
-		//"format-bluetooth": "{icon}",
-		//"format-bluetooth-muted": "",
 		"format-alt-click": "click-right",
 		"format-icons": {
 			"hdmi": "",
@@ -370,8 +367,9 @@
 	},
 	"temperature": {
 		"interval": 1,
+		//"exec": "cat /sys/class/hwmon/hwmon*/temp*_input",	// TEMPATURE
 		//"thermal-zone": 2,
-		"hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+		"hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
 		"critical-threshold": 80,
 		"format": "{icon}",
 		"format-alt": "{temperatureC}℃ {icon}",	// ℉ ℃
@@ -379,26 +377,28 @@
 		"format-critical": "{icon}",
 		"format-critical-alt": "{temperatureC}°C {icon}",
 		"format-icons": ["","","","",""],
+		"tooltip-format": "﬙ $(cat /sys/class/hwmon/hwmon3/temp1_input)\n󰍛 $(cat /sys/class/hwmon/hwmon1/temp1_input)\nⅡ $(cat /sys/class/hwmon/hwmon1/temp3_input)",
+		//"tooltip-format": "{icon} ALL: {}℃\n﬙ CPU: {}℃\n󰍛 GPU: {}: {}℃\nⅡ MEM: {}℃",
 		//"on-click": "exec",
 		"on-click-middle": "corectrl",
 		"tooltip": true
 	},
 	"cpu": {
 		"interval": 1,
+		"exec": "cat /sys/class/hwmon/hwmon3/temp1_input",	// TEMPATURE
 		"format": "﬙",
 		"format-alt": "{icon}{usage:>2}% ﬙",
 		"format-alt-click": "click-right",
-		//"format-icons": "﬙",
 		"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
 		//"on-click": "exec",
 		"on-click-middle": "corectrl",
+		"tooltip-format": "CPU: {}℃",
 		"tooltip": true
 	},
 	"custom/gpu": {
 		"interval": 1,
-		"exec": "cat /sys/class/hwmon/hwmon1/temp1_input",
-		//"exec": "radeontop -d - -i 1 -c -T -l 1 | cut -c 32-33 | tr -d '\n'",
-		//"exec-if": "which radeontop > /dev/null",
+		//"exec": "cat /sys/class/hwmon/hwmon1/temp1_input",	// TEMPATURE
+		"exec": "radeontop -d - -i 1 -c -T -l 1 | cut -c 32-33 | tr -d ['.''\n']",	// USAGE
 		"format": "󰍛",
 		"format-alt": "{icon}{}% 󰍛",
 		"format-alt-click": "click-right",
@@ -406,11 +406,12 @@
 		"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
 		//"on-click": "exec",
 		"on-click-middle": "corectrl",
-		"tooltip-format": "❖ IGPU: {}%\n❖ EGPU: {}%",
+		"tooltip-format": " GPU: {}℃",
 		"tooltip": true
 	},
 	"memory": {
 		"interval": 1,
+		"exec": "cat /sys/class/hwmon/hwmon1/temp3_input",	// TEMPATURE
 		"format": "Ⅱ",
 		"format-alt": "{icon}{percentage}% Ⅱ",
 		"format-alt-click": "click-right",
@@ -418,17 +419,18 @@
 		//"format-icons": ["♺","♳","♴","♵","♶","♷","♸","♹"],
 		//"on-click": "exec",
 		"on-click-middle": "corectrl",
-		"tooltip-format": "♳ MEMORY: {used} / {total} GiB\n♴ SWAP: {swapUsed} / {swapAvail} GiB ({swapPercentage}%)",
+		"tooltip-format": " MEMORY: {}℃\n♳ USED: {used} / {total} GiB\n♴ SWAP: {swapUsed} / {swapAvail} GiB ({swapPercentage}%)",
 		"tooltip": true
 	},
 	"disk": {
 		"interval": 30,
+		"exec": "cat /sys/class/hwmon/hwmon1/temp4_input",	// TEMPATURE
 		"format": "󰆼",
 		"format-alt": "{percentage_used}% 󰆼",
 		"format-alt-click": "click-right",
 		//"on-click": "exec",
 		"on-click-middle": "corectrl",
-		"tooltip-format": " PATH: ( {path} )\n⮩ {used} / {total}",
+		"tooltip-format": " DISK: {}℃\n PATH: ( {path} )\n⮩ {used} / {total}",
 		"tooltip": true
 	},
 	"battery": {
@@ -450,6 +452,25 @@
 		"tooltip-format": "ⴵ {time}",
 		"tooltip": true
 	},
+	"group/backlight": {
+		"all-outputs": false,
+		"icon-size": 16,
+		"orientation": "inherit",
+		"drawer": {
+		  "transition-duration": 200,
+		  "children-class": "drawer-child",
+		  "transition-left-to-right": false
+		},
+		"modules": [
+			"backlight",
+			"backlight/slider"
+		]
+	},
+	"backlight/slider": {
+		"min": 0,
+		"max": 100,
+		"orientation": "horizontal"
+	},
 	"backlight": {
 		"interval": 1,
 		"device": "intel_backlight",
@@ -466,12 +487,10 @@
 	},
 	"network": {
 		"interval": 1,
+		"format-alt": "{ipaddr}/{cidr} {icon}",
 		"format-wifi": "{icon}",
-		"format-wifi-alt": "{essid} {icon}",
 		"format-ethernet": "{icon}",
-		"format-ethernet-alt": "{ifname} {icon}",
 		"format-linked": "{icon}",
-		"format-linked-alt": "{ifname}: {ipaddr}/{cidr} {ifname}: {essid} {icon}",
 		"format-disconnected": "{icon}",
 		"tooltip-format-wifi": "❖ {ifname}: {essid}\n⮩ Frequency: {frequency}MHz\n⮩ Strength: {signaldBm}dBm ({signalStrength}%)\n⮩ IN-IP: {ipaddr}/{cidr}\n⮩ EX-IP: $(curl ifconfig.me)\n⮬: {bandwidthUpBits}\n⮮: {bandwidthDownBits}",
 		"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n IP: $(curl ifconfig.me)\n ⮬: {bandwidthUpBits}\n ⮮: {bandwidthDownBits}",
@@ -488,7 +507,6 @@
 	},
 	"custom/powermenu": {
 		//"exec": "$HOME/.config/wofi/scripts/powermenu.sh",
-		//"exec-if": "$HOME/.config/wofi/scripts/powermenu.sh &>/dev/null",
 		"format": "⏻",
 		"on-click": "$HOME/.config/wofi/scripts/powermenu.sh",
 		"on-click-middle": "$HOME/.config/wofi/scripts/powermenu.sh",
