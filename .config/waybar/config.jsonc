@@ -34,11 +34,11 @@
 		"custom/weather"			// AUR: WTTRBAR | WIP ~ FORMAT BETWEEN ℉/℃
 	],
 	"modules-right": [				//__SYSTEM__
-		"group/window",				// WIP ~ FIX HYPRLAND "idle_inhibitor"
+		"group/window",				// WIP ~ IMPLEMENT CAVA W/O RECOMPILING & FIX HYPRLAND "idle_inhibitor"
 		"bluetooth",				// WIP ~ REPALCE W/	"wlr/window"
 		"group/sink",				// WIP ~ FIX ALT MUTE 0% & STYLE.CSS
-		"group/source",				// WIP ~ FIX "pulseaudio#source/slider" & TOOLTIP & STYLE.CSS
-		"temperature",
+		"group/source",				// WIP ~ FIX ALT MUTE 0% & "pulseaudio#source/slider" & TOOLTIP & STYLE.CSS
+		"temperature",				// WIP ~ REPORT ALL HARDWARE THERMALS IN TOOLIP
 		"cpu",
 		"custom/gpu",
 		"memory",
