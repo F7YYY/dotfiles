@@ -2,12 +2,14 @@
     <h1>【 Arch Linux Wayland Rice 】</h1>
 </div>
 <div align="center">
+
 [![](https://img.shields.io/github/last-commit/f7yyy/dotfiles?&style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=222222)](https://github.com/F7YYY/dotfiles/activity)
 [![](https://img.shields.io/github/repo-size/f7yyy/dotfiles?style=for-the-badge&logo=googledrive&label=SIZE&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://github.com/f7yyy/dotfiles)
 [![](https://img.shields.io/github/stars/f7yyy/dotfiles?style=for-the-badge&logo=andela&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://youtu.be/dQw4w9WgXcQ?si=mAbUCyPRQY2MODCu)
 [![](https://img.shields.io/badge/issues-brain-green/f7yyy/dotfiles?style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://avatars.githubusercontent.com/u/38305613?v=4)
 [![](https://img.shields.io/github/license/f7yyy/dotfiles?style=for-the-badge&logo=GITHUB&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](LICENSE)
 </a>
+
 </div>
 <img src="Pictures/Screenshots/.1.png">
 <img src="Pictures/Screenshots/.2.png">
