@@ -66,6 +66,7 @@ menu {
 *.modules-left,
 *.modules-center,
 *.modules-right {
+    margin: 0px 10px;
     color: white;
     padding: 0px 10px;
     background-color: @black;
