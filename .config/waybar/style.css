@@ -67,8 +67,8 @@ menu {
 *.modules-center,
 *.modules-right {
     margin: 0px 10px;
-    color: white;
     padding: 0px 10px;
+    color: white;
     background-color: @black;
     border: 1px solid white;
     border-radius: 16px;
