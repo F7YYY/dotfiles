@@ -16,7 +16,7 @@ trap cleanup EXIT
 
 # Function to check if the required tools are installed
 requirements() {
-    local required_tools=("wofi" "systemctl" "swaymsg" "hyprctl" "hyprlock")
+    local required_tools=("wofi" "systemctl" "swaymsg" "hyprctl")
     local missing_tools=()
 
     for tool in "${required_tools[@]}"; do
@@ -37,8 +37,6 @@ requirements() {
 # Function to handle power menu options
 powermenu() {
     local selected="$1"
-    local swaylock=(swaylock-corrupter)
-    local hyprlock=(hyprlock -q)
     local uprocesses=(killall -u username)
 
     case "$selected" in
@@ -84,7 +82,7 @@ powermenu() {
         "Shutdown")
             systemctl poweroff
         ;;
-        *)
+        ""|*)
             cleanup
         ;;
     esac
