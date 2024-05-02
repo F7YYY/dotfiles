@@ -13,46 +13,41 @@
 
 /*──EVERYTHING───────────────────*/
 * {
+    /*all: unset;*/
     font: italic small-caps bold 20px "Sony Sketch EF, Symbols Nerd Font Mono";
-    color: @white;
+    background: transparent;
     background-color: transparent;
-    border-radius: 30px;
+    background-image: none;
+    box-shadow: none;
+    border: none;
 }
 
 /*──WOFI─────────────────────────*/
-#window {
-    background-color: @black;
-    border: 2px solid @white;
-    border-radius: 30px;
-}
-
-#outer-box {
-    padding: 20px;
-}
-
-#input {
+#text {
     color: white;
+}
+#input {
+    font-size: 30px;
+    margin: 10px;
+    color: red;
     background-color: @black;
-    border: 2px solid @white;
-    padding: 4px 0px;
+    border: 2px solid red;
+    border-radius: 16px;
 }
-
-#entry {
-    color: transparent;
-    margin: 4px 20px;
-    padding: 10px;
+#entry:selected {
+    all: unset;
+    color: red;
+    padding: 2px;
 }
-
-#entry #selected {
+#entry:selected #text {
+    color: @black;
+}
+#selected {
+    padding: 0px 10px 0px 0px;
     background-color: @white;
     border: 2px solid @black;
+    border-radius: 16px;
 }
-
-#selected>* {
-    color: @black;
-    padding: 0px 4px;
-}
-
 #img {
     padding: 0px 10px;
 }

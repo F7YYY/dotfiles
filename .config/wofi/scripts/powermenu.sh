@@ -16,7 +16,7 @@ trap cleanup EXIT
 
 # Function to check if the required tools are installed
 requirements() {
-    local required_tools=("wofi" "systemctl" "swaymsg" "hyprctl")
+    local required_tools=("wofi" "systemctl" "loginctl")
     local missing_tools=()
 
     for tool in "${required_tools[@]}"; do
@@ -36,41 +36,38 @@ requirements() {
 
 # Function to handle power menu options
 powermenu() {
-    local selected="$1"
-    local uprocesses=(killall -u username)
-
-    case "$selected" in
+    case "$1" in
         "Reload")
-            if [[ $XDG_SESSION_DESKTOP =~ ^sway* ]]; then
+            if [ $XDG_SESSION_DESKTOP =~ ^sway* ]; then
                 swaymsg reload
             elif [ $XDG_SESSION_DESKTOP == "hyprland" ]; then
                 hyprctl reload
             else
+                systemctl --user reload
                 systemctl --user daemon-reload
                 systemctl --user daemon-reexec
             fi
         ;;
         "Lock")
-            if [[ $XDG_SESSION_DESKTOP =~ ^sway* ]]; then
-                $swaylock
-            elif [ $XDG_SESSION_DESKTOP == "hyprland" ]; then
-                $hyprlock
-            else
-                loginctl lock-session
-            fi
+            loginctl lock-session
         ;;
         "Suspend")
-            systemctl suspend && "$LOCK"
+            loginctl lock-session
+            systemctl suspend
         ;;
         "Logout")
-            if [[ $XDG_SESSION_DESKTOP =~ ^sway* ]]; then
-                swaymsg exit && $uprocesses
+            if [ $XDG_SESSION_DESKTOP =~ ^sway* ]; then
+                loginctl kill-user $(whoami)
+                swaymsg exit &>/dev/null
             elif [ $XDG_SESSION_DESKTOP == "hyprland" ]; then
-                hyprctl dispatch exit && $uprocesses
+                HYPRCMDS=$(hyprctl -j clients | jq -j '.[] | "dispatch close window address:\(.address); "')
+
+                loginctl kill-user $(whoami)
+                hyprctl --batch "$HYPRCMDS" >> /tmp/hypr/hyprexitwithgrace.log 2>&1
+                hyprctl dispatch exit &>/dev/null
             else
                 loginctl terminate-session "$XDG_SESSION_ID"
                 loginctl kill-user $(whoami)
-                $uprocesses
             fi
         ;;
         "Reboot")
@@ -97,7 +94,7 @@ main() {
     			"Reboot"
     			"Reboot>BIOS"
     			"Shutdown"
-    			"<----DONE---->")
+    			"<──EXIT──>")
     local selected=$(printf "%s\n" "${menu[@]}" | wofi --dmenu --prompt "<Power-Menu>" | tr -d '\n')
 
     powermenu "$selected"
