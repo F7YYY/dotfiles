@@ -27,7 +27,7 @@
 		"wlr/taskbar",
 		"tray",
 		"gamemode",
-		"custom/recorder"			// WIP ~ FIX AUTOMATION
+		"custom/recorder"			// WIP ~ FIX FOR VARIOUS RECORDING PLATFORMS
 	],
 	"modules-center": [				//__STATUS__
 		"clock",
@@ -152,12 +152,16 @@
 		"tooltip": true
 	},
 	"custom/recorder": {
-		"exec": "echo '{\"class\": \"recording\"}'",
+		"interval": 1,
+		"exec": "echo ''",
 		"exec-if": "pgrep wf-recorder || pgrep ffmpeg",
-		"format": "",
-		"format-alt": " {}",
+		"format": "{}",
+		//"format-alt": " {}",
 		"format-alt-click": "click-right",
-		"return-type": "json"
+		"format-tooltip": " RECORDING",
+		//"on-click": "exec",
+		"on-click-middle": "exec obs",
+		"tooltip": true
 	},
 	//──MODULES_CENTER────────────────────────────────────
 	"clock": {
