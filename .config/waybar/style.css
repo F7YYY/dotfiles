@@ -34,10 +34,12 @@ tooltip {
     border: 2px solid white;
     border-radius: 16px;
 }
-window, #waybar {
+window#waybar {
     color: white;
     transition-property: inherit;
-    background: linear-gradient(transparent calc(50%-2px), white, transparent calc(50%+2px));
+}
+window:not(.modules-left), window:not(.modules-center), window:not(.modules-right) {
+    background: linear-gradient(transparent calc(50%-5px), white, transparent calc(50%+5px));
 }
 button menu {
     all: unset;
@@ -74,6 +76,10 @@ menu {
     border-radius: 16px;
     border-width: .4px 1px;
 }
+*.overlay {
+    background-color: black;
+    color: white;
+}
 
 /*──PULSEAUDIO_SLIDER──*/
 *slider {
@@ -96,15 +102,25 @@ menu {
     border-radius: 16px;
     background-color: white;
 }
+*.Playing {
+    /*background: rgb(137, 180, 250);
+    background: radial-gradient(circle, rgba(137, 180, 250, 120) 0%, rgba(142, 179, 250, 120) 6%, rgba(148, 226, 213, 1) 14%, rgba(147, 178, 250, 1) 14%, rgba(155, 176, 249, 1) 18%, rgba(245, 194, 231, 1) 28%, rgba(158, 175, 249, 1) 28%, rgba(181, 170, 248, 1) 58%, rgba(205, 214, 244, 1) 69%, rgba(186, 169, 248, 1) 69%, rgba(195, 167, 247, 1) 72%, rgba(137, 220, 235, 1) 73%, rgba(198, 167, 247, 1) 78%, rgba(203, 166, 247, 1) 100%);
+    background-size: 400% 400%;
+    animation: gradient_f 9s cubic-bezier(.72, .39, .21, 1) infinite;
+    */
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.377);
+    font-weight: bold;
+    color: #fff;
+}
 
 /*──AUTOMATION────────────────────────────────────────*/
 #bluetooth:hover, *:hover {
     color: red;
 }
-*.hidden *.deactivated, *.passive, *.off, *.inactive, *.empty, *.visible, *.hosting-monitor, *.current_output {
+*.hidden *.deactivated, *.passive, *.off, *.inactive, *.empty, *.visible, *.hosting-monitor, *.current_output, *.Paused, *.Stopped {
     color: grey;
 }
-*.focused, *.active, *.on, *.connected, *.pairable {
+*.focused, *.active, *.on, *.connected, *.pairable, *.solo {
     color: white;
 }
 *.persistent, *.disconnected, *.pending-updates, *.needs-attention {

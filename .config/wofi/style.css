@@ -20,11 +20,14 @@
     background-image: none;
     box-shadow: none;
     border: none;
+    color: white;
 }
 
 /*──WOFI─────────────────────────*/
-#text {
+window {
     color: white;
+    transition-property: inherit;
+    background-color: @black;
 }
 #input {
     font-size: 30px;
@@ -34,14 +37,6 @@
     border: 2px solid red;
     border-radius: 16px;
 }
-#entry:selected {
-    all: unset;
-    color: red;
-    padding: 2px;
-}
-#entry:selected #text {
-    color: @black;
-}
 #selected {
     padding: 0px 10px 0px 0px;
     background-color: @white;
@@ -50,4 +45,13 @@
 }
 #img {
     padding: 0px 10px;
+}
+#entry:selected {
+    border: 2px solid @white;
+    border-radius: 16px;
+    color: transparent;
+    padding: 2px;
+}
+#text:selected {
+    color: @black;
 }
