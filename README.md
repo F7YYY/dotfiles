@@ -10,10 +10,14 @@
 [![](https://img.shields.io/github/license/f7yyy/dotfiles?style=for-the-badge&logo=GITHUB&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](LICENSE)
 </a>
 
+<details>
+   <summary>SCREENSHOTS</summary>
 </div>
 <img src="Pictures/Screenshots/.1.png">
 <img src="Pictures/Screenshots/.2.png">
 <img src="Pictures/Screenshots/.3.png">
+<img src="Pictures/Screenshots/.4.png">
+</details>
 
 ## Features
 - **Boot Manager**: *([refind](https://www.rodsbooks.com/refind)+[refind-theme-darkmini-git](https://github.com/LightAir/darkmini))*

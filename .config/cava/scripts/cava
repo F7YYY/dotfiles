@@ -3,10 +3,10 @@
 # CUSTOM WAYBAR-CAVA MODULE
 ###########################
 #
-# DEFAULT VARIABLES
-config="${config:-$HOME/.config/cava/config}"
+# OBTAIN VARIABLES FROM WAYBAR OR USE DEFAULT
+config="${config}"
 temp="/tmp/waybarcava"
-icon=(${icons:-"" " " "▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"})
+icon=(${icons:-" " "▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"})
 bars="${bar:-8}"
 tooltip="${tooltip}"
 
@@ -41,8 +41,8 @@ format_status() {
 # FORMAT TOOLTIP TO WAYBAR
 format_tooltip() {
     if [ "$tooltip" = true ]; then
-        local info="{\"tooltip\": \"WIP ~ INFO\"}"
-        echo "{\"text\": \"$info\"}"
+        text=$(playerctl metadata --format '{{artist}} - {{title}}')
+        playerctl metadata --format '{"text": "'"$text"'", "tooltip": "{{playerName}} : {{artist}} - {{title}}"'
     fi
 }
 

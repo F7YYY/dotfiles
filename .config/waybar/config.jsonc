@@ -288,18 +288,18 @@
 			"tooltip-format-alt": "{status}",
 			"tooltip": true
 		},
-		"custom/cava": {
+		"custom/cava": {												// WIP ~ FUNCTIONS>SCRIPT (DON'T WORK)
 			"exec": "$HOME/.config/cava/scripts/cava",
 			"exec-if": "-f $HOME/.config/cava/scripts/cava",
-			"config": "$HOME/.config/cava/config",
-			"format": "{}",
+			//"config": "$HOME/.config/cava/config",					// WIP ~ ADAPT PERSONAL CONFIG
+			"format": "{}",												// {status}
 			"format-icons": [" ","▁","▂","▃","▄","▅","▆","▇","█"],
 			"bar": 8,
 			"on-click": "playerctl play-pause",
 			//"on-click-middle": "youtube-music",
 			"on-scroll-up": "playerctl previous",
 			"on-scroll-down": "playerctl next",
-			"tooltip-format": " {playerName}\n🎜 {artist} 🢖 {title}",
+			"tooltip-format": " {playerName}\n🎜 {artist} 🢖 {title}",		// WIP ~ SONG DETAILS
 			"tooltip": false
 		},
 		"bluetooth": {

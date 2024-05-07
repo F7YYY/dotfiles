@@ -1,16 +1,6 @@
 #!/bin/bash
-
-# Define bar characters in an array
+###########
 bars=("▁" "▂" "▃" "▄" "▅" "▆" "▇" "█")
-
-# Create dictionary to replace char with bar
-dict=$(printf "%s" "${bars[@]}")
-
-# Write temporary cava config
 config="/tmp/waybarcava"
-echo -e "[general]\nbars=10\n\n[output]\nmethod=raw\nraw_target=/dev/stdout\ndata_format=ascii\nascii_max_range="${bars[@]}"\n">"$config"
-
-# Read stdout from cava
-cava -p "$config" | while IFS= read -r line; do
-    echo "$line" | sed 's/;//g; y/01234567/'"$dict"'/'
-done
+echo -e "[general]\nbars=10\n\n[output]\nmethod=raw\nraw_target=/dev/stdout\ndata_format=ascii\nascii_max_range=7">"$config"
+cava -p "$config" | sed 's/;//g;y/01234567/'"$(printf "%s" "${bars[@]}")"'/'
