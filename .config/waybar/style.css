@@ -36,10 +36,8 @@ tooltip {
 }
 window#waybar {
     color: white;
-    transition-property: inherit;
-}
-window:not(.modules-left), window:not(.modules-center), window:not(.modules-right) {
     background: linear-gradient(transparent calc(50%-5px), white, transparent calc(50%+5px));
+    transition-property: inherit;
 }
 button menu {
     all: unset;
@@ -114,7 +112,7 @@ menu {
 }
 
 /*──AUTOMATION────────────────────────────────────────*/
-#bluetooth:hover, *:hover {
+#workspaces>*:hover, #bluetooth:hover, #custom-pacman:hover, *:hover {
     color: red;
 }
 *.hidden *.deactivated, *.passive, *.off, *.inactive, *.empty, *.visible, *.hosting-monitor, *.current_output, *.Paused, *.Stopped {

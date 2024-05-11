@@ -4,20 +4,20 @@
 ###########################
 #
 # OBTAIN VARIABLES FROM WAYBAR OR USE DEFAULT
-config="${config}"
+config="${config:-$HOME/.config/cava/config}"
 temp="/tmp/waybarcava"
-icon=(${icons:-" " "▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"})
-bars="${bar:-8}"
-tooltip="${tooltip}"
+icon=(${icon:-' _▁▂▃▄▅▆▇█'})
+bars="${bars:-10}"
+tooltip="${tooltip:-false}"
 
-# DYNAMICALLY CONCATENATE CAVA.CONF TO TEMP.CONFIG SPECIFICATION
+# DYNAMICALLY CONCATENATE CAVA.CONFIG TO TEMP.CONFIG SPECIFICATION
 modify_config() {
     local general=("bars=$bars")
-    local output=("method=raw" "raw_target=/dev/stdout" "data_format=ascii" "ascii_max_range=${#icon[@]}")
+    local output=("method=raw" "raw_target=/dev/stdout" "data_format=ascii" "ascii_max_range=${#icon}")
 
-    # ADAPT+FORMAT DEFAULT CAVA.CONF TO TEMP OTHERWISE CREATE TEMP
+    # ADAPT+FORMAT DEFAULT CAVA.CONFIG TO TEMP.CONFIG OTHERWISE CREATE TEMP.CONFIG
     if [ -f "$config" ]; then
-        sed -e "s/\s*=\s*/=/g;s/^[[:space:]]*//;s/[[:space:]]*$//;/#.*/d" "$config">"$temp"
+        sed '/#.*/d;s/\s*=\s*/=/g;s/^[[:space:]]*//;s/[[:space:]]*$//' "$config">"$temp"
         for line in "${general[@]}"; do
             grep -q "^${line%%=*}=" "$temp" && sed -i "s/^${line%%=*}=.*/$line/" "$temp" || sed -i "/^\[general\]/a$line" "$temp"
         done
@@ -25,24 +25,26 @@ modify_config() {
             grep -q "^${line%%=*}=" "$temp" && sed -i "s/^${line%%=*}=.*/$line/" "$temp" || sed -i "/^\[output\]/a$line" "$temp"
         done
     else
-        echo -e "[general]\nbars=$bars\n[output]\nmethod=raw\nraw_target=/dev/stdout\ndata_format=ascii\nascii_max_range=${#icon[@]}">"$temp"
+        echo -e "[general]\nbars=$bars\n[output]\nmethod=raw\nraw_target=/dev/stdout\ndata_format=ascii\nascii_max_range=${#icon}">"$temp"
     fi
 }
 
 # FORMAT BARS TO WAYBAR
 format_status() {
-    local dict=""
-    for (( i=0; i<${#icon[@]}; i++ )); do
-        dict+="s/;//g;s/$i/${icon[i]}/g;"
+    # DO NOT STREAMLINE OR SIMPLIFY LOGIC
+    for (( i=0; i<=${#icon}; i++ )); do
+        local dict+="s/;//g;s/$i/${icon:$i:1}/g;"
     done
-    cava -p "$temp" | sed "$dict"
+    cava -p $temp | while read -r line; do
+        echo $line | sed "$dict"
+    done
 }
 
 # FORMAT TOOLTIP TO WAYBAR
 format_tooltip() {
     if [ "$tooltip" = true ]; then
-        text=$(playerctl metadata --format '{{artist}} - {{title}}')
-        playerctl metadata --format '{"text": "'"$text"'", "tooltip": "{{playerName}} : {{artist}} - {{title}}"'
+        player_metadata=$(playerctl metadata --format '{{artist}} - {{title}}')
+        printf '{"text": "%s", "tooltip": "{{playerName}} : %s"}\n' "$player_metadata" "$player_metadata"
     fi
 }
 
@@ -50,7 +52,7 @@ format_tooltip() {
 main() {
     modify_config
     format_status
-    format_tooltip   # WIP
+    #format_tooltip   # WIP
 }
 
 # START

@@ -63,7 +63,7 @@
 			"disable-scroll": true,
 			"active-only": false,
 			"all-outputs": false,
-			"current-only": true,
+			//"current-only": true,
 			"sort-by-number": true,
 			"workspace_auto_back_and_forth": false,
 			"format": "{icon}",
@@ -92,7 +92,7 @@
 	        "format": "{icon}",
 	        "format-alt": "{icon} {count}",
 	        "show-empty": false,
-	        "format-icons": ["","☯"],					// STRING EMPTY=HIDDEN
+	        "format-icons": ["","☯"],									// STRING EMPTY=HIDDEN
 	        "tooltip-format": "{app}: {title}",
 			"tooltip": true
 		},
@@ -128,8 +128,8 @@
 		"wlr/taskbar": {
 			"all-outputs": false,
 			"markup": true,
-			"sort-by-app-id": true,						// ⮫  ONE OR   ⮪
-			//"active-first": true,						// ⮩ THE OTHER ⮨
+			"sort-by-app-id": true,										// ⮫  ONE OR   ⮪
+			//"active-first": true,										// ⮩ THE OTHER ⮨
 	        "format": "{icon}",
 	        "ignore-list": "$TERM",
 			"on-click": "activate",
@@ -145,8 +145,8 @@
 			"format": "{glyph}",
 			"format-alt": "{glyph} {count}",
 			"format-alt-click": "click-right",
-			//"glyph": "",								// ⮫  ONE OR   ⮪
-			"use-icon": true,							// ⮩ THE OTHER ⮨
+			//"glyph": "",												// ⮫  ONE OR   ⮪
+			"use-icon": true,											// ⮩ THE OTHER ⮨
 			"hide-not-running": true,
 			"icon-name": "input-gaming-symbolic",
 			"tooltip-format": "Games running: {count}",
@@ -157,11 +157,11 @@
 			"exec": "echo ''",
 			"exec-if": "pgrep wf-recorder || pgrep ffmpeg",
 			"format": "{}",
-			//"format-alt": ": {}",					// WIP ~ REPORT WHICH APP'S RECORDING
+			//"format-alt": ": {}",										// WIP ~ REPORT WHICH APP'S RECORDING
 			"format-alt-click": "click-right",
-			//"format-tooltip": ": {CAMERA}\n: {SCREEN}", // WIP ~ REPORT CAMERA/SCREEN
+			//"format-tooltip": ": {CAMERA}\n: {SCREEN}",				// WIP ~ REPORT CAMERA/SCREEN
 			//"on-click": "exec",
-			"on-click-middle": "exec obs",				// WIP ~ REOPEN RECORDING APP/OBS
+			"on-click-middle": "exec obs",								// WIP ~ REOPEN RECORDING APP/OBS
 			"tooltip": false
 		},
 		//──MODULES_CENTER────────────────────────────────────
@@ -250,11 +250,11 @@
 				"on": "1"
 			},
 			"state-icons": {
-				"playing": "",			// 🎜
+				"playing": "",											// 🎜
 				"paused": ""
 			},
 			"tooltip-format": "{artist} - {album} ({date})",
-			"tooltip-format-disconnected": ""				// STRING EMPTY=HIDDEN
+			"tooltip-format-disconnected": ""							// STRING EMPTY=HIDDEN
 		},
 		"sway/window": {
 			"format": "{}",
@@ -282,8 +282,8 @@
 			//"format-alt": "{custom-playerinfo}{custom-cava} {icon}",	// WIP
 			"format-alt-click": "click-right",
 			"format-icons": {
-				"activated": "💮",							// "",
-				"deactivated": "🏵"							// ""
+				"activated": "💮",										// "",
+				"deactivated": "🏵"										// ""
 			},
 			"tooltip-format-alt": "{status}",
 			"tooltip": true
@@ -291,15 +291,15 @@
 		"custom/cava": {												// WIP ~ FUNCTIONS>SCRIPT (DON'T WORK)
 			"exec": "$HOME/.config/cava/scripts/cava",
 			"exec-if": "-f $HOME/.config/cava/scripts/cava",
-			//"config": "$HOME/.config/cava/config",					// WIP ~ ADAPT PERSONAL CONFIG
-			"format": "{}",												// {status}
-			"format-icons": [" ","▁","▂","▃","▄","▅","▆","▇","█"],
-			"bar": 8,
+			"config": "$HOME/.config/cava/config",						// WIP ~ IMPORT TO SCRIPT
+			"format": "▕{}▏",											// WIP ~ EXPORT FROM SCRIPT {icon}
+			"format-icons": [" ","▁","▂","▃","▄","▅","▆","▇","█"],		// WIP ~ IMPORT TO SCRIPT
+			"bars": 10,													// WIP ~ IMPORT TO SCRIPT
 			"on-click": "playerctl play-pause",
 			//"on-click-middle": "youtube-music",
 			"on-scroll-up": "playerctl previous",
 			"on-scroll-down": "playerctl next",
-			"tooltip-format": " {playerName}\n🎜 {artist} 🢖 {title}",		// WIP ~ SONG DETAILS
+			"tooltip-format": " {playerName}\n🎜 {artist} 🢖 {title}",	// WIP ~ EXPORT FROM SCRIPT
 			"tooltip": false
 		},
 		"bluetooth": {
@@ -410,25 +410,25 @@
 		},
 		"temperature": {
 			"interval": 1,
-			//"exec": "cat /sys/class/hwmon/hwmon*/temp*_input",	// TEMPATURE
+			//"exec": "cat /sys/class/hwmon/hwmon*/temp*_input",			// TEMPATURE
 			"exec": "echo ﬙ $(cat '/sys/class/hwmon/hwmon3/temp1_input')\n󰍛 $(cat '/sys/class/hwmon/hwmon1/temp1_input')\nⅡ $(cat '/sys/class/hwmon/hwmon1/temp3_input')",
 			//"thermal-zone": 2,
 			"hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
 			"critical-threshold": 90,
 			"format": "{icon}",
-			"format-alt": "{temperatureC}℃ {icon}",				// ℉ ℃
+			"format-alt": "{temperatureC}℃ {icon}",						// ℉ ℃
 			"format-alt-click": "click-right",
 			"format-critical": "{icon}",
 			"format-icons": ["","","","",""],
 			"tooltip-format": "{}",
-			//"tooltip-format": "{icon} ALL: {}℃\n﬙ CPU: {}℃\n󰍛 GPU: {}: {}℃\nⅡ MEM: {}℃",
+			//"tooltip-format": "{icon}  ALL: {}℃\n{icon} ﬙ CPU: {}℃\n{icon} 󰍛 GPU: {}: {}℃\n{icon} Ⅱ MEM: {}℃\n{icon} 󰆼 SSD: {}℃\n{icon}  MBD: {}℃",
 			//"on-click": "exec",
 			"on-click-middle": "corectrl",
 			"tooltip": true
 		},
 		"cpu": {
 			"interval": 1,
-			"exec": "cat /sys/class/hwmon/hwmon3/temp1_input",	// TEMPATURE
+			"exec": "cat /sys/class/hwmon/hwmon3/temp1_input",			// TEMPATURE
 			"format": "﬙",
 			"format-alt": "{icon}{usage:>2}% ﬙",
 			"format-alt-click": "click-right",
@@ -440,7 +440,7 @@
 		},
 		"custom/gpu": {
 			"interval": 1,
-			//"exec": "cat /sys/class/hwmon/hwmon1/temp1_input",	// TEMPATURE
+			//"exec": "cat /sys/class/hwmon/hwmon1/temp1_input",			// TEMPATURE
 			"exec": "radeontop -d - -i 1 -c -T -l 1 | cut -c 32-33 | tr -d ['.''\n']",	// USAGE
 			"format": "󰍛",
 			"format-alt": "{icon}{}% 󰍛",
@@ -454,7 +454,7 @@
 		},
 		"memory": {
 			"interval": 1,
-			"exec": "cat /sys/class/hwmon/hwmon1/temp3_input",	// TEMPATURE
+			"exec": "cat /sys/class/hwmon/hwmon1/temp3_input",			// TEMPATURE
 			"format": "Ⅱ",
 			"format-alt": "{icon}{percentage}% Ⅱ",
 			"format-alt-click": "click-right",
@@ -467,7 +467,7 @@
 		},
 		"disk": {
 			"interval": 30,
-			"exec": "cat /sys/class/hwmon/hwmon1/temp4_input",	// TEMPATURE
+			"exec": "cat /sys/class/hwmon/hwmon1/temp4_input",			// TEMPATURE
 			"format": "󰆼",
 			"format-alt": "{percentage_used}% 󰆼",
 			"format-alt-click": "click-right",
@@ -522,7 +522,7 @@
 		},
 		"backlight": {
 			"interval": 1,
-			//"device": "intel_backlight",						// "acpi_video1",
+			//"device": "intel_backlight",								// "acpi_video1",
 			"format": "{icon}",
 			"format-alt": "{percent}% {icon}",
 			"format-alt-click": "click-right",
@@ -550,12 +550,11 @@
 				"linked": "🖧",
 				"disconnected": ""
 			},
-			"on-click": "nm-connection-editor",				// "kitty --detach $SHELL -c 'nmtui'",
+			"on-click": "nm-connection-editor",							// "kitty --detach $SHELL -c 'nmtui'",
 			"on-click-middle": "extipv4=$(curl -s ipinfo.io/ip) && extipv6=$(curl -s ipv6.icanhazip.com) && notify-send -u normal -a 'IP' \"EXTERNAL\nIPv4: $extipv4\nIPv6: $extipv6\"",
 			"tooltip": true
 		},
 		"custom/powermenu": {
-			//"exec": "$HOME/.config/wofi/scripts/powermenu",
 			"format": "⏻",
 			"on-click": "$HOME/.config/wofi/scripts/powermenu",
 			"on-click-middle": "$HOME/.config/wofi/scripts/powermenu",
@@ -567,8 +566,8 @@
 			"exec-if": "which waybar-updates > /dev/null",
 			"format": "{icon}",
 			"format-icons": {
-				"pending-updates": "",						// ⮯",
-				"updated": ""								// STRING EMPTY=HIDDEN
+				"pending-updates": "",
+				"updated": ""											// STRING EMPTY=HIDDEN
 			},
 			"on-click": "kitty --detach $SHELL -c 'yay && yay -Ycc && yay -Sc'",
 			"on-middle-click": "pkexec reflector > /etc/pacman.d/mirrorlist",
