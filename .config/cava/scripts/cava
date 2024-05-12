@@ -6,7 +6,7 @@
 # OBTAIN VARIABLES FROM WAYBAR OR USE DEFAULT
 config="${config:-$HOME/.config/cava/config}"
 temp="/tmp/waybarcava"
-icon=(${icon:-' _▁▂▃▄▅▆▇█'})
+icon=(${icon:-' ▁▂▃▄▅▆▇█'})
 bars="${bars:-10}"
 tooltip="${tooltip:-false}"
 

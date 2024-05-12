@@ -31,8 +31,8 @@
 			"custom/recorder"			// WIP ~ FIX FOR VARIOUS RECORDING PLATFORMS
 		],
 		"modules-center": [				//__STATUS__
-			"clock",
-			"custom/weather"			// AUR: WTTRBAR | WIP ~ FORMAT BETWEEN ℉/℃
+		"custom/weather",				// AUR: WTTRBAR | WIP ~ FORMAT BETWEEN ℉/℃
+		"clock"
 		],
 		"modules-right": [				//__SYSTEM__
 			"group/window",				// WIP ~ CAVA FPS & TOOLTIP W/O JSON
@@ -79,8 +79,8 @@
 				"9": "⑨",
 				"10": "⑩",
 				"special": "☯",
-				"default": "○",
-				"focused": "◉",
+				"default": "◉",											// "○",
+				//"focused": "◉",
 				"persistent": "●"
 				//"urgent": "✪"
 			},
@@ -116,8 +116,8 @@
 				"9": "⑨",
 				"10": "⑩",
 				"special": "☯",
-				"default": "○",
-				"focused": "◉",
+				"default": "◉",											// "○",
+				//"focused": "◉",
 				"persistent": "●"
 				//"urgent": "✪"
 			},
@@ -167,8 +167,8 @@
 		//──MODULES_CENTER────────────────────────────────────
 		"clock": {
 			"interval": 1,
-			"format": "ⴵ {:%T %Z}",
-			"format-alt": " {:%a: %D}",
+			"format": "{:%T %Z} ⴵ",
+			"format-alt": "{:%a: %D} ",
 			"format-alt-click": "click-right",
 			"calendar": {
 				"mode-mon-col": 2,
@@ -570,7 +570,7 @@
 				"updated": ""											// STRING EMPTY=HIDDEN
 			},
 			"on-click": "kitty --detach $SHELL -c 'yay && yay -Ycc && yay -Sc'",
-			"on-middle-click": "pkexec reflector > /etc/pacman.d/mirrorlist",
+			"on-click-middle": "pkexec reflector > /etc/pacman.d/mirrorlist",
 			"return-type": "json",
 			"tooltip": true
 		}
