@@ -167,7 +167,7 @@
 		//──MODULES_CENTER────────────────────────────────────
 		"clock": {
 			"interval": 1,
-			"format": "{:%T %Z} ⴵ",
+			"format": "{:%Z: %T} ⴵ",
 			"format-alt": "{:%a: %D} ",
 			"format-alt-click": "click-right",
 			"calendar": {
