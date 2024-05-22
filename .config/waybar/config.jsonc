@@ -429,7 +429,7 @@
 			"format-alt": "{usage}% ",
 			"format-alt-click": "click-right",
 			"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
-			//"on-click": "exec",
+			"on-click": "exec",
 			"on-click-middle": "corectrl",
 			"tooltip-format": "\tCPU: {}℃\n{icon}\tUSED: {}%",
 			"tooltip": true
@@ -441,32 +441,32 @@
 			"format-alt": "{}% 󰍛",
 			"format-alt-click": "click-right",
 			"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
-			//"on-click": "exec",
+			"on-click": "exec",
 			"on-click-middle": "corectrl",
 			"tooltip-format": "\tGPU: {}℃\n{icon}\tUSED: {}%",
 			"tooltip": true
 		},
 		"memory": {
 			"interval": 1,
-			"exec": "sensors | grep \"mem\" | awk '{print $2}'",
+			"exec": "sensors | grep 'mem' | awk '{print $2}'",
 			"format": "{icon}",
 			"format-alt": "{percentage}% {icon}",
 			"format-alt-click": "click-right",
 			"format-icons": ["♺","♳","♴","♵","♶","♷","♸","♹"],			// Ⅱ
-			//"on-click": "exec",
+			"on-click": "exec",
 			"on-click-middle": "corectrl",
 			"tooltip-format": "\tMEMORY: {}℃\n⮩\tUSED: {used} / {total} GiB\n\tSWAP: {swapUsed} / {swapAvail} GiB ({swapPercentage}%)",
 			"tooltip": true
 		},
 		"disk": {
 			"interval": 30,
-			"exec": "sensors | grep \"nvme\" | awk '{print $2}'",
+			"exec": "sensors | grep 'nvme' | awk '{print $2}'",
 			"format": "󰆼",
 			"format-alt": "{percentage_used}% 󰆼",
 			"format-alt-click": "click-right",
 			"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
-			//"on-click": "exec",
-			"on-click-middle": "corectrl",
+			"on-click": "exec",
+			"on-click-middle": "nemo $HOME",
 			"tooltip-format": "\tDISK: {}℃\n\tPATH: ( {path} )\n⮩\tUSED: {used} / {total}",
 			"tooltip": true
 		},
