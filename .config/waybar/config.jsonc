@@ -19,44 +19,44 @@
 		"width": 0,
 		"margin": 0,
 		"spacing": 0,
+		"icon-size": 16,
 		"modules-left": [				//__APPLICATIONS__
 			"custom/appmenu",
-			"sway/workspaces",			// ⮶ REPLACE W/"wlr/workspaces"
-			"sway/scratchpad",			// ⮶ REPLACE W/"wlr/workspaces"
-			"hyprland/workspaces",		// ⮶ RENAME W/"wlr/workspaces"
-			//"wlr/workspaces",			// WIP ~ IMPLEMENTATION
+			"sway/workspaces",			// ⮶ REPLACE
+			"sway/scratchpad",			// ⮶ REPLACE
+			"hyprland/workspaces",		// ⮱ RENAME: "wlr/workspaces",
 			"wlr/taskbar",
 			"tray",
 			"gamemode",
 			"custom/recorder"			// WIP ~ FIX FOR VARIOUS RECORDING PLATFORMS
 		],
 		"modules-center": [				//__STATUS__
-		"custom/weather",				// AUR: WTTRBAR | WIP ~ FORMAT BETWEEN ℉/℃
-		"clock"
+			"custom/weather",			// AUR: WTTRBAR | WIP ~ FORMAT BETWEEN ℉/℃
+			"clock"
 		],
 		"modules-right": [				//__SYSTEM__
-			"group/window",				// WIP ~ CAVA FPS & TOOLTIP W/O JSON
-			"bluetooth",				// WIP ~ REPORT ALL CONNECTED BATTERY%
-			"group/sink",				// WIP ~ FIX ALT MUTE 0% & STYLE.CSS
-			"group/source",				// WIP ~ FIX ALT MUTE 0% & "pulseaudio#source/slider" & TOOLTIP & STYLE.CSS
-			"temperature",				// WIP ~ REPORT ALL HARDWARE THERMALS IN TOOLIP
-			"cpu",
-			"custom/gpu",
+			"group/window",				// WIP ~ IMPORT TO SCRIPT & W/O JSON
+			"bluetooth",				// WIP ~ REPORT ALL CONNECTED DEVICES
+			"group/sink",				// WIP ~ FIX ALT MUTE 0%
+			"group/source",				// WIP ~ FIX ALT MUTE 0% & "pulseaudio#source/slider"
+			//"temperature",				// WIP ~ REPORT HARDWARE THERMALS INDIVIDUALLY WITHIN MODULES
+			"cpu",						// WIP ~ REFORMAT TOOLTIP INFORMATION
+			"custom/gpu",				// WIP ~ REPORT ALL HARDWARE INFORMATION IN TOOLTIP
 			"memory",
 			"disk",
 			"battery",
 			"group/backlight",
-			"network",					// WIP ~ REPORT EXTERNAL IP IN TOOLTIP W/O DDOS
+			"network",					// WIP ~ REPORT EXTERNAL-IP IN TOOLTIP W/O DDOS (CLICK-MIDDLE)
 			"custom/powermenu",			// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
 			"custom/pacman"				// AUR: WAYBAR-UPDATES
 		],
-		//──MODULES_LEFT──────────────────────────────────────
+		//──MODULES_LEFT────────────────────────────────
 		"custom/appmenu": {
 			"format": "⌘",
 			"on-click": "wofi",
 			"on-click-middle": "wofi-emoji",
 			"on-click-right": "wofi-calc",
-			"tooltip-format": "❶ᐩ❷⁼<span color='#FFFFFF'><b><u>MENU</u></b></span>\n↤🖱  LAUNCHER\n↧🖱  EMOJIS\n↦🖱  CALCULATOR",
+			"tooltip-format": "❶ᐩ❷⁼<span color='#FFFFFF'><b><u>MENU</u></b></span>\n↤🖱\tLAUNCHER\n↧🖱\tEMOJIS\n↦🖱\tCALCULATOR",
 			"tooltip": false
 		},
 		"sway/workspaces": {
@@ -149,7 +149,7 @@
 			"use-icon": true,											// ⮩ THE OTHER ⮨
 			"hide-not-running": true,
 			"icon-name": "input-gaming-symbolic",
-			"tooltip-format": "Games running: {count}",
+			"tooltip-format": "Running: {count}",
 			"tooltip": true
 		},
 		"custom/recorder": {
@@ -164,7 +164,7 @@
 			"on-click-middle": "exec obs",								// WIP ~ REOPEN RECORDING APP/OBS
 			"tooltip": false
 		},
-		//──MODULES_CENTER────────────────────────────────────
+		//──MODULES_CENTER──────────────────────────────
 		"clock": {
 			"interval": 1,
 			"format": "{:%Z: %T} ⴵ",
@@ -207,10 +207,9 @@
 			"return-type": "json",
 			"tooltip": true
 		},
-		//──MODULES_RIGHT─────────────────────────────────────
+		//──MODULES_RIGHT───────────────────────────────
 		"group/window": {
 			"all-outputs": false,
-			"icon-size": 16,
 			"orientation": "inherit",
 			"drawer": {
 			  "transition-duration": 200,
@@ -229,9 +228,22 @@
 			"on-scroll-up": "playerctl previous",
 			"on-scroll-down": "playerctl next"
 		},
+		"custom/cava": {												// WIP ~ FUNCTIONS>SCRIPT (DON'T WORK)
+			"exec": "$HOME/.config/cava/scripts/cava",
+			"exec-if": "-f $HOME/.config/cava/scripts/cava",
+			"config": "$HOME/.config/cava/config",						// WIP ~ IMPORT TO SCRIPT
+			"format": "▕{}▏",
+			"bars": 10,													// WIP ~ IMPORT TO SCRIPT
+			"on-click": "playerctl -a play-pause",
+			//"on-click-middle": "youtube-music",
+			"on-scroll-up": "playerctl previous",
+			"on-scroll-down": "playerctl next",
+			"tooltip-format": "\t{playerName}\n🎜\t{artist} 🢖 {title}",		// WIP ~ EXPORT FROM SCRIPT
+			"tooltip": false
+		},
 		"mpd": {
 			"interval": 1,
-			"title-len": 34,
+			//"title-len": 34,
 			"unknown-tag": "N/A",
 			"format": "{consumeIcon}{singleIcon}{artist} - {title}  {stateIcon}",
 			"format-disconnected": "",
@@ -253,7 +265,7 @@
 				"playing": "",											// 🎜
 				"paused": ""
 			},
-			"tooltip-format": "{artist} - {album} ({date})",
+			"tooltip-format": "{artist} 🢖 {album}",
 			"tooltip-format-disconnected": ""							// STRING EMPTY=HIDDEN
 		},
 		"sway/window": {
@@ -279,27 +291,13 @@
 		"idle_inhibitor": {
 			"what": "handle-lid-switch",
 			"format": "{icon}",
-			//"format-alt": "{custom-playerinfo}{custom-cava} {icon}",	// WIP
+			"format-alt": "{status} {icon}",							// "{cava}\t{icon}",
 			"format-alt-click": "click-right",
 			"format-icons": {
 				"activated": "💮",										// "",
 				"deactivated": "🏵"										// ""
 			},
-			"tooltip-format-alt": "{status}",
-			"tooltip": true
-		},
-		"custom/cava": {												// WIP ~ FUNCTIONS>SCRIPT (DON'T WORK)
-			"exec": "$HOME/.config/cava/scripts/cava",
-			"exec-if": "-f $HOME/.config/cava/scripts/cava",
-			"config": "$HOME/.config/cava/config",						// WIP ~ IMPORT TO SCRIPT
-			"format": "▕{}▏",											// WIP ~ EXPORT FROM SCRIPT {icon}
-			"format-icons": [" ","▁","▂","▃","▄","▅","▆","▇","█"],		// WIP ~ IMPORT TO SCRIPT
-			"bars": 10,													// WIP ~ IMPORT TO SCRIPT
-			"on-click": "playerctl play-pause",
-			//"on-click-middle": "youtube-music",
-			"on-scroll-up": "playerctl previous",
-			"on-scroll-down": "playerctl next",
-			"tooltip-format": " {playerName}\n🎜 {artist} 🢖 {title}",	// WIP ~ EXPORT FROM SCRIPT
+			//"tooltip-format": "{status}",
 			"tooltip": false
 		},
 		"bluetooth": {
@@ -312,13 +310,13 @@
 				"enabled": "󰂳",
 				"connected": "󰂱"
 			},
+			"on-click": "rfkill toggle bluetooth",
 			"on-click-middle": "blueman-manager",
-			"tooltip-format": "🖥 {controller_alias}: ({controller_address}) {num_connections}\n {device_alias}: ({device_address}) {device_battery_percentage}%",
+			"tooltip-format": "🖥\t{controller_alias}: ({controller_address}) {num_connections}\n\t{device_alias}: ({device_address}) {device_battery_percentage}%",
 			"tooltip": true
 		},
 		"group/sink": {
-			"all-outputs": false,
-			"icon-size": 16,
+			"all-outputs": true,
 			"orientation": "inherit",
 			"drawer": {
 			  "transition-duration": 200,
@@ -326,13 +324,12 @@
 			  "transition-left-to-right": false
 			},
 			"modules": [
-				"pulseaudio",
+				"pulseaudio#sink",
 				"pulseaudio/slider"
 			]
 		},
 		"group/source": {
-			"all-outputs": false,
-			"icon-size": 16,
+			"all-inputs": true,
 			"orientation": "inherit",
 			"drawer": {
 			  "transition-duration": 200,
@@ -341,7 +338,7 @@
 			},
 			"modules": [
 				"pulseaudio#source",
-				"pulseaudio#source/slider"
+				"pulseaudio/slider"
 			]
 		},
 		"pulseaudio/slider": {
@@ -349,7 +346,12 @@
 			"max": 100,
 			"orientation": "horizontal"
 		},
-		"pulseaudio": {
+		"pulseaudio#source/slider": {
+			"min": 0,
+			"max": 100,
+			"orientation": "horizontal"
+		},
+		"pulseaudio#sink": {
 			"interval": 1,
 			"scroll-step": 5,
 			"smooth-scrolling-threshold": 1,
@@ -375,7 +377,7 @@
 			"on-click-middle": "pavucontrol -t 3",
 			"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
 			"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
-			"tooltip-format": "{icon} {desc}",
+			"tooltip-format": "{icon}\t{desc}",
 			"tooltip": true
 		},
 		"pulseaudio#source": {
@@ -387,93 +389,85 @@
 			"format-source": "",
 			"format-source-muted": "",
 			"format-alt-click": "click-right",
-			"format-icons": {
-				"hdmi": "",
-				"hifi": "🎛",
-				"speaker": "󰜟",
-				"headphones": "",
-				"handsfree": "",
-				"headset": "",
-				"phone": "📱",
-				"portable": "📱",
-				"car": "",
-				"muted": "󰖁",
-				"default": ""
-			},
 			"ignored-sources": ["Easy Effects Source"],
 			"on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
 			"on-click-middle": "pavucontrol -t 4",
 			"on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
 			"on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
-			"tooltip-format": "{icon} {desc}",
+			"tooltip-format": "{format_source}\t{desc}",
 			"tooltip": true
 		},
 		"temperature": {
 			"interval": 1,
-			//"exec": "cat /sys/class/hwmon/hwmon*/temp*_input",			// TEMPATURE
-			"exec": "echo ﬙ $(cat '/sys/class/hwmon/hwmon3/temp1_input')\n󰍛 $(cat '/sys/class/hwmon/hwmon1/temp1_input')\nⅡ $(cat '/sys/class/hwmon/hwmon1/temp3_input')",
 			//"thermal-zone": 2,
-			"hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+			"hwmon-path": [
+				"/sys/class/hwmon/hwmon*/temp*_input",					// REPORT ALL TEMPATURES
+				"/sys/class/hwmon/hwmon0/temp1_input",
+				"/sys/class/hwmon/hwmon1/temp1_input",
+				"/sys/class/hwmon/hwmon1/temp2_input",
+				"/sys/class/hwmon/hwmon1/temp3_input",
+				"/sys/class/hwmon/hwmon2/temp1_input",
+				"/sys/class/hwmon/hwmon3/temp1_input",
+				"/sys/class/hwmon/hwmon3/temp3_input",
+				"/sys/class/hwmon/hwmon6/temp1_input"
+			],
 			"critical-threshold": 90,
 			"format": "{icon}",
-			"format-alt": "{temperatureC}℃ {icon}",						// ℉ ℃
+			"format-alt": "{temperatureC}℃ {icon}",
 			"format-alt-click": "click-right",
-			"format-critical": "{icon}",
+			"format-critical": ["","",""],
 			"format-icons": ["","","","",""],
-			"tooltip-format": "{}",
-			//"tooltip-format": "{icon}  ALL: {}℃\n{icon} ﬙ CPU: {}℃\n{icon} 󰍛 GPU: {}: {}℃\n{icon} Ⅱ MEM: {}℃\n{icon} 󰆼 SSD: {}℃\n{icon}  MBD: {}℃",
+			"tooltip-format": "\tALL: {temperatureC}℃\n\tCPU: {temperatureC}℃\n󰍛\tGPU: {temperatureC}℃\nⅡ\tMEM: {temperatureC}℃\n󰆼\tSSD: {temperatureC}℃\n﬙\tMBD: {temperatureC}℃",
 			//"on-click": "exec",
 			"on-click-middle": "corectrl",
 			"tooltip": true
 		},
 		"cpu": {
 			"interval": 1,
-			"exec": "cat /sys/class/hwmon/hwmon3/temp1_input",			// TEMPATURE
-			"format": "﬙",
-			"format-alt": "{icon}{usage:>2}% ﬙",
+			"exec": "cat /sys/class/hwmon/hwmon3/temp1_input",
+			"format": "",
+			"format-alt": "{usage}% ",
 			"format-alt-click": "click-right",
 			"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
 			//"on-click": "exec",
 			"on-click-middle": "corectrl",
-			"tooltip-format": "CPU: {}℃",
+			"tooltip-format": "\tCPU: {}℃\n{icon}\tUSED: {}%",
 			"tooltip": true
 		},
 		"custom/gpu": {
 			"interval": 1,
-			//"exec": "cat /sys/class/hwmon/hwmon1/temp1_input",			// TEMPATURE
-			"exec": "radeontop -d - -i 1 -c -T -l 1 | cut -c 32-33 | tr -d ['.''\n']",	// USAGE
+			"exec": "temp=$(sensors | grep 'temp1' | awk '{print $2}' | cut -c 2-3) && usage=$(sensors | grep 'usage' | awk '{print $2}') && echo $temp $usage",
 			"format": "󰍛",
-			"format-alt": "{icon}{}% 󰍛",
+			"format-alt": "{}% 󰍛",
 			"format-alt-click": "click-right",
-			//"format-icons": ["󰍛",""]
 			"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
 			//"on-click": "exec",
 			"on-click-middle": "corectrl",
-			"tooltip-format": " GPU: {}℃",
+			"tooltip-format": "\tGPU: {}℃\n{icon}\tUSED: {}%",
 			"tooltip": true
 		},
 		"memory": {
 			"interval": 1,
-			"exec": "cat /sys/class/hwmon/hwmon1/temp3_input",			// TEMPATURE
-			"format": "Ⅱ",
-			"format-alt": "{icon}{percentage}% Ⅱ",
+			"exec": "sensors | grep \"mem\" | awk '{print $2}'",
+			"format": "{icon}",
+			"format-alt": "{percentage}% {icon}",
 			"format-alt-click": "click-right",
-			"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
-			//"format-icons": ["♺","♳","♴","♵","♶","♷","♸","♹"],
+			"format-icons": ["♺","♳","♴","♵","♶","♷","♸","♹"],			// Ⅱ
 			//"on-click": "exec",
 			"on-click-middle": "corectrl",
-			"tooltip-format": " MEMORY: {}℃\n♳ USED: {used} / {total} GiB\n♴ SWAP: {swapUsed} / {swapAvail} GiB ({swapPercentage}%)",
+			"tooltip-format": "\tMEMORY: {}℃\n⮩\tUSED: {used} / {total} GiB\n\tSWAP: {swapUsed} / {swapAvail} GiB ({swapPercentage}%)",
 			"tooltip": true
 		},
 		"disk": {
 			"interval": 30,
-			"exec": "cat /sys/class/hwmon/hwmon1/temp4_input",			// TEMPATURE
+			"exec": "sensors | grep \"nvme\" | awk '{print $2}'",
 			"format": "󰆼",
 			"format-alt": "{percentage_used}% 󰆼",
 			"format-alt-click": "click-right",
+			"format-icons": ["▁","▂","▃","▄","▅","▆","▇","█"],
 			//"on-click": "exec",
 			"on-click-middle": "corectrl",
-			"tooltip-format": " DISK: {}℃\n PATH: ( {path} )\n⮩ {used} / {total}",
+			"tooltip-format": "\tDISK: {}℃\n\tPATH: ( {path} )\n⮩\tUSED: {used} / {total}",
 			"tooltip": true
 		},
 		"battery": {
@@ -498,12 +492,11 @@
 			},
 			//"on-click": "exec",
 			"on-click-middle": "corectrl",
-			"tooltip-format": "ⴵ {time}",
+			"tooltip-format": "ⴵ\t{time}",
 			"tooltip": true
 		},
 		"group/backlight": {
 			"all-outputs": false,
-			"icon-size": 16,
 			"orientation": "inherit",
 			"drawer": {
 			  "transition-duration": 200,
@@ -541,8 +534,8 @@
 			"format-ethernet": "{icon}",
 			"format-linked": "{icon}",
 			"format-disconnected": "{icon}",
-			"tooltip-format-wifi": " {ifname}: {essid}\n⮩ Frequency: {frequency}MHz\n⮩ Strength: {signaldBm}dBm ({signalStrength}%)\n⮩ IN-IP: {ipaddr}/{cidr}\n⮩ EX-IP: $(curl ifconfig.me)\n⮬: {bandwidthUpBits}\n⮮: {bandwidthDownBits}",
-			"tooltip-format-ethernet": "{ifname}\n IP: {ipaddr}/{cidr}\n IP: $(curl ifconfig.me)\n ⮬: {bandwidthUpBits}\n ⮮: {bandwidthDownBits}",
+			"tooltip-format-wifi": "\t{ifname}: {essid}\n⮩\tFrequency: {frequency}MHz\n⮩\tStrength: {signaldBm}dBm ({signalStrength}%)\n⮩\tIN-IP: {ipaddr}/{cidr}\n⮩\tEX-IP: $(curl ifconfig.me)\n⮬\t{bandwidthUpBits}\n⮮\t{bandwidthDownBits}",
+			"tooltip-format-ethernet": "{icon}\t{ifname}\n⮩\tIN-IP: {ipaddr}/{cidr}\n⮩\tEX-IP: $(curl ifconfig.me)\n⮬\t{bandwidthUpBits}\n⮮\t{bandwidthDownBits}",
 			"format-alt-click": "click-right",
 			"format-icons": {
 				"wifi": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
@@ -569,7 +562,7 @@
 				"pending-updates": "",
 				"updated": ""											// STRING EMPTY=HIDDEN
 			},
-			"on-click": "kitty --detach $SHELL -c 'yay && yay -Ycc && yay -Sc'",
+			"on-click": "kitty --detach $SHELL -c 'yay -Syyu && yay -Ycc && yay -Sc'",
 			"on-click-middle": "pkexec reflector > /etc/pacman.d/mirrorlist",
 			"return-type": "json",
 			"tooltip": true
