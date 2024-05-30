@@ -52,12 +52,13 @@
 		],
 		//──MODULES_LEFT────────────────────────────────
 		"custom/appmenu": {
+			"exec": "echo -e '🖱ᐩ❶⍆\tLAUNCHER\n🖱ᐩ❷⍆\tCALCULATOR\n🖱ᐩ❸⍆\tEMOJIS'",
 			"format": "⌘",
 			"on-click": "wofi",
 			"on-click-middle": "wofi-emoji",
 			"on-click-right": "wofi-calc",
-			"tooltip-format": "❶ᐩ❷⁼<span color='#FFFFFF'><b><u>MENU</u></b></span>\n↤🖱\tLAUNCHER\n↧🖱\tEMOJIS\n↦🖱\tCALCULATOR",
-			"tooltip": false
+			"tooltip-format": "{}",
+			"tooltip": true
 		},
 		"sway/workspaces": {
 			"disable-scroll": true,
@@ -139,7 +140,7 @@
 			"tooltip": true
 	    },
 		"tray": {
-			"show-passive-items": false
+			"show-passive-items": true
 		},
 		"gamemode": {
 			"format": "{glyph}",
@@ -210,7 +211,7 @@
 		//──MODULES_RIGHT───────────────────────────────
 		"group/window": {
 			"all-outputs": false,
-			"orientation": "inherit",
+			"orientation": "horizontal",
 			"drawer": {
 			  "transition-duration": 200,
 			  "children-class": "drawer-child",
@@ -219,7 +220,6 @@
 			"modules": [
 				"idle_inhibitor",
 				"custom/cava",
-				"custom/playerinfo",
 				"mpd",
 				"sway/window",
 				"hyprland/window",
@@ -286,7 +286,8 @@
 				"(.*) - Mozilla Firefox": " $1",
 				"(.*) - Brave": " $1",
 				"(.*) - kitty": " [$1]"
-			}
+			},
+			"tooltip": false
 		},
 		"idle_inhibitor": {
 			"what": "handle-lid-switch",
@@ -317,7 +318,7 @@
 		},
 		"group/sink": {
 			"all-outputs": true,
-			"orientation": "inherit",
+			"orientation": "horizontal",
 			"drawer": {
 			  "transition-duration": 200,
 			  "children-class": "drawer-child",
@@ -330,7 +331,7 @@
 		},
 		"group/source": {
 			"all-inputs": true,
-			"orientation": "inherit",
+			"orientation": "horizontal",
 			"drawer": {
 			  "transition-duration": 200,
 			  "children-class": "drawer-child",
@@ -401,15 +402,7 @@
 			"interval": 1,
 			//"thermal-zone": 2,
 			"hwmon-path": [
-				"/sys/class/hwmon/hwmon*/temp*_input",					// REPORT ALL TEMPATURES
-				"/sys/class/hwmon/hwmon0/temp1_input",
-				"/sys/class/hwmon/hwmon1/temp1_input",
-				"/sys/class/hwmon/hwmon1/temp2_input",
-				"/sys/class/hwmon/hwmon1/temp3_input",
-				"/sys/class/hwmon/hwmon2/temp1_input",
-				"/sys/class/hwmon/hwmon3/temp1_input",
-				"/sys/class/hwmon/hwmon3/temp3_input",
-				"/sys/class/hwmon/hwmon6/temp1_input"
+				"/sys/class/hwmon/hwmon*/temp*_input"					// REPORT ALL TEMPATURES
 			],
 			"critical-threshold": 90,
 			"format": "{icon}",
@@ -455,7 +448,7 @@
 			"format-icons": ["♺","♳","♴","♵","♶","♷","♸","♹"],			// Ⅱ
 			"on-click": "exec",
 			"on-click-middle": "corectrl",
-			"tooltip-format": "\tMEMORY: {}℃\n⮩\tUSED: {used} / {total} GiB\n\tSWAP: {swapUsed} / {swapAvail} GiB ({swapPercentage}%)",
+			"tooltip-format": "\tMEMORY: {}℃\n\tSWAP: {swapUsed} / {swapAvail} GiB ({swapPercentage}%)\n⮩\tUSED: {used} / {total} GiB",
 			"tooltip": true
 		},
 		"disk": {
@@ -497,7 +490,7 @@
 		},
 		"group/backlight": {
 			"all-outputs": false,
-			"orientation": "inherit",
+			"orientation": "horizontal",
 			"drawer": {
 			  "transition-duration": 200,
 			  "children-class": "drawer-child",
@@ -534,7 +527,7 @@
 			"format-ethernet": "{icon}",
 			"format-linked": "{icon}",
 			"format-disconnected": "{icon}",
-			"tooltip-format-wifi": "\t{ifname}: {essid}\n⮩\tFrequency: {frequency}MHz\n⮩\tStrength: {signaldBm}dBm ({signalStrength}%)\n⮩\tIN-IP: {ipaddr}/{cidr}\n⮩\tEX-IP: $(curl ifconfig.me)\n⮬\t{bandwidthUpBits}\n⮮\t{bandwidthDownBits}",
+			"tooltip-format-wifi": "\t{ifname}: {essid}\n⮩\tFREQUENCY: {frequency}MHz\n⮩\tSTRENGTH: {signaldBm}dBm ({signalStrength}%)\n⮩\tIN-IP: {ipaddr}/{cidr}\n⮩\tEX-IP: $(curl ifconfig.me)\n⮬\t{bandwidthUpBits}\n⮮\t{bandwidthDownBits}",
 			"tooltip-format-ethernet": "{icon}\t{ifname}\n⮩\tIN-IP: {ipaddr}/{cidr}\n⮩\tEX-IP: $(curl ifconfig.me)\n⮬\t{bandwidthUpBits}\n⮮\t{bandwidthDownBits}",
 			"format-alt-click": "click-right",
 			"format-icons": {
@@ -543,8 +536,8 @@
 				"linked": "🖧",
 				"disconnected": ""
 			},
-			"on-click": "nm-connection-editor",							// "kitty --detach $SHELL -c 'nmtui'",
-			"on-click-middle": "extipv4=$(curl -s ipinfo.io/ip) && extipv6=$(curl -s ipv6.icanhazip.com) && notify-send -u normal -a 'IP' \"EXTERNAL\nIPv4: $extipv4\nIPv6: $extipv6\"",
+			"on-click": "extipv4=$(curl -s ipinfo.io/ip) && extipv6=$(curl -s ipv6.icanhazip.com) && notify-send -u normal -a 'IP' \"EXTERNAL\nIPv4: $extipv4\nIPv6: $extipv6\"",
+			"on-click-middle": "nm-connection-editor || kitty --detach $SHELL -c 'nmtui'",
 			"tooltip": true
 		},
 		"custom/powermenu": {
@@ -562,7 +555,7 @@
 				"pending-updates": "",
 				"updated": ""											// STRING EMPTY=HIDDEN
 			},
-			"on-click": "kitty --detach $SHELL -c 'yay -Syyu && yay -Ycc && yay -Sc'",
+			"on-click": "kitty --detach $SHELL -c 'yay -Syyu && yay -Ycc && yay -Scc'",
 			"on-click-middle": "pkexec reflector > /etc/pacman.d/mirrorlist",
 			"return-type": "json",
 			"tooltip": true
