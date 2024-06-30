@@ -18,42 +18,8 @@ bar swaybar_command waybar
 #───RETARDED_DAEMONS
 #exec_always { $(killall -9Ieqg MIGRAINE) MIGRAINE }
 #───NORMAL_DAEMONS_WAYLAND+TRAY
-set {
-    $WAYLAND    --enable-features=UseOzonePlatform --ozone-platform=wayland
-    $TRAY       -silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized
-}
 exec {
-    bash                                                            # $HOME/.bashrc AUTO EXPORT ENV
-    dbus-update-activation-environment --systemd --all
-    /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-    gnome-keyring-daemon --start --components=secrets
-    #dex-autostart -a $HOME/.config/autostart/*
-    wlsunset -s 22:00 -S 10:00 -d 60
-    nm-applet
-    blueman-applet
-    hypridle
-    waypaper
-    #emacs --daemon
-    #eww daemon && eww open bar
-    waybar
-    mako
-    corectrl
-    openrgb $TRAY
-    #easyeffects $WAYLAND $TRAY                                     # NO MINIMIZED LAUNCH
-    #obs
-    #steam $WAYLAND $TRAY
-    #lutris $TRAY                                                   # NO MINIMIZED LAUNCH
-    vesktop $WAYLAND $TRAY
-    signal-desktop-beta $WAYLAND
-    telegram-desktop $TRAY
-    youtube-music $WAYLAND                                          # NO MINIMIZED LAUNCH (IN-APP)
-    betterbird $TRAY
-    #teams $WAYLAND $TRAY
-    #zoom $WAYLAND $TRAY                                            # NO MINIMIZED LAUNCH
-    wl-paste --type text --watch cliphist store                     # CLIPBOARD STORES TEXT DATA
-    wl-paste --type image --watch cliphist store                    # CLIPBOARD STORES IMAGE DATA
-    #─GSETTINGS
-    gsettings set org.gnome.desktop.interface cursor-theme Bibata_Ghost
+    # NOTHING SWAY SPECIFIC
 }
 
 #───VARIABLES─────────────────────────────────────────────────────────────────────────────────────────────────────────────────

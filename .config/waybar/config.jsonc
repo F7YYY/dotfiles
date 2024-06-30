@@ -537,7 +537,7 @@
 				"disconnected": ""
 			},
 			"on-click": "extipv4=$(curl -s ipinfo.io/ip) && extipv6=$(curl -s ipv6.icanhazip.com) && notify-send -u normal -a 'IP' \"EXTERNAL\nIPv4: $extipv4\nIPv6: $extipv6\"",
-			"on-click-middle": "nm-connection-editor || kitty --detach $SHELL -c 'nmtui'",
+			"on-click-middle": "nm-connection-editor || kitty --detach bash -c 'nmtui'",
 			"tooltip": true
 		},
 		"custom/powermenu": {
@@ -555,7 +555,7 @@
 				"pending-updates": "",
 				"updated": ""											// STRING EMPTY=HIDDEN
 			},
-			"on-click": "kitty --detach $SHELL -c 'yay -Syyu && yay -Ycc && yay -Scc'",
+			"on-click": "kitty --detach bash -c 'yay -Syyu && yay -Ycc && yay -Scc'",
 			"on-click-middle": "pkexec reflector > /etc/pacman.d/mirrorlist",
 			"return-type": "json",
 			"tooltip": true

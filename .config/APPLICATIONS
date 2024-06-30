@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+#   CUSTOM STARTUP APPLICATIONS LIST
+####################################
+#
+#───SET-(WORKS...IDK..SURE?)
+    export $WAYLAND="--enable-features=UseOzonePlatform --ozone-platform=wayland"
+    export $TRAY="-silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized"
+
+#───EXECUTABLES
+    exec bash                                           # $HOME/.bashrc AUTO EXPORT ENV
+    exec dbus-update-activation-environment --systemd --all
+    exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+    exec gnome-keyring-daemon --start --components=secrets
+    #exec dex-autostart -a $HOME/.config/autostart/*
+    exec wlsunset -s 22:00 -S 10:00 -d 60
+    exec nm-applet
+    exec blueman-applet
+    exec waypaper
+    #exec emacs --daemon
+    #exec eww daemon && eww open bar
+    exec waybar
+    exec mako
+    exec flameshot
+    exec corectrl
+    exec openrgb $TRAY                                  # DON'T MINIMIZED LAUNCH
+    #exec easyeffects $WAYLAND                          # NO MINIMIZED LAUNCH
+    #exec obs
+    #exec steam $WAYLAND $TRAY
+    #exec lutris $TRAY                                  # NO MINIMIZED LAUNCH
+    exec vesktop $WAYLAND $TRAY
+    exec signal-desktop-beta $WAYLAND
+    exec telegram-desktop $TRAY
+    exec youtube-music $WAYLAND $TRAY                   # IN-APP MINIMIZED LAUNCH
+    exec remmina $TRAY                                  # NO MINIMIZED LAUNCH
+    exec virt-manager $TRAY                             # NO MINIMIZED LAUNCH
+    exec betterbird $TRAY                               # NO MINIMIZED LAUNCH
+    #exec teams $WAYLAND $TRAY
+    #exec zoom $WAYLAND $TRAY                           # NO MINIMIZED LAUNCH
+    exec wl-paste --type text --watch cliphist store    # clipboard store text data
+    exec wl-paste --type image --watch cliphist store   # clipboard store image data
+
+#───GSETTINGS
+    #exec gsettings set org.gnome.desktop.interface cursor-theme <THEME>
