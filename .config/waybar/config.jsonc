@@ -1,13 +1,13 @@
-/*******************************************************
-*  ██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗  *
-*  ██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗ *
-*  ██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝ *
-*  ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗ *
-*  ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║ *
-*   ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ *
-*"https://github.com/Alexays/Waybar/wiki/Configuration"*
+/********************************************************
+*  ██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗   *
+*  ██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗  *
+*  ██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝  *
+*  ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗  *
+*  ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║  *
+*   ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  *
+*"https://github.com/Alexays/Waybar/wiki/Configuration/"*
 *
-**──LAYOUT────────────────────────────────────────────*/
+**──────────────────────────────────────────(LAYOUT)───*/
 [
 	{
 		"layer": "top",
@@ -20,37 +20,37 @@
 		"margin": 0,
 		"spacing": 0,
 		"icon-size": 16,
-		"modules-left": [				//__APPLICATIONS__
+		"modules-left": [			//__APPLICATIONS__
 			"custom/appmenu",
-			"sway/workspaces",			// ⮶ REPLACE
-			"sway/scratchpad",			// ⮶ REPLACE
-			"hyprland/workspaces",		// ⮱ RENAME: "wlr/workspaces",
+			"sway/workspaces",		// ⮶ REPLACE
+			"sway/scratchpad",		// ⮶ REPLACE
+			"hyprland/workspaces",	// ⮱ RENAME: "wlr/workspaces",
 			"wlr/taskbar",
 			"tray",
 			"gamemode",
-			"custom/recorder"			// WIP ~ FIX FOR VARIOUS RECORDING PLATFORMS
+			"custom/recorder"		// WIP ~ FIX FOR VARIOUS RECORDING PLATFORMS
 		],
-		"modules-center": [				//__STATUS__
-			"custom/weather",			// AUR: WTTRBAR | WIP ~ FORMAT BETWEEN ℉/℃
+		"modules-center": [			//__STATUS__
+			"custom/weather",		// AUR: WTTRBAR | WIP ~ FORMAT BETWEEN ℉/℃
 			"clock"
 		],
-		"modules-right": [				//__SYSTEM__
-			"group/window",				// WIP ~ IMPORT TO SCRIPT & W/O JSON
-			"bluetooth",				// WIP ~ REPORT ALL CONNECTED DEVICES
-			"group/sink",				// WIP ~ FIX ALT MUTE 0%
-			"group/source",				// WIP ~ FIX ALT MUTE 0% & "pulseaudio#source/slider"
-			//"temperature",				// WIP ~ REPORT HARDWARE THERMALS INDIVIDUALLY WITHIN MODULES
-			"cpu",						// WIP ~ REFORMAT TOOLTIP INFORMATION
-			"custom/gpu",				// WIP ~ REPORT ALL HARDWARE INFORMATION IN TOOLTIP
+		"modules-right": [			//__SYSTEM__
+			"group/window",			// WIP ~ IMPORT TO SCRIPT & W/O JSON
+			"bluetooth",			// WIP ~ REPORT ALL CONNECTED DEVICES
+			"group/sink",			// WIP ~ FIX ALT MUTE 0%
+			"group/source",			// WIP ~ FIX ALT MUTE 0% & "pulseaudio#source/slider"
+			//"temperature",		// WIP ~ REPORT HARDWARE THERMALS INDIVIDUALLY WITHIN MODULES
+			"cpu",					// WIP ~ REFORMAT TOOLTIP INFORMATION
+			"custom/gpu",			// WIP ~ REPORT ALL HARDWARE INFORMATION IN TOOLTIP
 			"memory",
 			"disk",
 			"battery",
 			"group/backlight",
-			"network",					// WIP ~ REPORT EXTERNAL-IP IN TOOLTIP W/O DDOS (CLICK-MIDDLE)
-			"custom/powermenu",			// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
-			"custom/pacman"				// AUR: WAYBAR-UPDATES
+			"network",				// WIP ~ REPORT EXTERNAL-IP IN TOOLTIP W/O DDOS (CLICK-MIDDLE)
+			"custom/powermenu",		// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
+			"custom/pacman"			// AUR: WAYBAR-UPDATES
 		],
-		//──MODULES_LEFT────────────────────────────────
+		//──────────────────────────────(MODULES_LEFT)───
 		"custom/appmenu": {
 			"exec": "echo -e '🖱ᐩ❶⍆\tLAUNCHER\n🖱ᐩ❷⍆\tCALCULATOR\n🖱ᐩ❸⍆\tEMOJIS'",
 			"format": "⌘",
@@ -80,7 +80,7 @@
 				"9": "⑨",
 				"10": "⑩",
 				"special": "☯",
-				"default": "◉",											// "○",
+				"default": "◉",			// "○",
 				//"focused": "◉",
 				"persistent": "●"
 				//"urgent": "✪"
@@ -93,7 +93,7 @@
 	        "format": "{icon}",
 	        "format-alt": "{icon} {count}",
 	        "show-empty": false,
-	        "format-icons": ["","☯"],									// STRING EMPTY=HIDDEN
+	        "format-icons": ["","☯"],	// STRING EMPTY=HIDDEN
 	        "tooltip-format": "{app}: {title}",
 			"tooltip": true
 		},
@@ -117,7 +117,7 @@
 				"9": "⑨",
 				"10": "⑩",
 				"special": "☯",
-				"default": "◉",											// "○",
+				"default": "◉",			// "○",
 				//"focused": "◉",
 				"persistent": "●"
 				//"urgent": "✪"
@@ -129,8 +129,8 @@
 		"wlr/taskbar": {
 			"all-outputs": false,
 			"markup": true,
-			"sort-by-app-id": true,										// ⮫  ONE OR   ⮪
-			//"active-first": true,										// ⮩ THE OTHER ⮨
+			"sort-by-app-id": true,		// ⮫  ONE OR   ⮪
+			//"active-first": true,		// ⮩ THE OTHER ⮨
 	        "format": "{icon}",
 	        "ignore-list": "$TERM",
 			"on-click": "activate",
@@ -146,8 +146,8 @@
 			"format": "{glyph}",
 			"format-alt": "{glyph} {count}",
 			"format-alt-click": "click-right",
-			//"glyph": "",												// ⮫  ONE OR   ⮪
-			"use-icon": true,											// ⮩ THE OTHER ⮨
+			//"glyph": "",				// ⮫  ONE OR   ⮪
+			"use-icon": true,			// ⮩ THE OTHER ⮨
 			"hide-not-running": true,
 			"icon-name": "input-gaming-symbolic",
 			"tooltip-format": "Running: {count}",
@@ -158,14 +158,14 @@
 			"exec": "echo ''",
 			"exec-if": "pgrep wf-recorder || pgrep ffmpeg",
 			"format": "{}",
-			//"format-alt": ": {}",										// WIP ~ REPORT WHICH APP'S RECORDING
+			//"format-alt": ": {}",		// WIP ~ REPORT WHICH APP'S RECORDING
 			"format-alt-click": "click-right",
-			//"format-tooltip": ": {CAMERA}\n: {SCREEN}",				// WIP ~ REPORT CAMERA/SCREEN
+			//"format-tooltip": ": {CAMERA}\n: {SCREEN}",	// WIP ~ REPORT CAMERA/SCREEN
 			//"on-click": "exec",
-			"on-click-middle": "exec obs",								// WIP ~ REOPEN RECORDING APP/OBS
+			"on-click-middle": "exec obs",	// WIP ~ REOPEN RECORDING APP/OBS
 			"tooltip": false
 		},
-		//──MODULES_CENTER──────────────────────────────
+		//────────────────────────────(MODULES_CENTER)───
 		"clock": {
 			"interval": 1,
 			"format": "{:%Z: %T} ⴵ",
@@ -208,7 +208,7 @@
 			"return-type": "json",
 			"tooltip": true
 		},
-		//──MODULES_RIGHT───────────────────────────────
+		//─────────────────────────────(MODULES_RIGHT)───
 		"group/window": {
 			"all-outputs": false,
 			"orientation": "horizontal",
@@ -228,17 +228,17 @@
 			"on-scroll-up": "playerctl previous",
 			"on-scroll-down": "playerctl next"
 		},
-		"custom/cava": {												// WIP ~ FUNCTIONS>SCRIPT (DON'T WORK)
+		"custom/cava": {									// WIP ~ FUNCTIONS>SCRIPT (DON'T WORK)
 			"exec": "$HOME/.config/cava/scripts/cava",
 			"exec-if": "-f $HOME/.config/cava/scripts/cava",
-			"config": "$HOME/.config/cava/config",						// WIP ~ IMPORT TO SCRIPT
+			"config": "$HOME/.config/cava/config",			// WIP ~ IMPORT TO SCRIPT
 			"format": "▕{}▏",
-			"bars": 10,													// WIP ~ IMPORT TO SCRIPT
+			"bars": 10,										// WIP ~ IMPORT TO SCRIPT
 			"on-click": "playerctl -a play-pause",
 			//"on-click-middle": "youtube-music",
 			"on-scroll-up": "playerctl previous",
 			"on-scroll-down": "playerctl next",
-			"tooltip-format": "\t{playerName}\n🎜\t{artist} 🢖 {title}",		// WIP ~ EXPORT FROM SCRIPT
+			"tooltip-format": "\t{playerName}\n🎜\t{artist} 🢖 {title}",	// WIP ~ EXPORT FROM SCRIPT
 			"tooltip": false
 		},
 		"mpd": {
@@ -262,11 +262,11 @@
 				"on": "1"
 			},
 			"state-icons": {
-				"playing": "",											// 🎜
+				"playing": "",					// 🎜
 				"paused": ""
 			},
 			"tooltip-format": "{artist} 🢖 {album}",
-			"tooltip-format-disconnected": ""							// STRING EMPTY=HIDDEN
+			"tooltip-format-disconnected": ""	// STRING EMPTY=HIDDEN
 		},
 		"sway/window": {
 			"format": "{}",
@@ -292,11 +292,11 @@
 		"idle_inhibitor": {
 			"what": "handle-lid-switch",
 			"format": "{icon}",
-			"format-alt": "{status} {icon}",							// "{cava}\t{icon}",
+			"format-alt": "{status} {icon}",	// "{cava}\t{icon}",
 			"format-alt-click": "click-right",
 			"format-icons": {
-				"activated": "💮",										// "",
-				"deactivated": "🏵"										// ""
+				"activated": "💮",				// "",
+				"deactivated": "🏵"				// ""
 			},
 			//"tooltip-format": "{status}",
 			"tooltip": false
@@ -402,7 +402,7 @@
 			"interval": 1,
 			//"thermal-zone": 2,
 			"hwmon-path": [
-				"/sys/class/hwmon/hwmon*/temp*_input"					// REPORT ALL TEMPATURES
+				"/sys/class/hwmon/hwmon*/temp*_input"	// REPORT ALL TEMPATURES
 			],
 			"critical-threshold": 90,
 			"format": "{icon}",
@@ -445,7 +445,7 @@
 			"format": "{icon}",
 			"format-alt": "{percentage}% {icon}",
 			"format-alt-click": "click-right",
-			"format-icons": ["♺","♳","♴","♵","♶","♷","♸","♹"],			// Ⅱ
+			"format-icons": ["♺","♳","♴","♵","♶","♷","♸","♹"],	// Ⅱ
 			"on-click": "exec",
 			"on-click-middle": "corectrl",
 			"tooltip-format": "\tMEMORY: {}℃\n\tSWAP: {swapUsed} / {swapAvail} GiB ({swapPercentage}%)\n⮩\tUSED: {used} / {total} GiB",
@@ -508,7 +508,7 @@
 		},
 		"backlight": {
 			"interval": 1,
-			//"device": "intel_backlight",								// "acpi_video1",
+			//"device": "intel_backlight",	// "acpi_video1",
 			"format": "{icon}",
 			"format-alt": "{percent}% {icon}",
 			"format-alt-click": "click-right",
@@ -527,8 +527,6 @@
 			"format-ethernet": "{icon}",
 			"format-linked": "{icon}",
 			"format-disconnected": "{icon}",
-			"tooltip-format-wifi": "\t{ifname}: {essid}\n⮩\tFREQUENCY: {frequency}MHz\n⮩\tSTRENGTH: {signaldBm}dBm ({signalStrength}%)\n⮩\tIN-IP: {ipaddr}/{cidr}\n⮩\tEX-IP: $(curl ifconfig.me)\n⮬\t{bandwidthUpBits}\n⮮\t{bandwidthDownBits}",
-			"tooltip-format-ethernet": "{icon}\t{ifname}\n⮩\tIN-IP: {ipaddr}/{cidr}\n⮩\tEX-IP: $(curl ifconfig.me)\n⮬\t{bandwidthUpBits}\n⮮\t{bandwidthDownBits}",
 			"format-alt-click": "click-right",
 			"format-icons": {
 				"wifi": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
@@ -536,26 +534,32 @@
 				"linked": "🖧",
 				"disconnected": ""
 			},
-			"on-click": "extipv4=$(curl -s ipinfo.io/ip) && extipv6=$(curl -s ipv6.icanhazip.com) && notify-send -u normal -a 'IP' \"EXTERNAL\nIPv4: $extipv4\nIPv6: $extipv6\"",
+			"on-click": "extip=$(curl -s myip.wtf/yaml) && fortune=$(curl -sI myip.wtf/yaml | sed -n 's/.*Fortune*. //p') && notify-send -u normal -a \"$fortune\" \"$extip\"",
 			"on-click-middle": "nm-connection-editor || kitty --detach bash -c 'nmtui'",
+			"tooltip-format": "{ERRORS_LOL}",
+			"tooltip-format-wifi": "\t{ifname}: {essid}\n⮩\tFREQUENCY: {frequency}MHz\n⮩\tSTRENGTH: {signaldBm}dBm ({signalStrength}%)\n⮩\tIN-IP: {ipaddr}/{cidr}\n⮩\tEX-IP: $(curl ifconfig.me)\n⮬\t{bandwidthUpBits}\n⮮\t{bandwidthDownBits}",
+			"tooltip-format-ethernet": "{icon}\t{ifname}\n⮩\tIN-IP: {ipaddr}/{cidr}\n⮩\tEX-IP: $(curl ifconfig.me)\n⮬\t{bandwidthUpBits}\n⮮\t{bandwidthDownBits}",
 			"tooltip": true
 		},
 		"custom/powermenu": {
 			"format": "⏻",
+			"format-alt": "🖕",
+			"format-alt-click": "click-right",
 			"on-click": "$HOME/.config/wofi/scripts/powermenu",
 			"on-click-middle": "$HOME/.config/wofi/scripts/powermenu",
-			"on-click-right": "$HOME/.config/wofi/scripts/powermenu",
 			"tooltip": false
 		},
 		"custom/pacman": {
 			"exec": "waybar-updates",
 			"exec-if": "which waybar-updates > /dev/null",
 			"format": "{icon}",
+			"format-alt": "{} {icon}",			
+			"format-alt-click": "click-right",
 			"format-icons": {
 				"pending-updates": "",
-				"updated": ""											// STRING EMPTY=HIDDEN
+				"updated": ""			// STRING EMPTY=HIDDEN
 			},
-			"on-click": "kitty --detach bash -c 'yay -Syyu && yay -Ycc && yay -Scc'",
+			"on-click": "kitty --detach $SHELL -c 'yay -Syyu && yay -Ycc && yay -Sc --noconfirm && clear'",
 			"on-click-middle": "pkexec reflector > /etc/pacman.d/mirrorlist",
 			"return-type": "json",
 			"tooltip": true

@@ -1,17 +1,17 @@
-/*******************************************************
-*  ██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗  *
-*  ██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗ *
-*  ██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝ *
-*  ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗ *
-*  ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║ *
-*   ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ *
-*"https://github.com/Alexays/Waybar/wiki/Configuration"*
+/********************************************************
+*  ██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗   *
+*  ██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗  *
+*  ██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝  *
+*  ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗  *
+*  ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║  *
+*   ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  *
+*"https://github.com/Alexays/Waybar/wiki/Configuration/"*
 *
-**──PRESETS───────────────────────────────────────────*/
+**─────────────────────────────────────────(PRESETS)───*/
 @define-color black rgba(0,0,0,0.66);
 @define-color white rgba(255,255,255,0.66);
 
-/*──EVERYTHING────────────────────────────────────────*/
+/*──────────────────────────────────────(EVERYTHING)───*/
 * {
     /*all: unset;*/
     font: italic small-caps bold 16px "Sony Sketch EF, Symbols Nerd Font Mono";
@@ -27,7 +27,7 @@
     }
 }
 
-/*──WAYBAR────────────────────────────────────────────*/
+/*──────────────────────────────────────────(WAYBAR)───*/
 tooltip {
     color: white;
     background-color: @black;
@@ -36,7 +36,7 @@ tooltip {
 }
 window#waybar {
     color: white;
-    background: linear-gradient(transparent calc(50%-5px), white, transparent calc(50%+5px));
+    background: linear-gradient(transparent calc(60%-4px), white, transparent calc(60%+4px));
     transition-property: inherit;
 }
 button menu {
@@ -59,20 +59,19 @@ menu {
     padding: 0px 2px;
 }
 
-/*──MODULES───────────────────────────────────────────*/
+/*─────────────────────────────────────────(MODULES)───*/
 *.module {
-    padding: 0px 10px;
+    padding: 1px 10px;
 }
 *.modules-left,
 *.modules-center,
 *.modules-right {
-    margin: 0px 10px;
-    padding: 0px 10px;
+    margin: 6px 6px 0px 6px;
     color: white;
     background-color: @black;
     border: 1px solid white;
     border-radius: 16px;
-    border-width: .4px 1px;
+    border-width: .6px 2px;
 }
 *.overlay {
     background-color: black;
@@ -111,7 +110,7 @@ menu {
     color: #fff;
 }
 
-/*──AUTOMATION────────────────────────────────────────*/
+/*──────────────────────────────────────(AUTOMATION)───*/
 #workspaces>*:hover, #bluetooth:hover, #custom-pacman:hover, *:hover {
     color: red;
 }

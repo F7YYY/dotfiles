@@ -1,44 +1,78 @@
 #!/bin/bash
 #
-#   CUSTOM STARTUP APPLICATIONS LIST
-####################################
+################################################################################
+#                                                                              #
+#   ▄▀▀▀▀▄  ▄▀▀▀█▀▀▄  ▄▀▀█▄   ▄▀▀▄▀▀▀▄  ▄▀▀▀█▀▀▄  ▄▀▀▄ ▄▀▀▄  ▄▀▀▄▀▀▀▄  ▄▀▀▀▀▄  #
+#  █ █   ▐ █    █  ▐ ▐ ▄▀ ▀▄ █   █   █ █    █  ▐ █   █    █ █   █   █ █ █   ▐  #
+#     ▀▄   ▐   █       █▄▄▄█ ▐  █▀▀█▀  ▐   █     ▐  █    █  ▐  █▀▀▀▀     ▀▄    #
+#  ▀▄   █     █       ▄▀   █  ▄▀    █     █        █    █      █      ▀▄   █   #
+#   █▀▀▀    ▄▀       █   ▄▀  █     █    ▄▀          ▀▄▄▄▄▀   ▄▀        █▀▀▀    #
+#   ▐      █         ▐   ▐   ▐     ▐   █                    █          ▐       #
+#          ▐                           ▐                    ▐                  #
+#                                                                              #
+################################################################################
 #
-#───SET-(WORKS...IDK..SURE?)
-    export $WAYLAND="--enable-features=UseOzonePlatform --ozone-platform=wayland"
-    export $TRAY="-silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized"
+#───────────────────────────────────────────────────────────────────(EXPORTS)───
+export WAYLAND="--enable-features=UseOzonePlatform --ozone-platform=wayland"
+#export TRAY="-silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized"
+export ILENT="&>/dev/null &disown"
 
-#───EXECUTABLES
-    exec bash                                           # $HOME/.bashrc AUTO EXPORT ENV
-    exec dbus-update-activation-environment --systemd --all
-    exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-    exec gnome-keyring-daemon --start --components=secrets
-    #exec dex-autostart -a $HOME/.config/autostart/*
-    exec wlsunset -s 22:00 -S 10:00 -d 60
-    exec nm-applet
-    exec blueman-applet
-    exec waypaper
-    #exec emacs --daemon
-    #exec eww daemon && eww open bar
-    exec waybar
-    exec mako
-    exec flameshot
-    exec corectrl
-    exec openrgb $TRAY                                  # DON'T MINIMIZED LAUNCH
-    #exec easyeffects $WAYLAND                          # NO MINIMIZED LAUNCH
-    #exec obs
-    #exec steam $WAYLAND $TRAY
-    #exec lutris $TRAY                                  # NO MINIMIZED LAUNCH
-    exec vesktop $WAYLAND $TRAY
-    exec signal-desktop-beta $WAYLAND
-    exec telegram-desktop $TRAY
-    exec youtube-music $WAYLAND $TRAY                   # IN-APP MINIMIZED LAUNCH
-    exec remmina $TRAY                                  # NO MINIMIZED LAUNCH
-    exec virt-manager $TRAY                             # NO MINIMIZED LAUNCH
-    exec betterbird $TRAY                               # NO MINIMIZED LAUNCH
-    #exec teams $WAYLAND $TRAY
-    #exec zoom $WAYLAND $TRAY                           # NO MINIMIZED LAUNCH
-    exec wl-paste --type text --watch cliphist store    # clipboard store text data
-    exec wl-paste --type image --watch cliphist store   # clipboard store image data
+#─────────────────────────────────────────────────────────────────(GSETTINGS)───
+#gsettings set org.gnome.desktop.interface theme <THEME>
 
-#───GSETTINGS
-    #exec gsettings set org.gnome.desktop.interface cursor-theme <THEME>
+#───────────────────────────────────────────────────────────────(EXECUTABLES)───
+main() {
+    #─DESCENDING_LIST
+    applications=(
+        "bash"
+        "dbus-update-activation-environment --systemd --all"
+        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+        "gnome-keyring-daemon --start --components=secrets"
+        #"dex-autostart -a $HOME/.config/autostart/*"
+        "wlsunset -s 22:00 -S 10:00 -d 60"
+        "nm-applet"
+        "blueman-applet"
+        "waypaper"
+        #"emacs --daemon"
+        #"eww daemon& eww open bar"
+        "waybar"
+        "dunst"
+        "flameshot"
+        "corectrl"
+        "openrgb --startminimized"
+        #"easyeffects"                                  # NO MINIMIZED LAUNCH
+        #"obs"
+        #"steam $WAYLAND -silent"
+        #"lutris"                                       # NO MINIMIZED LAUNCH
+        "vesktop $WAYLAND --start-minimized"
+        "signal-desktop-beta $WAYLAND"
+        "telegram-desktop -startintray"
+        "youtube-music $WAYLAND --use-tray-icon"
+        #"remmina"                                      # NO MINIMIZED LAUNCH
+        #"virt-manager"                                 # NO MINIMIZED LAUNCH
+        "betterbird"                                    # NO MINIMIZED LAUNCH
+        #"teams $WAYLAND --startminimized"
+        #"zoom $WAYLAND"                                # NO MINIMIZED LAUNCH
+        "wl-paste --type text --watch cliphist store"   # CLIPBOARD TEXT DATA
+        "wl-paste --type image --watch cliphist store"  # CLIPBOARD IMAGE DATA
+    )
+
+    #─LAUNCH_APPS_IF_NOT_LAUNCHED
+    for app in "${applications[@]}"; do
+        name="${app%% *}"
+
+        if ! pgrep -f "$name" &>/dev/null; then
+            echo "LAUNCHING: $app"
+            eval $app $ILENT
+        elif pgrep -f "$name" &>/dev/null; then
+            pkill -9 "$name" &>/dev/null
+            echo "RELAUNCHING: $app"
+            eval $app $ILENT
+        else
+            echo "NO-PR0CCESS: $app" 
+        fi
+    done
+}
+
+#───START
+main

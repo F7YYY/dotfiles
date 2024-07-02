@@ -10,35 +10,42 @@
 #  ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌ ▐░▌ ▐░█▄▄▄▄▄▄▄█░▌  #
 #  ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌  ▐░▌▐░░░░░░░░░░░▌  #
 #   ▀         ▀  ▀         ▀  ▀    ▀  ▀▀▀▀▀▀▀▀▀▀▀   #
-#####################################################
+####───"https://man.archlinux.org/man/mako.5/"───####
 #
-#──DISPLAY───────────────────────────────────────────
-layer=overlay
-anchor=top-center
+#────────────────────────────────────────(DISPLAY)───
+on-button-right=dismiss-all
 font=Sony Sketch EF 12
+background-color=#FFFFFFDD
+text-color=#000000DD
+#width=10000
+height=10000
+margin=6
+padding=1
+border-color=#000000DD
+border-radius=16
+progress-color=source #000000DD
 format=<b><u>%a</u></b>\n<i>%b 🢖 %s</i>
 group-by=summary
+max-visible=100
+output=DP-1
+layer=overlay
+anchor=top-center
 default-timeout=60000
-border-radius=10
-background-color=#FFFFFFDD
-progress-color=source #000000DD
-text-color=#000000DD
-on-button-right=dismiss-all
 
-#──STATES────────────────────────────────────────────
+#─────────────────────────────────────────(STATES)───
 [urgency=low]
-border-color=#000000DD
+    border-color=#000000DD
 [urgency=normal]
-border-color=#FF00FFDD
+    border-color=#FF00FFDD
 [urgency=critical]
-border-color=#FF0000DD
-default-timeout=0
+    border-color=#FF0000DD
+    default-timeout=0
 [mode=do-not-disturb]
-invisible=1
-on-notify=none
+    invisible=1
+    on-notify=none
 [mode=silent]
-on-notify=none
+    on-notify=none
 
-#──APPS──────────────────────────────────────────────
+#───────────────────────────────────────────(APPS)───
 [summary~="log-.*"]
-border-color=#808080DD
+    border-color=#808080DD

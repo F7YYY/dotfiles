@@ -1,0 +1,102 @@
+#############################################################################
+#   ________      ___  ___      ________       ________       _________     #
+#  |\   ___ \    |\  \|\  \    |\   ___  \    |\   ____\     |\___   ___\   #
+#  \ \  \_|\ \   \ \  \\\  \   \ \  \\ \  \   \ \  \___|_    \|___ \  \_|   #
+#   \ \  \ \\ \   \ \  \\\  \   \ \  \\ \  \   \ \_____  \        \ \  \    #
+#    \ \  \_\\ \   \ \  \\\  \   \ \  \\ \  \   \|____|\  \        \ \  \   #
+#     \ \_______\   \ \_______\   \ \__\\ \__\    ____\_\  \        \ \__\  #
+#      \|_______|    \|_______|    \|__| \|__|   |\_________\        \|__|  #
+#                                                \|_________|               #
+################───"https://man.archlinux.org/man/dunst.5"───################
+#
+#─────────────────────────────────────────────────────────────────(GLOBAL)───
+[global]
+    enable_posix_regex=true
+    notification_limit=0
+    #─Geometry
+    origin=top-center
+    offset=0x6
+    width=(0,10000)
+    height=10000
+    #─PROGRESS_BAR
+    #progress_bar_height=10
+    #progress_bar_frame_width=1
+    #progress_bar_min_width=150
+    #progress_bar_max_width=300
+    #progress_bar_corner_radius=0
+    icon_corner_radius=10
+    #transparency=50 #(X11 only)
+    padding=1
+    horizontal_padding=10
+    text_icon_padding=10
+    frame_width=2
+    #frame_color="#000000DD"
+    gap_size=6
+    separator_color=auto
+    idle_threshold=60
+    #─TEXT
+    font=Sony Sketch EF 12
+    line_height=1
+    markup=full
+    # Markup message format:
+    #   %a  appname
+    #   %s  summary
+    #   %b  body
+    #   %i  iconname (including its path)
+    #   %I  iconname (without its path)
+    #   %p  progress value if set ([  0%] to [100%]) or nothing
+    #   %n  progress value if set without any extra characters
+    #   %%  Literal %
+    # If any of these exists in the format but hasn't been specified in the notification
+    # (e.g. no icon has been set), the placeholders will simply be removed from the format.
+    format="<b><u>%a</u></b>\n<i>%b 🢖 %s</i>"
+    show_age_threshold=60
+    ellipsize=start #start/middle/end
+    #─ICONS
+    enable_recursive_icon_lookup=true
+    #icon_theme="Adwaita, breeze"
+    max_icon_size=64
+    #─ADVANCED
+    dmenu=/usr/bin/wofi --dmenu dunst:
+    corner_radius=16
+    ignore_dbusclose=true
+    #─mouse
+    # Possible values are:
+    # * none: Don't do anything.
+    # * do_action: Invoke the action determined by the action_name rule. If there is no
+    #              such action, open the context menu.
+    # * open_url: If the notification has exactly one url, open it. If there are multiple
+    #             ones, open the context menu.
+    # * close_current: Close current notification.
+    # * close_all: Close all notifications.
+    # * context: Open context menu for the notification.
+    # * context_all: Open context menu for all notifications.
+    # These values can be strung together for each mouse event, and
+    # will be executed in sequence.
+    mouse_left_click=do_action, open_url, close_current
+    mouse_middle_click=context
+    mouse_right_click=close_all
+
+#────────────────────────────────────────────────────────────────────(LOW)───
+[urgency_low]
+    background="#FFFFFFDD"
+    foreground="#000000DD"
+    frame_color="#000000DD"
+    timeout=60
+    #default_icon=/path/to/icon
+#─────────────────────────────────────────────────────────────────(NORMAL)───
+[urgency_normal]
+    background="#FFFFFFDD"
+    foreground="#000000DD"
+    frame_color="#FF00FFDD"
+    timeout=60
+    override_pause_level=30
+    #default_icon=/path/to/icon
+#───────────────────────────────────────────────────────────────────(HIGH)───
+[urgency_critical]
+    background="#FFFFFFDD"
+    foreground="#000000DD"
+    frame_color="#FF0000DD"
+    timeout=0
+    override_pause_level=60
+    #default_icon=/path/to/icon

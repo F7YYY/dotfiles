@@ -11,23 +11,26 @@
 #|  `8b.  ;8.`8888         `8.`8' `8,`'          .888888888. `88888.         8 8888      8 8888          .8'    `8.`8888.   |#
 #|   `Y8888P ,88P'          `8.`   `8'          .8'       `8. `88888.        8 8888      8 8888         .8'      `8.`8888.  |#
 #|──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────|#
-##########################################──"https://github.com/swaywm/sway/wiki/"──##########################################
+#########################################───"https://github.com/swaywm/sway/wiki/"───#########################################
 #
-#───EXECUTABLES_(DAEMONS+APPS)────────────────────────────────────────────────────────────────────────────────────────────────
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────────(EXECUTABLES)───
 bar swaybar_command waybar
 #───RETARDED_DAEMONS
 #exec_always { $(killall -9Ieqg MIGRAINE) MIGRAINE }
-#───NORMAL_DAEMONS_WAYLAND+TRAY
+#───NORMAL_DAEMONS
 exec {
-    # NOTHING SWAY SPECIFIC
+    $HOME/.config/APPLICATIONS
+    #─SWAY_SPECIFIC
+    swaymgr
 }
 
-#───VARIABLES─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#───────────────────────────────────────────────────────────────────────────────────────────────────────────────(VARIABLES)───
 set {
-    $FONT       Sony Sketch EF 12, Symbols Nerd Font Mono 12        # (kitty list-fonts)
+    $FONT       Sony Sketch EF 12, Symbols Nerd Font Mono 12    # (kitty list-fonts)
     $SUPER      Mod4
     $TERM       kitty --detach
     $LOCK       swaylock-corrupter --daemonize
+    #$DISPLAY   Name, mode [Resolution@HZ], Position [#,#], Scale [#]
     $DISPLAY1   DP-1 mode 1920x1080@240HZ position 0,0 scale 1
     #─VIM_KEYS
     $LEFT       H
@@ -42,7 +45,7 @@ set {
     $CLEAR      #00000000
 }
 
-#───KEYBINDS──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#────────────────────────────────────────────────────────────────────────────────────────────────────────────────(KEYBINDS)───
 bindsym --to-code {
     $SUPER+Q                kill
     $SUPER+Escape           exec $TERM
@@ -61,28 +64,29 @@ bindsym --to-code {
     --release --no-repeat   $SUPER+Semicolon seat - cursor release button1
     --no-repeat             $SUPER+Apostrophe seat - cursor press button2
     --release --no-repeat   $SUPER+Apostrophe seat - cursor release button2
-    #─SCREENSHOT/GIF
+    #─SCREENSHOT+GIF
     $SUPER+O                exec kooha
-    $SUPER+P                exec grimshot --notify save anything - | swappy --file -
-#───XF86_CONTROLS
-    #─BRIGHTNESS
+    $SUPER+P                exec flameshot screen
+    #─XF86_BRIGHTNESS
     XF86MonBrightnessUp     exec brightnessctl --quiet set 10%+
     XF86MonBrightnessDown   exec brightnessctl --quiet set 10%-
     XF86KbdBrightnessUp     exec brightnessctl --quiet --device *::kbd_backlight set 10%+
     XF86KbdBrightnessDown   exec brightnessctl --quiet --device *::kbd_backlight set 10%-
-    #─PULSEAUDIO
+    #─XF86_PULSEAUDIO
     XF86AudioRaiseVolume    exec pactl set-sink-volume @DEFAULT_SINK@ +5%
     XF86AudioLowerVolume    exec pactl set-sink-volume @DEFAULT_SINK@ -5%
     XF86AudioMute           exec pactl set-sink-mute @DEFAULT_SINK@ toggle
     XF86AudioMicMute        exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-    #─MEDIA
+    #─XF86_MEDIA
     XF86AudioNext           exec playerctl next
     XF86AudioPlay           exec playerctl play-pause
     XF86AudioPrev           exec playerctl previous
     XF86AudioStop           exec playerctl stop
+    #─OTHERS
+    $SUPER+C                exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
 }
 
-#───WORKSPACES────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#──────────────────────────────────────────────────────────────────────────────────────────────────────────────(WORKSPACES)───
 set {
     $SP                     scratchpad
     $WS                     workspace
@@ -94,7 +98,7 @@ set {
     $MINI                   minimize
     $RENDER                 max_render_time
     $IDLE                   inhibit_idle fullscreen
-    #─WINDOWS
+    #─OPACITY
     $OPACITY                0.8
     $OPAQUE                 1.0
 }
@@ -154,7 +158,7 @@ bindsym --to-code {
     $SUPER+Ctrl+Right       move right
 }
 
-#───WINDOW_MANAGEMENT_(swaymsg -t get_tree | awk 'tolower($0) ~ /(app_id|class|window_role)/ && NF > 1')
+#───WINDOW_MANAGEMENT─(swaymsg --type get_tree | awk 'tolower($0) ~ /(app_id|class|window_role)/ && NF > 1')
 for_window {
     [app_id=".*"]           $OPACITY, $MM, focus, sticky
     [class=".*"]            $OPACITY, $MM, focus, sticky
@@ -180,13 +184,13 @@ scratchpad_minimize             enable
 title_align                     center
 titlebar_separator              enable
 
-#───PERIPHERALS───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────────(PERIPHERALS)───
 output {
     $DISPLAY1
     * adaptive_sync             on
 }
 bindswitch {
-#───LAPTOP_AUTO_DISPLAY
+    #─LAPTOP_AUTO_DISPLAY
     --reload --locked lid:on output $DISPLAY1 disable
     --reload --locked lid:off output $DISPLAY1 enable
 }
@@ -201,7 +205,7 @@ input type:mouse {
     pointer_accel               0
 }
 
-#───THEME_FX──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#────────────────────────────────────────────────────────────────────────────────────────────────────────────────(THEME_FX)───
 blur                            disable
 blur_passes                     4
 blur_radius                     4
@@ -229,7 +233,7 @@ client.focused_inactive         $BLACK      $BLACK      $WHITE      $BLACK      
 client.unfocused                $GREY       $BLACK      $GREY       $GREY       $GREY
 client.urgent                   $RED        $BLACK      $RED        $RED        $RED
 
-#───SYSTEM_POWER──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#───────────────────────────────────────────────────────────────────────────────────────────────────────────────────(POWER)───
 exec bash -c $(swayidle -w \
     timeout 600 '$LOCK' \
     timeout 300 'if pgrep -x "$LOCK" > /dev/null; then swaymsg "output * dpms off"; fi' \
@@ -240,8 +244,8 @@ exec bash -c $(swayidle -w \
     #after-resume 'swaymsg "output * dpms on"' \
 )
 
-#───XD_WAYLAND────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#────────────────────────────────────────────────────────────────────────────────────────────────────────────────(XWAYLAND)───
 xwayland enable
 
-#───INCLUSION─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#───────────────────────────────────────────────────────────────────────────────────────────────────────────────(INCLUSION)───
 include /etc/sway/config.d/*
