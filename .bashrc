@@ -286,7 +286,7 @@ backup() {
 
 	if [ "$(date +%u)" = "$day" ]; then
 		git dotfiles cam "AUTO-BACKUP"
-		git dotfiles gui --prompt dotfiles psom	# CONFIGURE GUI 
+		git gui dotfiles psom	# CONFIGURE GUI 
 	fi
 }
 backup
