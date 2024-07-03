@@ -12,10 +12,10 @@
 #                                                                              #
 ################################################################################
 #
-#───────────────────────────────────────────────────────────────────(EXPORTS)───
-export WAYLAND="--enable-features=UseOzonePlatform --ozone-platform=wayland"
-#export TRAY="-silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized"
-export ILENT="&>/dev/null &disown"
+#─────────────────────────────────────────────────────────────────(VARIABLES)───
+wayland="--enable-features=UseOzonePlatform --ozone-platform=wayland"
+tray="-silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized"
+ilent="&>/dev/null &disown"
 
 #─────────────────────────────────────────────────────────────────(GSETTINGS)───
 #gsettings set org.gnome.desktop.interface theme <THEME>
@@ -57,19 +57,19 @@ main() {
         "wl-paste --type image --watch cliphist store"  # CLIPBOARD IMAGE DATA
     )
 
-    #─LAUNCH_APPS_IF_NOT_LAUNCHED
+    #─LAUNCH_OR_RELAUNCH_APPS
     for app in "${applications[@]}"; do
         name="${app%% *}"
 
         if ! pgrep -f "$name" &>/dev/null; then
-            echo "LAUNCHING: $app"
-            eval $app $ILENT
+            echo -e "LAUNCHING:\t$app"
+            eval $app $ilent
         elif pgrep -f "$name" &>/dev/null; then
-            pkill -9 "$name" &>/dev/null
-            echo "RELAUNCHING: $app"
-            eval $app $ILENT
+            pkill -9 -i "$name" &>/dev/null
+            echo -e "RELAUNCHING:\t$app"
+            eval $app $ilent
         else
-            echo "NO-PR0CCESS: $app" 
+            echo -e "NO-PR0CESS:\t$(whereis $app)" 
         fi
     done
 }

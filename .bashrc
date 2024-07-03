@@ -1,17 +1,17 @@
-#!/usr/bin/env bash#######################################################################
-#   ________      ________      ________       ___  ___      ________      ________      #
-#  |\   __  \    |\   __  \    |\   ____\     |\  \|\  \    |\   __  \    |\   ____\     #
-#  \ \  \|\ /_   \ \  \|\  \   \ \  \___|_    \ \  \\\  \   \ \  \|\  \   \ \  \___|     #
-#   \ \   __  \   \ \   __  \   \ \_____  \    \ \   __  \   \ \   _  _\   \ \  \        #
-#    \ \  \|\  \   \ \  \ \  \   \|____|\  \    \ \  \ \  \   \ \  \\  \|   \ \  \____   #
-#     \ \_______\   \ \__\ \__\    ____\_\  \    \ \__\ \__\   \ \__\\ _\    \ \_______\ #
-#      \|_______|    \|__|\|__|   |\_________\    \|__|\|__|    \|__|\|__|    \|_______| #
-#                                 \|_________|                                           #
-##########################################################################################
+#!/usr/bin/env bash########################################################################
+#   ________      ________      ________       ___  ___      ________      ________       #
+#  |\   __  \    |\   __  \    |\   ____\     |\  \|\  \    |\   __  \    |\   ____\      #
+#  \ \  \|\ /_   \ \  \|\  \   \ \  \___|_    \ \  \\\  \   \ \  \|\  \   \ \  \___|      #
+#   \ \   __  \   \ \   __  \   \ \_____  \    \ \   __  \   \ \   _  _\   \ \  \         #
+#    \ \  \|\  \   \ \  \ \  \   \|____|\  \    \ \  \ \  \   \ \  \\  \|   \ \  \____    #
+#     \ \_______\   \ \__\ \__\    ____\_\  \    \ \__\ \__\   \ \__\\ _\    \ \_______\  #
+#      \|_______|    \|__|\|__|   |\_________\    \|__|\|__|    \|__|\|__|    \|_______|  #
+#                                 \|_________|                                            #
+###########################################################################################
 #
-##########################################################################################
-#	SOURCED
-##########################################################################################
+###########################################################################################
+#	SOURCE
+###########################################################################################
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -27,17 +27,17 @@ elif [ -f /etc/bash_completion ]; then
 	. /etc/bash_completion
 fi
 
-##########################################################################################
+###########################################################################################
 #	THEME
-##########################################################################################
+###########################################################################################
 powerline-daemon -q
 export POWERLINE_BASH_CONTINUATION=1
 export POWERLINE_BASH_SELECT=1
 . /usr/share/powerline/bindings/bash/powerline.sh
 
-##########################################################################################
+###########################################################################################
 # 	ALIASES
-##########################################################################################
+###########################################################################################
 # Listing
 alias ll='ls -l --color=auto'
 alias la='ls -la --color=auto'
@@ -62,39 +62,13 @@ alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 # Run applications under Wayland
 alias wayland='--enable-features=UseOzonePlatform --ozone-platform=wayland'
+alias rcp='rsync --recursive --progress'
+alias rmv='rsync --recursive --progress'
+alias ftext='clear && grep -niHIr --color=always "$1" "${2:-.}" | less -r'
 
-##########################################################################################
-#	CUSTOM FUNCTIONS
-##########################################################################################
-# Copy file with a progress bar
-rcp() {
-	if command -v "rsync" &>/dev/null; then
-		case $1 in
-			""|[Hh]*[Pp]|-h*p|--h*p)
-				rsync --help
-			;;
-			*)
-				rsync --recursive --progress "${1}" "${2:-.}"
-			;;
-		esac
-	else
-		echo -e "\nPackege not found: rsync\nhttps://rsync.samba.org/\n"
-	fi
-}
-
-# Where the FUCK is that TEXT at!
-ftext() {
-	case $1 in
-		""|[Hh]*[Pp]|-h*p|--h*p)
-			echo -e "\nUsage: ftext [1] [2]"
-			echo -e "\n- [1]\tMandatory keyword to index\n- [2]\tOptional Path/File to iterate recursively\n\tDefault: [$(pwd)]\n"
-		;;
-		*)
-			clear && grep -niHIr --color=always "$1" "${2:-.}" | less -r
-		;;
-	esac
-}
-
+###########################################################################################
+# 	FUNCTIONS
+###########################################################################################
 # Export your environment variables Globally or Locally
 exp_env() {
 	# General Variables
@@ -133,7 +107,12 @@ exp_env() {
 	
 	# Processes user's exportation process
 	case $1 in
-		""|[lL]*)
+		""|-[Hh]|--[Hh]*)
+			echo -e "\nDefault: Local - At Login & Reload\n"
+			echo -e "- L/local\tExports to ($UID) $USER"
+			echo -e "- G/global\tExports to (/etc/environment)\n"
+		;;
+		-[Ll]*|--[Ll]*)
 			echo -e "\nExporting to ($UID) $USER\n"
     		for variable in "${enlist[@]}"; do
     		    if [[ ! $variable == "#"* ]]; then
@@ -141,37 +120,37 @@ exp_env() {
     		    fi
     		done
 		;;
-		[gG]*)
+		-[Gg]*|--[Gg]*)
 			echo -e "\nExporting to (/etc/environment)\n"
 			if [ -f /etc/environment ]; then
 				for variable in "${enlist[@]}"; do
 				    if [[ "$variable" != "#"* && ! $(grep -q "^$variable$" /etc/environment) ]]; then
-				        echo "$variable" | pkexec tee -a /etc/environment &>/dev/null
+				        echo "$variable" | pkexec tee -a /etc/environment 
 				    fi
 				done
 			else
-				pkexec touch /etc/environment &&
-				chmod 644 /etc/environment &&
+				pkexec touch /etc/environment
+				chmod 644 /etc/environment
 				chown root:root /etc/environment
 				exp_env global
 			fi
 		;;
 		*)
-			echo -e "\n🤷 ($1)\n\nexp_env [L/Local|g/global]\n - L/Local\tExports to ($UID) $USER\n - g/global\tExports to (/etc/environment)\n\nDefault: Local - At Login & Reload\n"
+			echo -e "\n🤷 ($1)\n\nexp_env [ H/help | L/local | G/global ]"
 		;;
 	esac
 }
-exp_env local && clear
+exp_env -local && clear
 
 # Automatically install packages listed in the PACKAGES file
 install_packages() {
-	local DISTRO="$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -c14- | tr -d '"')"					# lsb_release -sd
-	local ID="$(cat /etc/os-release | grep -w "ID" | cut -c4-)"
-	local URL=(https://raw.githubusercontent.com/F7YYY/dotfiles/master/PACKAGES)
+	local DISTRO="$(grep -w "^PRETTY_NAME" /etc/os-release | cut -d '"' -f 2)"	# lsb_release -sd
+	local ID="$(grep -w "^ID" /etc/os-release | cut -d '=' -f 2)"
 	local PACKAGED="$(find . -type f -name PACKAGES)"
+	local URL=(https://raw.githubusercontent.com/F7YYY/dotfiles/master/.config/PACKAGES)
 
 	cd $HOME || ~
-	echo "
+	echo -e "
 ##############################
  ``***%%@@@_ _
           ( Y )
@@ -184,87 +163,130 @@ install_packages() {
   |  |   .-.   |  ||
 ~~%._!@@_|-|_@@!~~||
 ~~~~~~~~~)=)~~~~~~~~
+😁 Welcoming improved commits!
 ##############################
-Home:		$(pwd)
-Distribution:	$DISTRO
-Architecture:	$ID
+Home:\t\t$(pwd)
+Distribution:\t$DISTRO
+Architecture:\t$ID
+Packaged:\t$PACKAGED
 ##############################
 "
-	if [ ! -f "$PACKAGED" ]; then
+	if [ ! -f "$PACKAGED" &>/dev/null ]; then
 		echo -e "Downloading the latest [$URL] -> [$(pwd)]"
-		if [ -v wget &>/dev/null ]; then
-			wget $URL
-			echo -e "\nObtained the latest PACKAGES\nURL: [$URL]\nPATH: [$PACKAGED]\n\n##############################"
-		elif [ -v curl &>/dev/null ]; then
+		if whereis curl &>/dev/null; then
+			whereis curl
 			curl $URL -o PACKAGES
-			echo -e "\nObtained the latest PACKAGES\nURL: [$URL]\nPATH: [$PACKAGED]\n\n##############################"
+
+		elif whereis wget &>/dev/null; then
+			whereis wget
+			wget $URL
 		else
-			notify-send -u critical -a "ERROR" "WGET & CURL NOT FOUND - Manual Download/Creation Required!" ||
-			echo -e '\n- WGET & CURL NOT FOUND!\n- Manual Download/Creation Required!\n'
+			whereis curl wget
+			notify-send -u critical -a "ERROR" "CURL & WGET NOT FOUND - Manual Download/Creation Required!"
+			echo -e "\n- CURL & WGET NOT FOUND!\n- Manual Download/Creation Required!\n"
+			echo -e "[ R/retry ]:\tRerun Script"
+			echo -e "[ C/create ]:\tCreate personalized "PACKAGES" list [DEFAULT]"
+			echo -e "[ Q/quit ]:\tExit Script\n"
+			read -p "?: " rce
+			case $rce in
+				[Rr]*)
+					echo -e "\nRETRYING_SCRIPT\n"
+					return 1 && install_packages
+				;;
+				""|[Cc]*)
+					echo -e "#─LIST_ONE_PACKAGE_PER-LINE\n" > $HOME/.config/PACKAGES
+					echo -e "\nOPTION:\tEDIT [ '$PACKAGED' ]\n"
+					echo -e "[ E/edit ]:\t'${EDITOR}'"
+					echo -e "[ Q/quit ]:\tExit & Manually Edit\n"
+					read -p "?: " edit
+					case $edit in
+						""|[Ee]*)
+							if whereis "$EDITOR" &>/dev/null; then
+								$EDITOR $PACKAGED
+							elif whereis nvim &>/dev/null; then
+								nvim $PACKAGED
+							elif whereis vim &>/dev/null; then
+								vim $PACKAGED
+							else
+								echo -e "\n- Editor not exported"
+								echo -e "- NeoVim & Vim not available"
+								echo -e "> Manual editing required after listing [$PACKAGED] <"
+								echo -e "##############################\n"
+								read -p "List Packages: " LIST
+								tr ' ' '\n' <<< "$LIST" >> "$PACKAGED"
+							fi
+						;;
+						[Qq]*)
+							return 1 && echo -e "\nExiting_Script\n\n##############################"
+						;;
+						*)
+							echo -e "\n🤷 ($1)\n\ninstall_packages [ E/edit | Q/quit ]\n"
+						;;
+					esac
+				;;
+				[Qq]*)
+					return 1 && echo -e "\nExiting_Script\n\n##############################"
+				;;
+				*)
+					echo -e "\n🤷 ($1)\n\ninstall_packages [ R/retry | C/create| Q/quit ]\n"
+				;;
+			esac
 		fi
-		echo -e " - R/Retry\tAlready created personal "PACKAGES"\n\t\tAlready downloaded: [$URL]\n\t\tRerun the script"
-		echo -e " - c/create\tHelp create my own personal "PACKAGES" list"
-		echo -e " - e/exit\tExit Script"
-		read -p "[R/Retry|c/create|e/exit]: " rc
-		case $rc in
-			""|[rR]*)
-				return 1 && install_packages
-			;;
-			[cC]*)
-				touch $HOME/PACKAGES && echo "# LIST ONE PACKAGE PER-LINE BELOW" >> $HOME/PACKAGES
-				echo -e "\nOPTION:\tEDIT ['$PACKAGED']\n[Y/Yes]\t- '${EDITOR:-vim}'\n[n/no]\t- Manually\n\n"
-				read -p "?: " edit
-				case $edit in
-					""|[yY]*)
-						if ! command -v "$EDITOR" &>/dev/null; then
-							$EDITOR $PACKAGED
-						elif command -v "nvim" &>/dev/null; then
-							nvim $PACKAGED
-						elif command -v "vim" &>/dev/null; then
-							vim $PACKAGED
-						else
-							echo -e "\n- Editor not exported\n- NeoVim & Vim not available\n\n> Manual editing maybe required after listing [$PACKAGED] <\n\n##############################"
-							read -p "List Packages: " LIST
-							tr ' ' '\n' <<< "$LIST" >> "$PACKAGED"
-						fi
-					;;
-					[eE]*)
-						return 1 && echo -e "\nExiting script\n\n##############################"
-					;;
-					*)
-						return 1 && echo -e "\nExiting script for manual [$PACKED] editing\n\n##############################"
-					;;
-				esac
-			;;
-			*)
-				echo -e "\n🤷 ($1)\n\ninstall_packages [R/retry|c/create|q/quit]"
-			;;
-		esac
+	elif [ -f "$PACKAGED" &>/dev/null ]; then
+		echo -e "Obtained the latest PACKAGES"
+		echo -e "PATH: [$PACKAGED]\n"
+		echo -e "##############################\n"
+	else
+		return 1 && echo -e "\n_WTF_\n"
 	fi
 
 	case $ID in
-		*)
-			notify-send -u critical -a "ERROR" "[$DISTRO]: DISTRIBUTION NOT IMPLEMENTED!" ||
-    	    echo -e "\n[$DISTRO]: DISTRIBUTION NOT IMPLEMENTED!" 2>&1
-			echo -e "\n😁 "Welcoming all new and improved commits!"\n"
-    	    return 1
-		;;
-		# ======
-		"arch")
+		#===(COPY_BETWEEN)=================================================================
+		arch)
 			# Install a better package manager
-    		if ! command -v "yay" &>/dev/null; then
+    		if ! whereis yay &>/dev/null; then
     		    sudo pacman -S --needed --noconfirm git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
-    		    cd $HOME && sudo find / -type d -name "yay-bin" -exec rm -fr "{}" +
+    		    cd $HOME && find . -type d -name "yay-bin" -exec rm -fr "{}" +
     		    echo "[$DISTRO] Package Manager installed: YAY!" 2>&1
 				yay -Siq yay-bin
     		fi
 			# Installs packages listed in PACKAGES file
-			if command -v yay &>/dev/null; then
-    		    yay -Syyu --needed --removemake --cleanafter - < PACKAGES && yay -Ycc && yay -Sc && sudo pacman-fix-permissions
-    		    notify-send -u low -a "PACKAGES" "[$DISTRO]: Updated && Packaged!" ||
-    		    echo "[$DISTRO]: Updated && Packaged!" 2>&1
+			if whereis yay &>/dev/null; then
+    		    yay -Syyu --needed --removemake --cleanafter - < $PACKAGED && sudo pacman-fix-permissions && yay -Ycc && yay -Sc --noconfirm
+    		    notify-send -u low -a "PACKAGES" "[$DISTRO]: Updated & Packaged!"
+    		    echo "[$DISTRO]: Updated & Packaged!" 2>&1
     		fi
 		;;
-		# ====== (COPY>PASTE>MODIFY) BETWEEN (# ======) BELOW THIS LINE FOR YOUR DISTRIBUTION(S)
+		#===(PASTE_UNDERNEATH)=============================================================
+		#	PASTE_HERE
+		#===(MODIFY_FOR_YOUR_DISTRIBUTION)=================================================
+		*)
+			notify-send -u critical -a "ERROR" "[$DISTRO]: DISTRIBUTION NOT IMPLEMENTED!"
+    	    echo -e "[$DISTRO]: DISTRIBUTION NOT IMPLEMENTED!\n" 2>&1
+    	    return 1
+		;;
 	esac
 }
+
+#─BACKUP_PACKAGES
+backup() {
+	local PACKAGED="$(find . -type f -name PACKAGES)"
+	local day="3"	# DAY OF THE WEEK
+
+	if [ -n "$PACKAGED" ] && [ "$(date +%u)" = "$day" ]; then
+		echo -e "#─UPDATED: $(date)" > "$PACKAGED"
+		if whereis yay &>/dev/null; then
+			yay -Qqe >> "$PACKAGED"
+		elif whereis pacman &>/dev/null; then
+			pacman -Qqe >> "$PACKAGED"
+		else
+			echo -e "\nI uSe ArCh BtW!\n"
+		fi
+	fi
+
+	if [ "$(date +%u)" = "$day" ]; then
+		git dotfiles cam "AUTO-BACKUP"
+		git gui --prompt dotfiles psom	# CONFIGURE GUI 
+	fi
+}
+backup
