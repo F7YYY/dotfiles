@@ -1,4 +1,4 @@
-#─UPDATED: Wed Jul  3 12:55:16 PM CDT 2024
+#─UPDATED: Wed Jul  3 12:55:56 PM CDT 2024
 adwaita-cursors
 adwaita-icon-theme
 aircrack-ng
@@ -225,6 +225,7 @@ systemd-ui
 systemd-ukify
 teams-for-linux-bin
 telegram-desktop-bin
+tk
 tor
 torbrowser-launcher
 traceroute
