@@ -107,7 +107,7 @@ exp_env() {
 	
 	# Processes user's exportation process
 	case $1 in
-		""|-[Hh]|--[Hh]*)
+		""|-[Hh]*|--[Hh]*)
 			echo -e "\nDefault: Local - At Login & Reload\n"
 			echo -e "-[ L/local ]:\tExports to ($UID) $USER"
 			echo -e "-[ G/global ]:\tExports to (/etc/environment)\n"
@@ -189,18 +189,18 @@ Packaged:\t$PACKAGED
 			echo -e "-[ Q/quit ]:\tExit Script\n"
 			read -p "?: " rcq
 			case $rcq in
-				-[Rr]*)
+				-[Rr]*|--[Rr]*)
 					echo -e "\nRETRYING_SCRIPT\n"
 					return 1 && install_packages
 				;;
-				""|-[Cc]*)
+				""|-[Cc]*|--[Cc]*)
 					echo -e "#─LIST_ONE_PACKAGE_PER-LINE\n" > $HOME/.config/PACKAGES
 					echo -e "\nOPTION:\tEDIT [ '$PACKAGED' ]\n"
 					echo -e "-[ E/edit ]:\t'${EDITOR}'"
 					echo -e "-[ Q/quit ]:\tExit & Manually Edit\n"
 					read -p "?: " edit
 					case $edit in
-						""|[Ee]*)
+						""|-[Ee]*|--[Ee]*)
 							if whereis "$EDITOR" &>/dev/null; then
 								$EDITOR $PACKAGED
 							elif whereis nvim &>/dev/null; then
@@ -216,7 +216,7 @@ Packaged:\t$PACKAGED
 								tr ' ' '\n' <<< "$LIST" >> "$PACKAGED"
 							fi
 						;;
-						-[Qq]*)
+						-[Qq]*|--[Qq]*)
 							return 1 && echo -e "\nExiting_Script\n\n##############################"
 						;;
 						*)
@@ -224,7 +224,7 @@ Packaged:\t$PACKAGED
 						;;
 					esac
 				;;
-				[Qq]*)
+				-[Qq]*|--[Qq]*)
 					return 1 && echo -e "\nExiting_Script\n\n##############################"
 				;;
 				*)
@@ -271,7 +271,7 @@ Packaged:\t$PACKAGED
 #─BACKUP_PACKAGES
 backup() {
 	local PACKAGED="$(find . -type f -name PACKAGES)"
-	local day="4"												# DAY OF THE WEEK
+	local day="1"												# DAY OF THE WEEK
 
 	if [ -n "$PACKAGED" ] && [ "$(date +%u)" = "$day" ]; then
 		echo -e "#─UPDATED: $(date)" > "$PACKAGED"
