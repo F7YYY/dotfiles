@@ -12,18 +12,18 @@
 #                                                                              #
 ################################################################################
 #
-#─────────────────────────────────────────────────────────────────(VARIABLES)───
-wayland="--enable-features=UseOzonePlatform --ozone-platform=wayland"
-tray="-silent -startintray --start-in-tray --use-tray-icon --start-minimized --startminimized --minimized"
-ilent="&>/dev/null &disown"
-
+#   IF [ XDG_SESSION_DESKTOP = "TTY" ]; THEN ECHO "STILL_SAFE_TO_RUN_SCRIPT"; FI
+#
 #─────────────────────────────────────────────────────────────────(GSETTINGS)───
-#gsettings set org.gnome.desktop.interface theme <THEME>
+#gsettings set org.gnome.desktop.interface <theme> <THEME>
 
 #───────────────────────────────────────────────────────────────(EXECUTABLES)───
 main() {
+    local INPUT="$@"
+    local WAYLAND="--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer --ozone-platform-hint=auto"
+
     #─DESCENDING_LIST
-    applications=(
+    local APPLICATIONS=(
         "bash"
         "dbus-update-activation-environment --systemd --all"
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
@@ -34,7 +34,7 @@ main() {
         "blueman-applet"
         "waypaper"
         #"emacs --daemon"
-        #"eww daemon& eww open bar"
+        #"eww daemon && eww open bar"
         "waybar"
         "dunst"
         "flameshot"
@@ -42,37 +42,49 @@ main() {
         "openrgb --startminimized"
         #"easyeffects"                                  # NO MINIMIZED LAUNCH
         #"obs"
-        #"steam $WAYLAND -silent"
+        #"steam -silent $WAYLAND"
         #"lutris"                                       # NO MINIMIZED LAUNCH
-        "vesktop $WAYLAND --start-minimized"
-        "signal-desktop-beta $WAYLAND"
+        "vesktop --start-minimized $WAYLAND"
+        "signal-desktop $WAYLAND"
         "telegram-desktop -startintray"
-        "youtube-music $WAYLAND --use-tray-icon"
+        "youtube-music --use-tray-icon $WAYLAND"
         #"remmina"                                      # NO MINIMIZED LAUNCH
         #"virt-manager"                                 # NO MINIMIZED LAUNCH
         "betterbird"                                    # NO MINIMIZED LAUNCH
-        #"teams $WAYLAND --startminimized"
-        #"zoom $WAYLAND"                                # NO MINIMIZED LAUNCH
-        "wl-paste --type text --watch cliphist store"   # CLIPBOARD TEXT DATA
-        "wl-paste --type image --watch cliphist store"  # CLIPBOARD IMAGE DATA
+        #"teams --startminimized $WAYLAND"
+        #"zoom $WAYLAND"                                # NO MINIMIZED LAUNCH OR WAYLAND
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
     )
 
     #─LAUNCH_OR_RELAUNCH_APPS
-    for app in "${applications[@]}"; do
-        name="${app%% *}"
+    for APP in "${APPLICATIONS[@]}"; do
+        local NAME="${APP%% *}"
 
-        if ! pgrep -f "$name" &>/dev/null; then
-            echo -e "LAUNCHING:\t$app"
-            eval $app $ilent
-        elif pgrep -f "$name" &>/dev/null; then
-            pkill -9 -i "$name" &>/dev/null
-            echo -e "RELAUNCHING:\t$app"
-            eval $app $ilent
-        else
-            echo -e "NO-PR0CESS:\t$(whereis $app)" 
-        fi
+        case $INPUT in
+            -[Hh]*|--[Hh]*)
+			    echo -e "\n./$0 -[H/R/ ]\n"
+			    echo -e "-[   H/help   ]: Help Menu"
+			    echo -e "-[ R/relaunch ]: Relaunch Apps"
+			    echo -e "-[            ]: Auto-Launch Apps [DEFAULT]\n"
+                return 1
+		    ;;
+            -[Rr]*|--[Rr]*)
+                echo -e "RELAUNCHING:\t"$APP""
+                pkill -9 "$NAME" &>/dev/null
+                eval "$APP" &>/dev/null &disown
+            ;;
+            ""|*)
+                if ! pgrep -f "$NAME" &>/dev/null; then
+                    echo -e "LAUNCHING:\t"$APP""
+                    eval "$APP" &>/dev/null &disown
+                else
+                    ps -C "$NAME" fh -Hw
+                fi
+            ;;
+        esac
     done
 }
 
 #───START
-main
+main "$@"

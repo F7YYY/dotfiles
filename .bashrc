@@ -109,8 +109,8 @@ exp_env() {
 	case $1 in
 		""|-[Hh]|--[Hh]*)
 			echo -e "\nDefault: Local - At Login & Reload\n"
-			echo -e "- L/local\tExports to ($UID) $USER"
-			echo -e "- G/global\tExports to (/etc/environment)\n"
+			echo -e "-[ L/local ]:\tExports to ($UID) $USER"
+			echo -e "-[ G/global ]:\tExports to (/etc/environment)\n"
 		;;
 		-[Ll]*|--[Ll]*)
 			echo -e "\nExporting to ($UID) $USER\n"
@@ -132,11 +132,11 @@ exp_env() {
 				pkexec touch /etc/environment
 				chmod 644 /etc/environment
 				chown root:root /etc/environment
-				exp_env global
+				return 1 && exp_env global
 			fi
 		;;
 		*)
-			echo -e "\n🤷 ($1)\n\nexp_env [ H/help | L/local | G/global ]"
+			echo -e "\n🤷 ($1)\n\nexp_env -[ H/help | L/local | G/global ]"
 		;;
 	esac
 }
@@ -184,20 +184,20 @@ Packaged:\t$PACKAGED
 			whereis curl wget
 			notify-send -u critical -a "ERROR" "CURL & WGET NOT FOUND - Manual Download/Creation Required!"
 			echo -e "\n- CURL & WGET NOT FOUND!\n- Manual Download/Creation Required!\n"
-			echo -e "[ R/retry ]:\tRerun Script"
-			echo -e "[ C/create ]:\tCreate personalized "PACKAGES" list [DEFAULT]"
-			echo -e "[ Q/quit ]:\tExit Script\n"
-			read -p "?: " rce
-			case $rce in
-				[Rr]*)
+			echo -e "-[ R/retry ]:\tRerun Script"
+			echo -e "-[ C/create ]:\tCreate personalized "PACKAGES" list [DEFAULT]"
+			echo -e "-[ Q/quit ]:\tExit Script\n"
+			read -p "?: " rcq
+			case $rcq in
+				-[Rr]*)
 					echo -e "\nRETRYING_SCRIPT\n"
 					return 1 && install_packages
 				;;
-				""|[Cc]*)
+				""|-[Cc]*)
 					echo -e "#─LIST_ONE_PACKAGE_PER-LINE\n" > $HOME/.config/PACKAGES
 					echo -e "\nOPTION:\tEDIT [ '$PACKAGED' ]\n"
-					echo -e "[ E/edit ]:\t'${EDITOR}'"
-					echo -e "[ Q/quit ]:\tExit & Manually Edit\n"
+					echo -e "-[ E/edit ]:\t'${EDITOR}'"
+					echo -e "-[ Q/quit ]:\tExit & Manually Edit\n"
 					read -p "?: " edit
 					case $edit in
 						""|[Ee]*)
@@ -216,11 +216,11 @@ Packaged:\t$PACKAGED
 								tr ' ' '\n' <<< "$LIST" >> "$PACKAGED"
 							fi
 						;;
-						[Qq]*)
+						-[Qq]*)
 							return 1 && echo -e "\nExiting_Script\n\n##############################"
 						;;
 						*)
-							echo -e "\n🤷 ($1)\n\ninstall_packages [ E/edit | Q/quit ]\n"
+							echo -e "\n🤷 ($1)\n\ninstall_packages -[ E/edit | Q/quit ]\n"
 						;;
 					esac
 				;;
@@ -228,7 +228,7 @@ Packaged:\t$PACKAGED
 					return 1 && echo -e "\nExiting_Script\n\n##############################"
 				;;
 				*)
-					echo -e "\n🤷 ($1)\n\ninstall_packages [ R/retry | C/create| Q/quit ]\n"
+					echo -e "\n🤷 ($1)\n\ninstall_packages -[ R/retry | C/create| Q/quit ]\n"
 				;;
 			esac
 		fi
@@ -247,7 +247,7 @@ Packaged:\t$PACKAGED
     		if ! whereis yay &>/dev/null; then
     		    sudo pacman -S --needed --noconfirm git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
     		    cd $HOME && find . -type d -name "yay-bin" -exec rm -fr "{}" +
-    		    echo "[$DISTRO] Package Manager installed: YAY!" 2>&1
+    		    echo "[$DISTRO] Package Manager Installed: YAY!" 2>&1
 				yay -Siq yay-bin
     		fi
 			# Installs packages listed in PACKAGES file
@@ -271,7 +271,7 @@ Packaged:\t$PACKAGED
 #─BACKUP_PACKAGES
 backup() {
 	local PACKAGED="$(find . -type f -name PACKAGES)"
-	local day="3"	# DAY OF THE WEEK
+	local day="4"												# DAY OF THE WEEK
 
 	if [ -n "$PACKAGED" ] && [ "$(date +%u)" = "$day" ]; then
 		echo -e "#─UPDATED: $(date)" > "$PACKAGED"
@@ -286,7 +286,7 @@ backup() {
 
 	if [ "$(date +%u)" = "$day" ]; then
 		git dotfiles cam "AUTO-BACKUP"
-		git gui dotfiles psom	# CONFIGURE GUI 
+		git gui dotfiles psom 
 	fi
 }
 backup

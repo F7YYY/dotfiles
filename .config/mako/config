@@ -17,7 +17,7 @@ on-button-right=dismiss-all
 font=Sony Sketch EF 12
 background-color=#FFFFFFDD
 text-color=#000000DD
-#width=10000
+#width=10000                        # NO DYNAMIC WIDTH
 height=10000
 margin=6
 padding=1
@@ -45,7 +45,3 @@ default-timeout=60000
     on-notify=none
 [mode=silent]
     on-notify=none
-
-#───────────────────────────────────────────(APPS)───
-[summary~="log-.*"]
-    border-color=#808080DD
