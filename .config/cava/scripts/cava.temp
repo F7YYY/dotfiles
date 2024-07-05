@@ -1,6 +1,0 @@
-#!/bin/bash
-###########
-bars=("▁" "▂" "▃" "▄" "▅" "▆" "▇" "█")
-config="/tmp/waybarcava"
-echo -e "[general]\nbars=10\n\n[output]\nmethod=raw\nraw_target=/dev/stdout\ndata_format=ascii\nascii_max_range=7">"$config"
-cava -p "$config" | sed 's/;//g;y/01234567/'"$(printf "%s" "${bars[@]}")"'/'

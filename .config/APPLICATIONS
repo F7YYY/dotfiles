@@ -16,6 +16,7 @@
 #
 #─────────────────────────────────────────────────────────────────(GSETTINGS)───
 #gsettings set org.gnome.desktop.interface <theme> <THEME>
+gsettings set org.gnome.desktop.interface clock-format 24h
 
 #───────────────────────────────────────────────────────────────(EXECUTABLES)───
 main() {
