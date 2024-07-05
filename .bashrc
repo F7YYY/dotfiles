@@ -310,7 +310,7 @@ Packaged:\t$PACKAGED
 #───AUTOMATE_PACKAGES_BACKUPS
 backup() {
 	local PACKAGED="$(find . -type f -name PACKAGES)"
-	local DAY="1"												# DAY OF THE WEEK
+	local DAY="5"												# DAY OF THE WEEK
 
 	if [ -n "$PACKAGED" ] && [ "$(date +%u)" = "$DAY" ]; then
 		echo -e "#─UPDATED: $(date)" > "$PACKAGED"
