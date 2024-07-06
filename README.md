@@ -1,26 +1,33 @@
 <div align="center"><h1>
-【 Arch Linux Wayland Rice 】
-</h1></div>
 
-<div align="center">
+  【 🍚 】
+</h1><h2>
 
-[![](https://img.shields.io/github/last-commit/f7yyy/dotfiles?&style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=222222)](https://github.com/F7YYY/dotfiles/activity)
-[![](https://img.shields.io/github/repo-size/f7yyy/dotfiles?style=for-the-badge&logo=googledrive&label=SIZE&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://github.com/f7yyy/dotfiles)
-[![](https://img.shields.io/github/stars/f7yyy/dotfiles?style=for-the-badge&logo=andela&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://youtu.be/dQw4w9WgXcQ?si=mAbUCyPRQY2MODCu)
-[![](https://img.shields.io/badge/issues-brain-green/f7yyy/dotfiles?style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://avatars.githubusercontent.com/u/38305613?v=4)
-[![](https://img.shields.io/github/license/f7yyy/dotfiles?style=for-the-badge&logo=GITHUB&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](LICENSE)
-</a></div>
+  [![](https://img.shields.io/github/last-commit/f7yyy/dotfiles?&style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=222222)](https://github.com/F7YYY/dotfiles/activity)
+  [![](https://img.shields.io/github/repo-size/f7yyy/dotfiles?style=for-the-badge&logo=googledrive&label=SIZE&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://github.com/f7yyy/dotfiles)
+  [![](https://img.shields.io/github/stars/f7yyy/dotfiles?style=for-the-badge&logo=andela&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://youtu.be/dQw4w9WgXcQ?si=mAbUCyPRQY2MODCu)
+  [![](https://img.shields.io/badge/issues-brain-green/f7yyy/dotfiles?style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://avatars.githubusercontent.com/u/38305613?v=4)
+  [![](https://img.shields.io/github/license/f7yyy/dotfiles?style=for-the-badge&logo=GITHUB&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](LICENSE)
+</h2></a><details><summary>👀-CANDY─(MOLDY)</summary>
 
-<details><summary>SCREENSHOTS</summary>
-<img src="Pictures/Screenshots/.1.png">
-<img src="Pictures/Screenshots/.2.png">
-<img src="Pictures/Screenshots/.3.png">
-<img src="Pictures/Screenshots/.4.png">
-#───THE_DEEPER_YOU_LOOK_THE_MORE_YOU_FIND
+  <img src="Pictures/Screenshots/.1.png">
+  <img src="Pictures/Screenshots/.2.png">
+  <img src="Pictures/Screenshots/.3.png">
+  <img src="Pictures/Screenshots/.4.png">
+  #───THE_DEEPER_YOU_LOOK_THE_MORE_YOU_FIND
+</details><details><summary>WALLPAPERS</summary>
+
+  - [Ramen Great Wave off Kanagawa](https://moewalls.com/abstract/ramen-great-wave-off-kanagawa-live-wallpaper)
+  - [The Great Wave off Kanagawa](https://moewalls.com/abstract/the-great-wave-off-kanagawa-live-wallpaper)
+  - [Autumn Tree - Ghost of Tsushima](https://moewalls.com/games/autumn-tree-ghost-of-tsushima-live-wallpaper)
+  - [Crimson Sun](https://moewalls.com/abstract/crimson-sun-live-wallpaper)
+  - [No File - Ruiner](https://moewalls.com/sci-fi/no-file-ruiner-live-wallpaper)
+  - [[LY] Pepe Matrix](https://moewalls.com/others/pepe-matrix-live-wallpaper)
+  - [=> MP4 -> GIF <=](https://cloudconvert.com/mp4-to-gif)
 </details>
 
-| [FEATURES](https://arewewaylandyet.com) | NAME | THEME |
-|-----------------------|------------------------|-------|
+| [FEATURES](.config/PACKAGES) | NAME | THEME |
+|-----------------------|-------------|-------|
 | Distribution          | [Arch Linux](https://github.com/archlinux)    |    [Wayland](https://github.com/wayland-project)
 | Boot Manager          | [rEFInd](https://www.rodsbooks.com/refind)    |    [darkmini](https://github.com/LightAir/darkmini)
 | Display Manager       | [LY](https://github.com/fairyglade/ly)
@@ -42,3 +49,4 @@
 | Icon Themes           |   |   [Flat Remix Black Dark](https://github.com/daniruiz/Flat-Remix-GTK)
 | Cursor Theme          |   |   [Bibata Ghost](https://github.com/Silicasandwhich/Bibata_Cursor_Translucent.git)
 | Audio Theme           |   |   [Pop](https://github.com/pop-os/gtk-theme)
+</a></div>
