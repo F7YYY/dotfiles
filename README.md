@@ -37,7 +37,7 @@
 | Status Bar            | [Waybar](https://github.com/Alexays/Waybar)    |  [waybar-updates](https://github.com/L11R/waybar-updates), [wttrbar](https://github.com/bjesus/wttrbar)
 | Notifications         | [Dunst](https://github.com/dunst-project/dunst)
 | Terminal              | [Kitty](https://github.com/kovidgoyal/kitty)
-| Shell                 | [Git](https://github.com/git), [Bash](https://git.savannah.gnu.org/cgit/bash.git), [Fish](https://github.com/fish-shell/fish-shell)    |    [Oh-My-Git](https://github.com/arialdomartini/oh-my-git), [Oh-My-Bash](https://github.com/ohmybash/oh-my-bash), ~~[Oh-My-Fish](https://github.com/oh-my-fish/oh-my-fish)~~/[Fish-Tide](https://github.com/IlanCosman/tide)
+| Shell                 | [Git](https://github.com/git), [Bash](https://git.savannah.gnu.org/cgit/bash.git), [Fish](https://github.com/fish-shell/fish-shell)    |    [Oh-My-Git](https://github.com/arialdomartini/oh-my-git), [Oh-My-Bash](https://github.com/ohmybash/oh-my-bash), [Oh-My-Fish](https://github.com/oh-my-fish/oh-my-fish)
 | Font                  | [Sony Sketch](http://www.ffonts.net/Sony-Sketch-EF.font), [Maple](https://github.com/subframe7536/maple-font), [Nerd Symbols](https://github.com/ryanoasis/nerd-fonts)
 | Package Manager       | [Yay](https://github.com/Jguer/yay)
 | Application Manager   | [Wofi](https://hg.sr.ht/~scoopta/wofi)    |   [wofi-calc](https://github.com/Zeioth/wofi-calc.git), [wofi-emoji](https://github.com/Zeioth/wofi-emoji)
