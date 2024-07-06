@@ -28,7 +28,7 @@
 
 | [FEATURES](.config/PACKAGES) | NAME | THEME |
 |-----------------------|-------------|-------|
-| Distribution          | [Arch Linux](https://github.com/archlinux)    |    [Wayland](https://github.com/wayland-project)
+| Distribution          | [Arch Linux](https://github.com/archlinux)    |    [Wayland](https://arewewaylandyet.com/)
 | Boot Manager          | [rEFInd](https://www.rodsbooks.com/refind)    |    [darkmini](https://github.com/LightAir/darkmini)
 | Display Manager       | [LY](https://github.com/fairyglade/ly)
 | DE/WM                 | [Hyprland](https://github.com/hyprwm/Hyprland), [SwayFX](https://github.com/WillPower3309/swayfx)
