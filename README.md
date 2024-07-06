@@ -14,7 +14,7 @@
   <img src="Pictures/Screenshots/.2.png">
   <img src="Pictures/Screenshots/.3.png">
   <img src="Pictures/Screenshots/.4.png">
-  #───THE_DEEPER_YOU_LOOK_THE_MORE_YOU_FIND
+  ───THE_DEEPER_YOU_LOOK_THE_MORE_YOU_FIND───
 </details><details><summary>WALLPAPERS</summary>
 
   - [Ramen Great Wave off Kanagawa](https://moewalls.com/abstract/ramen-great-wave-off-kanagawa-live-wallpaper)
