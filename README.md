@@ -1,56 +1,52 @@
 <div align="center"><h1>
-    【 Arch Linux Wayland Rice 】
-</h1></div>
 
-<div align="center">
+  【 🍚 】
+</h1><h2>
 
-[![](https://img.shields.io/github/last-commit/f7yyy/dotfiles?&style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=222222)](https://github.com/F7YYY/dotfiles/activity)
-[![](https://img.shields.io/github/repo-size/f7yyy/dotfiles?style=for-the-badge&logo=googledrive&label=SIZE&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://github.com/f7yyy/dotfiles)
-[![](https://img.shields.io/github/stars/f7yyy/dotfiles?style=for-the-badge&logo=andela&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://youtu.be/dQw4w9WgXcQ?si=mAbUCyPRQY2MODCu)
-[![](https://img.shields.io/badge/issues-brain-green/f7yyy/dotfiles?style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://avatars.githubusercontent.com/u/38305613?v=4)
-[![](https://img.shields.io/github/license/f7yyy/dotfiles?style=for-the-badge&logo=GITHUB&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](LICENSE)
-</a></div>
+  [![](https://img.shields.io/github/last-commit/f7yyy/dotfiles?&style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=222222)](https://github.com/F7YYY/dotfiles/activity)
+  [![](https://img.shields.io/github/repo-size/f7yyy/dotfiles?style=for-the-badge&logo=googledrive&label=SIZE&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://github.com/f7yyy/dotfiles)
+  [![](https://img.shields.io/github/stars/f7yyy/dotfiles?style=for-the-badge&logo=andela&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://youtu.be/dQw4w9WgXcQ?si=mAbUCyPRQY2MODCu)
+  [![](https://img.shields.io/badge/issues-brain-green/f7yyy/dotfiles?style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://avatars.githubusercontent.com/u/38305613?v=4)
+  [![](https://img.shields.io/github/license/f7yyy/dotfiles?style=for-the-badge&logo=GITHUB&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](LICENSE)
+</h2></a><details><summary>👀-CANDY─(MOLDY)</summary>
 
-<details><summary>SCREENSHOTS</summary>
-<img src="Pictures/Screenshots/.1.png">
-<img src="Pictures/Screenshots/.2.png">
-<img src="Pictures/Screenshots/.3.png">
-<img src="Pictures/Screenshots/.4.png">
+  <img src="Pictures/Screenshots/.1.png">
+  <img src="Pictures/Screenshots/.2.png">
+  <img src="Pictures/Screenshots/.3.png">
+  <img src="Pictures/Screenshots/.4.png">
+  ───THE_DEEPER_YOU_LOOK_THE_MORE_YOU_FIND───
+</details><details><summary>WALLPAPERS</summary>
+
+  - [Ramen Great Wave off Kanagawa](https://moewalls.com/abstract/ramen-great-wave-off-kanagawa-live-wallpaper)
+  - [The Great Wave off Kanagawa](https://moewalls.com/abstract/the-great-wave-off-kanagawa-live-wallpaper)
+  - [Autumn Tree - Ghost of Tsushima](https://moewalls.com/games/autumn-tree-ghost-of-tsushima-live-wallpaper)
+  - [Crimson Sun](https://moewalls.com/abstract/crimson-sun-live-wallpaper)
+  - [No File - Ruiner](https://moewalls.com/sci-fi/no-file-ruiner-live-wallpaper)
+  - [[LY] Pepe Matrix](https://moewalls.com/others/pepe-matrix-live-wallpaper)
+  - [=> MP4 -> GIF <=](https://cloudconvert.com/mp4-to-gif)
 </details>
 
-## Features
-- **Boot Manager**: *([refind](https://www.rodsbooks.com/refind)+[refind-theme-darkmini-git](https://github.com/LightAir/darkmini))*
-- **Display Manager**: *[ly](https://github.com/fairyglade/ly)*
-- **Window Manager**: *[hyprland](https://github.com/hyprwm/Hyprland) / [swayfx](https://github.com/WillPower3309/swayfx)*
-- **Lock Screen**: *[hyprlock](https://github.com/hyprwm/hyprlock) / [swaylock-corrupter](https://github.com/r00tman/corrupter)*
-- **Status Bar**: *([waybar](https://github.com/Alexays/Waybar)+[waybar-updates](https://github.com/L11R/waybar-updates)+[wttrbar](https://github.com/bjesus/wttrbar))*
-- **Notification Daemon**: *[mako](https://github.com/emersion/mako)*
-- **Terminal**: *[kitty](https://github.com/kovidgoyal/kitty)*
-- **Shell**: *([bash](https://git.savannah.gnu.org/cgit/bash.git)+[oh-my-bash-git](https://github.com/ohmybash/oh-my-bash)) & ([fish](https://github.com/fish-shell/fish-shell)+(~~[Oh My Fish](https://github.com/oh-my-fish/oh-my-fish)~~ / [fish-tide-git](https://github.com/IlanCosman/tide))) & ([git](https://github.com/git/git)+[oh-my-git](https://github.com/arialdomartini/oh-my-git)) & [github-cli](https://github.com/cli/cli)*
-- **Font**: *[sony-sketch-ef-font](http://www.ffonts.net/Sony-Sketch-EF.font) & [ttf-maple](https://github.com/subframe7536/maple-font) & [ttf-nerd-fonts-symbols](https://github.com/ryanoasis/nerd-fonts)*
-- **Package Manager**: *[yay-bin](https://github.com/Jguer/yay)*
-- **Application Launcher**: *([wofi](https://hg.sr.ht/~scoopta/wofi)+[wofi-calc](https://github.com/Zeioth/wofi-calc.git)+[wofi-emoji](https://github.com/Zeioth/wofi-emoji))*
-- **Wallpaper Setter**: *[waypaper](https://github.com/anufrievroman/waypaper)*
-- **File Manager**: *[nemo](https://github.com/linuxmint/nemo) & [ranger](https://github.com/ranger/ranger)*
-- **Text Editor**: *[vscodium-bin](https://github.com/VSCodium/vscodium) & [neovim](https://github.com/neovim/neovim)*
-- **Media**: *[youtube-music-bin](https://github.com/th-ch/youtube-music) & [imv](https://sr.ht/~exec64/imv/) & [mpv](https://github.com/mpv-player/mpv) & [cava](https://github.com/karlstav/cava)*
-- **System Monitor**: *[corectrl](https://gitlab.com/corectrl/corectrl) & [btop](https://github.com/aristocratos/btop) & [radeontop](https://github.com/clbr/radeontop)*
-- **Tweak**: *[gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) & ([qt5ct](https://qt5ct.sourceforge.io/)+[qt6ct](https://github.com/trialuser02/qt6ct)) & (~~[archlinux-tweak-tool-git](https://github.com/arcolinux/archlinux-tweak-tool)~~ - "Underdeveloped")*
-- **OTHER**: *[PACKAGES](PACKAGES)*
-
-## Additionals
-1. **Scripts:**
-   - [powermenu.sh](.config/wofi/scripts/powermenu.sh): *No Wofi powermenu package in AUR, I've considered [wlogout](https://github.com/ArtsyMacaw/wlogout) or [eww](https://github.com/elkowar/eww).*
-   - [battery.sh](.config/hypr/scripts/battery.sh): Thanks to [end-4](https://github.com/end-4) for the hyprlock battery [status.sh](https://github.com/end-4/dots-hyprland/blob/main/.config/hypr/hyprlock/status.sh) script!
-   - 😵 - *`I had more, but I'm brain dead (check older activity).`*
-2. **WIP.configs:**
-   - [.bashrc](.bashrc): *Always needs improvements, including install_packages() method.*
-   - [config.jsonc](.config/waybar/config.jsonc): *Explained in Waybar modules layout.*
-   - [style.css](.config/waybar/style.css): *Adjusting center-line visibility between Waybar modules only.*
-
-## ✨Thank You
-   😁 - *`Welcoming all new and improved commits!`*
-
-<a href="https://github.com/f7yyy/dotfiles/graphs/contributors">
-   <img src="https://contrib.rocks/image?repo=f7yyy/dotfiles" />
-</a>
+| [FEATURES](.config/PACKAGES) | NAME | THEME |
+|-----------------------|-------------|-------|
+| Distribution          | [Arch Linux](https://github.com/archlinux)    |    [Wayland](https://arewewaylandyet.com/)
+| Boot Manager          | [rEFInd](https://www.rodsbooks.com/refind)    |    [darkmini](https://github.com/LightAir/darkmini)
+| Display Manager       | [LY](https://github.com/fairyglade/ly)
+| DE/WM                 | [Hyprland](https://github.com/hyprwm/Hyprland), [SwayFX](https://github.com/WillPower3309/swayfx)
+| Lock Screen           | [Hyprlock](https://github.com/hyprwm/hyprlock), [Swaylock Corrupter](https://github.com/r00tman/corrupter)
+| Wallpaper Setter      | [Waypaper](https://github.com/anufrievroman/waypaper)
+| Status Bar            | [Waybar](https://github.com/Alexays/Waybar)    |  [waybar-updates](https://github.com/L11R/waybar-updates), [wttrbar](https://github.com/bjesus/wttrbar)
+| Notifications         | [Dunst](https://github.com/dunst-project/dunst)
+| Terminal              | [Kitty](https://github.com/kovidgoyal/kitty)
+| Shell                 | [Git](https://github.com/git), [Bash](https://git.savannah.gnu.org/cgit/bash.git), [Fish](https://github.com/fish-shell/fish-shell)    |    [Oh-My-Git](https://github.com/arialdomartini/oh-my-git), [Oh-My-Bash](https://github.com/ohmybash/oh-my-bash), [Oh-My-Fish](https://github.com/oh-my-fish/oh-my-fish)
+| Font                  | [Sony Sketch](http://www.ffonts.net/Sony-Sketch-EF.font), [Maple](https://github.com/subframe7536/maple-font), [Nerd Symbols](https://github.com/ryanoasis/nerd-fonts)
+| Package Manager       | [Yay](https://github.com/Jguer/yay)
+| Application Manager   | [Wofi](https://hg.sr.ht/~scoopta/wofi)    |   [wofi-calc](https://github.com/Zeioth/wofi-calc.git), [wofi-emoji](https://github.com/Zeioth/wofi-emoji)
+| File Manager          | [Nemo](https://github.com/linuxmint/nemo), [Ranger](https://github.com/ranger/ranger)
+| Text Editor           | [VSCodium](https://github.com/VSCodium/vscodium), [NeoVim](https://github.com/neovim/neovim)
+| Media Viewer          | [IMV](https://sr.ht/~exec64/imv), [MPV](https://github.com/mpv-player/mpv), [CAVA](https://github.com/karlstav/cava)
+| Screen Capture        | [OBS](https://github.com/obsproject/obs-studio), [Flameshot](https://github.com/flameshot-org/flameshot), [Kooha](https://github.com/SeaDve/Kooha)
+| GTK Themes            |   |   [Flat Remix White Darkest](https://github.com/daniruiz/Flat-Remix-GTK)
+| Icon Themes           |   |   [Flat Remix Black Dark](https://github.com/daniruiz/Flat-Remix-GTK)
+| Cursor Theme          |   |   [Bibata Ghost](https://github.com/Silicasandwhich/Bibata_Cursor_Translucent.git)
+| Audio Theme           |   |   [Pop](https://github.com/pop-os/gtk-theme)
+</a></div>
