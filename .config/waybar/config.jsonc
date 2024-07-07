@@ -325,8 +325,8 @@
 			  "transition-left-to-right": false
 			},
 			"modules": [
-				"pulseaudio#sink",
-				"pulseaudio/slider"
+				"pulseaudio#sink"
+				//"pulseaudio/slider"				// CRASHES WAYBAR
 			]
 		},
 		"group/source": {
@@ -338,11 +338,11 @@
 			  "transition-left-to-right": false
 			},
 			"modules": [
-				"pulseaudio#source",
-				"pulseaudio/slider"
+				"pulseaudio#source"
+				//"pulseaudio#source/slider"		// DOES NOT WORK
 			]
 		},
-		"pulseaudio/slider": {
+		"pulseaudio#sink/slider": {
 			"min": 0,
 			"max": 100,
 			"orientation": "horizontal"
@@ -553,7 +553,7 @@
 			"exec": "waybar-updates",
 			"exec-if": "which waybar-updates > /dev/null",
 			"format": "{icon}",
-			"format-alt": "{} {icon}",			
+			"format-alt": "{} {icon}",
 			"format-alt-click": "click-right",
 			"format-icons": {
 				"pending-updates": "",
