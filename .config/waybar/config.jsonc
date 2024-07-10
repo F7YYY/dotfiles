@@ -25,8 +25,8 @@
 			"sway/workspaces",		// ⮶ REPLACE
 			"sway/scratchpad",		// ⮶ REPLACE
 			"hyprland/workspaces",	// ⮱ RENAME: "wlr/workspaces",
-			"wlr/taskbar",
 			"tray",
+			"wlr/taskbar",			// WIP ~ DISAPPEAR WHEN EMPTY
 			"gamemode",
 			"custom/recorder"		// WIP ~ FIX FOR VARIOUS RECORDING PLATFORMS
 		],

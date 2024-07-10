@@ -8,8 +8,8 @@
 *"https://github.com/Alexays/Waybar/wiki/Configuration/"*
 *
 **─────────────────────────────────────────(PRESETS)───*/
-@define-color black rgba(0,0,0,0.66);
-@define-color white rgba(255,255,255,0.66);
+@define-color BLACK rgba(0,0,0,0.66);
+@define-color WHITE rgba(255,255,255,0.66);
 
 /*──────────────────────────────────────(EVERYTHING)───*/
 * {
@@ -20,6 +20,7 @@
     background-image: none;
     box-shadow: none;
     border: none;
+    padding: 0px;
 }
 @keyframes blink {
     to {
@@ -30,13 +31,13 @@
 /*──────────────────────────────────────────(WAYBAR)───*/
 tooltip {
     color: white;
-    background-color: @black;
+    background-color: @BLACK;
     border: 2px solid white;
     border-radius: 16px;
 }
 window#waybar {
     color: white;
-    background: linear-gradient(transparent calc(60%-4px), white, transparent calc(60%+4px));
+    background: linear-gradient(transparent calc(60%-10px), white, transparent calc(40%+10px));
     transition-property: inherit;
 }
 button menu {
@@ -44,19 +45,27 @@ button menu {
 }
 menu {
     color: white;
-    background-color: @black;
+    background-color: @BLACK;
     border: 1px solid white;
     border-radius: 16px;
 }
 *menu>*:hover {
     color: black;
-    background-color: @white;
-    border: 1px solid @black;
+    background-color: @WHITE;
+    border: 1px solid @BLACK;
     border-radius: 16px;
     animation-duration: 0;
 }
-#tray>**, *button {
+#tray>**,
+button>** {
     padding: 0px 2px;
+}
+#taskbar,
+#taskbar button {
+    padding: 0px 2px;
+}
+#taskbar button:first-child {
+    padding: 0px 0px 0px 10px;
 }
 
 /*─────────────────────────────────────────(MODULES)───*/
@@ -66,9 +75,9 @@ menu {
 *.modules-left,
 *.modules-center,
 *.modules-right {
-    margin: 6px 6px 0px 6px;
+    margin: 6px;
     color: white;
-    background-color: @black;
+    background-color: @BLACK;
     border: 1px solid white;
     border-radius: 16px;
     border-width: .6px 2px;
@@ -76,6 +85,9 @@ menu {
 *.overlay {
     background-color: black;
     color: white;
+}
+*.empty {
+    padding: 0px;
 }
 
 /*──PULSEAUDIO_SLIDER──*/
@@ -91,23 +103,13 @@ menu {
     min-width: 100px;
     border: 1px solid white;
     border-radius: 16px;
-    background-color: @black;
+    background-color: @BLACK;
 }
 *highlight {
     min-width: 1px;
     border: 1px solid white;
     border-radius: 16px;
     background-color: white;
-}
-*.Playing {
-    /*background: rgb(137, 180, 250);
-    background: radial-gradient(circle, rgba(137, 180, 250, 120) 0%, rgba(142, 179, 250, 120) 6%, rgba(148, 226, 213, 1) 14%, rgba(147, 178, 250, 1) 14%, rgba(155, 176, 249, 1) 18%, rgba(245, 194, 231, 1) 28%, rgba(158, 175, 249, 1) 28%, rgba(181, 170, 248, 1) 58%, rgba(205, 214, 244, 1) 69%, rgba(186, 169, 248, 1) 69%, rgba(195, 167, 247, 1) 72%, rgba(137, 220, 235, 1) 73%, rgba(198, 167, 247, 1) 78%, rgba(203, 166, 247, 1) 100%);
-    background-size: 400% 400%;
-    animation: gradient_f 9s cubic-bezier(.72, .39, .21, 1) infinite;
-    */
-    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.377);
-    font-weight: bold;
-    color: #fff;
 }
 
 /*──────────────────────────────────────(AUTOMATION)───*/
@@ -117,7 +119,7 @@ menu {
 *.hidden *.deactivated, *.passive, *.off, *.inactive, *.empty, *.visible, *.hosting-monitor, *.current_output, *.Paused, *.Stopped {
     color: grey;
 }
-*.focused, *.active, *.on, *.connected, *.pairable, *.solo {
+*.focused, *.active, *.on, *.connected, *.pairable, *.solo, *.playing {
     color: white;
 }
 *.persistent, *.disconnected, *.pending-updates, *.needs-attention {
