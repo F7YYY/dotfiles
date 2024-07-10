@@ -56,17 +56,6 @@ menu {
     border-radius: 16px;
     animation-duration: 0;
 }
-#tray>**,
-button>** {
-    padding: 0px 2px;
-}
-#taskbar,
-#taskbar button {
-    padding: 0px 2px;
-}
-#taskbar button:first-child {
-    padding: 0px 0px 0px 10px;
-}
 
 /*─────────────────────────────────────────(MODULES)───*/
 *.module {
@@ -89,8 +78,22 @@ button>** {
 *.empty {
     padding: 0px;
 }
+/*───WLR_TASKBAR───*/
+#tray>**,
+button>** {
+    padding: 0px 2px;
+}
+#taskbar {
+    padding: 0px;
+}
+#taskbar button {
+    padding: 0px 2px;
+}
+#taskbar button:first-child {
+    padding: 0px 0px 0px 10px;
+}
 
-/*──PULSEAUDIO_SLIDER──*/
+/*───PULSEAUDIO_SLIDER───*/
 *slider {
     min-height: 1px;
     min-width: 1px;
