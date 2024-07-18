@@ -87,10 +87,13 @@ button>** {
     padding: 0px;
 }
 #taskbar button {
-    padding: 0px 2px;
+    padding: 0px 1px;
 }
 #taskbar button:first-child {
     padding: 0px 0px 0px 10px;
+}
+#taskbar button:last-child {
+    padding: 0px 10px 0px 0px;
 }
 
 /*───PULSEAUDIO_SLIDER───*/

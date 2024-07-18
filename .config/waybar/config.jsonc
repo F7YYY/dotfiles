@@ -545,8 +545,8 @@
 			"format": "⏻",
 			"format-alt": "🖕",
 			"format-alt-click": "click-right",
-			"on-click": "$HOME/.config/wofi/scripts/powermenu",
-			"on-click-middle": "$HOME/.config/wofi/scripts/powermenu",
+			"on-click": "$HOME/.config/POWERMENU",
+			"on-click-middle": "$HOME/.config/POWERMENU",
 			"tooltip": false
 		},
 		"custom/pacman": {

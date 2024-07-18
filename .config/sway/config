@@ -54,7 +54,7 @@ bindsym --to-code {
     $SUPER+ALT+SPACE        exec wofi-calc
     $SUPER+CTRL+SPACE       exec wofi-emoji
     #$SUPER+Alt+R           exec swaymsg reload
-    Ctrl+Alt+Delete         exec $HOME/.config/wofi/scripts/powermenu
+    Ctrl+Alt+Delete         exec $HOME/.config/POWERMENU
     #─CURSOR
     $SUPER+$LEFT            seat - cursor move -10 0
     $SUPER+$DOWN            seat - cursor move 0 10
