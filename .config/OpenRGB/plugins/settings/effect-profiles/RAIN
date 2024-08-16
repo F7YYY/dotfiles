@@ -1,0 +1,108 @@
+{
+    "Effects": [
+        {
+            "AllowOnlyFirst": false,
+            "AutoStart": true,
+            "Brightness": 100,
+            "ControllerZones": [
+                {
+                    "description": "ENE SMBus Device",
+                    "is_segment": false,
+                    "location": "I2C: /dev/i2c-13, address 0x71",
+                    "name": "ENE DRAM",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "",
+                    "vendor": "ENE",
+                    "version": "AUDA0-E6K5-0101",
+                    "zone_idx": 0
+                },
+                {
+                    "description": "ENE SMBus Device",
+                    "is_segment": false,
+                    "location": "I2C: /dev/i2c-13, address 0x73",
+                    "name": "ENE DRAM",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "",
+                    "vendor": "ENE",
+                    "version": "AUDA0-E6K5-0101",
+                    "zone_idx": 0
+                },
+                {
+                    "description": "ASUS Aura USB Device",
+                    "is_segment": false,
+                    "location": "HID: /dev/hidraw7",
+                    "name": "ASUS ROG STRIX B650E-F GAMING WIFI",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "9876543210",
+                    "vendor": "ASUS",
+                    "version": "AULA3-AR32-0222",
+                    "zone_idx": 0
+                },
+                {
+                    "description": "ASUS Aura USB Device",
+                    "is_segment": false,
+                    "location": "HID: /dev/hidraw7",
+                    "name": "ASUS ROG STRIX B650E-F GAMING WIFI",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "9876543210",
+                    "vendor": "ASUS",
+                    "version": "AULA3-AR32-0222",
+                    "zone_idx": 1
+                },
+                {
+                    "description": "ASUS Aura USB Device",
+                    "is_segment": false,
+                    "location": "HID: /dev/hidraw7",
+                    "name": "ASUS ROG STRIX B650E-F GAMING WIFI",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "9876543210",
+                    "vendor": "ASUS",
+                    "version": "AULA3-AR32-0222",
+                    "zone_idx": 2
+                },
+                {
+                    "description": "ASUS Aura USB Device",
+                    "is_segment": false,
+                    "location": "HID: /dev/hidraw7",
+                    "name": "ASUS ROG STRIX B650E-F GAMING WIFI",
+                    "reverse": false,
+                    "segment_idx": -1,
+                    "self_brightness": 100,
+                    "serial": "9876543210",
+                    "vendor": "ASUS",
+                    "version": "AULA3-AR32-0222",
+                    "zone_idx": 3
+                }
+            ],
+            "CustomName": "",
+            "CustomSettings": {
+                "size": 2
+            },
+            "EffectClassName": "Rain",
+            "FPS": 60,
+            "RandomColors": false,
+            "Slider2Val": 50,
+            "Speed": 30,
+            "Temperature": 0,
+            "Tint": 0,
+            "UserColors": [
+                16777215,
+                12369856,
+                8091255,
+                4601917,
+                3219236
+            ]
+        }
+    ],
+    "version": 2
+}
