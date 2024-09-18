@@ -1,30 +1,30 @@
-##############################################################################################################################
-#|──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────|#
-#|     d888888o.   `8.`888b                 ,8'          .8.          `8.`8888.      ,8' 8 8888888888   `8.`8888.      ,8'  |#
-#|   .`8888:' `88.  `8.`888b               ,8'          .888.          `8.`8888.    ,8'  8 8888          `8.`8888.    ,8'   |#
-#|   8.`8888.   Y8   `8.`888b             ,8'          :88888.          `8.`8888.  ,8'   8 8888           `8.`8888.  ,8'    |#
-#|   `8.`8888.        `8.`888b     .b    ,8'          . `88888.          `8.`8888.,8'    8 8888            `8.`8888.,8'     |#
-#|    `8.`8888.        `8.`888b    88b  ,8'          .8. `88888.          `8.`88888'     8 888888888888     `8.`88888'      |#
-#|     `8.`8888.        `8.`888b .`888b,8'          .8`8. `88888.          `8. 8888      8 8888             .88.`8888.      |#
-#|      `8.`8888.        `8.`888b8.`8888'          .8' `8. `88888.          `8 8888      8 8888            .8'`8.`8888.     |#
-#|  8b   `8.`8888.        `8.`888`8.`88'          .8'   `8. `88888.          8 8888      8 8888           .8'  `8.`8888.    |#
-#|  `8b.  ;8.`8888         `8.`8' `8,`'          .888888888. `88888.         8 8888      8 8888          .8'    `8.`8888.   |#
-#|   `Y8888P ,88P'          `8.`   `8'          .8'       `8. `88888.        8 8888      8 8888         .8'      `8.`8888.  |#
-#|──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────|#
-#########################################───"https://github.com/swaywm/sway/wiki/"───#########################################
+################################################################################################################################
+#|───────────────────────────────────────────────────────────────────────────────────────|────────────────────────────────────|#
+#|     d888888o.   `8.`888b                 ,8'          .8.          `8.`8888.      ,8' | 8 8888888888   `8.`8888.      ,8'  |#
+#|   .`8888:' `88.  `8.`888b               ,8'          .888.          `8.`8888.    ,8'  | 8 8888          `8.`8888.    ,8'   |#
+#|   8.`8888.   Y8   `8.`888b             ,8'          :88888.          `8.`8888.  ,8'   | 8 8888           `8.`8888.  ,8'    |#
+#|   `8.`8888.        `8.`888b     .b    ,8'          . `88888.          `8.`8888.,8'    | 8 8888            `8.`8888.,8'     |#
+#|    `8.`8888.        `8.`888b    88b  ,8'          .8. `88888.          `8.`88888'     | 8 888888888888     `8.`88888'      |#
+#|     `8.`8888.        `8.`888b .`888b,8'          .8`8. `88888.          `8. 8888      | 8 8888             .88.`8888.      |#
+#|      `8.`8888.        `8.`888b8.`8888'          .8' `8. `88888.          `8 8888      | 8 8888            .8'`8.`8888.     |#
+#|  8b   `8.`8888.        `8.`888`8.`88'          .8'   `8. `88888.          8 8888      | 8 8888           .8'  `8.`8888.    |#
+#|  `8b.  ;8.`8888         `8.`8' `8,`'          .888888888. `88888.         8 8888      | 8 8888          .8'    `8.`8888.   |#
+#|   `Y8888P ,88P'          `8.`   `8'          .8'       `8. `88888.        8 8888      | 8 8888         .8'      `8.`8888.  |#
+#|───────────────────────────────────────────────────────────────────────────────────────|────────────────────────────────────|#
+##########################################───"https://github.com/swaywm/sway/wiki/"───##########################################
 #
-#─────────────────────────────────────────────────────────────────────────────────────────────────────────────(EXECUTABLES)───
+#───────────────────────────────────────────────────────────────────────────────────────────────────────────────────(DAEMONS)───
 bar swaybar_command waybar
-#───RETARDED_DAEMONS
-#exec_always { $(killall -9Ieqg MIGRAINE) MIGRAINE }
-#───NORMAL_DAEMONS
+#───RETARDED
+#exec_always { $(if pgrep -x HEADACHE; then killall -9Ieqg HEADACHE; fi) MIGRAINE }
+#───NORMAL
 exec {
     $HOME/.config/APPLICATIONS
     #─SWAY_SPECIFIC
     swaymgr
 }
 
-#───────────────────────────────────────────────────────────────────────────────────────────────────────────────(VARIABLES)───
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────(VARIABLES)───
 set {
     $FONT       Sony Sketch EF 12, Symbols Nerd Font Mono 12            # (kitty list-fonts)
     $SUPER      Mod4
@@ -45,7 +45,7 @@ set {
     $CLEAR      #00000000
 }
 
-#────────────────────────────────────────────────────────────────────────────────────────────────────────────────(KEYBINDS)───
+#──────────────────────────────────────────────────────────────────────────────────────────────────────────────────(KEYBINDS)───
 bindsym --to-code {
     $SUPER+Q                kill
     $SUPER+Escape           exec $TERM
@@ -53,7 +53,7 @@ bindsym --to-code {
     $SUPER+Space            exec wofi
     $SUPER+ALT+SPACE        exec wofi-calc
     $SUPER+CTRL+SPACE       exec wofi-emoji
-    #$SUPER+Alt+R           exec swaymsg reload
+    $SUPER+Alt+R            exec swaymsg reload
     Ctrl+Alt+Delete         exec $HOME/.config/POWERMENU
     #─CURSOR
     $SUPER+$LEFT            seat - cursor move -10 0
@@ -86,7 +86,7 @@ bindsym --to-code {
     $SUPER+C                exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
 }
 
-#──────────────────────────────────────────────────────────────────────────────────────────────────────────────(WORKSPACES)───
+#────────────────────────────────────────────────────────────────────────────────────────────────────────────────(WORKSPACES)───
 set {
     $SP                     scratchpad
     $WS                     workspace
@@ -139,8 +139,8 @@ bindsym --to-code {
     $SUPER+Backspace        $SP show
     $SUPER+Ctrl+Backspace   $MSP
     #─TAB_WORKSPACES
-    $SUPER+Shift+Tab        $WS next
-    $SUPER+Tab              $WS back_and_forth
+    $SUPER+Shift+Tab        $WS back
+    $SUPER+Tab              $WS next
     #─CHANGE_FOCUSED_WINDOWS
     $SUPER+Left             focus left
     $SUPER+Down             focus down
@@ -160,9 +160,9 @@ bindsym --to-code {
 
 #───WINDOW_MANAGEMENT─(swaymsg --type get_tree | awk 'tolower($0) ~ /(app_id|class|window_role)/ && NF > 1')
 for_window {
-    [app_id=".*"]           $OPACITY, $MM, focus, sticky
-    [class=".*"]            $OPACITY, $MM, focus, sticky
-    [window_role=".*"]      $OPACITY, $MM, focus, sticky
+    [app_id=".*"] $OPACITY, $MM, focus, sticky
+    [class=".*"] $OPACITY, $MM, focus, sticky
+    [window_role=".*"] $OPACITY, $MM, focus, sticky
     [title="(?:Open|Save|File|Folder|As|Select|Choose|Library|Password)"] $FLOAT
     [app_id="nm-*|mpv|imv|zenity|wdisplays|pavucontrol|gparted|openrgb"] $FLOAT, $OPAQUE
     [app_id="gnome-tweaks|qt5ct|qt6ct|waypaper*|bleachbit|zoom|electronplayer|qalculate-gtk"] $FLOAT, $OPAQUE
@@ -181,11 +181,11 @@ default_orientation             auto
 focus_on_window_activation      smart
 tiling_drag                     enable
 popup_during_fullscreen         smart
-scratchpad_minimize             enable
+#scratchpad_minimize             enable # SWAYFX
 title_align                     center
-titlebar_separator              enable
+#titlebar_separator              enable # SWAYFX
 
-#─────────────────────────────────────────────────────────────────────────────────────────────────────────────(PERIPHERALS)───
+#───────────────────────────────────────────────────────────────────────────────────────────────────────────────(PERIPHERALS)───
 output {
     $DISPLAY1
     * adaptive_sync             on
@@ -206,23 +206,25 @@ input type:mouse {
     pointer_accel               0
 }
 
-#────────────────────────────────────────────────────────────────────────────────────────────────────────────────(THEME_FX)───
-blur                            disable
-blur_passes                     4
-blur_radius                     4
-blur_xray                       enable
-corner_radius                   12
-shadows                         enable
-shadows_on_csd                  enable
-shadow_color                    $BLACK
-shadow_blur_radius              20
-layer_effects                   "notifications" blur disable; shadows enable; corner_radius 30
-default_dim_inactive            0.1
-dim_inactive_colors.unfocused   $CLEAR
-dim_inactive_colors.urgent      $RED
-default_border                  pixel 1px
-default_floating_border         pixel 1px
-smart_corner_radius             on
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(THEME)───
+#───SWAYFX
+#blur                            disable
+#blur_passes                     4
+#blur_radius                     4
+#blur_xray                       enable
+#corner_radius                   12
+#shadows                         enable
+#shadows_on_csd                  enable
+#shadow_color                    $BLACK
+#shadow_blur_radius              20
+#layer_effects                   "notifications" blur disable; shadows enable; corner_radius 30
+#default_dim_inactive            0.1
+#dim_inactive_colors.unfocused   $CLEAR
+#dim_inactive_colors.urgent      $RED
+#default_border                  pixel 1px
+#default_floating_border         pixel 1px
+#smart_corner_radius             on
+#───SWAY
 smart_borders                   on
 smart_gaps                      on
 gaps inner                      10px
@@ -234,19 +236,19 @@ client.focused_inactive         $BLACK      $BLACK      $WHITE      $BLACK      
 client.unfocused                $GREY       $BLACK      $GREY       $GREY       $GREY
 client.urgent                   $RED        $BLACK      $RED        $RED        $RED
 
-#───────────────────────────────────────────────────────────────────────────────────────────────────────────────────(POWER)───
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(POWER)───
 exec bash -c $(swayidle -w \
-    timeout 600 '$LOCK' \
-    timeout 300 'if pgrep -x "$LOCK" > /dev/null; then swaymsg "output * dpms off"; fi' \
-    timeout 1200 'systemctl suspend' \
-    resume 'swaymsg "output * dpms on"' \
-    before-sleep 'playerctl -a pause' \
-    before-sleep 'if ! pgrep -x "$LOCK" > /dev/null; then '$LOCK'; fi' \
-    #after-resume 'swaymsg "output * dpms on"' \
+    timeout 600 "$LOCK" \
+    timeout 300 "if pgrep -x '$LOCK' > /dev/null; then swaymsg 'output * dpms off'; fi" \
+    timeout 1200 "systemctl suspend" \
+    resume "swaymsg 'output * dpms on'" \
+    before-sleep "playerctl -a pause" \
+    before-sleep "if ! pgrep -x '$LOCK' > /dev/null; then '$LOCK'; fi" \
+    #after-resume "swaymsg 'output * dpms on'" \
 )
 
-#────────────────────────────────────────────────────────────────────────────────────────────────────────────────(XWAYLAND)───
+#──────────────────────────────────────────────────────────────────────────────────────────────────────────────────(XWAYLAND)───
 xwayland enable
 
-#───────────────────────────────────────────────────────────────────────────────────────────────────────────────(INCLUSION)───
-include /etc/sway/config.d/*
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────(INCLUSION)───
+include @sysconfdir@/sway/config.d/*

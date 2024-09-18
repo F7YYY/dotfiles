@@ -1,2 +1,10 @@
+package age
+package archlinux
+theme bira
 theme default
+theme emoji-powerline
 theme fox
+theme one
+theme random
+theme red-snapper
+theme separation

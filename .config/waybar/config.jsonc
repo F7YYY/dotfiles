@@ -166,6 +166,18 @@
 			"tooltip": false
 		},
 		//────────────────────────────(MODULES_CENTER)───
+		"custom/weather": {
+			"interval": 3600,
+			"exec": "wttrbar --fahrenheit",
+			"format": "{}℉",
+			"format-alt": "{on-click-right}℃",
+			"format-alt-click": "click-right",
+			"on-click": "exec",
+			"on-click-middle": "xdg-open https://wttr.in/",
+			"on-click-right": "exec wttrbar",
+			"return-type": "json",
+			"tooltip": true
+		},
 		"clock": {
 			"interval": 1,
 			"format": "{:%Z: %T} ⴵ",
@@ -194,18 +206,6 @@
 			"on-click": "wl-copy $(date '+%F_%T')",
 			"on-click-middle": "betterbird -calendar",
 			"tooltip-format": "<tt><small>{calendar}</small></tt>",
-			"tooltip": true
-		},
-		"custom/weather": {
-			"interval": 3600,
-			"exec": "wttrbar --fahrenheit",
-			"format": "{}℉",
-			"format-alt": "{on-click-right}℃",
-			"format-alt-click": "click-right",
-			"on-click": "exec",
-			"on-click-middle": "xdg-open https://wttr.in/",
-			"on-click-right": "exec wttrbar",
-			"return-type": "json",
 			"tooltip": true
 		},
 		//─────────────────────────────(MODULES_RIGHT)───

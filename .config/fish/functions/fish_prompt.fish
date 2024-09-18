@@ -1,1 +1,1 @@
-/home/snakeye/.local/share/omf/themes/slacker/fish_prompt.fish
+/home/snakeye/.local/share/omf/themes/separation/fish_prompt.fish

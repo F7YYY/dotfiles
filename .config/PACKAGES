@@ -1,4 +1,4 @@
-#─UPDATED: Fri Jul  5 04:09:24 PM CDT 2024
+#─UPDATED: Mon Aug 19 12:26:37 PM CDT 2024
 adwaita-cursors
 adwaita-icon-theme
 aircrack-ng
@@ -9,6 +9,7 @@ arcolinux-keyring
 arcolinux-mirrorlist-git
 base
 base-devel
+bash
 bash-completion
 beef
 betterbird-bin
@@ -39,6 +40,7 @@ dnsmasq
 docker
 dpkg
 dunst
+dxvk-bin
 easyeffects
 efibootmgr
 electron
@@ -47,13 +49,13 @@ endeavouros-keyring
 endeavouros-mirrorlist
 ettercap-gtk
 eww
+exfatprogs
 exploitdb
 f2fs-tools
 fastfetch
 ffuf
 firefox
 fish
-fish-tide-git
 flameshot-git
 flat-remix
 flat-remix-gtk
@@ -72,6 +74,7 @@ gnu-netcat
 gobuster
 gparted
 gptfdisk
+greetd-regreet
 grim
 grimshot
 gst-plugin-pipewire
@@ -105,6 +108,9 @@ kooha
 krita
 leafpad
 less
+lib32-glu
+lib32-gnutls
+lib32-mesa-vdpau
 lib32-vulkan-mesa-layers
 libcaca
 libgnome-keyring
@@ -123,9 +129,9 @@ linux-xanmod-bin
 linux-zen
 linux-zen-headers
 lutris
-ly
 lynis
 man-db
+mangohud
 memtest86+-efi
 mesa-utils
 mesa-vdpau
@@ -134,6 +140,7 @@ metasploit
 minecraft-launcher
 mkinitcpio-firmware
 mpv
+mpv-mpris
 nemo
 neovim
 network-manager-applet
@@ -159,6 +166,7 @@ pacman-cleanup-hook
 pacman-contrib
 pacman-fix-permissions
 pavucontrol
+payload-dumper-go-bin
 pipewire
 pipewire-alsa
 pipewire-ffado
@@ -180,6 +188,7 @@ pulledpork
 pwncat
 python-pip
 qalculate-gtk
+qbittorrent
 qemu-base
 qemu-guest-agent
 qt5-tools
@@ -213,9 +222,9 @@ snort
 sony-sketch-ef-font
 spice-gtk
 sqlmap
+starship
 startup-notification
 steam
-swayfx
 swayidle
 swaylock-corrupter
 swaymgr
@@ -272,6 +281,7 @@ wireplumber
 wireproxy
 wireshark-qt
 wl-clipboard
+wlroots
 wlsunset
 wofi
 wofi-calc
