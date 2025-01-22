@@ -6,10 +6,10 @@
 # PROCESS USER INPUT AND POWERMENU METHODS
 powermenu() {
     case "$1" in
-        "Reload")
+        "RELOAD")
             if [ $XDG_SESSION_DESKTOP =~ ^sway* ]; then
                 swaymsg reload
-            elif [ $XDG_SESSION_DESKTOP == "hyprland" ]; then
+            elif [ $XDG_SESSION_DESKTOP == "Hyprland" ]; then
                 hyprctl reload
             else
                 systemctl --user reload
@@ -17,41 +17,37 @@ powermenu() {
                 systemctl --user daemon-reexec
             fi
         ;;
-        "Lock")
+        "LOCK")
             loginctl lock-session
         ;;
-        "Suspend")
+        "SUSPEND")
             loginctl lock-session
             systemctl suspend
         ;;
-        "Logout")
+        "LOGOUT")
             loginctl terminate-session "$XDG_SESSION_ID"
             loginctl kill-user $(whoami)
         ;;
-        "Reboot")
+        "REBOOT")
             systemctl reboot
         ;;
-        "Reboot>BIOS")
+        "BIOS")
             systemctl reboot --firmware-setup
         ;;
-        "Shutdown")
+        "SHUTDOWN")
             systemctl poweroff
+        ;;
+        "────EXIT────"|""|*)
+            exit 0
         ;;
     esac
 }
 
 # DISPLAY POWERMEU & HANDLE USER INPUT
 main() {
-    local menu=("Reload"
-    			"Lock"
-    			"Suspend"
-    			"Logout"
-    			"Reboot"
-    			"Reboot>BIOS"
-    			"Shutdown"
-    			"<──EXIT──>")
-    local selected=$(printf "%s\n" "${menu[@]}" | wofi --dmenu --prompt "<Power_Menu>" | tr -d '\n')
-    powermenu "$selected"
+    local MENU=("RELOAD" "LOCK" "SUSPEND" "LOGOUT" "REBOOT" "BIOS" "SHUTDOWN" "────EXIT────")
+    local SELECTED=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "POWERMENU" | tr -d '\n')
+    powermenu "$SELECTED"
 }
 
 # START

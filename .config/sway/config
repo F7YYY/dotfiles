@@ -19,10 +19,7 @@ bar swaybar_command waybar
 #exec_always { $(if pgrep -x HEADACHE; then killall -9Ieqg HEADACHE; fi) MIGRAINE }
 #───NORMAL
 exec {
-    xdg-autostart
-    #dbus-update-activation-environment --systemd --all
-    #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-    #gnome-keyring-daemon --start --components=secrets
+    $HOME/.config/APPLICATIONS
     #─SWAY_SPECIFIC
     swaymgr
 }
@@ -54,10 +51,8 @@ bindsym --to-code {
     $SUPER+ESCAPE           exec $TERM
     $SUPER+ALT+ESCAPE       exec $TERM ranger
     $SUPER+SPACE            exec wofi
-    $SUPER+ALT+SPACE        exec wofi-calc
-    $SUPER+CTRL+SPACE       exec wofi-emoji
     $SUPER+ALT+R            exec swaymsg reload
-    $SUPER+SHIFT+SPACE      exec $HOME/.config/COMMAND
+    $SUPER+ALT+SPACE        exec $HOME/.config/WOFI
     CTRL+ALT+DELETE         exec $HOME/.config/POWERMENU
     #─CURSOR
     $SUPER+$LEFT            seat - cursor move -10 0

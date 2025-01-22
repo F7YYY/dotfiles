@@ -1,0 +1,35 @@
+#!/bin/bash
+###########
+# WOFI WRAPPER
+##############
+#
+# PROCESS USER INPUT AND MENU METHODS
+wofimenu() {
+    case "$1" in
+        "CALCULATOR")
+            eval wofi-calc
+        ;;
+        "EMOJI")
+            eval wofi-emoji
+        ;;
+        "POWERMENU")
+            eval $HOME/.config/POWERMENU
+        ;;
+        "COMMAND")
+            eval $HOME/.config/COMMAND
+        ;;
+        "────EXIT────"|""|*)
+            exit 0
+        ;;
+    esac
+}
+
+# DISPLAY APPLICATIONS+SCRIPTS & HANDLE USER INPUT
+main() {
+    local MENU=("CALCULATOR" "EMOJI" "POWERMENU" "COMMAND" "────EXIT────")
+    local SELECTED=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "MENU" | tr -d '\n')
+    wofimenu "$SELECTED"
+}
+
+# START
+main

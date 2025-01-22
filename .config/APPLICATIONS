@@ -13,10 +13,10 @@
 ################################################################################
 #
 #   IF [ XDG_SESSION_DESKTOP = "TTY" ]; THEN ECHO "STILL_SAFE_TO_RUN_SCRIPT"; FI
-#   DEPRECIATED SCRIPT (AUR): GNOME-TWEAKS>STARTUP_APPLICATIONS & XDG-AUTOSTART
+#   SCRIPT WRAPPER (AUR): GNOME-TWEAKS>STARTUP_APPLICATIONS & XDG-AUTOSTART
 #
 #─────────────────────────────────────────────────────────────────(GSETTINGS)───
-#gsettings set org.gnome.desktop.interface <theme> <THEME>
+#gsettings set org.gnome.desktop.interface <THEME> <THEME>
 gsettings set org.gnome.desktop.interface clock-format 24h
 
 #───────────────────────────────────────────────────────────────(EXECUTABLES)───
@@ -30,33 +30,17 @@ main() {
         "dbus-update-activation-environment --systemd --all"
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
         "gnome-keyring-daemon --start --components=secrets"
-        #"dex-autostart -a $HOME/.config/autostart/*"
+        "xdg-autostart"                                # AUTOSTARTS APPLICATIONS
         "wlsunset -s 22:00 -S 10:00 -d 60"
-        "nm-applet"
-        "blueman-applet"
-        "waypaper"
         #"emacs --daemon"
-        #"eww daemon && eww open bar"
-        "waybar"
-        "dunst"
-        "flameshot"
-        "corectrl"
-        "openrgb --startminimized"
-        #"easyeffects"                                  # NO MINIMIZED LAUNCH
-        #"obs"
+        #"openrgb --startminimized"
         #"steam -silent $WAYLAND"
-        #"lutris"                                       # NO MINIMIZED LAUNCH
-        "vesktop --start-minimized $WAYLAND"
-        "signal-desktop $WAYLAND"
-        "telegram-desktop -startintray"
-        "youtube-music --use-tray-icon $WAYLAND"
-        #"remmina"                                      # NO MINIMIZED LAUNCH
-        #"virt-manager"                                 # NO MINIMIZED LAUNCH
-        "betterbird"                                    # NO MINIMIZED LAUNCH
+        #"vesktop --start-minimized $WAYLAND"
+        #"telegram-desktop -startintray"
+        #"youtube-music --use-tray-icon $WAYLAND"
         #"teams --startminimized $WAYLAND"
-        #"zoom $WAYLAND"                                # NO MINIMIZED LAUNCH OR WAYLAND
-        "wl-paste --type text --watch cliphist store"
-        "wl-paste --type image --watch cliphist store"
+        #"wl-paste --type text --watch cliphist store"
+        #"wl-paste --type image --watch cliphist store"
     )
 
     #─LAUNCH_OR_RELAUNCH_APPS
