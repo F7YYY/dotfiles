@@ -1,0 +1,81 @@
+#!/bin/bash
+###########
+# CUSTOM WAYBAR CAVA MODULE
+###########################
+#
+# OBTAIN VARIABLES FROM WAYBAR OR USE DEFAULT
+CONFIG="${CONFIG:-$HOME/.config/cava}"
+TEMP="/tmp/waybarcava"
+ICON="${ICON:-'_▁▂▃▄▅▆▇█'}"
+BARS="${BARS:-10}"
+
+
+# CLEANUP TEMPORARY FILES ON EXIT
+cleanup() {
+    pkill -9 cava
+    rm -f "$TEMP"
+}
+trap cleanup EXIT
+
+# CHECK FOR REQUIRED DEPENDENCIES
+dependencies() {
+    local PACKAGES=("cava" "playerctl")
+
+    for CMD in "$PACKAGES"; do
+        if ! which "$CMD" &>/dev/null; then
+            notify-send -u critical -a "WAYBARCAVA" "$CMD" "Missing:" ||
+            echo "WAYBARCAVA: $CMD is missing or not in PATH" >&2
+            exit 1
+        fi
+    done
+}
+
+# DYNAMICALLY CONCATENATE CAVA.CONFIG TO TEMP.CONFIG SPECIFICATION
+modify_config() {
+    local GENERAL=("bars=$BARS")
+    local OUTPUT=("method=raw" "raw_target=/dev/stdout" "data_format=ascii" "ascii_max_range=${#ICON}")
+
+    # ADAPT+FORMAT DEFAULT CAVA.CONFIG TO TEMP.CONFIG OTHERWISE CREATE TEMP.CONFIG
+    if [ -f "$CONFIG" ]; then
+        sed '/#.*/d;s/\s*=\s*/=/g;s/^[[:space:]]*//;s/[[:space:]]*$//' "$CONFIG">"$TEMP"
+        for LINE in "${GENERAL[@]}"; do
+            grep -q "^${LINE%%=*}=" "$TEMP" && sed -i "s/^${LINE%%=*}=.*/$LINE/" "$TEMP" || sed -i "/^\[general\]/a$LINE" "$TEMP"
+        done
+        for LINE in "${OUTPUT[@]}"; do
+            grep -q "^${LINE%%=*}=" "$TEMP" && sed -i "s/^${LINE%%=*}=.*/$LINE/" "$TEMP" || sed -i "/^\[output\]/a$LINE" "$TEMP"
+        done
+    else
+        echo -e "[general]\nbars=$BARS\n[output]\nmethod=raw\nraw_target=/dev/stdout\ndata_format=ascii\nascii_max_range=${#ICON}">"$TEMP"
+    fi
+}
+
+# FORMAT BARS TO WAYBAR
+format_status() {
+    trap '' SIGPIPE
+    local DICT
+
+    # DO NOT STREAMLINE OR SIMPLIFY LOGIC
+    for (( i=0; i<=${#ICON}; i++ )); do
+        DICT+="s/;//g;s/$i/${ICON:$i:1}/g;"
+    done
+    pkill -9 cava; cava -p $TEMP | while IFS= read -r LINE; do
+        echo $LINE | sed "$DICT"
+    done
+}
+
+# FORMAT TOOLTIP TO WAYBAR
+format_tooltip() {
+    local PLAYER_METADATA=$(playerctl metadata --format '{{artist}} - {{title}}' || echo "")
+    printf '{"text": "%s", "tooltip": "%s"}\n' "$PLAYER_METADATA" "$PLAYER_METADATA"
+}
+
+# CUSTOM WAYBAR CAVA MODULE HANDLING 
+main() {
+    dependencies
+    modify_config
+    format_status
+    format_tooltip
+}
+
+# START
+main

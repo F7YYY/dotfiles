@@ -16,8 +16,8 @@
     #─Geometry
     origin=top-center
     offset=0x6
-    width=(0,10000)
-    height=10000
+    width=(0, 1000)
+    height=(0, 1000)
     #─PROGRESS_BAR
     #progress_bar_height=10
     #progress_bar_frame_width=1

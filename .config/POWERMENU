@@ -25,21 +25,8 @@ powermenu() {
             systemctl suspend
         ;;
         "Logout")
-            ./$HOME/.config/APPLICATIONS --KILL
-
-            if [ $XDG_SESSION_DESKTOP =~ ^sway* ]; then
-                loginctl kill-user $(whoami)
-                swaymsg exit >/dev/null
-            elif [ $XDG_SESSION_DESKTOP == "hyprland" ]; then
-                HYPRCMDS=$(hyprctl -j clients | jq -j '.[] | "dispatch close window address:\(.address); "')
-
-                loginctl kill-user $(whoami)
-                hyprctl --batch "$HYPRCMDS" >/dev/null
-                hyprctl dispatch exit >/dev/null
-            else
-                loginctl terminate-session "$XDG_SESSION_ID"
-                loginctl kill-user $(whoami)
-            fi
+            loginctl terminate-session "$XDG_SESSION_ID"
+            loginctl kill-user $(whoami)
         ;;
         "Reboot")
             systemctl reboot

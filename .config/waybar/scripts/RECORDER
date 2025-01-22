@@ -1,0 +1,101 @@
+#!/bin/bash
+# Requires wf-recorder: https://github.com/ammen99/wf-recorder
+
+# Configuration
+SIGNAL=1
+PID_FILE="/tmp/waybar-screenrecorder"
+VIDEO_DIR="$HOME/Videos/Screenrecords"
+VIDEO_EXT="mkv" # Use a versatile container format for high quality
+WF_RECORDER_OPTS="--codec libx264 --preset slow --pixel-format yuv420p --framerate 120 --bitrate 8000K" 
+# Adjust `--bitrate` and `--framerate` for desired quality.
+AUDIO_OPTS="--audio --audio-codec aac --audio-bitrate 192K"
+
+# CHECK FOR REQUIRED DEPENDENCIES
+dependencies() {
+    local PACKAGES=("wf-recorder")
+
+    for CMD in "$PACKAGES"; do
+        if ! which "$CMD" &>/dev/null; then
+            notify-send -u critical -a "RECORDER" "$CMD" "Missing:" ||
+            echo "RECORDER: $CMD is missing or not in PATH" >&2
+            exit 1
+        fi
+    done
+}
+
+# Functions
+record_status() {
+    if [[ -s "$PID_FILE" ]]; then
+        awk 'BEGIN {
+            printf "{\"text\":\"\", \"tooltip\":\"Recording\\n"}
+        }
+        NR==1 {
+            printf "PID: %s\\n", $0
+        }
+        NR==2 {
+            printf "Save to: %s\\n", $0
+        }
+        NR==3 {
+            printf "Log to: %s\"}\n", $0
+        }' "$PID_FILE"
+    else
+        printf '{"text":"", "tooltip":"Stopped"}\n'
+    fi
+}
+
+toggle_recording() {
+    if [[ -s "$PID_FILE" ]]; then
+        # Stop recording
+        local pid
+        pid=$(awk 'NR==1' "$PID_FILE")
+        kill "$pid" && > "$PID_FILE"
+    else
+        # Start recording
+        mkdir -p "$VIDEO_DIR"
+        local base_file="$VIDEO_DIR/$(date +'%Y%m%dT%H%M%S')"
+        local video_file="${base_file}.${VIDEO_EXT}"
+        local log_file="${base_file}.log"
+
+        case "$1" in
+            "fullscreen")
+                wf-recorder $WF_RECORDER_OPTS $AUDIO_OPTS --file "$video_file" >"$log_file" 2>&1 &
+                ;;
+            "region")
+                sleep 1 # Allow slurp time to activate
+                wf-recorder $WF_RECORDER_OPTS $AUDIO_OPTS --geometry "$(slurp)" --file "$video_file" >"$log_file" 2>&1 &
+                ;;
+            *)
+                echo "Invalid argument: $1 (expected 'fullscreen' or 'region')"
+                exit 1
+                ;;
+        esac
+
+        # Save process details
+        local pid
+        pid=$(jobs -p | tail -n 1)
+        printf "%d\n%s\n%s" "$pid" "$video_file" "$log_file" > "$PID_FILE"
+        disown "$pid"
+    fi
+
+    # Notify Waybar to update
+    pkill -RTMIN+$SIGNAL waybar
+}
+
+main {
+    dependencies
+    case "$1" in
+        "status")
+            record_status
+        ;;
+        "toggle")
+            toggle_recording "$2"
+        ;;
+        *)
+            echo "ERROR: Invalid argument '$1'. Valid options: status, toggle"
+            exit 1
+        ;;
+    esac
+}
+
+# START
+main

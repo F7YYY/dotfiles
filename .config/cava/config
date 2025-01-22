@@ -10,41 +10,51 @@
 # ▐░█▄▄▄▄▄▄▄▄▄ ▐░▌       ▐░▌       ▐░▐░▌       ▐░▌       ▐░▌ #
 # ▐░░░░░░░░░░░▌▐░▌       ▐░▌        ▐░▌        ▐░▌       ▐░▌ #
 #  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀          ▀          ▀         ▀  #
-##############################################################
+###########───(https://github.com/karlstav/cava)───###########
 #
 ##############################################################
 [general]
+autosens        = 1
 hide_on_silence = true
-framerate       = 240
+framerate       = 0
 bars            = 0
-bar_width       = 3
+bar_width       = 0
 bar_spacing     = 1
-sleep_timer     = 10
+bar_height      = 0
+sleep_timer     = 1
 ##############################################################
 [input]
-source          = auto
+#method          = pipewire
+#source          = auto
 ##############################################################
 [output]
-data_format     = ascii
-ascii_max_range = 9
+#method          = noncurses
+orientation     = horizontal
+channels        = stereo
+mono_option     = average
+reverse         = 1
+data_format     = binary
 bit_format      = 16bit
-waveform        = 1
+ascii_max_range = 1000
+bar_delimiter   = 0
+frame_delimiter = 0
+sdl_full_screen = 1
+synchronized_sync = 1
+show_idle_bar_heads = 1
+waveform        = 0
 ##############################################################
 [color]
 gradient         = 1
-gradient_count   = 8
 gradient_color_1 = '#000000'
-gradient_color_2 = '#424242'
-gradient_color_3 = '#616161'
-gradient_color_4 = '#757575'
-gradient_color_5 = '#9E9E9E'
-gradient_color_6 = '#BDBDBD'
-gradient_color_7 = '#E0E0E0'
-gradient_color_8 = '#EEEEEE'
-gradient_color_9 = '#F5F5F5'
-gradient_color_10 = '#FFFFFF'
+gradient_color_2 = '#242424'
+gradient_color_3 = '#494949'
+gradient_color_4 = '#6d6d6d'
+gradient_color_5 = '#929292'
+gradient_color_6 = '#b6b6b6'
+gradient_color_7 = '#dbdbdb'
+gradient_color_8 = '#ffffff'
 ##############################################################
 [smoothing]
-monstercat      = 1
-waves           = 0
-noise_reduction = 80
+monstercat      = 0
+waves           = 1
+noise_reduction = 50

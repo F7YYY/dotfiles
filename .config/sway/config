@@ -20,14 +20,17 @@ bar swaybar_command waybar
 #───NORMAL
 exec {
     xdg-autostart
+    #dbus-update-activation-environment --systemd --all
+    #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+    #gnome-keyring-daemon --start --components=secrets
     #─SWAY_SPECIFIC
     swaymgr
 }
 
 #─────────────────────────────────────────────────────────────────────────────────────────────────────────────────(VARIABLES)───
 set {
-    $FONT       Sony Sketch EF 12, Symbols Nerd Font Mono 12            # (kitty list-fonts)
     $SUPER      Mod4
+    $FONT       Sony Sketch EF 12, Symbols Nerd Font Mono 12            # (kitty list-fonts)
     $TERM       kitty --detach
     $LOCK       swaylock-corrupter --daemonize
     #$DISPLAY   Name, mode [Resolution@HZ], Position [#,#], Scale [#]
@@ -48,13 +51,14 @@ set {
 #──────────────────────────────────────────────────────────────────────────────────────────────────────────────────(KEYBINDS)───
 bindsym --to-code {
     $SUPER+Q                kill
-    $SUPER+Escape           exec $TERM
-    $SUPER+Alt+Escape       exec $TERM ranger
-    $SUPER+Space            exec wofi
+    $SUPER+ESCAPE           exec $TERM
+    $SUPER+ALT+ESCAPE       exec $TERM ranger
+    $SUPER+SPACE            exec wofi
     $SUPER+ALT+SPACE        exec wofi-calc
     $SUPER+CTRL+SPACE       exec wofi-emoji
-    $SUPER+Alt+R            exec swaymsg reload
-    Ctrl+Alt+Delete         exec $HOME/.config/POWERMENU
+    $SUPER+ALT+R            exec swaymsg reload
+    $SUPER+SHIFT+SPACE      exec $HOME/.config/COMMAND
+    CTRL+ALT+DELETE         exec $HOME/.config/POWERMENU
     #─CURSOR
     $SUPER+$LEFT            seat - cursor move -10 0
     $SUPER+$DOWN            seat - cursor move 0 10
@@ -108,11 +112,11 @@ bindsym --to-code {
     $SUPER+Y                splitt
     $SUPER+T                layout tabbed
     $SUPER+S                layout toggle split
-    $SUPER+Ctrl+S           layout stacking
-    $SUPER+Alt+F            fullscreen
+    $SUPER+CTRL+S           layout stacking
+    $SUPER+ALT+F            fullscreen
     $SUPER+F                floating toggle
     $SUPER+A                focus parent
-    $SUPER+Ctrl+F           focus mode_toggle
+    $SUPER+CTRL+F           focus mode_toggle
     #─SWITCH_WORKSPACES
     $SUPER+1                $WS 1
     $SUPER+2                $WS 2
@@ -125,37 +129,37 @@ bindsym --to-code {
     $SUPER+9                $WS 9
     $SUPER+0                $WS 10
     #─MOVE_CONTAINERS_TO_WORKSPACES
-    $SUPER+Ctrl+1           $MWS 1
-    $SUPER+Ctrl+2           $MWS 2
-    $SUPER+Ctrl+3           $MWS 3
-    $SUPER+Ctrl+4           $MWS 4
-    $SUPER+Ctrl+5           $MWS 5
-    $SUPER+Ctrl+6           $MWS 6
-    $SUPER+Ctrl+7           $MWS 7
-    $SUPER+Ctrl+8           $MWS 8
-    $SUPER+Ctrl+9           $MWS 9
-    $SUPER+Ctrl+0           $MWS 10
+    $SUPER+CTRL+1           $MWS 1
+    $SUPER+CTRL+2           $MWS 2
+    $SUPER+CTRL+3           $MWS 3
+    $SUPER+CTRL+4           $MWS 4
+    $SUPER+CTRL+5           $MWS 5
+    $SUPER+CTRL+6           $MWS 6
+    $SUPER+CTRL+7           $MWS 7
+    $SUPER+CTRL+8           $MWS 8
+    $SUPER+CTRL+9           $MWS 9
+    $SUPER+CTRL+0           $MWS 10
     #─MOVE_CONTAINERS_TO_SCRATCHPAD
-    $SUPER+Backspace        $SP show
-    $SUPER+Ctrl+Backspace   $MSP
+    $SUPER+BACKSPACE        $SP show
+    $SUPER+CTRL+BACKSPACE   $MSP
     #─TAB_WORKSPACES
-    $SUPER+Shift+Tab        $WS back
-    $SUPER+Tab              $WS next
+    $SUPER+SHIFT+TAB        $WS back
+    $SUPER+TAB              $WS next
     #─CHANGE_FOCUSED_WINDOWS
-    $SUPER+Left             focus left
-    $SUPER+Down             focus down
-    $SUPER+Up               focus up
-    $SUPER+Right            focus right
+    $SUPER+LEFT             focus left
+    $SUPER+DOWN             focus down
+    $SUPER+UP               focus up
+    $SUPER+RIGHT            focus right
     #─RESIZE_FOCUSED_WINDOWS
-    $SUPER+Alt+Left         resize shrink width 10px
-    $SUPER+Alt+Down         resize grow height 10px
-    $SUPER+Alt+Up           resize shrink height 10px
-    $SUPER+Alt+Right        resize grow width 10px
+    $SUPER+ALT+LEFT         resize shrink width 10px
+    $SUPER+ALT+DOWN         resize grow height 10px
+    $SUPER+ALT+UP           resize shrink height 10px
+    $SUPER+ALT+RIGHT        resize grow width 10px
     #─MOVE_FOCUSED_WINDOWS
-    $SUPER+Ctrl+Left        move left
-    $SUPER+Ctrl+Down        move down
-    $SUPER+Ctrl+Up          move up
-    $SUPER+Ctrl+Right       move right
+    $SUPER+CTRL+LEFT        move left
+    $SUPER+CTRL+DOWN        move down
+    $SUPER+CTRL+UP          move up
+    $SUPER+CTRL+RIGHT       move right
 }
 
 #───WINDOW_MANAGEMENT─(swaymsg --type get_tree | awk 'tolower($0) ~ /(app_id|class|window_role)/ && NF > 1')
