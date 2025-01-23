@@ -9,7 +9,8 @@ dependencies() {
                     "wofi-calc"
                     "wofi-emoji"
                     "$HOME/.config/wofi/SCRIPTS/POWERMENU"
-                    "$HOME/.config/wofi/SCRIPTS/COMMAND")
+                    "$HOME/.config/wofi/SCRIPTS/COMMAND"
+                    "$HOME/.config/APPLICATIONS")
 
     for CMD in "$PACKAGES"; do
         if ! which "$CMD" &>/dev/null; then
@@ -22,6 +23,9 @@ dependencies() {
 # PROCESS USER INPUT AND MENU METHODS
 wofimenu() {
     case "$1" in
+        "WOFI")
+            eval wofi
+        ;;
         "CALCULATOR")
             eval wofi-calc
         ;;
@@ -34,6 +38,9 @@ wofimenu() {
         "COMMAND")
             eval $HOME/.config/wofi/SCRIPTS/COMMAND
         ;;
+        "APPLICATIONS")
+            eval $HOME/.config/APPLICATIONS
+        ;;
         "────EXIT────"|""|*)
             exit 0
         ;;
@@ -42,7 +49,7 @@ wofimenu() {
 
 # DISPLAY APPLICATIONS+SCRIPTS & HANDLE USER INPUT
 main() {
-    local MENU=("CALCULATOR" "EMOJI" "POWERMENU" "COMMAND" "────EXIT────")
+    local MENU=("WOFI" "CALCULATOR" "EMOJI" "POWERMENU" "COMMAND" "APPLICATIONS" "────EXIT────")
     local SELECTED=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "MENU" | tr -d '\n')
     
     dependencies
