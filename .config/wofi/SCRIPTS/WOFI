@@ -3,6 +3,22 @@
 # WOFI WRAPPER
 ##############
 #
+# CHECK FOR REQUIRED DEPENDENCIES
+dependencies() {
+    local PACKAGES=("wofi"
+                    "wofi-calc"
+                    "wofi-emoji"
+                    "$HOME/.config/wofi/SCRIPTS/POWERMENU"
+                    "$HOME/.config/wofi/SCRIPTS/COMMAND")
+
+    for CMD in "$PACKAGES"; do
+        if ! which "$CMD" &>/dev/null; then
+            notify-send -u critical -a "WOFI" "$CMD" "Missing:" ||
+            echo "WOFI: $CMD is missing or not in PATH" >&2
+        fi
+    done
+}
+
 # PROCESS USER INPUT AND MENU METHODS
 wofimenu() {
     case "$1" in
@@ -13,10 +29,10 @@ wofimenu() {
             eval wofi-emoji
         ;;
         "POWERMENU")
-            eval $HOME/.config/POWERMENU
+            eval $HOME/.config/wofi/SCRIPTS/POWERMENU
         ;;
         "COMMAND")
-            eval $HOME/.config/COMMAND
+            eval $HOME/.config/wofi/SCRIPTS/COMMAND
         ;;
         "────EXIT────"|""|*)
             exit 0
@@ -28,6 +44,8 @@ wofimenu() {
 main() {
     local MENU=("CALCULATOR" "EMOJI" "POWERMENU" "COMMAND" "────EXIT────")
     local SELECTED=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "MENU" | tr -d '\n')
+    
+    dependencies
     wofimenu "$SELECTED"
 }
 

@@ -20,7 +20,7 @@
 	"spacing": 0,
 	"icon-size": 16,
 	"modules-left": [			//__APPLICATIONS__
-		"custom/appmenu",
+		"custom/appmenu",		// AUR: WOFI | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/WOFI
 		"sway/workspaces",		// ⮶ REPLACE
 		"sway/scratchpad",		// ⮶ REPLACE
 		"hyprland/workspaces",	// ⮱ RENAME: "wlr/workspaces",
