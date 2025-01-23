@@ -26,9 +26,9 @@
 		"hyprland/workspaces",	// ⮱ RENAME: "wlr/workspaces",
 		"tray",
 		"wlr/taskbar",
-		"custom/cava",
+		"custom/cava",			// SCRIPT: $HOME/.CONFIG/CAVA/SCRIPTS/WAYBARCAVA
 		"gamemode"
-		//"custom/recorder"
+		//"custom/recorder"		// SCRIPT: $HOME/.CONFIG/WAYBAR/SCRIPTS/RECORDER
 	],
 	"modules-center": [			//__STATUS__
 		"custom/weather",		// AUR: WTTRBAR | WIP ~ FORMAT BETWEEN ℉/℃
@@ -53,10 +53,11 @@
 	//──────────────────────────────(MODULES_LEFT)───
 	"custom/appmenu": {
 		"format": "⌘",
+		"format-alt": "",
+		"format-alt-click": "click-right",
 		"on-click": "wofi",
-		"on-click-middle": "wofi-emoji",
-		"on-click-right": "wofi-calc",
-		"tooltip-format": "🖱ᐩ❶⍆LAUNCHER\n🖱ᐩ❷⍆CALCULATOR\n🖱ᐩ❸⍆EMOJIS'",
+		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/WOFI",
+		"tooltip-format": "🖱ᐩ❶⍆LAUNCHER\n🖱ᐩ❸⍆OTHER'",
 		"tooltip": true
 	},
 	"sway/workspaces": {
@@ -142,8 +143,8 @@
 		"show-passive-items": true
 	},
 	"custom/cava": {	// WIP ~ IMPORT/EXPORT TO/FROM SCRIPT
-		"exec-if": "[ -f $HOME/.config/cava/scripts/WAYBARCAVA ]",
-		"exec": "$HOME/.config/cava/scripts/WAYBARCAVA",
+		"exec-if": "[ -f $HOME/.config/cava/SCRIPTS/WAYBARCAVA ]",
+		"exec": "$HOME/.config/cava/SCRIPTS/WAYBARCAVA",
 		"config": "$HOME/.config/cava/config",
 		"format": "▕{}▏",
 		//"format-icons" : ["_","▁","▂","▃","▄","▅","▆","▇","█"],
@@ -170,14 +171,14 @@
 	},
 	"custom/recorder": {
 		"interval": 1,
-		"exec-if": "[ -f $HOME/.config/waybar/scripts/recorder.sh ]",
-		"exec": "$HOME/.config/waybar/scripts/recorder.sh status",
+		"exec-if": "[ -f $HOME/.config/waybar/SCRIPTS/RECORDER ]",
+		"exec": "$HOME/.config/waybar/SCRIPTS/RECORDER status",
 		"format": "{}", //",
 		"format-alt": "{}", //" {}",		// WIP ~ REPORT WHICH APP'S RECORDING
 		"format-alt-click": "click-right",
-		"on-click": "$HOME/.config/waybar/scripts/recorder.sh toggle fullscreen",
+		"on-click": "$HOME/.config/waybar/SCRIPTS/RECORDER toggle fullscreen",
 		"on-click-middle": "obs",
-		"on-click-right": "$HOME/.config/waybar/scripts/recorder.sh toggle region",
+		"on-click-right": "$HOME/.config/waybar/SCRIPTS/RECORDER toggle region",
 		"tooltip-format": "🖱ᐩ❶⍆FULLSCREEN\n🖱ᐩ❷⍆REGION\n🖱ᐩ❸⍆OBS'",
 		//"tooltip-format": ": {CAMERA}\n: {SCREEN}",	// WIP ~ REPORT CAMERA/SCREEN/APPLICATION/REGION
 		"tooltip": true,
@@ -415,8 +416,8 @@
 		"smooth-scrolling-threshold": 1,
 		"format": "{format_source}",
 		"format-alt": "{source_volume}% {format_source}",
-		"format-source": "",
-		"format-source-muted": "",
+		"format-source": "",
+		"format-source-muted": "",
 		"format-alt-click": "click-right",
 		"ignored-sources": ["Easy Effects Source"],
 		"on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
@@ -445,8 +446,8 @@
 	},
 	"cpu": {
 		"interval": 1,
-		"format": "",
-		"format-alt": "{usage}% 󰍛",
+		"format": "",
+		"format-alt": "{usage}% ",
 		"format-alt-click": "click-right",
 		"format-icons": ["_","▁","▂","▃","▄","▅","▆","▇","█"],
 		"on-click": "exec",
@@ -571,13 +572,13 @@
 	},
 	"custom/powermenu": {
 		"interval": 1,
-		"exec-if": "[ -f $HOME/.config/POWERMENU ]",
+		"exec-if": "[ -f $HOME/.config/wofi/SCRIPTS/POWERMENU ]",
 		"exec": "uptime -p",
 		"format": "⏻",
 		"format-alt": "🖕",
 		"format-alt-click": "click-right",
-		"on-click": "$HOME/.config/POWERMENU",
-		"on-click-middle": "$HOME/.config/POWERMENU",
+		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU",
+		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/POWERMENU",
 		"tooltip-format": "{}",
 		"tooltip": true
 	},

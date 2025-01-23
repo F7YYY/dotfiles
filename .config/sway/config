@@ -52,8 +52,8 @@ bindsym --to-code {
     $SUPER+ALT+ESCAPE       exec $TERM ranger
     $SUPER+SPACE            exec wofi
     $SUPER+ALT+R            exec swaymsg reload
-    $SUPER+ALT+SPACE        exec $HOME/.config/WOFI
-    CTRL+ALT+DELETE         exec $HOME/.config/POWERMENU
+    $SUPER+ALT+SPACE        exec $HOME/.config/wofi/SCRIPTS/WOFI
+    CTRL+ALT+DELETE         exec $HOME/.config/wofi/SCRIPTS/POWERMENU
     #─CURSOR
     $SUPER+$LEFT            seat - cursor move -10 0
     $SUPER+$DOWN            seat - cursor move 0 10
