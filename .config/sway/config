@@ -47,11 +47,11 @@ set {
 
 #──────────────────────────────────────────────────────────────────────────────────────────────────────────────────(KEYBINDS)───
 bindsym --to-code {
+    #$SUPER+ALT+R            exec swaymsg reload
     $SUPER+Q                kill
     $SUPER+ESCAPE           exec $TERM
     $SUPER+ALT+ESCAPE       exec $TERM ranger
     $SUPER+SPACE            exec wofi
-    $SUPER+ALT+R            exec swaymsg reload
     $SUPER+ALT+SPACE        exec $HOME/.config/wofi/SCRIPTS/WOFI
     CTRL+ALT+DELETE         exec $HOME/.config/wofi/SCRIPTS/POWERMENU
     #─CURSOR
