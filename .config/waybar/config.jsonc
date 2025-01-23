@@ -26,7 +26,7 @@
 		"hyprland/workspaces",	// ⮱ RENAME: "wlr/workspaces",
 		"tray",
 		"wlr/taskbar",
-		"custom/cava",			// SCRIPT: $HOME/.CONFIG/CAVA/SCRIPTS/WAYBARCAVA
+		//"custom/cava",			// SCRIPT: $HOME/.CONFIG/CAVA/SCRIPTS/WAYBARCAVA
 		"gamemode"
 		//"custom/recorder"		// SCRIPT: $HOME/.CONFIG/WAYBAR/SCRIPTS/RECORDER
 	],
