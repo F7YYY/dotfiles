@@ -26,12 +26,12 @@ main() {
 
     #─DESCENDING_LIST
     local APPLICATIONS=(
-        "bash"
+        "bash -c backup && bash -c exp_env"
         "dbus-update-activation-environment --systemd --all"
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
         "gnome-keyring-daemon --start --components=secrets"
-        "xdg-autostart"                                # AUTOSTARTS APPLICATIONS
         "wlsunset -s 22:00 -S 10:00 -d 60"
+        "xdg-autostart"                                # AUTOSTARTS APPLICATIONS
         #"emacs --daemon"
         #"openrgb --startminimized"
         #"steam -silent $WAYLAND"
@@ -52,14 +52,19 @@ main() {
 			    echo -e "\n./$0 -[H/R/ ]\n"
 			    echo -e "-[   H/help   ]: Help Menu"
 			    echo -e "-[ R/relaunch ]: Relaunch Apps"
+			    echo -e "-[   K/kill   ]: Kill All Apps"
 			    echo -e "-[            ]: Auto-Launch Apps [DEFAULT]\n"
-                return 1
+                return 0
 		    ;;
             -[Rr]*|--[Rr]*)
                 echo -e "RELAUNCHING:\t"$APP""
                 pkill -9 "$NAME" &>/dev/null
                 eval "$APP" &>/dev/null &disown
             ;;
+	-[Kk]*|--[Kk]*)
+		echo -e "KILLING:\t"$APP""
+		pkill -9 "$NAME" &>/dev/null
+	;;
             ""|*)
                 if ! pgrep -f "$NAME" &>/dev/null; then
                     echo -e "LAUNCHING:\t"$APP""

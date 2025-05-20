@@ -2,7 +2,7 @@
     "AllowOnlyFirst": false,
     "Brightness": 100,
     "CustomSettings": {
-        "size": 2
+        "size": 5
     },
     "EffectClassName": "Rain",
     "FPS": 60,
@@ -13,9 +13,9 @@
     "Tint": 0,
     "UserColors": [
         16777215,
-        12369856,
-        8091255,
-        4601917,
-        3219236
+        13421772,
+        8947848,
+        4473924,
+        2236962
     ]
 }

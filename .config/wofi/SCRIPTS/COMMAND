@@ -3,15 +3,26 @@
 # NICHE WOFI-CLI
 ################
 #
-# FORGET OPENING/CLOSING DETACHED TERMINALS
+# FORGET OPENING/CLOSING DETACHED TERMINALS WITH SECURE-CODING
 main() {
     local MENU=("────EXIT────")
-    local SELECTED=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "$~>" | tr -d '\n')
-    
-    if [ -n "$SELECTED" ] && [ "$SELECTED" != "────EXIT────" ]; then
-        eval "$SELECTED" &>/dev/null &disown
-    else
-        return 0
+    local INPUT=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "$~>")
+    local SANITIZER=${INPUT//[^[:alnum:][:space:]_.\/-]/}       # ./HAND_SANITIZER
+    local SANITIZER=${SANITIZER#${SANITIZER%%[![:space:]]*}}    # -PLEASE
+    local SANITIZER=${SANITIZER%${SANITIZER##*[![:space:]]}}    # -AND
+    local SANITIZER=${SANITIZER//+( )/ }                        # -THANK
+    local SANITIZED=($SANITIZER)                                # -YOU
+
+    if [[ -n "${SANITIZED[0]}" && "${SANITIZED[0]}" != "${MENU[0]}" ]]; then
+        if ! command -v "${SANITIZED[0]}" &>/dev/null; then
+            notify-send -u critical -a "COMMAND" "${SANITIZED[0]}" "INVALID" ||
+            echo "UNKNOWN COMMAND: ${SANITIZED[0]}" >&2
+        elif [[ "${SANITIZED[@]}" != "$INPUT" ]]; then
+            notify-send -u normal -a "COMMAND" "$0" "ORIGINAL: $INPUT\nSANITIZED: ${SANITIZED[*]}\n"
+            "${SANITIZED[@]}" &>/dev/null &disown
+        else
+            "${SANITIZED[@]}" &>/dev/null &disown
+        fi
     fi
 }
 

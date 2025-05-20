@@ -1,7 +1,7 @@
 {
     "audio_settings": {
         "amplitude": 100,
-        "audio_device": 1,
+        "audio_device": 2,
         "avg_mode": 0,
         "avg_size": 8,
         "decay": 80,
@@ -34,11 +34,7 @@
     "hide_unsupported": true,
     "prefer_random": true,
     "prefered_colors": [
-        16777215,
-        11513775,
-        7303023,
-        4144959,
-        2039583
+        16777215
     ],
     "startup_profile": "",
     "temperature": 0,

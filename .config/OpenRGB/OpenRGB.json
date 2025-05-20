@@ -5,11 +5,11 @@
         "enabled": true,
         "host": "0.0.0.0",
         "port": "",
-        "profile": "CF-WHITE",
+        "profile": "",
         "setclient": false,
         "setcustom": false,
         "setminimized": true,
-        "setprofile": true,
+        "setprofile": false,
         "setserver": false,
         "setserverhost": false,
         "setserverport": false
@@ -1299,18 +1299,18 @@
     "UserInterface": {
         "RunZoneChecks": false,
         "exit_profile": {
-            "profile_name": "CF-WHITE",
+            "profile_name": "",
             "set_on_exit": true
         },
         "geometry": {
             "height": 0,
             "load_geometry": true,
-            "save_on_exit": false,
+            "save_on_exit": true,
             "width": 0,
             "x": 0,
             "y": 0
         },
-        "greyscale_tray_icon": false,
+        "greyscale_tray_icon": true,
         "language": "System Default",
         "minimize_on_close": true
     }

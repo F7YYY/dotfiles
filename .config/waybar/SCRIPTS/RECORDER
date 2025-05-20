@@ -81,7 +81,7 @@ toggle_recording() {
     pkill -RTMIN+$SIGNAL waybar
 }
 
-main {
+main() {
     dependencies
     case "$1" in
         "status")

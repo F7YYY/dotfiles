@@ -1,0 +1,419 @@
+[
+  {
+    "name": "main",
+    "output": "All",
+    "layer": "overlay",
+    "position": "top",
+    "controls": "right",
+    "width": "auto",
+    "height": 0,
+    "homogeneous": true,
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "padding-horizontal": 0,
+    "padding-vertical": 0,
+    "spacing": 0,
+    "items-padding": 0,
+    "icons": "dark",
+    "css-name": "main",
+    "modules-left": [
+      "hyprland-workspaces",
+      "hyprland-taskbar",
+      "hyprland-submap",
+      "sway-workspaces",
+      "sway-taskbar",
+      "scratchpad",
+      "niri-taskbar",
+      "dwl-tags",
+      "tray"
+    ],
+    "modules-center": [
+      "clock",
+      "openweather"
+    ],
+    "modules-right": [
+      "playerctl",
+      "random-wallpaper"
+    ],
+    "controls-settings": {
+      "components": [
+        "brightness",
+        "volume",
+        "battery",
+        "per-app-volume",
+        "processes"
+      ],
+      "commands": {
+        "battery": ""
+      },
+      "show-values": false,
+      "interval": 1,
+      "icon-size": 20,
+      "hover-opens": false,
+      "leave-closes": true,
+      "click-closes": true,
+      "css-name": "controls-window",
+      "custom-items": [
+        {
+          "name": "Panel Settings",
+          "icon": "nwg-panel",
+          "cmd": "nwg-panel-config"
+        }
+      ],
+      "menu": {
+        "name": "Exit",
+        "icon": "system-shutdown-symbolic",
+        "items": [
+          {
+            "name": "RELOAD",
+            "cmd": "if [ $XDG_SESSION_DESKTOP =~ ^sway* ]; then swaymsg reload; elif [ $XDG_SESSION_DESKTOP == \"Hyprland\" ]; then hyprctl reload; else systemctl --user reload; systemctl --user daemon-reload; systemctl --user daemon-reexec; fi"
+          },
+          {
+            "name": "LOCK",
+            "cmd": "loginctl lock-session"
+          },
+          {
+            "name": "SUSPEND",
+            "cmd": "loginctl lock-session && systemctl suspend"
+          },
+          {
+            "name": "LOGOUT",
+            "cmd": "swaymsg exit"
+          },
+          {
+            "name": "REBOOT",
+            "cmd": "systemctl reboot"
+          },
+          {
+            "name": "BIOS",
+            "cmd": "systemctl reboot --firmware-setup"
+          },
+          {
+            "name": "SHUTDOWN",
+            "cmd": "systemctl -i poweroff"
+          }
+        ]
+      },
+      "show-brightness": false,
+      "show-volume": false,
+      "show-battery": false,
+      "output-switcher": true,
+      "per-app-volume": false,
+      "backlight-controller": "brightnessctl",
+      "backlight-device": "",
+      "window-width": 0,
+      "window-margin-horizontal": 0,
+      "window-margin-vertical": 0,
+      "root-css-name": "controls-overview",
+      "battery-low-level": 20,
+      "battery-low-interval": 2,
+      "processes-label": "Processes",
+      "readme-label": "README",
+      "angle": 0.0
+    },
+    "tray": {
+      "root-css-name": "tray",
+      "inner-css-name": "inner-tray",
+      "icon-size": 20,
+      "smooth-scrolling-threshold": 0,
+      "new-left": false
+    },
+    "sway-taskbar": {
+      "workspace-menu": [
+        "h1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "name-max-len": 20,
+      "image-size": 20,
+      "workspaces-spacing": 2,
+      "task-padding": 2,
+      "show-app-icon": true,
+      "show-app-name": false,
+      "show-layout": true,
+      "workspace-buttons": true,
+      "all-workspaces": true,
+      "mark-autotiling": true,
+      "mark-xwayland": true,
+      "all-outputs": true,
+      "angle": 0.0
+    },
+    "sway-workspaces": {
+      "numbers": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "custom-labels": [
+        "\u2460 \u2461 \u2462 \u2463 \u2464 \u2465 \u2466 \u2467 \u2468 \u2469"
+      ],
+      "focused-labels": [
+        "\u25c9"
+      ],
+      "show-icon": true,
+      "image-size": 20,
+      "show-name": true,
+      "name-length": 10,
+      "mark-autotiling": true,
+      "mark-content": true,
+      "hide-empty": true,
+      "show-layout": true,
+      "angle": 0.0
+    },
+    "clock": {
+      "format": "%Z%T",
+      "tooltip-text": "%a: %D",
+      "on-left-click": "",
+      "on-middle-click": "betterbird -calendar",
+      "on-right-click": "",
+      "on-scroll-up": "",
+      "on-scroll-down": "",
+      "css-name": "clock",
+      "interval": 1,
+      "tooltip-date-format": true,
+      "root-css-name": "root-clock",
+      "angle": 0.0,
+      "calendar-path": "",
+      "calendar-css-name": "calendar-window",
+      "calendar-placement": "top",
+      "calendar-margin-horizontal": 0,
+      "calendar-margin-vertical": 0,
+      "calendar-icon-size": 20,
+      "calendar-interval": 60,
+      "calendar-on": true
+    },
+    "playerctl": {
+      "buttons-position": "right",
+      "icon-size": 20,
+      "chars": 20,
+      "scroll": true,
+      "button-css-name": "playerctl-button",
+      "label-css-name": "playerctl-config",
+      "interval": 1,
+      "show-cover": true,
+      "cover-size": 20,
+      "angle": 0.0
+    },
+    "menu-start": "left",
+    "exclusive-zone": true,
+    "sigrt": 64,
+    "use-sigrt": false,
+    "scratchpad": {
+      "css-name": "scratchpad",
+      "icon-size": 20,
+      "angle": 0.0,
+      "single-output": true
+    },
+    "sway-mode": {
+      "show-default": false,
+      "show-icon": true,
+      "css-name": "swaymode",
+      "icon-size": 20,
+      "angle": 0.0
+    },
+    "openweather": {
+      "module-id": "1747721040.477734",
+      "appid": "",
+      "weatherbit-api-key": "",
+      "lat": 51.5008,
+      "long": -0.1246,
+      "lang": "en",
+      "units": "standard",
+      "interval": 1800,
+      "loc-name": "",
+      "weather-icons": "color",
+      "on-right-click": "",
+      "on-middle-click": "",
+      "on-scroll": "",
+      "icon-placement": "start",
+      "icon-size": 24,
+      "css-name": "weather",
+      "show-name": true,
+      "angle": 0.0,
+      "ow-popup-icons": "dark",
+      "popup-header-icon-size": 48,
+      "popup-icon-size": 24,
+      "popup-text-size": "small",
+      "popup-css-name": "weather-forecast",
+      "popup-placement": "right",
+      "popup-margin-horizontal": 0,
+      "popup-margin-top": 0,
+      "popup-margin-bottom": 0,
+      "show-humidity": true,
+      "show-wind": true,
+      "show-pressure": true,
+      "show-cloudiness": true,
+      "show-visibility": true,
+      "show-pop": true,
+      "show-volume": true
+    },
+    "brightness-slider": {
+      "show-brightness": false,
+      "show-volume": false,
+      "show-battery": true,
+      "icon-size": 20,
+      "interval": 10,
+      "hover-opens": true,
+      "leave-closes": true,
+      "root-css-name": "brightness-module",
+      "css-name": "brightness-popup",
+      "angle": 0.0,
+      "icon-placement": "end",
+      "backlight-device": "",
+      "backlight-controller": "brightnessctl",
+      "slider-orientation": "horizontal",
+      "slider-inverted": false,
+      "popup-icon-placement": "start",
+      "popup-horizontal-alignment": "right",
+      "popup-vertical-alignment": "top",
+      "popup-width": 256,
+      "popup-height": 64,
+      "popup-horizontal-margin": 0,
+      "popup-vertical-margin": 0,
+      "step-size": 5
+    },
+    "dwl-tags": {
+      "tag-names": "1 2 3 4 5 6 7 8 9 10",
+      "title-limit": 20,
+      "angle": 0.0
+    },
+    "hyprland-taskbar": {
+      "name-max-len": 20,
+      "icon-size": 16,
+      "workspaces-spacing": 0,
+      "client-padding": 0,
+      "show-app-icon": true,
+      "show-app-name": false,
+      "show-app-name-special": false,
+      "show-layout": true,
+      "all-outputs": true,
+      "mark-xwayland": true,
+      "angle": 0.0,
+      "image-size": 20,
+      "task-padding": 0
+    },
+    "hyprland-workspaces": {
+      "num-ws": 10,
+      "show-icon": true,
+      "show-inactive-workspaces": true,
+      "show-workspaces-from-all-outputs": false,
+      "image-size": 20,
+      "show-workspaces": true,
+      "show-name": false,
+      "name-length": 20,
+      "show-empty": true,
+      "mark-content": true,
+      "show-names": true,
+      "mark-floating": true,
+      "mark-xwayland": true,
+      "angle": 0.0
+    },
+    "monitor": "",
+    "run-if-output-exist": [],
+    "run-if-output-absent": [],
+    "width-as-percentage": true,
+    "start-hidden": false,
+    "hyprland-submap": {
+      "show-default": false,
+      "show-icon": true,
+      "css-name": "executor-label",
+      "icon-size": 20,
+      "angle": 0.0
+    },
+    "keyboard-layout": {
+      "keyboard-device-hyprland": "",
+      "root-css-name": "root-executor",
+      "css-name": "executor-label",
+      "show-icon": true,
+      "icon-size": 20.0,
+      "interval": 1.0,
+      "icon-placement": "left",
+      "tooltip-text": "\ud83d\uddb1\u1429\u2776\u2346Next_layout | \u1429\u2777\u2346Menu",
+      "angle": 0.0
+    },
+    "niri-taskbar": {
+      "name-max-len": 20,
+      "icon-size": 16,
+      "workspaces-spacing": 2,
+      "client-padding": 0,
+      "workspace-label": "idx",
+      "show-app-icon": true,
+      "show-app-name": true,
+      "show-layout": true,
+      "all-outputs": true,
+      "angle": 0.0,
+      "image-size": 20,
+      "task-padding": 2
+    },
+    "random-wallpaper": {
+      "source": "wallhaven.cc",
+      "tags": [
+        ""
+      ],
+      "ratios": "",
+      "atleast": "1920x1080",
+      "apikey": "H6NL2CE1cAprGMZAdm6YQ9p1uYu5EKPg",
+      "save-path": "/home/snakeye/Pictures/Wallpapers",
+      "local-path": "/home/snakeye/Pictures/Wallpapers",
+      "icon-size": 20,
+      "interval": 10,
+      "refresh-on-startup": true
+    },
+    "swaync": {
+      "tooltip-text": "Notifications",
+      "on-left-click": "swaync-client -t",
+      "on-middle-click": "pkill -9 swaync; swaync &>/dev/null &disown && swaync-client -R && swaync-client -rs",
+      "on-right-click": "swaync-client -op",
+      "on-scroll-up": "swaync-client --close-latest",
+      "on-scroll-down": "swaync-client --hide-latest ",
+      "root-css-name": "root-executor",
+      "css-name": "executor",
+      "icon-placement": "right",
+      "icon-size": 20,
+      "interval": 1,
+      "always-show-icon": false
+    },
+    "executor-cpuav": {
+      "script": "gopsuinfo -i a",
+      "interval": 1,
+      "tooltip-text": "CPU average load",
+      "on-left-click": "foot -e htop",
+      "on-middle-click": "",
+      "on-right-click": "",
+      "on-scroll-up": "",
+      "on-scroll-down": "",
+      "css-name": "",
+      "icon-size": 20,
+      "icon-placement": "right",
+      "root-css-name": "",
+      "angle": 0.0,
+      "sigrt": 34,
+      "use-sigrt": false
+    },
+    "executor-cpubar": {
+      "script": "gopsuinfo -c g",
+      "interval": 2,
+      "tooltip-text": "",
+      "on-left-click": "",
+      "on-middle-click": "",
+      "on-right-click": "",
+      "on-scroll-up": "",
+      "on-scroll-down": "",
+      "css-name": "",
+      "icon-size": 16,
+      "icon-placement": "left"
+    }
+  }
+]

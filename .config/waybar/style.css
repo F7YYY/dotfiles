@@ -8,142 +8,109 @@
 *"https://github.com/Alexays/Waybar/wiki/Configuration/"*
 *
 **─────────────────────────────────────────(PRESETS)───*/
-@define-color BLACK rgba(0,0,0,0.66);
-@define-color WHITE rgba(255,255,255,0.66);
+@define-color black     rgba(0,0,0,0.8);
+@define-color grey      rgba(125,125,125,0.8);
+@define-color white     rgba(255,255,255,0.8);
+@define-color red       rgba(255,0,0,0.8);
+@define-color green     rgba(0,255,0,0.8);
+@define-color blue      rgba(0,0,255,0.8);
+@define-color purple    rgba(255,0,255,0.8);
 
 /*──────────────────────────────────────(EVERYTHING)───*/
 * {
-    /*all: unset;*/
+    all: unset;
     font: italic small-caps bold 16px "Sony Sketch EF, Symbols Nerd Font Mono";
-    background: transparent;
-    background-color: transparent;
-    background-image: none;
-    box-shadow: none;
-    border: none;
-    padding: 0px;
+    text-shadow: 1px 1px @black;
+    border-radius: 20px;
+    -gtk-outline-radius: 20px;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 @keyframes blink {
-    to {
+    from {
         color: transparent;
+    }
+    to {
+        color: inherit;
     }
 }
 
 /*──────────────────────────────────────────(WAYBAR)───*/
 tooltip {
-    color: white;
-    background-color: @BLACK;
+    background-color: @black;
     border: 2px solid white;
-    border-radius: 16px;
 }
 window#waybar {
-    color: white;
     background: linear-gradient(transparent calc(60%-10px), white, transparent calc(40%+10px));
     transition-property: inherit;
 }
-button menu {
-    all: unset;
+#waybar window menu,
+#waybar window menuitem {
+    padding: 4px;
 }
 menu {
-    color: white;
-    background-color: @BLACK;
+    background-color: @black;
     border: 1px solid white;
-    border-radius: 16px;
 }
-*menu>*:hover {
-    color: black;
-    background-color: @WHITE;
-    border: 1px solid @BLACK;
-    border-radius: 16px;
-    animation-duration: 0;
+menu>*:hover {
+    background-color: @grey;
+    border: 1px solid @white;
 }
 
 /*─────────────────────────────────────────(MODULES)───*/
 *.module {
-    padding: 1px 10px;
+    padding: 2px 10px;
 }
-*.modules-left,
-*.modules-center,
-*.modules-right {
+*.modules-left, *.modules-center, *.modules-right {
     margin: 6px;
-    color: white;
-    background-color: @BLACK;
+    background-color: @black;
     border: 1px solid white;
-    border-radius: 16px;
-    border-width: .6px 2px;
+    border-width: 1px 3px;
 }
 *.overlay {
-    background-color: black;
-    color: white;
-}
-*.empty {
-    padding: 0px;
+    background-color: @black;
 }
 /*───WLR_TASKBAR───*/
-#tray>**,
-button>** {
+#tray *, button {
     padding: 0px 2px;
 }
-#taskbar {
-    padding: 0px;
-}
-#taskbar button {
-    padding: 0px 1px;
-}
-#taskbar button:first-child {
-    padding: 0px 0px 0px 10px;
-}
-#taskbar button:last-child {
-    padding: 0px 10px 0px 0px;
-}
-
 /*───PULSEAUDIO_SLIDER───*/
-*slider {
-    min-height: 1px;
-    min-width: 1px;
-    border: 1px solid red;
-    border-radius: 16px;
-    background-color: black;
+slider {
+    min-height: 10px;
 }
 *trough {
-    min-height: 1px;
     min-width: 100px;
     border: 1px solid white;
-    border-radius: 16px;
-    background-color: @BLACK;
+    background-color: @black;
 }
 *highlight {
-    min-width: 1px;
-    border: 1px solid white;
-    border-radius: 16px;
-    background-color: white;
+    border: 1px solid @black;
+    background-color: @white;
 }
 
-/*──────────────────────────────────────(AUTOMATION)───*/
-#workspaces>*:hover, #bluetooth:hover, #custom-pacman:hover, *:hover {
-    color: red;
-}
-*.hidden *.deactivated, *.passive, *.off, *.inactive, *.empty, *.visible, *.hosting-monitor, *.current_output, *.Paused, *.Stopped {
-    color: grey;
-}
-*.focused, *.active, *.on, *.connected, *.pairable, *.solo, *.playing {
+/*─────────────────────────────────────(AUTOMATIONS)───*/
+*:hover:hover, *:hover* {
     color: white;
 }
-*.persistent, *.disconnected, *.pending-updates, *.needs-attention {
-    color: white;
-    animation-name: blink;
-    animation-duration: 500ms;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+*.on, *.connected, *.visible, *.full, *.solo, *.paused, *.playing, *.current_output {
+    color: @white;
 }
-*.warning, *.urgent, *.critical, *.critical:not(.charging) {
-    color:red;
-    animation-name: blink;
-    animation-duration: 500ms;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+*.hidden, *.deactivated, *.disconnected, *.muted, *.good, *.passive, *.pairable,  *.inactive, *.hosting-monitor, *.stopped, *:disabled {
+    color: @grey;
 }
-*.charging, *.plugged {
-    color: green;
+*:checked, *.off, *.empty {
+    color: @black;
+}
+*.persistent, *.charging, *.plugged, *.pending-updates, *.needs-attention {
+    animation-duration: 1000ms;
+    animation-name: blink;
+}
+*.warning {
+    animation-duration: 500ms;
+    animation-name: blink;
+}
+*.urgent, *.critical, *.plugged:not(.charging) {
+    animation-duration: 250ms;
+    animation-name: blink;
 }

@@ -11,6 +11,7 @@
 #
 #─────────────────────────────────────────────────────────────────(GLOBAL)───
 [global]
+    monitor=1
     enable_posix_regex=true
     notification_limit=0
     #─Geometry

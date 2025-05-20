@@ -10,7 +10,6 @@
 [user]
 	name = F7YYY
 	email = 38305613+F7YYY@users.noreply.github.com
-	signingkey = B8C8A538AD60E92B
 [core]
 	editor = nvim
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol

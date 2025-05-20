@@ -24,7 +24,7 @@ inside-clear-color=00000000
 inside-caps-lock-color=00000000
 inside-ver-color=00000000
 inside-wrong-color=00000000
-indicator-image=Pictures/Wallpapers/monochrome/1.jpg
+indicator-image=$HOME/Pictures/Wallpapers/**
 #────────────────────────
 #layout-bg-color=FF0000FF
 #layout-border-color=FF0000FF

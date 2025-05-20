@@ -168,9 +168,9 @@ for_window {
 }
 #───WINDOW_DEFAULT_APPS
 assign {
-    [class="zoom|teams*"] $WS 9
-    [app_id="betterbird"] $WS 10
-    [app_id="easyeffects"] $SP
+    [class="zoom*|teams*"] $WS 9
+    [app_id="^betterbird*"] $WS 10
+    [app_id="easyeffects*"] $SP
 }
 #───OTHERS
 floating_modifier               $SUPER normal

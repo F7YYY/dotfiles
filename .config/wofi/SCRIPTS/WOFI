@@ -13,9 +13,9 @@ dependencies() {
                     "$HOME/.config/APPLICATIONS")
 
     for CMD in "$PACKAGES"; do
-        if ! which "$CMD" &>/dev/null; then
-            notify-send -u critical -a "WOFI" "$CMD" "Missing:" ||
-            echo "WOFI: $CMD is missing or not in PATH" >&2
+        if ! command -v "$CMD" &>/dev/null; then
+            notify-send -u critical -a "WOFI" "$0" "$CMD" "MISSING:" ||
+            echo "WOFI: [$CMD] MISSING OR NOT IN PATH" >&2
         fi
     done
 }
@@ -24,24 +24,24 @@ dependencies() {
 wofimenu() {
     case "$1" in
         "WOFI")
-            eval wofi
+            wofi
         ;;
         "CALCULATOR")
-            eval wofi-calc
+            wofi-calc
         ;;
         "EMOJI")
-            eval wofi-emoji
+            wofi-emoji
         ;;
         "POWERMENU")
-            eval $HOME/.config/wofi/SCRIPTS/POWERMENU
+            $HOME/.config/wofi/SCRIPTS/POWERMENU
         ;;
         "COMMAND")
-            eval $HOME/.config/wofi/SCRIPTS/COMMAND
+            $HOME/.config/wofi/SCRIPTS/COMMAND
         ;;
         "APPLICATIONS")
-            eval $HOME/.config/APPLICATIONS
+            $HOME/.config/APPLICATIONS
         ;;
-        "────EXIT────"|""|*)
+        ""|*)
             exit 0
         ;;
     esac
@@ -49,8 +49,8 @@ wofimenu() {
 
 # DISPLAY APPLICATIONS+SCRIPTS & HANDLE USER INPUT
 main() {
-    local MENU=("WOFI" "CALCULATOR" "EMOJI" "POWERMENU" "COMMAND" "APPLICATIONS" "────EXIT────")
-    local SELECTED=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "MENU" | tr -d '\n')
+    local MENU=("────EXIT────" "WOFI" "CALCULATOR" "EMOJI" "POWERMENU" "COMMAND" "APPLICATIONS")
+    local SELECTED=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "MENU")
     
     dependencies
     wofimenu "$SELECTED"

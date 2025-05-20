@@ -9,8 +9,9 @@
 *
 **──────────────────────────────────────────(LAYOUT)───*/
 [{
-	"layer": "top",
-	"position": "top",
+	//"output": "DP-1",
+	"layer": "overlay",
+	"position": "overlay",
 	"gtk-layer-shell": true,
 	"pango_markup": true,
 	"reload_style_on_change": true,
@@ -18,28 +19,27 @@
 	"width": 0,
 	"margin": 0,
 	"spacing": 0,
-	"icon-size": 16,
+	"icon-size": 20,
 	"modules-left": [			//__APPLICATIONS__
 		"custom/appmenu",		// AUR: WOFI | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/WOFI
-		"sway/workspaces",		// ⮶ REPLACE
-		"sway/scratchpad",		// ⮶ REPLACE
-		"hyprland/workspaces",	// ⮱ RENAME: "wlr/workspaces",
+		"sway/workspaces",		// ⬐ REPLACE
+		"sway/scratchpad",		// ⬐ REPLACE
+		"hyprland/workspaces",	// ↳ REPLACE ➞ "wlr/workspaces",
 		"tray",
 		"wlr/taskbar",
-		//"custom/cava",			// SCRIPT: $HOME/.CONFIG/CAVA/SCRIPTS/WAYBARCAVA
-		"gamemode"
-		//"custom/recorder"		// SCRIPT: $HOME/.CONFIG/WAYBAR/SCRIPTS/RECORDER
+		"gamemode",
+		"custom/recorder"		// SCRIPT: $HOME/.CONFIG/WAYBAR/SCRIPTS/RECORDER
 	],
 	"modules-center": [			//__STATUS__
 		"custom/weather",		// AUR: WTTRBAR | WIP ~ FORMAT BETWEEN ℉/℃
-		"custom/notification",	// AUR: SWAYNC
+		"custom/notification",	// AUR: SWAYNC	| WIP ~ EVERYTHING
 		"clock"
 	],
 	"modules-right": [			//__SYSTEM__ WIP FIX FORMAT-ALT STATUS
-		"group/window",			// WIP ~ IMPORT TO SCRIPT & REPORT W/O JSON
+		"group/window",			// WIP ~ EVERYTHING
 		"bluetooth",			// WIP ~ REPORT ALL CONNECTED DEVICES
-		"group/sink",			// WIP ~ FIX #SINK/SLIDER CRASHING WAYBAR
-		"group/source",			// WIP ~ FIX #SOURCE/SLIDER NOT SHOWN
+		"group/sink",			// WIP ~ #SINK/SLIDER CRASHING WAYBAR
+		"group/source",			// WIP ~ #SOURCE/SLIDER NOT SHOWN
 		"cpu",					// WIP ~ REFORMAT TOOLTIP INFORMATION
 		"custom/gpu-usage",		// AUR: GPU-USAGE-WAYBAR-GIT
 		"memory",
@@ -47,24 +47,24 @@
 		"battery",
 		"group/backlight",
 		"network",				// WIP ~ REPORT EXTERNAL-IP W/O DDOS
-		"custom/powermenu",		// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
+		"group/power",			// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
 		"custom/pacman"			// AUR: WAYBAR-UPDATES
 	],
 	//──────────────────────────────(MODULES_LEFT)───
 	"custom/appmenu": {
-		"format": "⌘",
-		"format-alt": "",
+		"format": "󰣇",
+		"format-alt": "⌘",
 		"format-alt-click": "click-right",
 		"on-click": "wofi",
 		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/WOFI",
-		"tooltip-format": "🖱ᐩ❶⍆LAUNCHER\n🖱ᐩ❸⍆OTHER",
+		"tooltip-format": "🖱ᐩ❶⍆LAUNCHER\n🖱ᐩ❷⍆FORMAT\n🖱ᐩ❸⍆OTHER",
 		"tooltip": true
 	},
 	"sway/workspaces": {
 		"disable-scroll": true,
 		"active-only": false,
 		"all-outputs": false,
-		//"current-only": true,
+		"current-only": true,
 		"sort-by-number": true,
 		"workspace_auto_back_and_forth": false,
 		"format": "{icon}",
@@ -126,6 +126,9 @@
 		"on-click-middle": "close",
 		"tooltip": false
 	},
+	"tray": {
+		"show-passive-items": true
+	},
 	"wlr/taskbar": {
 		"all-outputs": false,
 		"markup": true,
@@ -138,25 +141,6 @@
 	    "on-click-right": "minimize-raise",
 		"tooltip-format": "{title}",
 		"tooltip": true
-	},
-	"tray": {
-		"show-passive-items": true
-	},
-	"custom/cava": {	// WIP ~ IMPORT/EXPORT TO/FROM SCRIPT
-		"exec-if": "[ -f $HOME/.config/cava/SCRIPTS/WAYBARCAVA ]",
-		"exec": "$HOME/.config/cava/SCRIPTS/WAYBARCAVA",
-		"config": "$HOME/.config/cava/config",
-		"format": "▕{}▏",
-		//"format-icons" : ["_","▁","▂","▃","▄","▅","▆","▇","█"],
-		"bars": 10,
-		"bar_delimiter": 0,
-		"on-click": "playerctl -a play-pause",
-		"on-click-middle": "youtube-music",
-		"on-scroll-up": "playerctl previous",
-		"on-scroll-down": "playerctl next",
-		"tooltip-format": "{}", //"\t{playerName}\n🎜\t{artist} 🢖 {title}",
-		"tooltip": false,	// TRUE BREAKS ALL MODULE TOOLTIPS
-		"return": "json"
 	},
 	"gamemode": {
 		"format": "{glyph}",
@@ -173,7 +157,7 @@
 		"interval": 1,
 		"exec-if": "[ -f $HOME/.config/waybar/SCRIPTS/RECORDER ]",
 		"exec": "$HOME/.config/waybar/SCRIPTS/RECORDER status",
-		"format": "{}", //",
+		"format": "{}", //"",
 		"format-alt": "{}", //" {}",		// WIP ~ REPORT WHICH APP'S RECORDING
 		"format-alt-click": "click-right",
 		"on-click": "$HOME/.config/waybar/SCRIPTS/RECORDER toggle fullscreen",
@@ -205,7 +189,7 @@
 		"format-alt-click": "click-right",
 		"format-icons": {
 			"notification": "󱅫",
-			"none": "",						// "",
+			"none": "",
 			"dnd-notification": "",
 			"dnd-none": "󰂛",
 			"inhibited-notification": "",
@@ -213,40 +197,41 @@
 			"dnd-inhibited-notification": "",
 			"dnd-inhibited-none": ""
 		},
-		"on-click": "sleep 0.1 && swaync-client -t -sw",
-		"on-click-middle": "sleep 0.1 && swaync-client -d -sw",
+		"on-click": "swaync-client -R -rs && swaync-client -t -swb",
+		"on-click-middle": "swaync-client -d -swb",
 		"escape": true,
 		"tooltip": true,
 		"return-type": "json"
 	},
 	"clock": {
 		"interval": 1,
-		"format": "{:%Z: %T} ⴵ",
-		"format-alt": "{:%a: %D} ",
+		"format": "{:%Z:%T} ⴵ",
+		"format-alt": "{:%a %D} ",
 		"format-alt-click": "click-right",
 		"calendar": {
-			"mode-mon-col": 2,
-			"weeks-pos": "left",
-			"on-scroll": 1,
+			"mode"			: "year",
+			"mode-mon-col"	: 3,
+			"weeks-pos"		: "left",
+			"on-scroll"		: 1,
 			//"on-click-right": "mode",
 			"format": {
-				"months": "<span color='#FFFFFF'><b>{}</b></span>",
-				"days": "<span color='#DDDDDD'>{}</span>",
-				"weeks": "<span color='#777777'>{}</span>",
-				"weekdays": "<span color='#777777'>{}</span>",
-				"today": "<span color='#FF0000'><b>{}</b></span>"
+				"months"	: "<span color='#FFFFFF'><b>{}</b></span>",
+				"days"		: "<span color='#DDDDDD'>{}</span>",
+				"weeks"		: "<span color='#777777'>{}</span>",
+				"weekdays"	: "<span color='#777777'>{}</span>",
+				"today"		: "<span color='#FF0000'><b>{}</b></span>"
 			}
 		},
 		"actions": {
-			"on-click-right": "mode",
-			"on-click-forward": "tz_up",
-			"on-click-backward": "tz_down",
-			"on-scroll-up": "shift_down",
-			"on-scroll-down": "shift_up"
+			"on-click-right"	: "mode",
+			"on-click-forward"	: "tz_up",
+			"on-click-backward"	: "tz_down",
+			"on-scroll-up"		: "shift_down",
+			"on-scroll-down"	: "shift_up"
 		},
 		"on-click": "wl-copy $(date '+%F_%T')",
 		"on-click-middle": "betterbird -calendar",
-		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"tooltip-format": "<tt><span size='10pt'{calendar}</span></tt>",
 		"tooltip": true
 	},
 	//─────────────────────────────(MODULES_RIGHT)───
@@ -260,8 +245,6 @@
 		},
 		"modules": [
 			"idle_inhibitor",
-			"custom/cava",
-			"mpd",
 			"wlr/window",
 			"sway/window",
 			"hyprland/window"
@@ -288,47 +271,63 @@
 		},
 		"tooltip": true
 	},
-	"mpd": {
-		"interval": 1,
-		//"title-len": 34,
-		"unknown-tag": "N/A",
-		"format": "{consumeIcon}{singleIcon}{artist} - {title}  {stateIcon}",
-		"format-disconnected": "",
-		"format-stopped": "{consumeIcon}{singleIcon} ",
-		"consume-icons": {
-			"on": ""
-		},
-		"random-icons": {
-			"off": "<span color=\"#f53c3c\"></span> ",
-			"on": ""
-		},
-		"repeat-icons": {
-			"on": ""
-		},
-		"single-icons": {
-			"on": "1"
-		},
-		"state-icons": {
-			"playing": "",					// 🎜
-			"paused": ""
-		},
-		"on-scroll-up": "playerctl previous",
-		"on-scroll-down": "playerctl next",
-		"tooltip-format": "{artist} 🢖 {album}",
-		"tooltip-format-disconnected": "",	// STRING EMPTY=HIDDEN
-		"tooltip": true
-	},
 	"idle_inhibitor": {
 		"what": "handle-lid-switch",
 		"format": "{icon}",
-		//"format-alt": "{}\t{icon}",
+		"format-alt": "{custom/cava}\t{icon}",
 		"format-alt-click": "click-right",
-		"format-icons": {
-			"activated": "💮",				// "",
-			"deactivated": "🏵"				// ""
+		"format-icons": {	// "🏵",
+			"activated": "",
+			"deactivated": ""
 		},
 		"tooltip-format": "{status}",
-		"tooltip": true
+		"tooltip": true,
+		"custom/cava": {	// WIP ~ IMPORT/EXPORT TO/FROM SCRIPT
+			"exec-if": "[ -f $HOME/.config/cava/SCRIPTS/WAYBARCAVA ]",
+			"exec": "$HOME/.config/cava/SCRIPTS/WAYBARCAVA",
+			"config": "$HOME/.config/cava/config",
+			"format": "▕{}▏",
+			"format-icons" : ["_","▁","▂","▃","▄","▅","▆","▇","█"],
+			"bars": 10,
+			"bar_delimiter": 0,
+			"on-click": "playerctl -a play-pause",
+			"on-click-middle": "youtube-music",
+			"on-scroll-up": "playerctl previous",
+			"on-scroll-down": "playerctl next",
+			"tooltip-format": "{mpd}", //"\t{playerName}\n🎜\t{artist} 🢖 {title}",
+			"tooltip": false,	// TRUE BREAKS ALL MODULE TOOLTIPS
+			"return": "json",
+			"mpd": {
+				"interval": 1,
+				//"title-len": 34,
+				"unknown-tag": "N/A",
+				"format": "{consumeIcon}{singleIcon}{artist} - {title}  {stateIcon}",
+				"format-disconnected": "",
+				"format-stopped": "{consumeIcon}{singleIcon} ",
+				"consume-icons": {
+					"on": ""
+				},
+				"random-icons": {
+					"off": "<span color=\"#f53c3c\"></span> ",
+					"on": ""
+				},
+				"repeat-icons": {
+					"on": ""
+				},
+				"single-icons": {
+					"on": "1"
+				},
+				"state-icons": {
+					"playing": "",					// 🎜
+					"paused": ""
+				},
+				"on-scroll-up": "playerctl previous",
+				"on-scroll-down": "playerctl next",
+				"tooltip-format": "{artist} 🢖 {album}",
+				"tooltip-format-disconnected": "",	// STRING EMPTY=HIDDEN
+				"tooltip": true
+			}
+		}
 	},
 	"bluetooth": {
 		"interval": 1,
@@ -570,6 +569,53 @@
 		"tooltip-format-ethernet": "{icon}\t{ifname}\n⮩\tIN-IP: {ipaddr}/{cidr}\n⮩\tEX-IP: $(curl ifconfig.me)\n⮬\t{bandwidthUpBits}\n⮮\t{bandwidthDownBits}",
 		"tooltip": true
 	},
+	"group/power": {
+    	"orientation": "inherit",
+    	"drawer": {
+    	    "transition-duration": 500,
+    	    "children-class": "options",
+    	    "transition-left-to-right": false
+    	},
+    	"modules": [
+    	    "custom/powermenu"
+			//"custom/reload",
+			//"custom/suspend",
+    	    //"custom/logout",
+    	    //"custom/lock",
+    	    //"custom/reboot",
+    	    //"custom/bios"
+    	]
+	},
+	"custom/reload": {
+    	"format": "󰗼",
+		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --reload",
+		"tooltip": false
+	},
+	"custom/suspend": {
+	    "format": "󰍁",
+		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --suspend",
+		"tooltip": false
+	},
+	"custom/lock": {
+	    "format": "󰍁",
+		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --lock",
+		"tooltip": false
+	},
+	"custom/logout": {
+		"format": "󰗼",
+		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --logout",
+		"tooltip": false
+	},
+	"custom/reboot": {
+	    "format": "󰜉",
+		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --reboot",
+		"tooltip": false
+	},
+	"custom/bios": {
+	    "format": "󰜉",
+		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --bios",
+		"tooltip": false
+	},
 	"custom/powermenu": {
 		"interval": 1,
 		"exec-if": "[ -f $HOME/.config/wofi/SCRIPTS/POWERMENU ]",
@@ -577,9 +623,10 @@
 		"format": "⏻",
 		"format-alt": "🖕",
 		"format-alt-click": "click-right",
+		//"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU SHUTDOWN",
 		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU",
 		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/POWERMENU",
-		"tooltip-format": "{}",
+		"tooltip-format": "{}\n──────────────\n🖱ᐩ❶⍆POWERMENU\n🖱ᐩ❷⍆BITCH\n🖱ᐩ❸⍆POWERMENU",
 		"tooltip": true
 	},
 	"custom/pacman": {
