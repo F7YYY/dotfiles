@@ -7,16 +7,12 @@
 *                    /____/                 *
 *"https://man.archlinux.org/man/swaync.5.en"*
 *
-**─────────────────────────────(PRESETS)───*/
-@define-color black   rgba(0,0,0,0.8);
-@define-color grey    rgba(125,125,125,0.8);
-@define-color white   rgba(255,255,255,0.8);
-@define-color red     rgba(255,0,0,0.8);
-@define-color green   rgba(0,255,0,0.8);
-@define-color blue    rgba(0,0,255,0.8);
-@define-color purple  rgba(255,0,255,0.8);
+**──────────────────────────────(PRESETS)──*/
+@define-color black rgba(0,0,0,0.8);
+@define-color grey  rgba(125,125,125,0.8);
+@define-color white rgba(255,255,255,0.8);
 
-/*──────────────────────────(EVERYTHING)───*/
+/*───────────────────────────(EVERYTHING)──*/
 * {
   all: unset;
   font: italic small-caps bold 20px "Sony Sketch EF, Symbols Nerd Font Mono";
@@ -26,24 +22,25 @@
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  transition-property: inherit;
 }
 @keyframes blink {
   from {
-    color: transparent;
+    color: inherit;
   }
   to {
-    color: inherit;
+    color: transparent;
   }
 }
 
-/*─────────────────────────────(CONTROL)───*/
+/*──────────────────────────────(CONTROL)──*/
 .control-center {
   border: 2px solid white;
   background-color: @black;
   padding: 22px;
 }
 
-/*──────────────────────────────(NOTIFY)───*/
+/*───────────────────────────────(NOTIFY)──*/
 .notification {
   border: 2px solid white;
   background-color: @grey;
@@ -69,11 +66,11 @@ label {
 .close-button {
 }
 
-/*──────────────────────────────(WIDGET)───*/
+/*───────────────────────────────(WIDGET)──*/
 .widget-buttons-grid {
   padding: 100px;
 }
-/*──────────────────────────(AUTOMATION)───*/
+/*───────────────────────────(AUTOMATION)──*/
 *>button,
 *>switch,
 *>slider {

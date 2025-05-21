@@ -1,57 +1,71 @@
-/**********************************
-*  ██╗    ██╗ ██████╗ ███████╗██╗ *
-*  ██║    ██║██╔═══██╗██╔════╝██║ *
-*  ██║ █╗ ██║██║   ██║█████╗  ██║ *
-*  ██║███╗██║██║   ██║██╔══╝  ██║ *
-*  ╚███╔███╔╝╚██████╔╝██║     ██║ *
-*   ╚══╝╚══╝  ╚═════╝ ╚═╝     ╚═╝ *
-***********************************
+/**************************************
+*    ██╗    ██╗ ██████╗ ███████╗██╗   *
+*    ██║    ██║██╔═══██╗██╔════╝██║   *
+*    ██║ █╗ ██║██║   ██║█████╗  ██║   *
+*    ██║███╗██║██║   ██║██╔══╝  ██║   *
+*    ╚███╔███╔╝╚██████╔╝██║     ██║   *
+*     ╚══╝╚══╝  ╚═════╝ ╚═╝     ╚═╝   *
+*https://man.archlinux.org/man/wofi.1/*
 *
-**──PRESETS──────────────────────*/
-@define-color black rgba(0,0,0,0.66);
-@define-color white rgba(255,255,255,0.66);
+**───────────────────────(PRESETS)───*/
+@define-color black rgba(0,0,0,0.8);
+@define-color grey  rgba(125,125,125,0.8);
+@define-color white rgba(255,255,255,0.8);
 
-/*──EVERYTHING───────────────────*/
+/*─────────────────────(EVERYTHING)──*/
 * {
-    /*all: unset;*/
+    all: unset;
     font: italic small-caps bold 20px "Sony Sketch EF, Symbols Nerd Font Mono";
-    background: transparent;
-    background-color: transparent;
-    background-image: none;
-    box-shadow: none;
-    border: none;
-    color: white;
+    text-shadow: 1px 1px @black;
+    border-radius: 20px;
+    -gtk-outline-radius: 20px;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transition-property: inherit;
+}
+@keyframes blink {
+    from {
+        color: inherit;
+    }
+    to {
+        color: transparent;
+    }
 }
 
-/*──WOFI─────────────────────────*/
+/*────────────(MODULES+AUTOMATIONS)──*/
 window {
-    color: white;
-    transition-property: inherit;
+    color: @white;
     background-color: @black;
 }
 #input {
-    font-size: 30px;
     margin: 10px;
-    color: red;
-    background-color: @black;
-    border: 2px solid red;
-    border-radius: 16px;
 }
-#selected {
-    padding: 0px 10px 0px 0px;
-    background-color: @white;
-    border: 2px solid @black;
-    border-radius: 16px;
-}
-#img {
+#input image {
     padding: 0px 10px;
+    color: white;
+    display: inline-block;
 }
-#entry:selected {
-    border: 2px solid @white;
-    border-radius: 16px;
-    color: transparent;
-    padding: 2px;
+#selected, #input {
+    font-size: 30px;
+    color: white;
+    background-color: @black;
+    border: 2px solid white;
 }
-#text:selected {
-    color: @black;
+#entry, #entry label, #entry image {
+    margin: 0px 10px;
+}
+*:hover, #entry:selected {
+    color: @white;
+    background-color: @grey;
+    border: 2px solid white;
+}
+*:hover, #entry #entry:selected {
+    color: white;
+    background-color: @black;
+    border: 2px solid white;
+}
+*:hover, #input image:last-child:hover, #input image:first-child:hover {
+    animation-duration: 1000ms;
+    animation-name: blink;
 }

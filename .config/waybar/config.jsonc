@@ -7,10 +7,10 @@
 *   ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  *
 *"https://github.com/Alexays/Waybar/wiki/Configuration/"*
 *
-**──────────────────────────────────────────(LAYOUT)───*/
+**───────────────────────────────────────────(LAYOUT)──*/
 [{
-	//"output": "DP-1",
-	"layer": "overlay",
+	"output": "",
+	"layer": "top",
 	"position": "overlay",
 	"gtk-layer-shell": true,
 	"pango_markup": true,
@@ -20,22 +20,23 @@
 	"margin": 0,
 	"spacing": 0,
 	"icon-size": 20,
+	//___WIP_FIX_ALL_MODULES_FORMAT-ALT_STATUS___//
 	"modules-left": [			//__APPLICATIONS__
 		"custom/appmenu",		// AUR: WOFI | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/WOFI
-		"sway/workspaces",		// ⬐ REPLACE
-		"sway/scratchpad",		// ⬐ REPLACE
-		"hyprland/workspaces",	// ↳ REPLACE ➞ "wlr/workspaces",
+		"sway/workspaces",		// REPLACE ↴
+		"sway/scratchpad",		// REPLACE ↴
+		"hyprland/workspaces",	// REPLACE ⟴ "wlr/workspaces",
 		"tray",
 		"wlr/taskbar",
 		"gamemode",
-		"custom/recorder"		// SCRIPT: $HOME/.CONFIG/WAYBAR/SCRIPTS/RECORDER
+		"custom/recorder"		// AUR: WF-RECORDER-GUI/OBS | WIP ~ SCRIPT: $HOME/.CONFIG/WAYBAR/SCRIPTS/RECORDER
 	],
 	"modules-center": [			//__STATUS__
 		"custom/weather",		// AUR: WTTRBAR | WIP ~ FORMAT BETWEEN ℉/℃
 		"custom/notification",	// AUR: SWAYNC	| WIP ~ EVERYTHING
 		"clock"
 	],
-	"modules-right": [			//__SYSTEM__ WIP FIX FORMAT-ALT STATUS
+	"modules-right": [			//__SYSTEM__
 		"group/window",			// WIP ~ EVERYTHING
 		"bluetooth",			// WIP ~ REPORT ALL CONNECTED DEVICES
 		"group/sink",			// WIP ~ #SINK/SLIDER CRASHING WAYBAR
@@ -50,7 +51,7 @@
 		"group/power",			// SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
 		"custom/pacman"			// AUR: WAYBAR-UPDATES
 	],
-	//──────────────────────────────(MODULES_LEFT)───
+/*─────────────────────────────────────(MODULES_LEFT)──*/
 	"custom/appmenu": {
 		"format": "󰣇",
 		"format-alt": "⌘",
@@ -132,8 +133,8 @@
 	"wlr/taskbar": {
 		"all-outputs": false,
 		"markup": true,
-		"sort-by-app-id": true,		// ⮫  ONE OR   ⮪
-		//"active-first": true,		// ⮩ THE OTHER ⮨
+		"sort-by-app-id": true,		// ONE OR THE OTHER //
+		//"active-first": true,		// ONE OR THE OTHER //
 	    "format": "{icon}",
 	    "ignore-list": "$TERM",
 		"on-click": "activate",
@@ -146,29 +147,31 @@
 		"format": "{glyph}",
 		"format-alt": "{glyph} {count}",
 		"format-alt-click": "click-right",
-		//"glyph": "",				// ⮫  ONE OR   ⮪
-		"use-icon": true,			// ⮩ THE OTHER ⮨
+		//"glyph": "",				// ONE OR THE OTHER //
+		"use-icon": true,			// ONE OR THE OTHER //
 		"hide-not-running": true,
 		"icon-name": "input-gaming-symbolic",
 		"tooltip-format": "Running: {count}",
 		"tooltip": true
 	},
 	"custom/recorder": {
-		"interval": 1,
-		"exec-if": "[ -f $HOME/.config/waybar/SCRIPTS/RECORDER ]",
-		"exec": "$HOME/.config/waybar/SCRIPTS/RECORDER status",
-		"format": "{}", //"",
-		"format-alt": "{}", //" {}",		// WIP ~ REPORT WHICH APP'S RECORDING
-		"format-alt-click": "click-right",
-		"on-click": "$HOME/.config/waybar/SCRIPTS/RECORDER toggle fullscreen",
-		"on-click-middle": "obs",
-		"on-click-right": "$HOME/.config/waybar/SCRIPTS/RECORDER toggle region",
-		"tooltip-format": "🖱ᐩ❶⍆FULLSCREEN\n🖱ᐩ❷⍆REGION\n🖱ᐩ❸⍆OBS'",
+		"on-click": "wf-recorder-gui",
+		"on-click-right": "obs",
+		//"interval": 1,
+		//"exec-if": "[ -f $HOME/.config/waybar/SCRIPTS/RECORDER ]",
+		//"exec": "$HOME/.config/waybar/SCRIPTS/RECORDER status",
+		"format": "",
+		//"format-alt": " '{}'",		// WIP ~ REPORT WHICH APP'S RECORDING
+		//"format-alt-click": "click-right",
+		//"on-click": "$HOME/.config/waybar/SCRIPTS/RECORDER toggle fullscreen",
+		//"on-click-middle": "obs",
+		//"on-click-right": "$HOME/.config/waybar/SCRIPTS/RECORDER toggle region",
+		//"tooltip-format": "🖱ᐩ❶⍆FULLSCREEN\n🖱ᐩ❷⍆REGION\n🖱ᐩ❸⍆OBS'",
 		//"tooltip-format": ": {CAMERA}\n: {SCREEN}",	// WIP ~ REPORT CAMERA/SCREEN/APPLICATION/REGION
-		"tooltip": true,
-		"return-type": "json"
+		"tooltip": true
+		//"return-type": "json"
 	},
-	//────────────────────────────(MODULES_CENTER)───
+/*───────────────────────────────────(MODULES_CENTER)──*/
 	"custom/weather": {
     "interval": 3600,
     "exec-if": "which wttrbar",
@@ -234,7 +237,7 @@
 		"tooltip-format": "<tt><span size='10pt'{calendar}</span></tt>",
 		"tooltip": true
 	},
-	//─────────────────────────────(MODULES_RIGHT)───
+/*────────────────────────────────────(MODULES_RIGHT)──*/
 	"group/window": {
 		"all-outputs": false,
 		"orientation": "horizontal",

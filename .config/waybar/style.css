@@ -7,16 +7,12 @@
 *   ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  *
 *"https://github.com/Alexays/Waybar/wiki/Configuration/"*
 *
-**─────────────────────────────────────────(PRESETS)───*/
-@define-color black     rgba(0,0,0,0.8);
-@define-color grey      rgba(125,125,125,0.8);
-@define-color white     rgba(255,255,255,0.8);
-@define-color red       rgba(255,0,0,0.8);
-@define-color green     rgba(0,255,0,0.8);
-@define-color blue      rgba(0,0,255,0.8);
-@define-color purple    rgba(255,0,255,0.8);
+**──────────────────────────────────────────(PRESETS)──*/
+@define-color black rgba(0,0,0,0.8);
+@define-color grey  rgba(125,125,125,0.8);
+@define-color white rgba(255,255,255,0.8);
 
-/*──────────────────────────────────────(EVERYTHING)───*/
+/*───────────────────────────────────────(EVERYTHING)──*/
 * {
     all: unset;
     font: italic small-caps bold 16px "Sony Sketch EF, Symbols Nerd Font Mono";
@@ -26,24 +22,28 @@
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+    transition-property: inherit;
 }
 @keyframes blink {
     from {
-        color: transparent;
+        color: inherit;
     }
     to {
-        color: inherit;
+        color: transparent;
     }
 }
 
-/*──────────────────────────────────────────(WAYBAR)───*/
+/*───────────────────────────────────────────(WAYBAR)──*/
 tooltip {
     background-color: @black;
     border: 2px solid white;
 }
+window {
+    color: @white;
+    background-color: @black;
+}
 window#waybar {
     background: linear-gradient(transparent calc(60%-10px), white, transparent calc(40%+10px));
-    transition-property: inherit;
 }
 #waybar window menu,
 #waybar window menuitem {
@@ -53,12 +53,12 @@ menu {
     background-color: @black;
     border: 1px solid white;
 }
-menu>*:hover {
+menu *:hover {
     background-color: @grey;
     border: 1px solid @white;
 }
 
-/*─────────────────────────────────────────(MODULES)───*/
+/*──────────────────────────────────────────(MODULES)──*/
 *.module {
     padding: 2px 10px;
 }
@@ -89,17 +89,17 @@ slider {
     background-color: @white;
 }
 
-/*─────────────────────────────────────(AUTOMATIONS)───*/
-*:hover:hover, *:hover* {
+/*──────────────────────────────────────(AUTOMATIONS)──*/
+*:hover:hover, *:hover*, *.current_output, *.selected {
     color: white;
 }
-*.on, *.connected, *.visible, *.full, *.solo, *.paused, *.playing, *.current_output {
+*.on, *.connected, *.empty, *.hosting-monitor, *.visible, *.selectred, *.full, *.solo, *.paused, *.playing {
     color: @white;
 }
-*.hidden, *.deactivated, *.disconnected, *.muted, *.good, *.passive, *.pairable,  *.inactive, *.hosting-monitor, *.stopped, *:disabled {
+*.hidden, *.deactivated, *.disconnected, *.muted, *.good, *.passive, *.pairable, *.inactive, *.stopped, *:disabled {
     color: @grey;
 }
-*:checked, *.off, *.empty {
+*:checked, *.off {
     color: @black;
 }
 *.persistent, *.charging, *.plugged, *.pending-updates, *.needs-attention {
