@@ -5,14 +5,14 @@
 *  ___/ / |/ |/ / /_/ / /_/ / /|  / /___    *
 * /____/|__/|__/\__,_/\__, /_/ |_/\____/    *
 *                    /____/                 *
-*"https://man.archlinux.org/man/swaync.5.en"*
+*(https://man.archlinux.org/man/swaync.5.en)*
 *
-**──────────────────────────────(PRESETS)──*/
+**─────────────────────────────(PRESETS)───*/
 @define-color black rgba(0,0,0,0.8);
 @define-color grey  rgba(125,125,125,0.8);
 @define-color white rgba(255,255,255,0.8);
 
-/*───────────────────────────(EVERYTHING)──*/
+/*──────────────────────────(EVERYTHING)───*/
 * {
   all: unset;
   font: italic small-caps bold 20px "Sony Sketch EF, Symbols Nerd Font Mono";
@@ -33,82 +33,144 @@
   }
 }
 
-/*──────────────────────────────(CONTROL)──*/
-.control-center {
+/*
+*───(UNUSED)───*
+.close-button
+.notification-action
+.notification-default-action
+.inline-reply-entry
+.inline-reply
+.inline-reply-button
+.blank-window
+.widget-buttons-grid>flowbox>flowboxchild>button
+.widget-buttons-grid>flowbox>flowboxchild>button:hover 
+.widget-menubar>box>.menu-button-bar>button
+.AnyName
+.topbar-buttons
+.per-app-volume
+.widget-backlight
+.widget-inhibitors
+.notification-group-headers
+.notification-group-icon
+.notification-group-collapse-button
+.notification-group-close-all-button
+.widget-volume
+.widget-volume trough
+.widget-volume trough slider
+.widget-volume>box>button
+
+
+
+
+*/
+
+/*────────────────────────────(CONTROLS)───*/
+.control-center,
+.control-center-list,
+.control-center-list-placeholder {
   border: 2px solid white;
   background-color: @black;
-  padding: 22px;
 }
 
-/*───────────────────────────────(NOTIFY)──*/
+
+
+
+/*──────────────────────────────(NOTIFY)───*/
 .notification {
   border: 2px solid white;
-  background-color: @grey;
-}
-.notification>:hover {
-  background-color: @white;
-}
-.notification-background {
-  padding: 4px 0px;
 }
 .notification-content {
   padding: 10px;
-  color: WHITE;
+  background-color: @grey;
 }
-image {
+.notification-background :hover {
+  background-color: @white;
 }
+.notification-row {
+  padding: 6px 0px;
+}
+.floating-notifications {
+  border: 3px solid @black;
+  background: @black;
+}
+.low {
+  border-color: @black;
+}
+.normal,
+.summary {
+  border-color: white;
+}
+.critical {
+  border-color: red;
+}
+.image {
+  border-radius: 8px;
+  color: green;
+  background-color: blue;
+}
+.body,
 .body-image {
+  color: @white;
 }
-label {
-}
-.menu-button-bar {
-}
-.close-button {
+.time {
+  color: transparent;
 }
 
-/*───────────────────────────────(WIDGET)──*/
+
+
+/*─────────────────────────────(WIDGETS)───*/
 .widget-buttons-grid {
-  padding: 100px;
+  padding: 10px;
 }
-/*───────────────────────────(AUTOMATION)──*/
+.widget-dnd,
+.widget-title,
+.widget-label {
+  padding: 10px 20px;
+  color: white;
+}
+.widget-dnd>switch:checked {
+  background-color: @white;
+}
+.widget-dnd>switch:checked,
+.widget-dnd>switch slider {
+  color: black;
+}
+
+.widget-mpris>* {
+  color: white;
+  border: 2px solid white;
+  background-color: @black;
+  padding: 10px;
+  margin: 10px;
+}
+
+
+
+/*─────────────────────────(AUTOMATIONS)───*/
 *>button,
 *>switch,
 *>slider {
-  border: 2px solid white;
-  color: white;
+  margin: 0px 4px;
+  padding: 4px;
+  border: 2px solid @white;
+  color: @white;
   background-color: @black;
 }
 *>button:hover,
 *>switch:hover,
 *>slider:hover {
-  color: black;
-  background-color: @white;
+  color: white;
+  border: 2px solid white;
 }
 *>button:checked,
 *>switch:checked,
 *>slider:checked {
   color: black;
+  background-color: @black;
 }
 *:checked button,
 *:checked switch,
 *:checked slider {
-  background: white;
-}
-*>.low {
-  border-color: @black;
-}
-*>.normal {
-  border-color: white;
-}
-*>.critical {
-  border-color: red;
-}
-*>.summary {
   color: white;
-}
-*>.body {
-  color: @white;
-}
-*>.time {
-  color: @grey;
+  background: @white;
 }

@@ -5,14 +5,14 @@
 *  ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗  *
 *  ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║  *
 *   ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  *
-*"https://github.com/Alexays/Waybar/wiki/Configuration/"*
+*(https://github.com/Alexays/Waybar/wiki/Configuration/)*
 *
-**──────────────────────────────────────────(PRESETS)──*/
+**─────────────────────────────────────────(PRESETS)───*/
 @define-color black rgba(0,0,0,0.8);
 @define-color grey  rgba(125,125,125,0.8);
 @define-color white rgba(255,255,255,0.8);
 
-/*───────────────────────────────────────(EVERYTHING)──*/
+/*──────────────────────────────────────(EVERYTHING)───*/
 * {
     all: unset;
     font: italic small-caps bold 16px "Sony Sketch EF, Symbols Nerd Font Mono";
@@ -33,7 +33,7 @@
     }
 }
 
-/*───────────────────────────────────────────(WAYBAR)──*/
+/*──────────────────────────────────────────(WAYBAR)───*/
 tooltip {
     background-color: @black;
     border: 2px solid white;
@@ -58,7 +58,7 @@ menu *:hover {
     border: 1px solid @white;
 }
 
-/*──────────────────────────────────────────(MODULES)──*/
+/*─────────────────────────────────────────(MODULES)───*/
 *.module {
     padding: 2px 10px;
 }
@@ -71,11 +71,11 @@ menu *:hover {
 *.overlay {
     background-color: @black;
 }
-/*───WLR_TASKBAR───*/
+/*───(WLR_TASKBAR)───*/
 #tray *, button {
     padding: 0px 2px;
 }
-/*───PULSEAUDIO_SLIDER───*/
+/*───(PULSEAUDIO_SLIDER)───*/
 slider {
     min-height: 10px;
 }
@@ -89,11 +89,11 @@ slider {
     background-color: @white;
 }
 
-/*──────────────────────────────────────(AUTOMATIONS)──*/
+/*─────────────────────────────────────(AUTOMATIONS)───*/
 *:hover:hover, *:hover*, *.current_output, *.selected {
     color: white;
 }
-*.on, *.connected, *.empty, *.hosting-monitor, *.visible, *.selectred, *.full, *.solo, *.paused, *.playing {
+*.on, *.connected, *.options, *.empty, *.hosting-monitor, *.visible, *.selectred, *.full, *.solo, *.paused, *.playing {
     color: @white;
 }
 *.hidden, *.deactivated, *.disconnected, *.muted, *.good, *.passive, *.pairable, *.inactive, *.stopped, *:disabled {

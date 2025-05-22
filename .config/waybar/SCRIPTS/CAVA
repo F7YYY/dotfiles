@@ -9,7 +9,6 @@ TEMP="/tmp/waybarcava"
 ICON="${ICON:-'_▁▂▃▄▅▆▇█'}"
 BARS="${BARS:-10}"
 
-
 # CLEANUP TEMPORARY FILES ON EXIT
 cleanup() {
     pkill -9 cava

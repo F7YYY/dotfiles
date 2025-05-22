@@ -28,10 +28,14 @@ main() {
     local APPLICATIONS=(
         "bash -c backup && bash -c exp_env"
         "dbus-update-activation-environment --systemd --all"
-        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
         "gnome-keyring-daemon --start --components=secrets"
-        "wlsunset -s 22:00 -S 10:00 -d 60"
+        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
         "xdg-autostart"                                # AUTOSTARTS APPLICATIONS
+        "wlsunset -s 22:00 -S 10:00 -d 60"
+        "mpd --systemd"
+        #"wl-paste --type text --watch cliphist store"
+        #"wl-paste --type image --watch cliphist store"
+        #───(MINIMIZED_FLAGS)───#
         #"emacs --daemon"
         #"openrgb --startminimized"
         #"steam -silent $WAYLAND"
@@ -39,8 +43,6 @@ main() {
         #"telegram-desktop -startintray"
         #"youtube-music --use-tray-icon $WAYLAND"
         #"teams --startminimized $WAYLAND"
-        #"wl-paste --type text --watch cliphist store"
-        #"wl-paste --type image --watch cliphist store"
     )
 
     #─LAUNCH_OR_RELAUNCH_APPS

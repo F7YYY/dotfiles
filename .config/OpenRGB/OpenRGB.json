@@ -5,7 +5,7 @@
         "enabled": true,
         "host": "0.0.0.0",
         "port": "",
-        "profile": "",
+        "profile": "rain",
         "setclient": false,
         "setcustom": false,
         "setminimized": true,
@@ -1294,7 +1294,7 @@
         ]
     },
     "Theme": {
-        "theme": "auto"
+        "theme": "dark"
     },
     "UserInterface": {
         "RunZoneChecks": false,

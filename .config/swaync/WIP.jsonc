@@ -1,0 +1,17 @@
+        "volume": {
+            "label": "󰕾 ",
+            //"label": "",
+            //"label": "",
+            "show-per-app": true,
+            "show-per-app-icon": true,
+            "show-per-app-label": true
+        }
+
+"widget-config": {
+    "buttons-grid": {
+        "actions": [
+            
+        ]
+    }
+}
+//"command": "sh -c ~/script/cliphist/cliphist-menu.sh"
