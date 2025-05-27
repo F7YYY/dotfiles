@@ -35,13 +35,6 @@
 
 /*
 *───(UNUSED)───*
-.close-button
-.notification-action
-.notification-default-action
-.inline-reply-entry
-.inline-reply
-.inline-reply-button
-.blank-window
 .widget-buttons-grid>flowbox>flowboxchild>button
 .widget-buttons-grid>flowbox>flowboxchild>button:hover 
 .widget-menubar>box>.menu-button-bar>button
@@ -58,13 +51,14 @@
 .widget-volume trough
 .widget-volume trough slider
 .widget-volume>box>button
-
-
-
-
+.floating-notifications.background
+.notification.critical
+.notification.critical progress
 */
 
+
 /*────────────────────────────(CONTROLS)───*/
+.notification-default-action,
 .control-center,
 .control-center-list,
 .control-center-list-placeholder {
@@ -72,8 +66,35 @@
   background-color: @black;
 }
 
+trough highlight {
+  background: @white;
+
+  border: 2px solid @white;
+}
+scale trough {
+  padding: 4px;
+  margin: 0px 10px;
+  background-color: @black;
+  border: 2px solid white;
+  min-height: 10px;
+  min-width: 0px;
+}
+
+.close-button:hover {
+  color: black;
+  border: 2px solid black;
+}
 
 
+.blank-window {
+  box-shadow: black @black @grey @white white;
+}
+.inline-reply-entry,
+.inline-reply,
+.inline-reply-button {
+  background-color: green;
+  color: red;
+}
 
 /*──────────────────────────────(NOTIFY)───*/
 .notification {
@@ -89,10 +110,12 @@
 .notification-row {
   padding: 6px 0px;
 }
+/*
 .floating-notifications {
   border: 3px solid @black;
   background: @black;
 }
+*/
 .low {
   border-color: @black;
 }
@@ -126,51 +149,35 @@
 .widget-title,
 .widget-label {
   padding: 10px 20px;
-  color: white;
-}
-.widget-dnd>switch:checked {
-  background-color: @white;
-}
-.widget-dnd>switch:checked,
-.widget-dnd>switch slider {
-  color: black;
 }
 
-.widget-mpris>* {
+.widget-mpris {
   color: white;
   border: 2px solid white;
   background-color: @black;
-  padding: 10px;
+  padding: 1px;
   margin: 10px;
 }
 
 
 
 /*─────────────────────────(AUTOMATIONS)───*/
-*>button,
-*>switch,
-*>slider {
-  margin: 0px 4px;
-  padding: 4px;
-  border: 2px solid @white;
+*>button *,
+*>switch *,
+*>slider * {
+  border: 2px solid white;
   color: @white;
   background-color: @black;
 }
-*>button:hover,
-*>switch:hover,
-*>slider:hover {
+*>button:checked>*,
+*>switch:checked>*,
+*>slider:checked>* {
   color: white;
-  border: 2px solid white;
+  background-color: @white;
 }
-*>button:checked,
-*>switch:checked,
-*>slider:checked {
-  color: black;
-  background-color: @black;
-}
-*:checked button,
-*:checked switch,
-*:checked slider {
+*>button:hover>*,
+*>switch:hover>*,
+*>slider:hover>* {
   color: white;
-  background: @white;
+  background-color: @grey;
 }

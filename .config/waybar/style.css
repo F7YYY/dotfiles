@@ -41,12 +41,13 @@ tooltip {
 window {
     color: @white;
     background-color: @black;
-}
-window#waybar {
     background: linear-gradient(transparent calc(60%-10px), white, transparent calc(40%+10px));
 }
-#waybar window menu,
-#waybar window menuitem {
+.modules-center window * {
+    background: unset;
+    all: unset;
+}
+#waybar window menu, #waybar window menuitem {
     padding: 4px;
 }
 menu {
@@ -90,13 +91,14 @@ slider {
 }
 
 /*─────────────────────────────────────(AUTOMATIONS)───*/
-*:hover:hover, *:hover*, *.current_output, *.selected {
+*:hover:hover, *:hover*, *.current_output, *.focused {
     color: white;
 }
-*.on, *.connected, *.options, *.empty, *.hosting-monitor, *.visible, *.selectred, *.full, *.solo, *.paused, *.playing {
+*.default, 
+*.on, *.connected, *.options, *.empty, *.sink, *.source, *.hosting-monitor, *.visible, *.selected, *.full, *.solo, *.paused, *.playing {
     color: @white;
 }
-*.hidden, *.deactivated, *.disconnected, *.muted, *.good, *.passive, *.pairable, *.inactive, *.stopped, *:disabled {
+*.hidden, *.deactivated, *.disconnected, *.sink-muted, *.source-muted, *.good, *.passive, *.pairable, *.inactive, *.stopped, *:disabled {
     color: @grey;
 }
 *:checked, *.off {

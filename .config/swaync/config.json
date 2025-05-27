@@ -1,115 +1,125 @@
 {
-    "$schema": "/etc/xdg/swaync/configSchema.json",
-    "layer": "overlay",
-    "positionX": "center",
-    "positionY": "top",
-    "control-center-margin-top": 0,
-    "control-center-margin-bottom": 0,
-    "control-center-margin-right": 0,
-    "control-center-margin-left": 0,
-    "control-center-height": 500,
-    "control-center-width": 500,
-    "notification-visibility": {},
-    "notification-inline-replies": true,
-    "notification-icon-size": 50,
-    "notification-body-image-height": 200,
-    "notification-body-image-width": 200,
-    "control-center-layer": "overlay",
-    "control-center-exclusive-zone": true,
-    "notification-2fa-action": true,
-    "notification-window-width": 500,
-    "timeout": 60,
-    "timeout-low": 30,
-    "timeout-critical": 0,
-    "transition-time": 10,
-    "layer-shell": true,
-    "keyboard-shortcuts": true,
-    "hide-on-clear": false,
-    "hide-on-action": true,
-    "fit-to-screen": true,
-    "relative-timestamps": true,
-    "script-fail-notify": true,
-    "scripts": {},
-    "image-visibility": "when-available",
-    "cssPriority": "application",
-    "widgets": [
-        "dnd",
-        "title",
-        "buttons-grid",
-        "mpris",
-        "notifications",
-        "backlight",
-        "volume"
-    ],
-    "widget-config": {
-        "buttons-grid": {
-            "actions": [
-                {
-                    "label": "󰌁",
-                    "command": "hyprshade toggle blue-light-filter"
-                },{
-                    "label": "󰊠",
-                    "command": "hyprshade toggle screenShader"
-                },{
-                    "label": "󰏘",
-                    "command": "hyprshade toggle vibrance"
-                },{
-                    "label": " ",
-                    "type": "toggle",
-                    "active": false,
-                    "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
-                    "update-command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
-                },{
-                    "label": "",
-                    "type": "toggle",
-                    "active": false,
-                    "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && rfkill unblock bluetooth || rfkill block bluetooth'",
-                    "update-command": "sh -c '[[ $(rfkill list bluetooth | grep \"Soft blocked: yes\") ]] && echo false || echo true'"
-                },{
-                    "label": "󰄀",
-                    "type": "button",
-                    "active": false,
-                    "command": "hyprshot -m region"
-                },{
-                    "label": "󰕧",
-                    "type": "toggle",
-                    "active": false,
-                    "command": "sh -c ~/script/swaync/wf-recorder.sh",
-                    "update-command": "sh -c 'pgrep -x wf-recorder > /dev/null && echo true || echo false'"
-                },{
-                    "label": "",
-                    "type": "button",
-                    "active": true
-                }
-            ]
-        },
-        "title": {
-            "text": "󰂚\t::\tCLEAR-NOTIFICATIONS",
-            "clear-all-button": true,
-            "button-text": " 󰎟\t"
-        },
-        "mpris": {
-            "image-size": 96,
-            "image-radius": 12
-        },
-        "dnd": {
-            "text": "󰂛\t::\tDO-NOT-DISTURB"
-        },
-        "notifications": {
-            "example-name": {
-                "state": "muted",
-                "urgency": "Low",
-                "app-name": "youtube-music"
-            }
-        },
-        "backlight": {
-            "label": "󰃟 "
-        },
-        "volume": {
-            "label": "󰕾 ",
-            "show-per-app": true,
-            "show-per-app-icon": true,
-            "show-per-app-label": true
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "layer": "overlay",
+  "positionX": "center",
+  "positionY": "top",
+  "control-center-margin-top": 0,
+  "control-center-margin-bottom": 0,
+  "control-center-margin-right": 0,
+  "control-center-margin-left": 0,
+  "control-center-height": 500,
+  "control-center-width": 500,
+  "notification-inline-replies": true,
+  "notification-icon-size": 50,
+  "notification-body-image-height": 200,
+  "notification-body-image-width": 200,
+  "control-center-layer": "overlay",
+  "control-center-exclusive-zone": true,
+  "notification-2fa-action": true,
+  "notification-window-width": 500,
+  "timeout": 60,
+  "timeout-low": 30,
+  "timeout-critical": 0,
+  "transition-time": 10,
+  "layer-shell": true,
+  "keyboard-shortcuts": true,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "fit-to-screen": true,
+  "relative-timestamps": true,
+  "script-fail-notify": true,
+  "image-visibility": "when-available",
+  "cssPriority": "application",
+  "widgets": [
+    /*    MENUBAR & BUTTONS-GRID FOR AESTHETICS
+    "label",
+    "dnd",
+    "title",
+    "menubar",
+    */
+    "volume",
+    "backlight",
+    "mpris",
+    "buttons-grid",
+    "notifications",
+    "scripts"
+  ],
+  "widget-config": {
+    "label": {
+      "max-lines": 1,
+      "text": "Controll Center"
+    },
+    "dnd": {
+      "text": "󰂛\t::\tDO-NOT-DISTURB"
+    },
+    "title": {
+      "text": "󰂚\t::\tCLEAR-NOTIFICATIONS",
+      "clear-all-button": true,
+      "button-text": "󰎟\t"
+    },
+    "menubar": {
+      "menu#network-buttons": {
+        "label": "",
+        "position": "center",
+        "actions": [
+          {
+            "label": "Network Settings",
+            "command": "nm-connection-editor"
+          }
+        ]
+      },
+      "menu#bluetooth-buttons": {
+        "label": "",
+        "position": "center",
+        "actions": [
+          {
+            "label": "Bluetooth Manager",
+            "command": "blueman"
+          }
+        ]
+      }
+    },
+    "buttons-grid": {
+      "actions": [
+        {
+          "label": "󰍷",
+          "type": "toggle",
+          "active": false,
+          "command": "echo $(swaync-client -d)",
+          "update-command": "swaync-client -I"
+        },{
+          "label": "",
+          "type": "button",
+          "active": false,
+          "command": "swaync-client -C"
         }
-    }
+      ]
+    },
+    "mpris": {
+      "image-size": 100,
+      "image-radius": 20
+    },
+    "volume": {
+      "label": "󰕾",
+      "show-per-app": true,
+      "show-per-app-icon": true,
+      "show-per-app-label": true
+    },
+    "backlight": {
+      "label": "󰃟"
+    },
+    "notifications": {},
+    "notification-visibility": {},
+    "backlight": {
+      "label": "",
+      "device": "intel_backlight",
+      "min": 10
+    },
+    "backlight#KB": {
+      "label": "",
+      "device": "asus::kbd_backlight",
+      "subsystem": "leds"
+    },
+    "scripts": {}
+  }
 }
