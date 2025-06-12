@@ -7,25 +7,40 @@
 #   ╚══╝╚══╝  ╚═════╝ ╚═╝     ╚═╝ #
 ###################################
 #
-#──WOFI────────────────────────────
+#──────────────────────(CONFIG)───
+#stylesheet=PATH
+#color=PATH
+#colors=PATH
+#show=run/drun/dmenu    # SAME_AS_MODE
 mode=drun
-show_all=true
-width=20%
-height=30%
-prompt=❥❥❥❥❥❥❥❥❥❥❥❥
-normal_window=true
+width=400px
+height=400px
+prompt=❥❥❥❥❥❥❥❥❥❥
+#normal_window=true     # DEFAULT
 allow_images=true
 allow_markup=true
-term=kitty --detach
+term=xterm --detach
+#password=*
+exec_search=true
 hide_scroll=true
 matching=multi-contains
 insensitive=true
-location=center
-lines=0
+parse_search=true
+#location=center        # DEFAULT
+lines=10
+#columns=1              # DEFAULT
+#sort_order=default     # DEFAULT
 gtk_dark=true
-monitor=*
+#search=YOUR_MOM        # DEFAULT
+#monitor=DP-1
+#orientation=vertical   # DEFAULT
+halign=center
+content_halign=start
+valign=center
+filter_rate=1
 image_size=30
 key_expand=Tab
-#line_wrap=word
+line_wrap=word
 dynamic_lines=true
 layer=overlay
+#single_click=false     # DEFAULT

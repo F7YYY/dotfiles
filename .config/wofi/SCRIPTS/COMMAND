@@ -5,8 +5,8 @@
 #
 # FORGET OPENING/CLOSING DETACHED TERMINALS WITH SECURE-CODING
 main() {
-    local MENU=("────EXIT────")
-    local INPUT=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "$~>")
+    local MENU=("───( EXIT )───")
+    local INPUT=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "  ~❯")
     local SANITIZER=${INPUT//[^[:alnum:][:space:]_.\/-]/}       # ./HAND_SANITIZER
     local SANITIZER=${SANITIZER#${SANITIZER%%[![:space:]]*}}    # -PLEASE
     local SANITIZER=${SANITIZER%${SANITIZER##*[![:space:]]}}    # -AND

@@ -1,4 +1,5 @@
-#!/usr/bin/env bash########################################################################
+#!/bin/bash
+###########################################################################################
 #   ________      ________      ________       ___  ___      ________      ________       #
 #  |\   __  \    |\   __  \    |\   ____\     |\  \|\  \    |\   __  \    |\   ____\      #
 #  \ \  \|\ /_   \ \  \|\  \   \ \  \___|_    \ \  \\\  \   \ \  \|\  \   \ \  \___|      #
@@ -7,111 +8,157 @@
 #     \ \_______\   \ \__\ \__\    ____\_\  \    \ \__\ \__\   \ \__\\ _\    \ \_______\  #
 #      \|_______|    \|__|\|__|   |\_________\    \|__|\|__|    \|__|\|__|    \|_______|  #
 #                                 \|_________|                                            #
+#                                                                                         #
 ###########################################################################################
 #
-#───────────────────────────────────────────────────────────────────────────────(SOURCE)───
-#───AUTO_RUN_INTERACTIVELY
+#──────────────────────────────────────────────────────────────────────────────(SOURCES)───
+#───(AUTO_RUN_INTERACTIVELY)
 [[ $- != *i* ]] && return
 
-#───SOURCE_DEFINITIONS
+#───(SOURCE_DEFINITIONS)
 [[ -f /etc/bashrc ]] && . /etc/bashrc
 
-#───ENABLE_BASH_COMPLETIONS
+#───(ENABLE_BASH_COMPLETIONS)
 [[ -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
 
 #────────────────────────────────────────────────────────────────────────────────(THEME)───
-powerline-daemon -q
-export POWERLINE_BASH_CONTINUATION=1
-export POWERLINE_BASH_SELECT=1
-. /usr/share/powerline/bindings/bash/powerline.sh
-
+#source /usr/share/oh-my-bash/oh-my-bash.sh
 #──────────────────────────────────────────────────────────────────────────────(ALIASES)───
-alias ll='ls -l --color=auto'
+alias c="clear"
+alias l='ls -l --color=auto'
 alias la='ls -la --color=auto'
+alias ll="ls -lahs --color=auto"
 alias grep='grep --color=auto'
-alias logs="sudo find /var/log -type f -exec file {} + | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
-alias rsync='rsync --recursive --progress'
+alias egrep="egrep --color=auto"
+alias fgrep="fgrep --color=auto"
 alias ftext='clear && grep -niHIr --color=always "$1" "${2:-.}" | less -r'
+alias curl="curl --user-agent 'noleak'"
+alias wget="wget -c --user-agent 'noleak'"
+alias rsync='rsync --recursive --progress'
+alias logs="sudo find /var/log -type f -exec file {} + | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
 alias alert='notify-send -u critical -a "$([ $? = 0 ] && echo TERMINAL || echo ERROR)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')" "Finished"'
+alias free="free -h"
+alias cp="cp -i"
+alias rm="rm -i"
+alias mv="mv -i"
+alias df="df -h"
+alias du="du -h"
+alias dd="dd status=progress"
+alias shred="shred -zf"
 alias wayland='--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer --ozone-platform-hint=auto'
-#───CHANGE_DIRECTORY
+
+#───(CHANGE_DIRECTORY)
 alias home='cd ~ || cd $HOME'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-#───ARCHIVE
+#───(ARCHIVE)
 alias mktar='tar -cvf'
 alias mkbz2='tar -cvjf'
 alias mkgz='tar -cvzf'
 alias untar='tar -xvf'
 alias unbz2='tar -xvjf'
 alias ungz='tar -xvzf'
+#───(KEYBINDS)
+if [[ -n "$BASH_VERSION" ]]; then           # BASH_SPECIFIC
+  bind '"\e[1~": beginning-of-line'         # Home
+  bind '"\e[7~": beginning-of-line'
+  bind '"\e[H": beginning-of-line'
+  bind '"\e[4~": end-of-line'               # End
+  bind '"\e[8~": end-of-line'
+  bind '"\e[F": end-of-line'
+  bind '"\e[3~": delete-char'               # Delete
+  bind '"\e[C": forward-char'               # →
+  bind '"\e[D": backward-char'              # ←
+  bind '"\e[1;5C": forward-word'            # Ctrl+→
+  bind '"\e[1;5D": backward-word'           # Ctrl+←
+  bind '"\C-h": backward-kill-word'         # Ctrl+Backspace
+  bind '"\e[Z": undo'                       # Shift+Tab = undo
+  bind '"\e[5~": history-search-backward'   # Page Up
+  bind '"\e[6~": history-search-forward'    # Page Down
+fi
 
 #────────────────────────────────────────────────────────────────────────────(FUNCTIONS)───
-#───EXPORT_ENVIRONMENT_VARIABLES
+#───(EXPORT_ENVIRONMENT_VARIABLES)
 exp_env() {
-	local VENDOR=($(lspci | grep -iE 'vga' | grep -ioE 'amd|nvidia|intel' | awk '{print tolower($0)}'))
-	local INPUT="${1:-}"
+    local INPUT="${1:-}"
 	local W=0 X=0 A=0 N=0 I=0
+
+	local VENDOR=($(lspci | grep -iE 'vga' | grep -ioE 'amd|nvidia|intel' | awk '{print tolower($0)}'))
 	local ENLISTMENT=(
 		"HISTSIZE=1000"
 		"HISTFILESIZE=1000"
 		"HISTCONTROL=erasedups:ignoredups:ignorespace"
-		"EDITOR=codium -w"
+		"EDITOR=com.vscodium.codium -w"             #codium -w"	# FLATPAK
 		"GPG_TTY=$(tty)"
 		"QT_QPA_PLATFORMTHEME=qt6ct"
 		"QT_AUTO_SCREEN_SCALE_FACTOR=1"
 		"_JAVA_AWT_WM_NONREPARENTING=1"
 	)
+	local XORG=(
+		"XDG_BACKEND=x11"					# FORCE_BACKEND
+	)
 	local WAYLAND=(
-		"CLUTTER_BACKEND=wayland"
-		"ECORE_EVAS_ENGINE=wayland"
-		"ELM_ENGINE=wayland"
+		"XDG_BACKEND=wayland"					# FORCE_BACKEND
+		"CLUTTER_BACKEND=$XDG_BACKEND"
+		"ECORE_EVAS_ENGINE=$XDG_BACKEND"
+		"ELM_ENGINE=$XDG_BACKEND"
 		"MOZ_ENABLE_WAYLAND=1"
-		"QT_SCREEN_SCALE_FACTORS=1"			# FLAMESHOT
-		"QT_QPA_PLATFORM=wayland;xcb"
-		"QT_QPA_PLATFORMTHEME=wayland"
+		"QT_SCREEN_SCALE_FACTORS=1"			        # FLAMESHOT
+		"QT_QPA_PLATFORM=$XDG_BACKEND;xcb"
+		"QT_QPA_PLATFORMTHEME=$XDG_BACKEND"
 		"QT_WAYLAND_FORCE_DPI=physical"
-		#"QT_WAYLAND_DISABLE_WINDOWDECORATION=1"	# DEFAULT: OFF
+		#"QT_WAYLAND_DISABLE_WINDOWDECORATION=1"    # DEFAULT: 0
 		"QT_WAYLAND_SHELL_INTEGRATION=layer-shell"
-		"SDL_VIDEODRIVER=wayland"
-		#"SDL_VIDEO_DRIVER=wayland"			# ONLY SET PER-STUTTERING STEAM GAME STEAM WON'T LAUNCH
-		#"WAYLAND_DEBUG=1"				# EXPORT FOR DEBUGGING (1, client, server)
-		#"XDG_SESSION_DESKTOP=Hyprland"			# EXPORT IF NOT DEFAULTING TO DE/WM
-		#"XDG_CURRENT_DESKTOP=Hyprland"			# EXPORT IF NOT DEFAULTING TO DE/WM
-		#"XDG_SESSION_TYPE=wayland"			# EXPORT IF NOT DEFAULTING TO WAYLAND
-		#"GDK_BACKEND=wayland"				# EXPORT IF NOT DEFAULTING TO WAYLAND
-		#"DISPLAY=$WAYLAND_DISPLAY"			# EXPORT FOR SPECIFIC APPS ($WAYLAND_DISPLAY:0)
+		"SDL_VIDEODRIVER=$XDG_BACKEND"
+        #"GDK_BACKEND=$XDG_BACKEND"                 # EXPORT IF NOT DEFAULTING TO WAYLAND
+		#"XDG_SESSION_TYPE=$XDG_BACKEND"			# EXPORT IF NOT DEFAULTING TO WAYLAND
+		#"SDL_VIDEO_DRIVER=$XDG_BACKEND"			# ONLY SET PER-STUTTERING STEAM GAME STEAM WON'T LAUNCH
+		#"XDG_SESSION_DESKTOP=Hyprland"		        # EXPORT IF NOT DEFAULTING TO DE/WM
+		#"XDG_CURRENT_DESKTOP=$XDG_SESSION_DESKTOP" # EXPORT IF NOT DEFAULTING TO DE/WM
+		#"DISPLAY=$WAYLAND_DISPLAY:0"			    # EXPORT FOR SPECIFIC APPS
+	    #"WAYLAND_DEBUG=1"				            # EXPORT FOR DEBUGGING (1, client, server)
 	)
 	local AMD=(
 		"VDPAU_DRIVER=radeonsi"
 		"LIBVA_DRIVER_NAME=radeonsi"
-	)
+        "RADV_PERFTEST=aco"
+        "mesa_glthread=true"
+        #───(PER-USER_REQUIREMENTS)
+        #"VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json"
+        #"VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/amd_icd32.json:/usr/share/vulkan/icd.d/amd_icd64.json"
+        #"AMD_VULKAN_ICD=RADV"
+        #"DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1=1"
+    )
 	local NVIDIA=(
 		"GBM_BACKEND=nvidia-drm"
-		"__GLX_VENDOR_LIBRARY_NAME=nvidia"
 		"LIBVA_DRIVER_NAME=nvidia"
+		"__GLX_VENDOR_LIBRARY_NAME=nvidia"
 		"__GL_GSYNC_ALLOWED"
 		"__GL_VRR_ALLOWED"
-		#"WLR_DRM_NO_ATOMIC=1"				# LEGACY DRM INTERFACE
+        "__GL_SHADER_DISK_CACHE=1"
+        "__GL_SHADER_DISK_CACHE_PATH=/tmp/shaders"  # "/path/to/location"
+        #"__GL_THREADED_OPTIMIZATION=1"             # PER-GAME_BENCHMARKS
+		#"WLR_DRM_NO_ATOMIC=1"				        # LEGACY DRM INTERFACE
 	)
-	local INTEL=("INTEL=no")
-	local XORG=("XORG=no")
+	local INTEL=("INTEL=RETARD_ALERT")
 
-	#─CONCATENATE_VERIFIED_BACKENDS
-    if [[ "$XDG_SESSION_TYPE" == "wayland" && "$W" -eq 0 ]]; then
+	#───(CONCATENATE_VERIFIED_BACKENDS)
+    if [[ "$XDG_BACKEND" == "wayland" && "$W" -eq 0 ]]; then
         ENLISTMENT+=("${WAYLAND[@]}")
         ((W++))
-    elif [[ "$XDG_SESSION_TYPE" == "x11" && "$X" -eq 0 ]]; then
+    elif [[ "$XDG_BACKEND" == "x11" && "$X" -eq 0 ]]; then
         ENLISTMENT+=("${XORG[@]}")
         ((X++))
     else
-        echo -e "\nUNKNOWN_BACKEND: [$XDG_SESSION_TYPE]"
+        echo -e "==============================="
+        echo -e "UNKNOWN_BACKEND: [$XDG_BACKEND]"
+        echo -e "===============================\n"
     fi
 
-	#─CONCATENATE_VERIFIED_GPUS
+	#───(CONCATENATE_VERIFIED_GPUS)
 	for GPU in "${VENDOR[@]}"; do
 	    if [[ "$GPU" == "amd" && "$A" -eq 0 ]]; then
 	        ENLISTMENT+=("${AMD[@]}")
@@ -129,7 +176,7 @@ exp_env() {
 	    fi
 	done
 
-	#─PROCESSES_USER_EXPORTATION
+	#───(PROCESSES_USER_EXPORTATION)
 	case $INPUT in
 		""|-[Hh]*|--[Hh]*)
 			echo -e "\n-[ C/check  ]:\tCheck Available Exports"
@@ -175,9 +222,8 @@ exp_env() {
 		;;
 	esac
 }
-exp_env -local && clear
 
-#──AUTOMATE_PACKAGES_INSTALLATION
+#───(AUTOMATE_PACKAGES_INSTALLATION)
 install_packages() {
 	local INPUT="$1"
 	local DISTRO="$(grep -w "^PRETTY_NAME" /etc/os-release | cut -d '"' -f 2)"	# SIMPLY-(lsb_release -sd)
@@ -310,13 +356,13 @@ Packaged:\t$PACKAGED
 	esac
 }
 
-#───AUTOMATE_PACKAGES_BACKUPS
+#───(AUTOMATE_PACKAGES_BACKUPS)
 backup() {
 	local PACKAGED="$(find . -type f -name PACKAGES)"
 	local DAY="1"												# DAY OF THE WEEK
 
 	if [ -n "$PACKAGED" ] && [ "$(date +%u)" = "$DAY" ]; then
-		echo -e "#─UPDATED: $(date)" > "$PACKAGED"
+		echo -e "#───(UPDATED: $(date))" > "$PACKAGED"
 		if whereis yay &>/dev/null; then
 			yay -Qqe >> "$PACKAGED"
 		elif whereis pacman &>/dev/null; then
@@ -331,4 +377,344 @@ backup() {
 		git gui dotfiles psom
 	fi
 }
-backup
+
+#───(compdef libredefender)
+_libredefender() {
+    local i cur prev opts cmd
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    cmd=""
+    opts=""
+
+    for i in ${COMP_WORDS[@]}; do
+        case "${cmd},${i}" in
+            ",$1")
+                cmd="libredefender"
+            ;;
+            libredefender,completions)
+                cmd="libredefender__completions"
+            ;;
+            libredefender,dump-config)
+                cmd="libredefender__dump__config"
+            ;;
+            libredefender,help)
+                cmd="libredefender__help"
+            ;;
+            libredefender,infections)
+                cmd="libredefender__infections"
+            ;;
+            libredefender,scan)
+                cmd="libredefender__scan"
+            ;;
+            libredefender,scheduler)
+                cmd="libredefender__scheduler"
+            ;;
+            libredefender,test-notify)
+                cmd="libredefender__test__notify"
+            ;;
+            libredefender__help,completions)
+                cmd="libredefender__help__completions"
+            ;;
+            libredefender__help,dump-config)
+                cmd="libredefender__help__dump__config"
+            ;;
+            libredefender__help,help)
+                cmd="libredefender__help__help"
+            ;;
+            libredefender__help,infections)
+                cmd="libredefender__help__infections"
+            ;;
+            libredefender__help,scan)
+                cmd="libredefender__help__scan"
+            ;;
+            libredefender__help,scheduler)
+                cmd="libredefender__help__scheduler"
+            ;;
+            libredefender__help,test-notify)
+                cmd="libredefender__help__test__notify"
+            ;;
+            *)
+            ;;
+        esac
+    done
+
+    case "${cmd}" in
+        libredefender)
+            opts="-q -v -C -D -h --quiet --verbose --colors --data --help scan scheduler infections test-notify dump-config completions help"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                --data)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                -D)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__completions)
+            opts="-q -v -C -D -h --quiet --verbose --colors --data --help bash elvish fish powershell zsh"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                --data)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                -D)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__dump__config)
+            opts="-q -v -C -D -h --quiet --verbose --colors --data --help"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                --data)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                -D)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__help)
+            opts="scan scheduler infections test-notify dump-config completions help"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__help__completions)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__help__dump__config)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__help__help)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__help__infections)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+            ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__help__scan)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__help__scheduler)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__help__test__notify)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__infections)
+            opts="-d -q -v -C -D -h --delete --delete-all --quiet --verbose --colors --data --help"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                --data)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                -D)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__scan)
+            opts="-j -q -v -C -D -h --concurrency --quiet --verbose --colors --data --help [PATHS]..."
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                --concurrency)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                -j)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                --data)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                -D)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__scheduler)
+            opts="-q -v -C -D -h --quiet --verbose --colors --data --help"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                --data)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                -D)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+        libredefender__test__notify)
+            opts="-q -v -C -D -h --quiet --verbose --colors --data --help"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                --data)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                -D)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                ;;
+                *)
+                    COMPREPLY=()
+                ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+        ;;
+    esac
+}
+#complete -F _libredefender -o nosort -o bashdefault -o default libredefender       # NOT_ZSH_FRIENDLY
+alias defender="complete -F _libredefender -o nosort -o bashdefault -o default libredefender"

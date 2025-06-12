@@ -49,7 +49,7 @@ wofimenu() {
 
 # DISPLAY APPLICATIONS+SCRIPTS & HANDLE USER INPUT
 main() {
-    local MENU=("────EXIT────" "WOFI" "CALCULATOR" "EMOJI" "POWERMENU" "COMMAND" "APPLICATIONS")
+    local MENU=("───( EXIT )───" "WOFI" "CALCULATOR" "EMOJI" "POWERMENU" "COMMAND" "APPLICATIONS")
     local SELECTED=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "MENU")
     
     dependencies

@@ -62,7 +62,7 @@ powermenu() {
 # DISPLAY POWERMEU & HANDLE USER INPUT
 main() {
     local INPUT="${1#--}"
-    local MENU=("────EXIT────" "RELOAD" "LOCK" "SUSPEND" "LOGOUT" "REBOOT" "BIOS" "SHUTDOWN")
+    local MENU=("───( EXIT )───" "RELOAD" "LOCK" "SUSPEND" "LOGOUT" "REBOOT" "BIOS" "SHUTDOWN")
 
     if [ -n "$INPUT" ]; then
         powermenu "$INPUT"

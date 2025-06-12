@@ -47,7 +47,7 @@
 		"group/temperatures",	// WIP ~ EVERYTHING
 		"group/system",
 		"network",				// WIP ~ REPORT EXTERNAL-IP W/O DDOS
-		"group/powermenu",		// WIP ~ RIGHT CLICK FOR OPTIONS (NOT HOVER) | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
+		"group/powermenu",		// WIP ~ RIGHT CLICK SHOW OPTIONS (NOT HOVER) | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
 		"custom/pacman"			// AUR: WAYBAR-UPDATES
 	],
 /*────────────────────────────────────(MODULES_LEFT)───*/
@@ -217,9 +217,8 @@
 		"all-outputs": false,
 		"orientation": "horizontal",
 		"drawer": {
-			"transition-duration": 200,
-			"children-class": "drawer-child",
-			"transition-left-to-right": false
+			"children-class": "options",
+    	    "transition-left-to-right": false
 		},
 		"modules": [
 			"mpd",				// AUR: MPD
@@ -335,9 +334,8 @@
 		"all-outputs": false,
 		"orientation": "horizontal",
 		"drawer": {
-			"transition-duration": 200,
-			"children-class": "drawer-child",
-			"transition-left-to-right": false
+			"children-class": "options",
+    	    "transition-left-to-right": false
 		},
 		"modules": [
 			"idle_inhibitor",
@@ -353,7 +351,7 @@
 		"rewrite": {
 			"(.*) - Mozilla Firefox": " $1",
 			"(.*) - Brave": " $1",
-			"(.*) - kitty": " [$1]"
+			"(.*) - xterm": " [$1]"
 		},
 		"tooltip": true
 	},
@@ -495,7 +493,7 @@
 	"group/temperatures": {
     	"orientation": "inherit",
     	"drawer": {
-    	    "children-class": "options",
+			"children-class": "options",
     	    "transition-left-to-right": false
     	},
     	"modules": [
@@ -556,9 +554,8 @@
 		"all-outputs": false,
 		"orientation": "horizontal",
 		"drawer": {
-			"transition-duration": 200,
-			"children-class": "drawer-child",
-			"transition-left-to-right": false
+			"children-class": "options",
+    	    "transition-left-to-right": false
 		},
 		"modules": [
 			"backlight",
@@ -587,15 +584,15 @@
 	"group/system": {
     	"orientation": "inherit",
     	"drawer": {
-    	    "children-class": "options",
+			"children-class": "options",
     	    "transition-left-to-right": false
     	},
     	"modules": [
 			"cpu",					// WIP ~ REFORMAT TOOLTIP INFORMATION
+			"custom/gpu-usage",		// AUR: GPU-USAGE-WAYBAR-GIT
 			"battery",
-			"disk",
 			"memory",
-			"custom/gpu-usage"		// AUR: GPU-USAGE-WAYBAR-GIT
+			"disk"
 		]
 	},
 	"cpu": {
@@ -647,7 +644,7 @@
 		"format-alt-click": "click-right",
 		"format-icons": ["_","▁","▂","▃","▄","▅","▆","▇","█"],
 		//"on-click": "exec",
-		"on-click-middle": "nemo",
+		"on-click-middle": "thunar || yazi || ranger || xdg-open $HOME",
 		"tooltip-format": "\tDISK:\t{}\n\tPATH:\t( {path} )\n⮩\tUSED:\t{used} / {total}",
 		"tooltip": true
 	},
@@ -693,7 +690,7 @@
 			"disconnected": ""
 		},
 		"on-click": "extip=$(curl -s myip.wtf/yaml) && fortune=$(curl -sI myip.wtf/yaml | sed -n 's/.*Fortune*. //p') && notify-send -u normal -a \"$fortune\" \"$extip\"",
-		"on-click-middle": "nm-connection-editor || kitty --detach $SHELL -c 'nmtui'",
+		"on-click-middle": "nm-connection-editor || xterm --detach $SHELL -c 'nmtui'",
 		"tooltip-format": "{ERRORS_LOL}",
 		"tooltip-format-wifi": "󱚾\t{ifname}\n󱚽\t{essid}\t({frequency} GHZ)\n󱚸\t{signaldBm}dBm ({signalStrength}%)\n󱦂\t{ipaddr}/{cidr}\n󰩟\tIFCONFIG.ME\n󱚺\t{bandwidthUpBits}\n󱚶\t{bandwidthDownBits}",
 		"tooltip-format-ethernet": "{icon}\t{ifname}\n󰲐\t{ipaddr}/{cidr}\n󰩠\tcurl ifconfig.me\n󰳘\t{bandwidthUpBits}\n󰱦\t{bandwidthDownBits}",
@@ -702,72 +699,108 @@
 	"group/powermenu": {
     	"orientation": "inherit",
     	"drawer": {
-    	    "children-class": "options",
+			"children-class": "options",
     	    "transition-left-to-right": false
     	},
     	"modules": [
-    	    "custom/power",
-			"custom/reload",
-    	    "custom/lock",
-			"custom/suspend",
-    	    "custom/logout",
+    	    "custom/powermenu",
+    	    "custom/shutdown",
+    	    "custom/bios",
     	    "custom/reboot",
-    	    "custom/bios"
+    	    "custom/logout",
+			"custom/suspend",
+    	    "custom/lock",
+			"custom/reload"
     	]
 	},
 	"custom/reload": {
     	"format": "󰳋",
+		"format-alt": "🔄",
+		"format-alt-click": "click-right",
 		"exec-if": "[ -f $HOME/.config/wofi/SCRIPTS/POWERMENU ]",
 		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --RELOAD",
-		"tooltip-format": "( RELOAD )",
+		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/POWERMENU --RELOAD",
+		"on-click-right": "$HOME/.config/wofi/SCRIPTS/POWERMENU --RELOAD",
+		"tooltip-format": "-( RELOAD )-",
 		"tooltip": true
 	},
 	"custom/lock": {
 	    "format": "󰯅",
+		"format-alt": "🔒",
+		"format-alt-click": "click-right",
 		"exec-if": "[ -f $HOME/.config/wofi/SCRIPTS/POWERMENU ]",
 		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --LOCK",
-		"tooltip-format": "( LOCK )",
+		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/POWERMENU --LOCK",
+		"on-click-right": "$HOME/.config/wofi/SCRIPTS/POWERMENU --LOCK",
+		"tooltip-format": "-( LOCK )-",
 		"tooltip": true
 	},
 	"custom/suspend": {
 	    "format": "󰳌",
+		"format-alt": "💤",
+		"format-alt-click": "click-right",
 		"exec-if": "[ -f $HOME/.config/wofi/SCRIPTS/POWERMENU ]",
 		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --SUSPEND",
-		"tooltip-format": "( SUSPEND )",
+		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/POWERMENU --SUSPEND",
+		"on-click-right": "$HOME/.config/wofi/SCRIPTS/POWERMENU --SUSPEND",
+		"tooltip-format": "-( SUSPEND )-",
 		"tooltip": true
 	},
 	"custom/logout": {
 		"format": "󰨒",
+		"format-alt": "👤",
+		"format-alt-click": "click-right",
 		"exec-if": "[ -f $HOME/.config/wofi/SCRIPTS/POWERMENU ]",
 		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --LOGOUT",
-		"tooltip-format": "( LOGOUT )",
+		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/POWERMENU --LOGOUT",
+		"on-click-right": "$HOME/.config/wofi/SCRIPTS/POWERMENU --LOGOUT",
+		"tooltip-format": "-( LOGOUT )-",
 		"tooltip": true
 	},
 	"custom/reboot": {
 	    "format": "󰇠",
+		"format-alt": "🔃",
+		"format-alt-click": "click-right",
 		"exec-if": "[ -f $HOME/.config/wofi/SCRIPTS/POWERMENU ]",
 		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --REBOOT",
-		"tooltip-format": "( REBOOT )",
+		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/POWERMENU --REBOOT",
+		"on-click-right": "$HOME/.config/wofi/SCRIPTS/POWERMENU --REBOOT",
+		"tooltip-format": "-( REBOOT )-",
 		"tooltip": true
 	},
 	"custom/bios": {
 	    "format": "󰴴",
+		"format-alt": "⚙️",
+		"format-alt-click": "click-right",
 		"exec-if": "[ -f $HOME/.config/wofi/SCRIPTS/POWERMENU ]",
 		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --BIOS",
-		"tooltip-format": "( BIOS )",
+		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/POWERMENU --BIOS",
+		"on-click-right": "$HOME/.config/wofi/SCRIPTS/POWERMENU --BIOS",
+		"tooltip-format": "-( BIOS )-",
 		"tooltip": true
 	},
-	"custom/power": {
+	"custom/shutdown": {
+	    "format": "⏻",
+		"format-alt": "🖕",
+		"format-alt-click": "click-right",
+		"exec-if": "[ -f $HOME/.config/wofi/SCRIPTS/POWERMENU ]",
+		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU --SHUTDOWN",
+		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/POWERMENU --SHUTDOWN",
+		"on-click-right": "$HOME/.config/wofi/SCRIPTS/POWERMENU --SHUTDOWN",
+		"tooltip-format": "-( SHUTDOWN )-",
+		"tooltip": true
+	},
+	"custom/powermenu": {
 		"interval": 1,
 		"exec-if": "[ -f $HOME/.config/wofi/SCRIPTS/POWERMENU ]",
 		"exec": "uptime -p",
-		"format": "⏻",
-		//"format-alt": "{'GROUP/POWER'}\t🏵",
+		"format": "🏵",
+		"format-alt": "🌸",
 		"format-alt-click": "click-right",
 		"on-click": "$HOME/.config/wofi/SCRIPTS/POWERMENU",
 		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/POWERMENU",
-		"on-click-right": "$HOME/.config/wofi/SCRIPTS/POWERMENU --SHUTDOWN",
-		"tooltip-format": "{}\n──────────────\n🖱ᐩ❶⍆POWERMENU\n🖱ᐩ❷⍆( SHUTDOWN )\n🖱ᐩ❸⍆POWERMENU",
+		"on-click-right": "$HOME/.config/wofi/SCRIPTS/POWERMENU",
+		"tooltip-format": "{}\n──────────────\n🖱ᐩ❶⍆POWERMENU\n🖱ᐩ❷⍆POWERMENU\n🖱ᐩ❸⍆POWERMENU",
 		"tooltip": true
 	},
 	"custom/pacman": {
@@ -780,8 +813,8 @@
 			"pending-updates": "󱉚",
 			"updated": ""		// STRING EMPTY=HIDDEN
 		},
-		"on-click": "kitty --detach $SHELL -c 'yay -Syyu && yay -Ycc && yay -Scc --noconfirm && clear'",
-		"on-click-middle": "pkexec reflector > /etc/pacman.d/mirrorlist",
+		"on-click": "xterm --detach $SHELL -c 'yay -Syyu && yay -Scc --noconfirm --answerclean y && yay -Ycc --cleanmenu --gendb && clear'",
+		"on-click-middle": "wofi -drun --password --prompt=PASSWORD | sudo reflector --save /etc/pacman.d/mirrorlist",
 		"tooltip": true,
 		"return-type": "json"
 	}

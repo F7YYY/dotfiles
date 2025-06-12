@@ -26,13 +26,15 @@ main() {
 
     #─DESCENDING_LIST
     local APPLICATIONS=(
-        "bash -c backup && bash -c exp_env"
+        "bash -c backup && bash -c 'exp_env --local'"
         "dbus-update-activation-environment --systemd --all"
         "gnome-keyring-daemon --start --components=secrets"
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
         "xdg-autostart"                                # AUTOSTARTS APPLICATIONS
-        "wlsunset -s 22:00 -S 10:00 -d 60"
         "mpd --systemd"
+        "waybar"
+        "libredefender scheduler"
+        "wlsunset -s 22:00 -S 10:00 -d 60"
         #"wl-paste --type text --watch cliphist store"
         #"wl-paste --type image --watch cliphist store"
         #───(MINIMIZED_FLAGS)───#

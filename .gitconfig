@@ -64,7 +64,7 @@
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
 [alias]
-	dotfiles = !git --git-dir=$HOME/.$ --work-tree=$HOME
+	dotfiles = !git --git-dir=$HOME/.git --work-tree=$HOME
 	##########
 	a = add
 	aa = add --all

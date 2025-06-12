@@ -25,12 +25,8 @@
     transition-property: inherit;
 }
 @keyframes blink {
-    from {
-        color: inherit;
-    }
-    to {
-        color: transparent;
-    }
+    from { color: inherit; }
+      to { color: transparent; }
 }
 
 /*──────────────────────────────────────────(WAYBAR)───*/
