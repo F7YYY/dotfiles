@@ -18,7 +18,6 @@
     font: italic small-caps bold 16px "Sony Sketch EF, Symbols Nerd Font Mono";
     text-shadow: 1px 1px @black;
     border-radius: 20px;
-    -gtk-outline-radius: 20px;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-direction: alternate;

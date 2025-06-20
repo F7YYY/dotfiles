@@ -1297,10 +1297,10 @@
         "theme": "dark"
     },
     "UserInterface": {
-        "RunZoneChecks": false,
+        "RunZoneChecks": true,
         "exit_profile": {
-            "profile_name": "",
-            "set_on_exit": true
+            "profile_name": "rain",
+            "set_on_exit": false
         },
         "geometry": {
             "height": 0,

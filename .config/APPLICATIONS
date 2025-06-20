@@ -1,5 +1,4 @@
 #!/bin/bash
-#
 ################################################################################
 #                                                                              #
 #   ▄▀▀▀▀▄  ▄▀▀▀█▀▀▄  ▄▀▀█▄   ▄▀▀▄▀▀▀▄  ▄▀▀▀█▀▀▄  ▄▀▀▄ ▄▀▀▄  ▄▀▀▄▀▀▀▄  ▄▀▀▀▀▄  #
@@ -13,73 +12,78 @@
 ################################################################################
 #
 #   IF [ XDG_SESSION_DESKTOP = "TTY" ]; THEN ECHO "STILL_SAFE_TO_RUN_SCRIPT"; FI
-#   SCRIPT WRAPPER (AUR): GNOME-TWEAKS>STARTUP_APPLICATIONS & XDG-AUTOSTART
 #
-#─────────────────────────────────────────────────────────────────(GSETTINGS)───
-#gsettings set org.gnome.desktop.interface <THEME> <THEME>
-gsettings set org.gnome.desktop.interface clock-format 24h
-
 #───────────────────────────────────────────────────────────────(EXECUTABLES)───
 main() {
     local INPUT="$@"
-    local WAYLAND="--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer --ozone-platform-hint=auto"
+    local LAUNCH=""
+    local UWSM=0
 
-    #─DESCENDING_LIST
+    #───(LIST)
     local APPLICATIONS=(
-        "bash -c backup && bash -c 'exp_env --local'"
-        "dbus-update-activation-environment --systemd --all"
+        "exp_env --local && backup"
+        #"dbus-update-activation-environment --systemd --all"   # MANAGED BY AUR:UWSM
         "gnome-keyring-daemon --start --components=secrets"
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-        "xdg-autostart"                                # AUTOSTARTS APPLICATIONS
-        "mpd --systemd"
+        "xdg-autostart"						# AUR:UWSM MANAGED
         "waybar"
-        "libredefender scheduler"
-        "wlsunset -s 22:00 -S 10:00 -d 60"
+        #"wlsunset -s 22:00 -S 10:00 -d 60"
         #"wl-paste --type text --watch cliphist store"
         #"wl-paste --type image --watch cliphist store"
-        #───(MINIMIZED_FLAGS)───#
+        #───(MINIMIZED_FLAGS)
         #"emacs --daemon"
-        #"openrgb --startminimized"
-        #"steam -silent $WAYLAND"
-        #"vesktop --start-minimized $WAYLAND"
-        #"telegram-desktop -startintray"
-        #"youtube-music --use-tray-icon $WAYLAND"
-        #"teams --startminimized $WAYLAND"
+        #"openrgb --startminimized wayland"
+        #"steam -silent wayland"
+        #"vesktop --start-minimized wayland"
+        #"telegram-desktop -startintray wayland"
+        #"youtube-music --use-tray-icon wayland"
+        #"teams --startminimized wayland"
     )
 
-    #─LAUNCH_OR_RELAUNCH_APPS
+	[ command -v uwsm &>/dev/null ] && UWSM=1 || UWSM=0
+
+    #───(MANAGE_EXECUTIONs)
     for APP in "${APPLICATIONS[@]}"; do
         local NAME="${APP%% *}"
 
         case $INPUT in
-            -[Hh]*|--[Hh]*)
-			    echo -e "\n./$0 -[H/R/ ]\n"
-			    echo -e "-[   H/help   ]: Help Menu"
+            ""|-[Hh]*|--[Hh]*)
+                echo -e "\n[ $0 ]\n"
+			    echo -e "-[ H/help     ]: Help Menu"
+			    echo -e "-[ L/launch   ]: Launch Apps"
 			    echo -e "-[ R/relaunch ]: Relaunch Apps"
-			    echo -e "-[   K/kill   ]: Kill All Apps"
-			    echo -e "-[            ]: Auto-Launch Apps [DEFAULT]\n"
-                return 0
-		    ;;
-            -[Rr]*|--[Rr]*)
-                echo -e "RELAUNCHING:\t"$APP""
-                pkill -9 "$NAME" &>/dev/null
-                eval "$APP" &>/dev/null &disown
+			    echo -e "-[ K/kill     ]: Kill All Apps"
+                break
             ;;
-	-[Kk]*|--[Kk]*)
-		echo -e "KILLING:\t"$APP""
-		pkill -9 "$NAME" &>/dev/null
-	;;
-            ""|*)
+            -[Ll]*|--[Ll]*)
                 if ! pgrep -f "$NAME" &>/dev/null; then
                     echo -e "LAUNCHING:\t"$APP""
-                    eval "$APP" &>/dev/null &disown
+                    [ $UWSM -eq 1 ] && LAUNCH="uwsm app" || LAUNCH="eval"
+                    $LAUNCH "$APP" &>/dev/null &disown
                 else
                     ps -C "$NAME" fh -Hw
                 fi
+		    ;;
+            -[Rr]*|--[Rr]*)
+                echo -e "RELAUNCHING:\t"$APP""
+                [ $UWSM -eq 1 ] && LAUNCH="uwsm stop" || LAUNCH="pkill -9"
+                $LAUNCH "$NAME" &>/dev/null
+                [ $UWSM -eq 1 ] && LAUNCH="uwsm app" || LAUNCH="eval"
+                $LAUNCH "$APP" &>/dev/null &disown
             ;;
+	        -[Kk]*|--[Kk]*)
+		        echo -e "KILLING:\t"$APP""
+                [ $UWSM -eq 1 ] && LAUNCH="uwsm stop" || LAUNCH="pkill -9"
+		        $LAUNCH "$NAME" &>/dev/null
+	        ;;
+		    *)
+                echo -e "\n[!] UNKNOWN INPUT: $1\n"
+                main -h
+                break
+		    ;;
         esac
     done
 }
 
-#───START
+#───(START)
 main "$@"
