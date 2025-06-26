@@ -1,4 +1,3 @@
-#!/bin/zsh
 #####################################################################
 #                                                                   #
 #     ███████╗██████╗ ██████╗  ██████╗ ███████╗██╗██╗     ███████╗  #
@@ -32,18 +31,15 @@
 
 #──────────────────────────────────────────────────────────(THEME)───
 #───(p10k configure)───#───(nvim $HOME/.p10k.zsh)───#
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+[[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
+# Enable Powerlevel10k instant prompt. Should stay close to the top of "$HOME/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+[[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 
-#───(FALLBACK)
 # _______________________
 # |[user@hostname]-[~]  |
-# |─>>                  |
+# |─>> FALLBACK         |
 # |_____________________|
 #
 PS1="%{$fg[blue]%}%B[%b%{$fg[cyan]%}%n%{$fg[grey]%}%B@%b%{$fg[cyan]%}%m%{$fg[blue]%}%B]-%b%{$fg[blue]%}%B[%b%{$fg[white]%}%~%{$fg[blue]%}%B]%b
@@ -52,87 +48,31 @@ autoload -U colors && colors
 
 #──────────────────────────────────────────────────(AUTO_COMPLETE)───
 _comp_options+=(globdots)   # hidden files are included
-HISTFILE=~/.bash_history
+HISTFILE="$HOME/.bash_history"
 zmodload zsh/complist
 setopt autocd beep extendedglob notify
-zstyle :compinstall filename '$HOME/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' format '>>> %d'
 #autoload -Uz compinit
 
-#───(https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins)
-plugins=(
-  aliases
-  alias-finder
-  archlinux
-  #autoenv
-  autojump
-  branch
-  catimg
-  colored-man-pages
-  colorize
-  command-not-found
-  common-aliases
-  cp
-  emoji
-  emoji-clock
-  emotty
-  extract
-  fancy-ctrl-z
-  gh
-  git
-  git-auto-fetch
-  git-commit
-  git-extras
-  gitfast
-  git-flow
-  github
-  gitignore
-  #gitlfs
-  git-prompt
-  gnu-utils
-  gpg-agent
-  history
-  history-substring-search
-  jump
-  keychain
-  kitty
-  nmap
-  postgres
-  rsync
-  #starship
-  sudo
-  systemd
-  #thefuck
-  themes
-  ufw
-  vscode
-  zbell
-  zsh-interactive-cd
-  zsh-navigation-tools
-  #zsh-autocomplete
-  #zsh-autosuggestions
-  #zsh-navigation-tools
-  #zsh-syntax-highlighting
-)
-
 #───────────────────────────────────────────────────────(KEYBINDS)───
-#bindkey -e
-#bindkey '^[[1~' beginning-of-line       # Home
-#bindkey '^[[7~' beginning-of-line
-#bindkey '^[[H' beginning-of-line
-#bindkey '^[[4~' end-of-line             # End
-#bindkey '^[[8~' end-of-line
-#bindkey '^[[F' end-of-line
-#bindkey '^[[3~' delete-char             # Delete
-#bindkey '^[[C' forward-char             # →
-#bindkey '^[[D' backward-char            # ←
-#bindkey '^[[1;5C' forward-word          # Ctrl+→
-#bindkey '^[[1;5D' backward-word         # Ctrl+←
-#bindkey '^[Oc' forward-word
-#bindkey '^[Od' backward-word
-#bindkey '^H' backward-kill-word         # Ctrl+Backspace
-#bindkey '^[[Z' undo                     # Shift+Tab
-#bindkey '^[[5~' history-beginning-search-backward   # Page Up
-#bindkey '^[[6~' history-beginning-search-forward    # Page Down
-#autoload -Uz bindkey
+bindkey -e
+bindkey '^[[1~' beginning-of-line       # Home
+bindkey '^[[7~' beginning-of-line
+bindkey '^[[H' beginning-of-line
+bindkey '^[[4~' end-of-line             # End
+bindkey '^[[8~' end-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[3~' delete-char             # Delete
+bindkey '^[[C' forward-char             # →
+bindkey '^[[D' backward-char            # ←
+bindkey '^[[1;5C' forward-word          # Ctrl+→
+bindkey '^[[1;5D' backward-word         # Ctrl+←
+bindkey '^[Oc' forward-word
+bindkey '^[Od' backward-word
+bindkey '^H' backward-kill-word         # Ctrl+Backspace
+bindkey '^[[Z' undo                     # Shift+Tab
+bindkey '^[[5~' history-beginning-search-backward   # Page Up
+bindkey '^[[6~' history-beginning-search-forward    # Page Down
+#autoload -Uz bindkey   # function definition file not found

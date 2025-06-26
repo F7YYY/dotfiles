@@ -1,4 +1,3 @@
-#!/bin/bash
 ################################################################################################
 #        ________      ________      ________       ___  ___      ________      ________       #
 #       |\   __  \    |\   __  \    |\   ____\     |\  \|\  \    |\   __  \    |\   ____\      #
@@ -15,7 +14,7 @@
 #───(AUTO_RUN_INTERACTIVELY)
 [[ $- != *i* ]] && return
 #───(SOURCERER)
-[[ -f "$HOME/.bash_bashrc" ]] && source "$HOME/.bash_profile"
+[[ -f "$HOME/.bash_profile" ]] && source "$HOME/.bash_profile"
 #───(SOURCE_DEFINITIONS)
 [[ -f /etc/bash.bashrc ]] && source /etc/bash.bashrc
 #───(bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)")────#

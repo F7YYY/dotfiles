@@ -39,7 +39,7 @@ powermenu() {
         S|[Ss]hutdown|SHUTDOWN)
             systemctl -i poweroff
         ;;
-        [hH]*)
+        [hH]*|"")
             echo -e "\n\tPOWERMENU_OPTIONS"
             echo -e "─────────────────────────────────────────"
             echo -e "HELP:\t\tH|h\t    Help|help"
@@ -53,8 +53,9 @@ powermenu() {
             echo -e "BIOS:\t\tB\t    Bios|bios"
             echo -e "SHUTDOWN:\tS\tShutdown|shutdown\n"
         ;;
-        ""|*)
-            exit 0
+        *)
+            notify-send -u normal '[!] UNKNOWN INPUT: ' $@ || echo -e "\n[!] UNKNOWN INPUT: $@\n"
+            powermenu HELP
         ;;
     esac
 }

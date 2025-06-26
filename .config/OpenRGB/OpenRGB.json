@@ -5,11 +5,11 @@
         "enabled": true,
         "host": "0.0.0.0",
         "port": "",
-        "profile": "rain",
+        "profile": "rain-default",
         "setclient": false,
         "setcustom": false,
         "setminimized": true,
-        "setprofile": false,
+        "setprofile": true,
         "setserver": false,
         "setserverhost": false,
         "setserverport": false
@@ -1297,16 +1297,16 @@
         "theme": "dark"
     },
     "UserInterface": {
-        "RunZoneChecks": true,
+        "RunZoneChecks": false,
         "exit_profile": {
-            "profile_name": "rain",
-            "set_on_exit": false
+            "profile_name": "rain-default",
+            "set_on_exit": true
         },
         "geometry": {
-            "height": 0,
+            "height": 421,
             "load_geometry": true,
             "save_on_exit": true,
-            "width": 0,
+            "width": 906,
             "x": 0,
             "y": 0
         },

@@ -1,4 +1,3 @@
-#!/bin/zsh
 #################################################
 #                                               #
 #     ███████╗███████╗██╗  ██╗██████╗  ██████╗  #
@@ -27,6 +26,8 @@
 [[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh ]] && source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 #───(AUR: zsh-syntax-highlighting)
 [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#───(AUR: zsh-history-substring-search)
+[[ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]] && source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 #───(AUR: zsh-theme-powerlevel10k)
 [[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]] && source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
@@ -103,13 +104,67 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-#plugins=(imported_from_zprofile)
+#───(https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins)
+plugins=(
+  aliases
+  alias-finder
+  archlinux
+  #autoenv
+  autojump
+  branch
+  catimg
+  colored-man-pages
+  colorize
+  command-not-found
+  common-aliases
+  cp
+  emoji
+  emoji-clock
+  emotty
+  extract
+  fancy-ctrl-z
+  gh
+  git
+  git-auto-fetch
+  git-commit
+  git-extras
+  gitfast
+  git-flow
+  github
+  gitignore
+  #gitlfs
+  git-prompt
+  gnu-utils
+  gpg-agent
+  history
+  history-substring-search
+  jump
+  keychain
+  kitty
+  nmap
+  postgres
+  rsync
+  #starship
+  sudo
+  systemd
+  #thefuck
+  themes
+  ufw
+  vscode
+  zbell
+  zsh-interactive-cd
+  zsh-navigation-tools
+  #zsh-autocomplete
+  #zsh-autosuggestions
+  #zsh-navigation-tools
+  #zsh-syntax-highlighting
+)
 
 [[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# export MANPATH='/usr/local/man:$MANPATH'
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -133,5 +188,5 @@ COMPLETION_WAITING_DOTS="true"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias zshconfig="mate $HOME/.zshrc"
+# alias ohmyzsh="mate $HOME/.oh-my-zsh"

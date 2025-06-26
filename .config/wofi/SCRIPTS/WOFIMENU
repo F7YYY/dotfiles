@@ -1,0 +1,62 @@
+#!/bin/bash
+###########
+# WOFI WRAPPER
+##############
+#
+# CONFIGURABLE "VARIABLES"
+CALCULATOR="wofi-calc"
+EMOJI="wofi-emoji"
+POWERMENU="$(find "$HOME/.config/" -type f -name POWERMENU 2>/dev/null | head -n 1)"
+APPLICATIONS="$(find "$HOME/.config/" -type f -name APPLICATIONS 2>/dev/null | head -n 1)"
+
+# CHECK FOR REQUIRED DEPENDENCIES
+dependencies() {
+    local PACKAGES=(
+        "wofi"
+        "$CALCULATOR"
+        "$EMOJI"
+        "$POWERMENU"
+        "$APPLICATIONS"
+    )
+
+    for CMD in "${PACKAGES[@]}"; do
+        if [ ! command -v "$CMD" &>/dev/null ]; then
+            notify-send -u critical -a "WOFI" "$0" "$CMD" "MISSING:" || echo "WOFI: [$CMD] MISSING OR NOT IN PATH"
+        fi
+    done
+}
+
+# HANDLE KNOWN WOFI MENU SELECTIONS
+wofimenu() {
+    case "$1" in
+        "WOFI") wofi ;;
+        "CALCULATOR") "$CALCULATOR" ;;
+        "EMOJI") "$EMOJI" ;;
+        "POWERMENU") "$POWERMENU" ;;
+        "APPLICATIONS") "$APPLICATIONS" ;;
+        *) 
+            notify-send -u normal '[!] UNKNOWN INPUT: ' $@ || echo -e "\n[!] UNKNOWN INPUT: $@\n"
+        ;;
+    esac
+}
+
+# DISPLAY APPLICATIONS+SCRIPTS & HANDLE USER INPUT
+main() {
+    local MENU=("───( EXIT )───" "WOFI" "CALCULATOR" "EMOJI" "POWERMENU" "APPLICATIONS")
+    local SELECTED=$(printf "%s\n" "${MENU[@]}" | wofi --dmenu --prompt "  ~❯")
+    local INPUT="${1#--}"
+
+    dependencies
+
+    if [[ -n "${INPUT[0]}" ]]; then
+        if ! command -v "${INPUT[0]}" &>/dev/null; then
+            notify-send -u critical -a "COMMAND" "INVALID: ${INPUT[0]}" || echo "INVALID COMMAND: ${COMMAND[0]}" >&2
+            exit 1
+        fi
+    elif [[ -n "$SELECTED" && "$SELECTED" != "{MENU[0}" ]]; then
+        wofimenu "$SELECTED"
+    fi
+}
+
+# START
+main

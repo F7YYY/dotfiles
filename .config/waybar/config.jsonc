@@ -22,7 +22,7 @@
 	"icon-size": 20,
 	/*───(FIX_ALL_MODULES_FORMAT-ALT_RIGHT_CLICK_STATUS)─(POSSIBLE_WABAR_BUG)───*/
 	"modules-left": [			//___APPLICATIONS___
-		"custom/appmenu",		// AUR: WOFI | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/WOFI
+		"custom/appmenu",		// AUR: WOFI | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/WOFIMENU
 		"sway/workspaces",		// REPLACE ↴
 		"sway/scratchpad",		// REPLACE ↴
 		"hyprland/workspaces",	// REPLACE ⟴ "wlr/workspaces",
@@ -56,7 +56,7 @@
 		"format-alt": "",
 		"format-alt-click": "click-right",
 		"on-click": "wofi",
-		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/WOFI",
+		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/WOFIMENU",
 		"tooltip-format": "{}\n──────────────\n🖱ᐩ❶⍆LAUNCHER\n🖱ᐩ❷⍆FORMAT\n🖱ᐩ❸⍆OTHER",
 		"tooltip": true
 	},

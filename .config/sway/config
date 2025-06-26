@@ -51,8 +51,8 @@ bindsym --to-code {
     $SUPER+Q                kill
     $SUPER+ESCAPE           exec $TERM
     $SUPER+ALT+ESCAPE       exec $TERM ranger
-    $SUPER+SPACE            exec wofi
-    $SUPER+ALT+SPACE        exec $HOME/.config/wofi/SCRIPTS/WOFI
+    $SUPER+SPACE            exec wofi       #rofi       # WAYLAND COMPATIBLE
+    $SUPER+ALT+SPACE        exec $HOME/.config/wofi/SCRIPTS/WOFIMENU
     CTRL+ALT+DELETE         exec $HOME/.config/wofi/SCRIPTS/POWERMENU
     #───(CURSOR)
     $SUPER+$LEFT            seat - cursor move -10 0
@@ -64,8 +64,9 @@ bindsym --to-code {
     --no-repeat             $SUPER+Apostrophe seat - cursor press button2
     --release --no-repeat   $SUPER+Apostrophe seat - cursor release button2
     #───(SCREENSHOT+GIF)
-    $SUPER+O                exec kooha
+    $SUPER+O                exec wf-recorder-gui
     $SUPER+P                exec flameshot screen
+    $SUPER+SHIFT+P          exec flameshot gui
     #───(XF86_BRIGHTNESS)
     XF86MonBrightnessUp     exec brightnessctl --quiet set 10%+
     XF86MonBrightnessDown   exec brightnessctl --quiet set 10%-

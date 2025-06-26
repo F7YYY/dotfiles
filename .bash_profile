@@ -1,4 +1,3 @@
-#!/bin/bash
 ##########################################################################################################################################################################
 #        ________      ________      ________       ___  ___                     ________    ________      ________      ________  ___      ___           _______        #
 #       |\   __  \    |\   __  \    |\   ____\     |\  \|\  \                   |\   __  \  |\   __  \    |\   __  \    |\  _____\|\  \    |\  \         |\  ___ \       #
@@ -29,31 +28,31 @@
 gsettings set org.gnome.desktop.interface clock-format 24h
 
 #─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(ALIASES)───
-alias c="clear"
+alias c='clear'
 alias l='ls -l --color=auto'
 alias la='ls -la --color=auto'
-alias ll="ls -lahs --color=auto"
+alias ll='ls -lahs --color=auto'
 alias grep='grep --color=auto'
-alias egrep="egrep --color=auto"
-alias fgrep="fgrep --color=auto"
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
 alias ftext='clear && grep -niHIr --color=always "$1" "${2:-.}" | less -r'
-alias curl="curl --user-agent 'noleak'"
-alias wget="wget -c --user-agent 'noleak'"
+alias curl='curl --user-agent "noleak"'
+alias wget='wget -c --user-agent "noleak"'
 alias rsync='rsync --recursive --progress'
-alias logs="sudo find /var/log -type f -exec file {} + | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
+alias logs='sudo find /var/log -type f -exec file {} + | grep "text" | cut -d " " -f1 | sed -e"s/:$//g" | grep -v "[0-9]$" | xargs tail -f'
 alias alert='notify-send -u critical -a "$([ $? = 0 ] && echo TERMINAL || echo ERROR)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')" "Finished"'
-alias free="free -h"
-alias cp="cp -i"
-alias rm="rm -i"
-alias mv="mv -i"
-alias df="df -h"
-alias du="du -h"
-alias dd="dd status=progress"
-alias shred="shred -zf"
+alias free='free -h'
+alias cp='cp -i'
+alias rm='rm -i'
+alias mv='mv -i'
+alias df='df -h'
+alias du='du -h'
+alias dd='dd status=progress'
+alias shred='shred -zf'
 alias wayland='--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer --ozone-platform-hint=auto'
 
 #───(CHANGE_DIRECTORY)
-alias home='cd ~ || cd $HOME'
+alias home='cd ~ || cd "$HOME"'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -66,15 +65,13 @@ alias untar='tar -xvf'
 alias unbz2='tar -xvjf'
 alias ungz='tar -xvzf'
 
-#───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(FUNCTIONS)───
-#───(EXPORT_ENVIRONMENT_VARIABLES)
+#────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(EXPORT_ENVIRONMENT_VARIABLES)───
 exporter() {
     local INPUT="${1:-}"
-    local W=0 X=0 A=0 N=0 I=0
     local ESCALATE=""
     local ENVFILE="/etc/environment"
     local VENDOR=($(lspci | grep -iE 'vga' | grep -ioE 'amd|nvidia|intel' | awk '{print tolower($0)}'))
-    
+
     #───(VARIABLES)
     local ENLISTMENT=(
         "HISTSIZE=1000"
@@ -83,9 +80,6 @@ exporter() {
         "EDITOR=vscodium-electron -w"
         "GPG_TTY=$(tty)"
         "_JAVA_AWT_WM_NONREPARENTING=1"
-        "XDG_DATA_HOME=$HOME/.local/share"
-        "XDG_STATE_HOME=$HOME/.local/state"
-        "XDG_CACHE_HOME=$HOME/.cache"
 	    "XDG_SESSION_TYPE=$XDG_BACKEND"
 		#"XDG_SESSION_DESKTOP=$XDG_CURRENT_DESKTOP" # EXPORT IF NOT DEFAULTING TO DE/WM
 		#"XDG_CURRENT_DESKTOP=$XDG_SESSION_DESKTOP" # EXPORT IF NOT DEFAULTING TO DE/WM
@@ -139,36 +133,38 @@ exporter() {
 		#"WLR_DRM_NO_ATOMIC=1"				        # LEGACY DRM INTERFACE
 	)
     local INTEL=(
-		"INTEL=RETARD_ALERT"						# UNLESS IGPU - BUT STILL
+		"INTEL=RETARD_ALERT"						# UNLESS FOR IGPU
 		"VDPAU_DRIVER=va_gl"
 		"LIBVA_DRIVER_NAME=iHD"
 	)
     
     #───(BACKEND_APPEND)
     case "$XDG_BACKEND" in
-        wayland) ((W++)) && ENLISTMENT+=("${WAYLAND[@]}");;
-        x11)     ((X++)) && ENLISTMENT+=("${XORG[@]}");;
-        *) echo -e "\n[?] UNKNOWN XDG_BACKEND: [$XDG_BACKEND]";;
+        wayland) ENLISTMENT+=$WAYLAND ;;
+        x11) ENLISTMENT+=$XORG ;;
+        *) echo -e "\n[?] UNKNOWN XDG_BACKEND: [$XDG_BACKEND]" ;;
     esac
 
     #───(GPU_APPEND)
     for GPU in "${VENDOR[@]}"; do
         case "$GPU" in
-            amd) ((A++)) && ENLISTMENT+=("${AMD[@]}");;
-            nvidia) ((N++)) && ENLISTMENT+=("${NVIDIA[@]}");;
-            intel) ((I++)) && ENLISTMENT+=("${INTEL[@]}");;
-            *) echo -e "\n[?] UNKNOWN GPU: [$GPU]";;
+            amd) ENLISTMENT+=$AMD ;;
+            nvidia) ENLISTMENT+=$NVIDIA ;;
+            intel) ENLISTMENT+=$INTEL ;;
+            *) echo -e "\n[?] UNKNOWN GPU: [$GPU]" ;;
         esac
     done
 
     #───(PRIVILEGE_DETECTION)
     echo -e "\n[*] ENUMERATING PRIVILEGE ESCALATE METHODS..."
     if [[ $EUID -eq 0 ]]; then
-        ESCALATE=""; echo -e "[✓] FOUND: 'root'"
+        echo -e "[✓] FOUND: 'root'"
     elif command -v sudo &>/dev/null; then
-        ESCALATE="sudo"; echo -e "[✓] FOUND: '$ESCALATE'"
+        ESCALATE="sudo"
+        echo -e "[✓] FOUND: '$ESCALATE'"
     elif command -v pkexec &>/dev/null; then                        # BYPASSES ROOT ESCALATION
-        ESCALATE="pkexec"; echo -e "[✓] FOUND: '$ESCALATE'"
+        ESCALATE="pkexec"
+        echo -e "[✓] FOUND: '$ESCALATE'"
     else
         echo -e "\n[!] PRIVILEGED COMMAND NOT FOUND..."
         while true; do
@@ -192,22 +188,22 @@ exporter() {
         ;;
         -[Cc]*|--[Cc]*)
             echo -e "\n==========================================\n"
-            echo -e "{+} CHECKING EXPORTS: [.bashrc]\n"
+            echo -e "[?] CHECKING EXPORTS: [.bashrc]\n"
             for VAR in "${ENLISTMENT[@]}"; do echo -e "$VAR"; done
             echo -e "\n──────────────────────────────────────────\n"
-            echo -e "{+} CHECKING EXPORTS: [$ENVFILE]\n"
+            echo -e "[?] CHECKING EXPORTS: [$ENVFILE]\n"
             $ESCALATE cat "$ENVFILE"
             echo -e "\n==========================================\n"
         ;;
         -[Ll]*|--[Ll]*)
-            echo -e "\n{+} EXPORTING TO: [$UID($USER)]\n"
+            echo -e "\n[+] EXPORTING TO: [$UID($USER)]\n"
             for VAR in "${ENLISTMENT[@]}"; do
                 echo -e "[✓] EXPORTED: "$VAR""
 		        export "$VAR"
 	        done
         ;;
         -[Gg]*|--[Gg]*)
-            echo -e "\n{+} EXPORTING TO: [$ENVFILE]"
+            echo -e "\n[+] EXPORTING TO: [$ENVFILE]"
 
             # Ensure $ENVFILE exists with correct perms
             [[ ! -f $ENVFILE ]] && $ESCALATE touch "$ENVFILE" && $ESCALATE chmod 644 "$ENVFILE"
@@ -223,55 +219,188 @@ exporter() {
                 echo -e "\n[!] ^-FINAL_COPY-^\n"
             fi
 
-            local TMPFILE=$(mktemp)
-            cp -f "$ENVFILE" "$TMPFILE"
-
             # Replace old header block with new one
-            $ESCALATE sed -i '/^#' "$TMPFILE"
-            echo -e "# IMPORTED BY .BASHRC ($(date))\n#\n# PARSED BY pam_env MODULE\n#\n# KEY=VAL\n" | $ESCALATE tee -a "$TMPFILE" > /dev/null
+            echo -e "\n[!] #DELETING_ALL_COMMENTED_LINES\n[+] IMPORTING NEW HEADER\n"
+            $ESCALATE sed -i '/^#' "$ENVFILE"
+            local HEADER="# .BASHRC IMPORT ($(date))\n#\n# PARSED BY pam_env MODULE\n#\n# KEY=VAL\n"
+            $ESCALATE sed -i -E '/^\s*#/d' "$ENVFILE"           # MUST STAY SEPERATED
+            $ESCALATE sed -i -E "1s|^|$HEADER|" "$ENVFILE"      # MUST STAY SEPERATED
 
+            # Recursively iterate though all lines and arrays for changes
             for VAR in "${ENLISTMENT[@]}"; do
                 local KEY="${VAR%%=*}"
                 local VAL="${VAR#*=}"
-                local LINE=$(grep -E "^\s*#?\s*${KEY}\s*=" "$TMPFILE" | tail -n1)
+                local LINE=$($ESCALATE grep -E "^\s*${KEY}=" "$ENVFILE")
 
-                if [[ -n "$LINE" ]]; then
-                    if [[ "$LINE" == "$VAR" ]]; then
+                if [ grep  "$KEY" == "$VAR" ]; then
+                    echo -e "[FOUND]:\t$LINE"
+                    echo -e "[REPLACEMENT]:\t$VAR"
+                    read -rp "REPLACE? (Yes/No): " CONFIRMREP
+                    if [[ "$CONFIRMREP" =~ ^[Yy] ]]; then
+                        $ESCALATE sed -i "s|^\s*${KEY}=.*|${VAR}|" "$ENVFILE"
+                        echo -e "[✓] REPLACED: $VAR"
+                    elif [[ "$LINE" == "$VAR" ]]; then
                         echo -e "[-] SKIPPED: $VAR"
                         continue
                     fi
-
-                    echo -e "[FOUND]:\t$LINE"
-                    echo -e "[REPLACEMENT]:\t$VAR"
-                    read -rp "REPLACE? (yes/no): " CONFIRMREP
-                    if [[ "$CONFIRMREP" =~ ^[Yy] ]]; then
-                        $ESCALATE sed -i "s|^\s*#\?\s*$KEY\s*=.*|$VAR|" "$TMPFILE"
-                        echo -e "[✓] REPLACED\n"
-                    else
-                        echo -e "[-] SKIPPED: $VAR"
-                    fi
                 else
                     # Delete commented versions
-                    $ESCALATE sed -i "/^#\s*${KEY}=.*/d" "$TMPFILE"
+                    $ESCALATE sed -i "/^#\s*${KEY}=.*/d" "$ENVFILE"
                     echo -e "[+] ADDING:\t$VAR"
-                    echo "$VAR" | $ESCALATE tee -a "$TMPFILE" > /dev/null
+                    echo "$VAR" | $ESCALATE tee -a "$ENVFILE" > /dev/null
                 fi
             done
 
             # Final copy into /etc/environment
-            echo -e "\n{+} WRITING:\t[$ENVFILE]"
-            $ESCALATE cp "$TMPFILE" "$ENVFILE" && echo -e "\n[✓] UPDATED:\t[$ENVFILE]"
-            rm -f "$TMPFILE"
+            echo -e "\n[✓] UPDATED:\t[$ENVFILE]"
         ;;
         *)
             echo -e "\n[!] UNKNOWN INPUT: $1\n"
-            exp_env -h
+            exporter -h
         ;;
     esac
     echo -e "\n[✓] DONE\n"
 }
 
-#───(AUTOMATE_PACKAGES_INSTALLATION)
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(EXECUTABLES)───
+startups() {
+    local INPUT="$@"
+    local LAUNCH=""
+    local UWSM=0
+    local DESKTOP="$HOME/.config/autostart/COMMANDS.desktop"
+    local APPLICATIONS=(
+        #"dbus-update-activation-environment --systemd --all"   # MANAGED BY AUR:UWSM
+        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+        "'gnome-keyring-daemon --start --components=secrets'"
+        "'exporter --LOCAL'"
+        "backup"
+        "waybar"
+        #"waypaper --restore"
+        #"xdg-autostart"						# AUR:UWSM MANAGED
+        #"wlsunset -s 22:00 -S 10:00 -d 60"
+        #"wl-paste --type text --watch cliphist store"
+        #"wl-paste --type image --watch cliphist store"
+        #───(MINIMIZED_FLAGS)
+        #"emacs --daemon"
+        #"openrgb --startminimized wayland"
+        #"steam -silent wayland"
+        #"vesktop --start-minimized wayland"
+        #"telegram-desktop -startintray wayland"
+        #"youtube-music --use-tray-icon wayland"
+        #"teams --startminimized wayland"
+    )
+
+    [ command -v uwsm &>/dev/null ] && UWSM=1 || UWSM=0
+
+    #───(MANAGE_EXECUTIONS)
+    case $INPUT in
+        ""|-[Hh]*|--[Hh]*)
+            echo -e "\n[ $0 ]\n"
+    	    echo -e "-[ H/help     ]: Help Menu"
+    	    echo -e "-[ L/launch   ]: Re/Launch Apps"
+    	    echo -e "-[ K/kill     ]: Kill All Apps"
+            echo -e "-[ E/export   ]: Export All to [$DESKTOP]"
+            echo -e "-[ C/check    ]: Output [$DESKTOP]\n"            
+        ;;
+        -[Ll]*|--[Ll]*)
+            $0 --kill
+
+            for APP in "${APPLICATIONS[@]}"; do
+                local NAME="${APP%% *}"
+
+                echo -e "[✓] LAUNCHING: "$APP""
+                [ $UWSM -eq 1 ] && LAUNCH="uwsm-app" || LAUNCH="eval"
+                $LAUNCH "$APP" &>/dev/null &disown
+                if pgrep -af "$NAME" &>/dev/null; then
+                    echo -e "────────────────────────────"
+                    pgrep -af "$NAME" 
+                    echo -e "────────────────────────────\n"
+                fi
+            done
+        ;;
+        -[Kk]*|--[Kk]*)
+            for APP in "${APPLICATIONS[@]}"; do
+                local NAME="${APP%% *}"
+
+                echo -e "[✓] TERMINATING: "$APP""
+                if pgrep -af "$NAME" &>/dev/null; then
+                    echo -e "────────────────────────────"
+                    pkill -9 -f -e "$NAME"
+                    pkill -9 -f -e "$APP"
+                    echo -e "────────────────────────────\n"
+                else
+                    pkill -9 "$NAME" &>/dev/null
+                    pkill -9 "$APP" &>/dev/null
+                fi
+            done
+        ;;
+        -[Ee]*|--[Ee]*)
+            local ENTRY="[Desktop Entry]\nName=COMMANDS\nIcon=Terminal\nType=Application\nEncoding=UTF-8\nTerminal=true\nStartupNotify=true\nComment='.bash_profile generated $0'\n"
+
+            # Ensure $DESKTOP is configured
+            if [[ ! -f "$DESKTOP" || ! -s "$DESKTOP" ]]; then
+                echo -e "$ENTRY" > "$DESKTOP"
+                chmod +x "$DESKTOP"
+                echo -e "[+] CREATED:\t$DESKTOP"
+            else
+                echo -e "\n[+] REFORMATTING: [$DESKTOP]"
+                # Replace all none Exec= lines
+                sed -i -E '/^\s*Exec=/!d' "$DESKTOP"        # MUST STAY SEPERATED
+                sed -i -E "1s|^|$ENTRY|" "$DESKTOP"         # MUST STAY SEPERATED
+                # Report removed lines if any were found
+                local REMOVED_LINES=$(grep -v '^\s*Exec=' "$DESKTOP")
+                if [[ -n "$REMOVED_LINES" ]]; then
+                    echo -e "[-] REMOVED_LINES:\n$REMOVED_LINES\n────────────────────────────"
+                fi
+            fi
+
+            # Add or replace applications from the APPLICATIONS array
+            for APP in "${APPLICATIONS[@]}"; do
+                local LINE="Exec=$APP"
+                local FOUND=$(grep -E "^\s*Exec\s*=\s*${APP}" "$DESKTOP")
+
+                if [[ -n "$FOUND" && "$FOUND" != "$LINE" ]]; then
+                    echo -e "\n[>] FOUND:\t$FOUND"
+                    echo -e "[<] REPLACE:\t$LINE"
+                    read -rp "[y/N] REPLACE?: " CONFIRMREP
+                    if [[ "$CONFIRMREP" =~ ^[Yy] ]]; then
+                        sed -i -E "s|^\s*${FOUND}|$LINE|" "$DESKTOP"
+                        echo -e "[✓] REPLACED:\t$APP"
+                    else
+                        echo -e "[-] SKIPPED:\t$APP"
+                    fi
+                elif [[ -n "$FOUND" && "$FOUND" == "$LINE" ]]; then
+                    echo -e "[-] SKIPPED:\t$APP"
+                else
+                    echo "$LINE" >> "$DESKTOP"
+                    echo -e "[+] ADDED:\t$APP"
+                fi
+            done
+
+            $0 --check
+        ;;
+        -[Cc]*|--[Cc]*)
+            #───(PEACE_OF_MIND)
+            #   if [ $XDG_SESSION_DESKTOP = "TTY" ]; then
+            #       echo -e "\nSAFE_TO_EXECUTE_SCRIPT";
+            #       echo -e "\nUSECASE:\t<ORGAINZED_SHELL_COMMANDS>\n"
+            #   elif [ -f "$DESKTOP" ]
+            #       echo "EXPORT_ONCE_AND_FORGET" > "$DESKTOP"
+            #   else
+            #       echo -e "\nUSE_AS_NEEDED\n"
+            #   fi
+            echo -e "\n────────────────────────────"
+            cat "$DESKTOP" 
+            echo -e "────────────────────────────\n"
+        ;;
+        *)
+            echo -e "\n[?] UNKNOWN_INPUT: $1\n"
+            $0 --help
+        ;;
+    esac
+}
+
+#──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(AUTOMATE_PACKAGES_INSTALLATION)───
 install_packages() {
 	local INPUT="$1"
 	local DISTRO="$(grep -w "^PRETTY_NAME" /etc/os-release | cut -d '"' -f 2)"	# SIMPLY-(lsb_release -sd)
@@ -407,7 +536,7 @@ Packaged:\t$PACKAGED
 	esac
 }
 
-#───(AUTOMATE_PACKAGES_BACKUPS)
+#───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(AUTOMATE_PACKAGES_BACKUPS)───
 backup() {
 	local PACKAGED="$(find . -type f -name PACKAGES)"
 	local DAY="1"												# DAY OF THE WEEK
@@ -429,7 +558,7 @@ backup() {
 	fi
 }
 
-#───(compdef libredefender)
+#───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(compdef libredefender)───
 _libredefender() {
     local i cur prev opts cmd
     COMPREPLY=()
