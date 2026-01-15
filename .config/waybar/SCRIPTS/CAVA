@@ -6,7 +6,7 @@
 # OBTAIN VARIABLES FROM WAYBAR OR USE DEFAULT
 CONFIG="${CONFIG:-$HOME/.config/cava}"
 TEMP="/tmp/waybarcava"
-ICON="${ICON:-'_▁▂▃▄▅▆▇█'}"
+ICON="${ICON:-'▁▂▃▄▅▆▇█'}"
 BARS="${BARS:-10}"
 
 # CLEANUP TEMPORARY FILES ON EXIT
@@ -73,7 +73,7 @@ main() {
     dependencies
     modify_config
     format_status
-    format_tooltip
+    #format_tooltip
 }
 
 # START

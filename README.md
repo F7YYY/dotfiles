@@ -8,12 +8,11 @@
   [![](https://img.shields.io/github/stars/f7yyy/dotfiles?style=for-the-badge&logo=andela&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://youtu.be/dQw4w9WgXcQ?si=mAbUCyPRQY2MODCu)
   [![](https://img.shields.io/badge/issues-brain-green/f7yyy/dotfiles?style=for-the-badge&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](https://avatars.githubusercontent.com/u/38305613?v=4)
   [![](https://img.shields.io/github/license/f7yyy/dotfiles?style=for-the-badge&logo=GITHUB&color=DDDDDD&logoColor=DDDDDD&labelColor=333333)](LICENSE)
-</h2></a><details><summary>👀-CANDY─(MOLDY)</summary>
+</h2></a><details><summary>👀-CANDY</summary>
 
   <img src="Pictures/Screenshots/.1.png">
   <img src="Pictures/Screenshots/.2.png">
   <img src="Pictures/Screenshots/.3.png">
-  <img src="Pictures/Screenshots/.4.png">
   ───THE_DEEPER_YOU_LOOK_THE_MORE_YOU_FIND───
 </details><details><summary>WALLPAPERS</summary>
 
@@ -28,25 +27,25 @@
 
 | [FEATURES](.config/PACKAGES) | NAME | THEME |
 |-----------------------|-------------|-------|
-| Distribution          | [Arch Linux](https://github.com/archlinux)    |    [Wayland](https://arewewaylandyet.com/)
-| Boot Manager          | [rEFInd](https://www.rodsbooks.com/refind)    |    [darkmini](https://github.com/LightAir/darkmini)
-| Display Manager       | [LY](https://github.com/fairyglade/ly)
-| DE/WM                 | [Hyprland](https://github.com/hyprwm/Hyprland), [SwayFX](https://github.com/WillPower3309/swayfx)
-| Lock Screen           | [Hyprlock](https://github.com/hyprwm/hyprlock), [Swaylock Corrupter](https://github.com/r00tman/corrupter)
-| Wallpaper Setter      | [Waypaper](https://github.com/anufrievroman/waypaper)
-| Status Bar            | [Waybar](https://github.com/Alexays/Waybar)    |  [waybar-updates](https://github.com/L11R/waybar-updates), [wttrbar](https://github.com/bjesus/wttrbar)
-| Notifications         | [Dunst](https://github.com/dunst-project/dunst)
-| Terminal              | [Kitty](https://github.com/kovidgoyal/kitty)
-| Shell                 | [Git](https://github.com/git), [Bash](https://git.savannah.gnu.org/cgit/bash.git), [Fish](https://github.com/fish-shell/fish-shell)    |    [Oh-My-Git](https://github.com/arialdomartini/oh-my-git), [Oh-My-Bash](https://github.com/ohmybash/oh-my-bash), [Oh-My-Fish](https://github.com/oh-my-fish/oh-my-fish)
-| Font                  | [Sony Sketch](http://www.ffonts.net/Sony-Sketch-EF.font), [Maple](https://github.com/subframe7536/maple-font), [Nerd Symbols](https://github.com/ryanoasis/nerd-fonts)
-| Package Manager       | [Yay](https://github.com/Jguer/yay)
-| Application Manager   | [Wofi](https://hg.sr.ht/~scoopta/wofi)    |   [wofi-calc](https://github.com/Zeioth/wofi-calc.git), [wofi-emoji](https://github.com/Zeioth/wofi-emoji)
-| File Manager          | [Nemo](https://github.com/linuxmint/nemo), [Ranger](https://github.com/ranger/ranger)
-| Text Editor           | [VSCodium](https://github.com/VSCodium/vscodium), [NeoVim](https://github.com/neovim/neovim)
-| Media Viewer          | [IMV](https://sr.ht/~exec64/imv), [MPV](https://github.com/mpv-player/mpv), [CAVA](https://github.com/karlstav/cava)
-| Screen Capture        | [OBS](https://github.com/obsproject/obs-studio), [Flameshot](https://github.com/flameshot-org/flameshot), [Kooha](https://github.com/SeaDve/Kooha)
-| GTK Themes            |   |   [Flat Remix White Darkest](https://github.com/daniruiz/Flat-Remix-GTK)
-| Icon Themes           |   |   [Flat Remix Black Dark](https://github.com/daniruiz/Flat-Remix-GTK)
-| Cursor Theme          |   |   [Bibata Ghost](https://github.com/Silicasandwhich/Bibata_Cursor_Translucent.git)
-| Audio Theme           |   |   [Pop](https://github.com/pop-os/gtk-theme)
+| Distribution          | [Arch Linux](https://github.com/archlinux)  | [Wayland](https://arewewaylandyet.com/)
+| Boot Manager          | [refind](https://www.rodsbooks.com/refind)  | [darkmini](https://github.com/LightAir/darkmini)
+| Display Manager       | [ly](https://github.com/fairyglade/ly)
+| DE/WM                 | [hyprland](https://github.com/hyprwm/Hyprland), [sway](https://github.com/swaywm/sway)  | [hypridle](https://github.com/hyprwm/hypridle), [swayidle](https://github.com/swaywm/swayidle), [swaymgr](https://github.com/Difrex/swaymgr) +Plugins
+| Lock Screen           | [hyprlock](https://github.com/hyprwm/hyprlock), [swaylock-corrupter](https://github.com/r00tman/corrupter)
+| Wallpaper Setter      | [waypaper](https://github.com/anufrievroman/waypaper) | [mpvpaper](https://github.com/GhostNaN/mpvpaper), [swww](https://github.com/LGFae/swww)
+| Status Bar            | [waybar](https://github.com/Alexays/Waybar) ~> [eww](https://github.com/elkowar/eww) | [waybar-updates](https://github.com/L11R/waybar-updates), [wttrbar](https://github.com/bjesus/wttrbar)
+| Notifications         | [swaync](https://github.com/ErikReider/SwayNotificationCenter)
+| Terminal              | [kitty](https://github.com/kovidgoyal/kitty)
+| Shell                 | [git](https://github.com/git), [bash](https://git.savannah.gnu.org/cgit/bash.git), [zsh](https://sourceforge.net/p/zsh/code/ci/master/tree/)  | [oh-my-git](https://github.com/arialdomartini/oh-my-git), [oh-my-bash](https://github.com/ohmybash/oh-my-bash), [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh), +Plugins, +Scripts
+| Font                  | [sony-sketch-ef-font](http://www.ffonts.net/Sony-Sketch-EF.font), [maplemono-otf](https://github.com/subframe7536/maple-font), [maplemono-nf](https://github.com/subframe7536/maple-font), [nerd-fonts](https://www.nerdfonts.com/font-downloads)
+| Package Manager       | [yay](https://github.com/Jguer/yay)
+| Application Manager   | [wofi](https://hg.sr.ht/~scoopta/wofi) ~> [rofi](https://github.com/davatorium/rofi)    |   [wofi-calc](https://github.com/Zeioth/wofi-calc.git), [wofi-emoji](https://github.com/Zeioth/wofi-emoji), [rofi-calc](https://github.com/svenstaro/rofi-calc)
+| File Manager          | [nemo](https://github.com/linuxmint/nemo), [ranger](https://github.com/ranger/ranger)
+| Text Editor           | [vscodium-electron-bin](https://github.com/VSCodium/vscodium), [neovim](https://github.com/neovim/neovim)/[gvim](https://www.vim.org/), [leafpad](https://github.com/eworm-de/leafpad)
+| Media Viewer          | [imv](https://sr.ht/~exec64/imv), [mpv](https://github.com/mpv-player/mpv), [cava](https://github.com/karlstav/cava)
+| Screen Capture        | [obs-studio](https://github.com/obsproject/obs-studio), [flameshot-git](https://github.com/flameshot-org/flameshot), [wf-recorder](https://github.com/ammen99/wf-recorder)+[wf-recorder-gui](https://github.com/ali205412/wf-recorder-gui)
+| GTK Themes            | [flat-remix](https://github.com/daniruiz/Flat-Remix), [flat-remix-gtk](https://drasite.com/flat-remix-gtk)   |   [Flat Remix White Darkest](https://github.com/daniruiz/Flat-Remix-GTK)
+| Icon Themes           | [flat-remix](https://github.com/daniruiz/Flat-Remix), [flat-remix-gtk](https://drasite.com/flat-remix-gtk)   |   [Flat Remix Black Dark](https://github.com/daniruiz/Flat-Remix-GTK)
+| Cursor Theme          |   |   Default
+| Audio Theme           |   |   [pop](https://github.com/pop-os/gtk-theme)
 </a></div>

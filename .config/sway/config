@@ -18,20 +18,19 @@
 #exec_always { $(if pgrep -x HEADACHE; then killall -9Ieqg HEADACHE; fi) SUPRISE MIGRAINE }
 #───(NORMAL)
 exec {
-    #$HOME/.config/APPLICATIONS     # UWSM MANAGED & $HOME/.CONFIG/AUTOSTART
     #───(SWAY_SPECIFIC)
     swaymgr
 }
 
 #─────────────────────────────────────────────────────────────────────────────────────────────────────────────────(VARIABLES)───
 set {
-    $SUPER      Mod4
+    $SUPER      MOD4
     $FONT       Sony Sketch EF 12, Symbols Nerd Font Mono 12        #───(kitty list-fonts)───#
     $TERM       kitty --detach
     $LOCK       swaylock-corrupter --daemonize
     #───(NAME)─(DISPLAY)─(MODE)─([RESOLUTION@HZ])─([POSITION X,Y])─([SCALE #])───#
-    $DISPLAY1   DP-1 mode 1920x1080@240HZ position 0,0 scale 1
-    $DISPLAY2   HDMI-1 mode 1920x1080@60HZ position 1920,0 scale 1
+    $DISPLAY1   DP-1 mode 9999x9999@9999 position 0,0 scale 1
+    $DISPLAY2   DP-2 mode 9999x9999@9999 position 1920,0 scale 1
     #───(VIM_KEYS)
     $LEFT       H
     $DOWN       J
@@ -51,7 +50,7 @@ bindsym --to-code {
     $SUPER+Q                kill
     $SUPER+ESCAPE           exec $TERM
     $SUPER+ALT+ESCAPE       exec $TERM ranger
-    $SUPER+SPACE            exec wofi       #rofi       # WAYLAND COMPATIBLE
+    $SUPER+SPACE            exec wofi   #rofi       # WAYLAND COMPATIBLE
     $SUPER+ALT+SPACE        exec $HOME/.config/wofi/SCRIPTS/WOFIMENU
     CTRL+ALT+DELETE         exec $HOME/.config/wofi/SCRIPTS/POWERMENU
     #───(CURSOR)
@@ -101,7 +100,7 @@ set {
     $HIDETITLEBAR           titlebar hide
     #───(OPACITY)
     $OPACITY                0.8
-    $OPAQUE                 1.0
+    $OPAQUE                 0.8
 }
 bindsym --to-code {
     $SUPER+B                splith

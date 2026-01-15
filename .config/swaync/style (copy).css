@@ -1,0 +1,46 @@
+/*__________________________________________*
+*    _____                     _   ________ *
+*   / ___/      ______ ___  __/ | / / ____/ *
+*   \__ \ | /| / / __ `/ / / /  |/ / /      *
+*  ___/ / |/ |/ / /_/ / /_/ / /|  / /___    *
+* /____/|__/|__/\__,_/\__, /_/ |_/\____/    *
+*                    /____/                 *
+*(https://man.archlinux.org/man/swaync.5.en)*
+*
+**─────────────────────────────(PRESETS)───*/
+@define-color black rgba(0,0,0,0.8);
+@define-color grey  rgba(125,125,125,0.8);
+@define-color white rgba(255,255,255,0.8);
+
+/*──────────────────────────(EVERYTHING)───*/
+* {
+  all: unset;
+  font: italic small-caps bold 20px "Sony Sketch EF, Symbols Nerd Font Mono";
+  text-shadow: 1px 1px @black;
+  border-radius: 20px;
+  -gtk-outline-radius: 20px;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  transition-property: inherit;
+}
+@keyframes blink {
+    from { color: inherit; }
+      to { color: transparent; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**───(UNUSED)───*

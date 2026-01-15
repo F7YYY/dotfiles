@@ -30,6 +30,8 @@
 [[ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]] && source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 #───(AUR: zsh-theme-powerlevel10k)
 [[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]] && source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+#───(jump)
+[[ -s /home/snakeye/.cache/yay/autojump/pkg/autojump/etc/profile.d/autojump.sh ]] && source /home/snakeye/.cache/yay/autojump/pkg/autojump/etc/profile.d/autojump.sh
 
 #───────────────────────────────────(OH-MY-ZSH)──
 # If you come from bash you might have to change your $PATH.

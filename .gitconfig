@@ -284,4 +284,4 @@
 	process = git-lfs filter-process
 	required = true
 [oh-my-zsh]
-	git-commit-alias = 01433503c2a474c049fa56d792ebfd9274e683cc
+	git-commit-alias = ec14da72fbf8b5016bb1533d4af3ff3bb2ac7a19

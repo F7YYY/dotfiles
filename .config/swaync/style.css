@@ -14,7 +14,7 @@
 
 /*──────────────────────────(EVERYTHING)───*/
 * {
-  all: unset;
+  /*all: unset;*/
   font: italic small-caps bold 20px "Sony Sketch EF, Symbols Nerd Font Mono";
   text-shadow: 1px 1px @black;
   border-radius: 20px;
@@ -22,142 +22,158 @@
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-  transition-property: inherit;
+  transition: all 0 ease;
 }
+
 @keyframes blink {
-    from { color: inherit; }
-      to { color: transparent; }
+  from { color: inherit; }
+  to { color: transparent; }
 }
-
-/*
-*───(UNUSED)───*
-.widget-buttons-grid>flowbox>flowboxchild>button
-.widget-buttons-grid>flowbox>flowboxchild>button:hover 
-.widget-menubar>box>.menu-button-bar>button
-.AnyName
-.topbar-buttons
-.per-app-volume
-.widget-backlight
-.widget-inhibitors
-.notification-group-headers
-.notification-group-icon
-.notification-group-collapse-button
-.notification-group-close-all-button
-.widget-volume
-.widget-volume trough
-.widget-volume trough slider
-.widget-volume>box>button
-.floating-notifications.background
-.notification.critical
-.notification.critical progress
-*/
-
 
 /*────────────────────────────(CONTROLS)───*/
-.notification-default-action,
-.control-center,
-.control-center-list,
-.control-center-list-placeholder {
-  border: 2px solid white;
-  background-color: @black;
-}
 
-trough highlight {
-  background: @white;
-
-  border: 2px solid @white;
-}
-scale trough {
-  padding: 4px;
-  margin: 0px 10px;
+.control-center { /* GOOD */
+  color: white;
   background-color: @black;
   border: 2px solid white;
-  min-height: 10px;
-  min-width: 0px;
+  margin: 10px 0px;
 }
 
-.close-button:hover {
-  color: black;
-  border: 2px solid black;
+.control-center-list>* { /* GOOD */
+  border: 2px solid @black;
+  background-color: transparent;
 }
+
+.control-center-list-placeholder { /* GOOD */
+  color: @grey;
+  background-color: transparent;
+}
+
+.notification,
+.notification-action,
+.notification-default-action { /* GOOD */
+  background-color: @black;
+  border: 2px solid @grey;
+}
+
+.notification-row,
+.notification-content {
+  all: unset;
+}
+
 
 
 .blank-window {
   box-shadow: black @black @grey @white white;
 }
-.inline-reply-entry,
-.inline-reply,
-.inline-reply-button {
-  background-color: green;
-  color: red;
-}
 
-/*──────────────────────────────(NOTIFY)───*/
-.notification {
-  border: 2px solid white;
-}
-.notification-content {
-  padding: 10px;
-  background-color: @grey;
-}
-.notification-background :hover {
-  background-color: @white;
-}
-.notification-row {
-  padding: 6px 0px;
-}
-/*
-.floating-notifications {
-  border: 3px solid @black;
-  background: @black;
-}
-*/
-.low {
-  border-color: @black;
-}
-.normal,
-.summary {
+
+.control-center-clear-all:hover,
+.notification>:hover,
+.notification-background:hover,
+.notification-default-action:hover,
+.notification-action:hover { /* GOOD */
+  background-color: black;
   border-color: white;
 }
-.critical {
-  border-color: red;
+
+.control-center-dnd {
+  background-color: @black;
+  border: 2px solid @grey;
 }
-.image {
-  border-radius: 8px;
-  color: green;
-  background-color: blue;
+.control-center-dnd:checked,
+.control-center-dnd slider {
+  background-color: black;
+  border: 2px solid white;
 }
+
+
+/*──────────────────────────────(NOTIFY)───*/
+
+.low { border: 2px solid grey; }
+.normal { border: 2px solid white; }
+.critical { border: 2px solid red; }
+
+.close-button:hover,
+.close-button {
+  all: unset;
+}
+
+
+
+.image,
 .body,
 .body-image {
-  color: @white;
+  background: transparent;
+  background-color: transparent;
+  color: @grey;
+}
+.summary {
+  background: transparent;
+  border-color: white;
+  color: white;
 }
 .time {
-  color: transparent;
+  background: transparent;
+  color: white;
 }
-
-
 
 /*─────────────────────────────(WIDGETS)───*/
-.widget-buttons-grid {
-  padding: 10px;
-}
-.widget-dnd,
-.widget-title,
-.widget-label {
-  padding: 10px 20px;
-}
 
-.widget-mpris {
+.widget-title {
+  margin: 2px 10px;
+}
+.widget-title > button {
   color: white;
+  background: @black;
+  border: 2px solid @grey;
+}
+.widget-title > button:hover {
+  background: @grey;
   border: 2px solid white;
-  background-color: @black;
-  padding: 1px;
-  margin: 10px;
+}
+/* DND widget */
+.widget-dnd {
+  margin: 2px 10px;
+}
+.widget-dnd>switch {
+  background: @black;
+  border: 2px solid @grey;
+}
+.widget-dnd>switch:checked {
+  background: @grey;
+}
+.widget-dnd>switch slider {
+  background: white;
+  border: 2px solid @black;
+}
+.widget-dnd>switch:hover {
+  background: grey;
+  border: 2px solid white;
+}
+/* Label widget */
+.widget-label {
+  margin: 2px 10px;
 }
 
+/* Mpris widget */
+.widget-mpris {
+  margin: 2px 10px;
+  background-color: transparent;
+}
+.widget-mpris-player {
+  background-color: @grey;
+  border: 2px solid white;
+  color: @white;
+}
+.widget-mpris-title,
+.widget-mpris-subtitle {
+  all: unset;
+}
 
 
 /*─────────────────────────(AUTOMATIONS)───*/
+
 *>button *,
 *>switch *,
 *>slider * {
@@ -177,3 +193,54 @@ scale trough {
   color: white;
   background-color: @grey;
 }
+
+
+
+
+
+/***** TESTING *****/
+
+.inline-reply-entry,
+.inline-reply,
+.inline-reply-button {
+  background-color: green;
+  color: red;
+}
+
+.top-action-title {
+  color: red;
+  background-color: red;
+}
+.control-center-clear-all {
+  background-color: red;
+}
+.widget-label>label {
+  color: red;
+  background-color: red;
+}
+
+/***** UNUSED
+
+.widget-buttons-grid
+.floating-notifications
+trough highlight
+scale trough 
+.widget-buttons-grid>flowbox>flowboxchild>button
+.widget-buttons-grid>flowbox>flowboxchild>button:hover 
+.widget-menubar>box>.menu-button-bar>button
+.AnyName
+.topbar-buttons
+.per-app-volume
+.widget-backlight
+.widget-inhibitors
+.notification-group-headers
+.notification-group-icon
+.notification-group-collapse-button
+.notification-group-close-all-button
+.widget-volume
+.widget-volume trough
+.widget-volume trough slider
+.widget-volume>box>button
+.floating-notifications.background
+.notification.critical
+.notification.critical progress
