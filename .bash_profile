@@ -270,8 +270,8 @@ startups() {
     local DESKTOP="$HOME/.config/autostart/COMMANDS.desktop"
     local APPLICATIONS=(
         #"dbus-update-activation-environment --systemd --all"   # MANAGED BY AUR:UWSM
-        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-        "gnome-keyring-daemon --start --components=secrets"
+        #"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+        #"gnome-keyring-daemon --start --components=secrets"
         "exporter --local"
         "backup"
         #"xdg-autostart"						# AUR:UWSM MANAGED
@@ -281,7 +281,7 @@ startups() {
         #───(MINIMIZED_FLAGS)
         #"emacs --daemon"
         #"openrgb --startminimized wayland"
-        #"steam -silent wayland"
+        #"steam-native -silent wayland"
         #"vesktop --start-minimized wayland"
         #"telegram-desktop -startintray wayland"
         #"youtube-music --use-tray-icon wayland"

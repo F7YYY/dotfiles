@@ -4,15 +4,23 @@
         "custom": "",
         "enabled": true,
         "host": "0.0.0.0",
-        "port": "",
-        "profile": "rain-default",
+        "port": "6742",
+        "profile": "",
         "setclient": false,
         "setcustom": false,
         "setminimized": true,
-        "setprofile": true,
+        "setprofile": false,
         "setserver": false,
         "setserverhost": false,
         "setserverport": false
+    },
+    "Client": {
+        "clients": [
+            {
+                "ip": "127.0.0.1",
+                "port": 6742
+            }
+        ]
     },
     "CorsairDominatorSettings": {
         "model": "CMT"
@@ -1254,42 +1262,12 @@
             "Z370 AORUS Ultra Gaming-CF"
         ]
     },
-    "LogManager": {
-        "dialog_no_show_hashes": [
-            14306703760882907409
-        ]
-    },
-    "Plugins": {
-        "plugins": [
+    "QMKOpenRGBDevices": {
+        "devices": [
             {
-                "description": "Customize OpenRGB look and feel",
-                "enabled": true,
-                "name": "Skins plugin"
-            },
-            {
-                "description": "Sync colors with hardware measures",
-                "enabled": true,
-                "name": "Hardware Sync"
-            },
-            {
-                "description": "Group and organize your devices on a spatial map",
-                "enabled": true,
-                "name": "OpenRGB Visual Map Plugin"
-            },
-            {
-                "description": "Receive E1.31 lighting control data from external applications to control OpenRGB devices",
-                "enabled": true,
-                "name": "OpenRGB E1.31 Receiver Plugin"
-            },
-            {
-                "description": "Schedule some OpenRGB actions",
-                "enabled": true,
-                "name": "Scheduler plugin"
-            },
-            {
-                "description": "Provides a variety of custom effects",
-                "enabled": true,
-                "name": "OpenRGB Effects Plugin"
+                "name": "DZ60RGB-ANSI_v2",
+                "usb_pid": "",
+                "usb_vid": ""
             }
         ]
     },
@@ -1297,21 +1275,21 @@
         "theme": "dark"
     },
     "UserInterface": {
-        "RunZoneChecks": false,
+        "disable_key_expansion": true,
         "exit_profile": {
-            "profile_name": "rain-default",
+            "profile_name": "",
             "set_on_exit": true
         },
         "geometry": {
-            "height": 421,
+            "height": 0,
             "load_geometry": true,
             "save_on_exit": true,
-            "width": 906,
+            "width": 0,
             "x": 0,
             "y": 0
         },
         "greyscale_tray_icon": true,
-        "language": "System Default",
+        "language": "default",
         "minimize_on_close": true
     }
 }
