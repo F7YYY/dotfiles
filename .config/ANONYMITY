@@ -1,136 +1,176 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Strict mode: fail on errors, undefined vars, and pipe failures
+set -euo pipefail
+IFS=$'\n\t'
 
-# Define constants
-NAMESPACE="anonspace"
-VETH_NAME="veth0"
-VETH_PEER="veth1"
-VPN_SERVER="your.vpn.server"
-VPN_PORT="443"
-INTERFACE="wg0"
-WIREPROXY_CONFIG_DIR="$HOME/.config/wireproxy"
-WIREPROXY_CONFIG_FILE="$WIREPROXY_CONFIG_DIR/config.toml"
-TOR_CONFIG_FILE="/etc/tor/torrc"
-TOR_SERVICE="/etc/systemd/system/tor.service"
-WIREPROXY_SERVICE="$HOME/.config/systemd/user/wireproxy.service"
-SHADOWSOCKS_CONFIG="$HOME/.config/shadowsocks.json"
-I2P_CONFIG_DIR="$HOME/.config/.i2p"
+###################
+# Constants / Defaults
+###################
 
-# Function to detect the OS and package manager
+readonly NAMESPACE="anonspace"
+readonly VETH_NAME="veth0"
+readonly VETH_PEER="veth1"
+readonly DEFAULT_CIDR="10.200.200.0/24"
+readonly VPN_SERVER=""
+readonly VPN_PORT="443"
+readonly INTERFACE="wg0"
+
+# config paths
+readonly WP_CONFIG_DIR="$HOME/.config/wireproxy"
+readonly WP_CONFIG_FILE="$WP_CONFIG_DIR/config.toml"
+readonly TOR_CONFIG_FILE="/etc/tor/torrc"
+readonly SHADOWSOCKS_CONFIG="$HOME/.config/shadowsocks.json"
+readonly I2P_CONFIG_DIR="$HOME/.config/i2p"
+
+###################
+# Helpers
+###################
+
+die() {
+    echo "ERROR: $1" >&2
+    exit 1
+}
+
+prompt_yesno() {
+    local prompt="$1"
+    local ans
+    read -rp "$prompt (y/N): " ans
+    [[ "$ans" =~ ^[Yy]$ ]]
+}
+
+###################
+# Detect OS + Package Manager
+###################
+
 detect_os_and_package_manager() {
-    if [ -f /etc/os-release ]; then
-        # Check for supported Linux distros
+    if [[ -f /etc/os-release ]]; then
         source /etc/os-release
-        OS_NAME=$ID
-        case $OS_NAME in
-            "debian")
+        case "${ID,,}" in
+            ubuntu|debian*)
                 PACKAGE_MANAGER="apt"
                 ;;
-            "fedora")
+            fedora*|centos*|rocky*)
                 PACKAGE_MANAGER="dnf"
                 ;;
-            "arch")
+            arch)
                 PACKAGE_MANAGER="pacman"
                 ;;
-            "macos")
-                PACKAGE_MANAGER="brew"
-                ;;
             *)
-                echo "Unsupported OS: $OS_NAME"
-                exit 1
+                die "Unsupported OS: $ID"
                 ;;
         esac
     else
-        echo "OS detection failed. Ensure this is a Linux or macOS system."
-        exit 1
+        die "OS detection failed"
     fi
 }
 
-# Function to check and install missing tools
-check_and_install_tools() {
-    declare -A tools
-    tools=(
-        ["WireGuard"]="wireguard-tools"
-        ["Tor"]="tor"
-        ["Shadowsocks"]="shadowsocks-libev"
-        ["I2P"]="i2p"
-        ["WireProxy"]="wireproxy"
-    )
-
-    missing_tools=()
-
-    # Check if each tool is installed
-    for tool in "${!tools[@]}"; do
-        if ! command -v ${tool,,} &>/dev/null; then
-            missing_tools+=("$tool")
-        fi
-    done
-
-    if [ ${#missing_tools[@]} -gt 0 ]; then
-        echo "Missing tools: ${missing_tools[@]}"
-        echo "Would you like to install them? (y/n)"
-        read -p "Enter your choice: " install_choice
-        if [[ "$install_choice" == "y" || "$install_choice" == "Y" ]]; then
-            for tool in "${missing_tools[@]}"; do
-                echo "Would you like to install $tool? (y/n)"
-                read -p "Enter your choice for $tool: " choice
-                if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
-                    install_package "${tools[$tool]}"
-                fi
-            done
-        else
-            echo "Installation aborted. Exiting..."
-            exit 1
-        fi
-    else
-        echo "All required tools are already installed."
-    fi
-}
-
-# Function to install a package using the correct package manager
 install_package() {
-    local package=$1
-    echo "Installing $package using $PACKAGE_MANAGER..."
-
-    case $PACKAGE_MANAGER in
-        "apt")
-            sudo apt update && sudo apt install -y $package
+    local pkg="$1"
+    case "$PACKAGE_MANAGER" in
+        apt)
+            sudo apt update && sudo apt install -y "$pkg"
             ;;
-        "dnf")
-            sudo dnf install -y $package
+        dnf)
+            sudo dnf install -y "$pkg"
             ;;
-        "pacman")
-            sudo pacman -S $package
-            ;;
-        "brew")
-            brew install $package
+        pacman)
+            sudo pacman -Sy --noconfirm "$pkg"
             ;;
         *)
-            echo "Unsupported package manager: $PACKAGE_MANAGER"
-            exit 1
+            die "Unsupported package manager: $PACKAGE_MANAGER"
             ;;
     esac
 }
 
-# Function to create network namespace for isolation
-create_namespace() {
-    echo "Creating network namespace '$NAMESPACE'..."
-    sudo ip netns add $NAMESPACE
-    sudo ip link add $VETH_NAME type veth peer name $VETH_PEER
-    sudo ip link set $VETH_PEER netns $NAMESPACE
-    sudo ip addr add 10.200.200.1/24 dev $VETH_NAME
-    sudo ip link set $VETH_NAME up
-    sudo ip netns exec $NAMESPACE ip addr add 10.200.200.2/24 dev $VETH_PEER
-    sudo ip netns exec $NAMESPACE ip link set $VETH_PEER up
-    sudo ip netns exec $NAMESPACE ip link set lo up
-    sudo ip netns exec $NAMESPACE ip route add default via 10.200.200.1
-    echo "Network namespace '$NAMESPACE' created and configured."
+###################
+# Check & install tools
+###################
+
+check_and_install_tools() {
+    declare -A tools=(
+        ["wg"]="wireguard-tools"
+        ["tor"]="tor"
+        ["ss-local"]="shadowsocks-libev"
+        ["i2prouter"]="i2p"
+        ["wireproxy"]="wireproxy"
+    )
+
+    local missing=()
+
+    for cmd in "${!tools[@]}"; do
+        if ! command -v "$cmd" &> /dev/null; then
+            missing+=("$cmd")
+        fi
+    done
+
+    if [[ ${#missing[@]} -gt 0 ]]; then
+        echo "Missing: ${missing[*]}"
+        if prompt_yesno "Install missing tools?"; then
+            for cmd in "${missing[@]}"; do
+                install_package "${tools[$cmd]}"
+            done
+        else
+            die "Required tools missing"
+        fi
+    fi
 }
 
-# Function to configure WireProxy
+###################
+# Cleanup everything
+###################
+
+cleanup() {
+    echo "Cleaning up..."
+
+    # Remove firewall rules (flush NAT and filter rules)
+    sudo iptables -t nat -F
+    sudo iptables -F
+    sudo iptables -X
+    sudo iptables -P INPUT ACCEPT
+    sudo iptables -P OUTPUT ACCEPT
+    sudo iptables -P FORWARD ACCEPT
+
+    # Delete network namespace and veth interface
+    sudo ip netns delete "$NAMESPACE" 2>/dev/null || true
+    sudo ip link delete "$VETH_NAME" 2>/dev/null || true
+
+    # Stop/disable services
+    systemctl --user disable --now wireproxy.service 2>/dev/null || true
+    sudo systemctl disable --now tor.service 2>/dev/null || true
+
+    echo "Cleanup complete."
+}
+
+###################
+# Network Namespace Setup
+###################
+
+create_namespace() {
+    echo "Creating namespace..."
+    # Cleanup old namespace if exists
+    sudo ip netns delete "$NAMESPACE" 2>/dev/null || true
+    sudo ip link delete "$VETH_NAME" 2>/dev/null || true
+
+    sudo ip netns add "$NAMESPACE"
+    sudo ip link add "$VETH_NAME" type veth peer name "$VETH_PEER"
+    sudo ip link set "$VETH_PEER" netns "$NAMESPACE"
+
+    sudo ip addr add "${DEFAULT_CIDR%.*}.1/24" dev "$VETH_NAME"
+    sudo ip link set "$VETH_NAME" up
+
+    sudo ip netns exec "$NAMESPACE" ip addr add "${DEFAULT_CIDR%.*}.2/24" dev "$VETH_PEER"
+    sudo ip netns exec "$NAMESPACE" ip link set lo up
+    sudo ip netns exec "$NAMESPACE" ip link set "$VETH_PEER" up
+    sudo ip netns exec "$NAMESPACE" ip route add default via "${DEFAULT_CIDR%.*}.1"
+}
+
+###################
+# WireProxy (WireGuard)
+###################
+
 configure_wireproxy() {
-    echo "Configuring WireProxy..."
-    mkdir -p $WIREPROXY_CONFIG_DIR
-    cat <<EOF > $WIREPROXY_CONFIG_FILE
+    mkdir -p "$WP_CONFIG_DIR"
+    cat > "$WP_CONFIG_FILE" <<EOF
 [Interface]
 PrivateKey = YOUR_PRIVATE_KEY
 Address = 10.66.66.2/24
@@ -140,113 +180,122 @@ DNS = 1.1.1.1
 PublicKey = YOUR_SERVER_PUBLIC_KEY
 Endpoint = $VPN_SERVER:$VPN_PORT
 AllowedIPs = 0.0.0.0/0
-PersistentKeepalive = 25
 EOF
-    echo "WireProxy configuration created."
 }
 
-# Function to start WireProxy service
 start_wireproxy_service() {
-    echo "Starting WireProxy service..."
     systemctl --user daemon-reload
     systemctl --user enable --now wireproxy.service
 }
 
-# Function to configure Tor
+###################
+# Tor
+###################
+
 configure_tor() {
-    echo "Configuring Tor with obfs4 bridge..."
-    cat <<EOF > $TOR_CONFIG_FILE
+    sudo mkdir -p "$(dirname "$TOR_CONFIG_FILE")"
+    sudo tee "$TOR_CONFIG_FILE" > /dev/null <<EOF
 UseBridges 1
 ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy
-Bridge obfs4 $TOR_BRIDGE_IP:$TOR_BRIDGE_PORT $TOR_BRIDGE_FINGERPRINT cert=$TOR_BRIDGE_CERT iat-mode=0
+# Define real bridge values below
 SOCKSPort 9050
-DNSPort 5353
-VirtualAddrNetworkIPv4 10.192.0.0/10
-AutomapHostsOnResolve 1
-TransPort 9040
-TransListenAddress 127.0.0.1
-DNSListenAddress 127.0.0.1
-ExitRelay 0
-StrictNodes 1
 EOF
-    echo "Tor configuration created."
 }
 
-# Function to start Tor service
 start_tor_service() {
-    echo "Starting Tor service..."
     sudo systemctl daemon-reload
     sudo systemctl enable --now tor.service
 }
 
-# Function to configure Shadowsocks
+###################
+# Shadowsocks
+###################
+
 configure_shadowsocks() {
-    echo "Configuring Shadowsocks..."
-    cat <<EOF > $SHADOWSOCKS_CONFIG
+    read -rp "Shadowsocks password: " -s SS_PASSWORD
+    mkdir -p "$(dirname "$SHADOWSOCKS_CONFIG")"
+    cat > "$SHADOWSOCKS_CONFIG" <<EOF
 {
-    "server": "$VPN_SERVER",
-    "server_port": $VPN_PORT,
-    "local_address": "127.0.0.1",
-    "local_port": 1080,
-    "password": "$SS_PASSWORD",
-    "timeout": 300,
-    "method": "aes-256-cfb"
+  "server":"$VPN_SERVER",
+  "server_port":$VPN_PORT,
+  "local_port":1080,
+  "password":"$SS_PASSWORD",
+  "method":"aes-256-gcm"
 }
 EOF
-    echo "Shadowsocks configuration created."
 }
 
-# Function to start Shadowsocks service
 start_shadowsocks_service() {
-    echo "Starting Shadowsocks service..."
-    ss-local -c $SHADOWSOCKS_CONFIG &
+    nohup ss-local -c "$SHADOWSOCKS_CONFIG" &>/dev/null &
 }
 
-# Function to configure I2P
+###################
+# I2P
+###################
+
 configure_i2p() {
-    echo "Configuring I2P..."
-    mkdir -p $I2P_CONFIG_DIR
-    # Example configuration for I2P (Modify as needed)
-    cat <<EOF > $I2P_CONFIG_DIR/i2p.conf
-# I2P configuration
-# Please modify this file with your I2P server settings
-# For I2P, you need to start the router service and configure tunnels
+    mkdir -p "$I2P_CONFIG_DIR"
+    cat > "$I2P_CONFIG_DIR/i2p.conf" <<EOF
+# I2P config
 EOF
-    echo "I2P configuration created."
 }
 
-# Function to start I2P service
 start_i2p_service() {
-    echo "Starting I2P service..."
-    sudo systemctl start i2p
+    sudo systemctl enable --now i2p
 }
 
-# Apply firewall and routing rules based on selected tool
+###################
+# Firewall + Routing
+###################
+
 apply_routing_and_firewall() {
-    echo "Configuring routing and firewall..."
-
+    echo "Applying firewall rules..."
     sudo sysctl -w net.ipv4.ip_forward=1
-    sudo iptables -t nat -A POSTROUTING -s 10.200.200.0/24 -o $INTERFACE -j MASQUERADE
-    sudo iptables -A FORWARD -i $INTERFACE -o $VETH_NAME -j ACCEPT
-    sudo iptables -A FORWARD -i $VETH_NAME -o $INTERFACE -j ACCEPT
-
-    # Redirect all DNS queries through Tor or WireGuard
-    if [ "$selected_tool" == "Tor" ]; then
-        sudo iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 5353
-        sudo iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 5353
-    fi
-
-    echo "Routing and firewall rules applied."
+    sudo iptables -t nat -A POSTROUTING -s "$DEFAULT_CIDR" -o "$INTERFACE" -j MASQUERADE
+    sudo iptables -A FORWARD -i "$INTERFACE" -o "$VETH_NAME" -j ACCEPT
+    sudo iptables -A FORWARD -i "$VETH_NAME" -o "$INTERFACE" -j ACCEPT
 }
 
-# Function to start the selected tool based on user's choice
-start_selected_tool() {
+###################
+# Main
+###################
 
-    clear
-    echo -e "\n(; OG_EVAH_NUF\N"
+main() {
+    detect_os_and_package_manager
+
+    echo "Select an action:"
+    echo "  1) Setup anonymity tools"
+    echo "  2) Cleanup / undo setup"
+
+    read -rp "Enter choice [1-2]: " action_choice
+
+    case "$action_choice" in
+        2)
+            cleanup
+            exit 0
+            ;;
+        1)
+            ;;
+        *)
+            echo "Invalid option"
+            exit 1
+            ;;
+    esac
+
+    #check_and_install_tools
+
+    echo "Select tool to enable:"
+    select selected_tool in "WireGuard" "Tor" "Shadowsocks" "I2P"; do
+        [[ -n "$selected_tool" ]] && break
+        echo "Invalid choice"
+    done
+
+    create_namespace
+    apply_routing_and_firewall
 
     case "$selected_tool" in
         "WireGuard")
+            read -rp "Enter VPN server (host): " VPN_SERVER
             configure_wireproxy
             start_wireproxy_service
             ;;
@@ -262,32 +311,9 @@ start_selected_tool() {
             configure_i2p
             start_i2p_service
             ;;
-        *)
-            echo "Unknown tool selected."
-            exit 1
-            ;;
     esac
+
+    echo "Setup complete!"
 }
 
-# Main entry point
-main() {
-    # Step 1: Detect OS and package manager
-    detect_os_and_package_manager
-
-    # Step 2: Check for missing tools and offer installation
-    check_and_install_tools
-
-    # Step 3: Create network namespace for isolation
-    create_namespace
-
-    # Step 4: Apply routing and firewall rules
-    apply_routing_and_firewall
-
-    # Step 5: Start the selected tool (WireGuard, Tor, or Shadowsocks)
-    start_selected_tool
-
-    echo "Anonymity setup is complete and active."
-}
-
-# Start the script
 main

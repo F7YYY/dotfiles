@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [[ "$1" == "--kitty" ]]; then
+	kitty &
+
+elif [[ "$1" == "--firefox" ]]; then
+	firefox &
+
+elif [[ "$1" == "--thunar" ]]; then
+	thunar ~ &
+
+elif [[ "$1" == "--discord" ]]; then
+	discord &
+
+
+elif [[ "$1" == "--spotify" ]]; then
+	spotify &
+
+
+elif [[ "$1" == "--vscode" ]]; then
+	code &
+	
+elif [[ "$1" == "--notion" ]]; then
+	notion-app &
+
+	
+elif [[ "$1" == "--vlc" ]]; then
+	vlc &
+
+fi

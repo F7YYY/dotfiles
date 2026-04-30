@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>TERMINAL</name>
+	<submenu></submenu>
+	<unique-id>1749675941193248-1</unique-id>
+	<command>xterm --detach</command>
+	<description>USER</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>utilities-terminal_su</icon>
+	<name>TERMINAL</name>
+	<submenu></submenu>
+	<unique-id>1749677226305215-1</unique-id>
+	<command>wofi -drun --password | sudo xterm --detach</command>
+	<description>ROOT TERMINAL</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+</actions>

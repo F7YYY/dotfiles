@@ -1,0 +1,259 @@
+################################################################################################################################
+#|───────────────────────────────────────────────────────────────────────────────────────|────────────────────────────────────|#
+#|     d888888o.   `8.`888b                 ,8'          .8.          `8.`8888.      ,8' | 8 8888888888   `8.`8888.      ,8'  |#
+#|   .`8888:' `88.  `8.`888b               ,8'          .888.          `8.`8888.    ,8'  | 8 8888          `8.`8888.    ,8'   |#
+#|   8.`8888.   Y8   `8.`888b             ,8'          :88888.          `8.`8888.  ,8'   | 8 8888           `8.`8888.  ,8'    |#
+#|   `8.`8888.        `8.`888b     .b    ,8'          . `88888.          `8.`8888.,8'    | 8 8888            `8.`8888.,8'     |#
+#|    `8.`8888.        `8.`888b    88b  ,8'          .8. `88888.          `8.`88888'     | 8 888888888888     `8.`88888'      |#
+#|     `8.`8888.        `8.`888b .`888b,8'          .8`8. `88888.          `8. 8888      | 8 8888             .88.`8888.      |#
+#|      `8.`8888.        `8.`888b8.`8888'          .8' `8. `88888.          `8 8888      | 8 8888            .8'`8.`8888.     |#
+#|  8b   `8.`8888.        `8.`888`8.`88'          .8'   `8. `88888.          8 8888      | 8 8888           .8'  `8.`8888.    |#
+#|  `8b.  ;8.`8888         `8.`8' `8,`'          .888888888. `88888.         8 8888      | 8 8888          .8'    `8.`8888.   |#
+#|   `Y8888P ,88P'          `8.`   `8'          .8'       `8. `88888.        8 8888      | 8 8888         .8'      `8.`8888.  |#
+#|───────────────────────────────────────────────────────────────────────────────────────|────────────────────────────────────|#
+##########################################───(https://github.com/swaywm/sway/wiki/)───##########################################
+#
+#───────────────────────────────────────────────────────────────────────────────────────────────────────────────────(DAEMONS)───
+#───(RETARDED)
+#exec_always { $(if pgrep -x HEADACHE; then killall -9Ieqg HEADACHE; fi) SUPRISE MIGRAINE }
+
+#───(NORMAL)
+exec {
+    #───(SWAY_SPECIFIC)
+    swaymgr
+    #───(APPLICATIONS)
+    waybar
+}
+
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────(VARIABLES)───
+set {
+    $SUPER      MOD4
+    $FONT       Sony Sketch EF 12, Symbols Nerd Font Mono 12        #───(kitty list-fonts)───#
+    $TERM       kitty --detach
+    $LOCK       swaylock-corrupter --daemonize
+    #───(NAME)─(DISPLAY)─(MODE)─([RESOLUTION@HZ])─([POSITION X,Y])─([SCALE #])───#
+    #───(AUR/wdisplays)
+    $DISPLAY1   DP-1 mode 1920x1080@240 position 0,420 scale 1
+    $DISPLAY2   DP-2 mode 1920x1080@144 position 1920,0 scale 1
+    #───(VIM_KEYS)
+    $LEFT       H
+    $DOWN       J
+    $UP         K
+    $RIGHT      L
+    #───(COLORS)
+    $RED    #FF0000FF
+    $WHITE  #FFFFFFFF
+    $GREY   #FFFFFF66
+    $BLACK  #000000FF
+    $CLEAR  #00000000
+}
+
+#──────────────────────────────────────────────────────────────────────────────────────────────────────────────────(KEYBINDS)───
+bindsym --to-code {
+    #$SUPER+ALT+R            exec swaymsg reload
+    $SUPER+Q                kill
+    $SUPER+ESCAPE           exec $TERM
+    $SUPER+ALT+ESCAPE       exec $TERM ranger
+    $SUPER+SPACE            exec wofi   #rofi       # WAYLAND COMPATIBLE
+    $SUPER+ALT+SPACE        exec $HOME/.config/wofi/SCRIPTS/WOFIMENU
+    CTRL+ALT+DELETE         exec $HOME/.config/wofi/SCRIPTS/POWERMENU
+    #───(CURSOR)
+    $SUPER+$LEFT            seat - cursor move -10 0
+    $SUPER+$DOWN            seat - cursor move 0 10
+    $SUPER+$UP              seat - cursor move 0 -10
+    $SUPER+$RIGHT           seat - cursor move 10 0
+    --no-repeat             $SUPER+Semicolon seat - cursor press button1
+    --release --no-repeat   $SUPER+Semicolon seat - cursor release button1
+    --no-repeat             $SUPER+Apostrophe seat - cursor press button2
+    --release --no-repeat   $SUPER+Apostrophe seat - cursor release button2
+    #───(SCREENSHOT+GIF)
+    $SUPER+O                exec wf-recorder-gui
+    $SUPER+P                exec flameshot screen
+    $SUPER+SHIFT+P          exec flameshot gui
+    #───(XF86_BRIGHTNESS)
+    XF86MonBrightnessUp     exec brightnessctl --quiet set 10%+
+    XF86MonBrightnessDown   exec brightnessctl --quiet set 10%-
+    XF86KbdBrightnessUp     exec brightnessctl --quiet --device *::kbd_backlight set 10%+
+    XF86KbdBrightnessDown   exec brightnessctl --quiet --device *::kbd_backlight set 10%-
+    #───(XF86_PULSEAUDIO)
+    XF86AudioRaiseVolume    exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    XF86AudioLowerVolume    exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    XF86AudioMute           exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    XF86AudioMicMute        exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    #───(XF86_MEDIA)
+    XF86AudioNext           exec playerctl next
+    XF86AudioPlay           exec playerctl play-pause
+    XF86AudioPrev           exec playerctl previous
+    XF86AudioStop           exec playerctl stop
+    #───(OTHER)
+    $SUPER+C                exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
+}
+
+#────────────────────────────────────────────────────────────────────────────────────────────────────────────────(WORKSPACES)───
+set {
+    $SP                     scratchpad
+    $WS                     workspace
+    $MWS                    move to $WS
+    $MSP                    move to $SP
+    $MM                     move position mouse
+    #───(RESIZING+ALIGNMENT)
+    $FLOAT                  floating enable
+    $MINI                   minimize
+    $RENDER                 max_render_time
+    $IDLE                   inhibit_idle fullscreen
+    $HIDETITLEBAR           titlebar hide
+    #───(OPACITY)
+    $OPACITY                0.8
+    $OPAQUE                 0.8
+}
+bindsym --to-code {
+    $SUPER+B                splith
+    $SUPER+V                splitv
+    $SUPER+Y                splitt
+    $SUPER+T                layout tabbed
+    $SUPER+S                layout toggle split
+    $SUPER+CTRL+S           layout stacking
+    $SUPER+ALT+F            fullscreen
+    $SUPER+F                floating toggle
+    $SUPER+A                focus parent
+    $SUPER+CTRL+F           focus mode_toggle
+    #───(SWITCH_WORKSPACES)
+    $SUPER+1                $WS 1
+    $SUPER+2                $WS 2
+    $SUPER+3                $WS 3
+    $SUPER+4                $WS 4
+    $SUPER+5                $WS 5
+    $SUPER+6                $WS 6
+    $SUPER+7                $WS 7
+    $SUPER+8                $WS 8
+    $SUPER+9                $WS 9
+    $SUPER+0                $WS 10
+    #───(MOVE_CONTAINERS_TO_WORKSPACES)
+    $SUPER+CTRL+1           $MWS 1
+    $SUPER+CTRL+2           $MWS 2
+    $SUPER+CTRL+3           $MWS 3
+    $SUPER+CTRL+4           $MWS 4
+    $SUPER+CTRL+5           $MWS 5
+    $SUPER+CTRL+6           $MWS 6
+    $SUPER+CTRL+7           $MWS 7
+    $SUPER+CTRL+8           $MWS 8
+    $SUPER+CTRL+9           $MWS 9
+    $SUPER+CTRL+0           $MWS 10
+    #───(MOVE_CONTAINERS_TO_SCRATCHPAD)
+    $SUPER+BACKSPACE        $SP show
+    $SUPER+CTRL+BACKSPACE   $MSP
+    #───(TAB_WORKSPACES)
+    $SUPER+SHIFT+TAB        $WS back
+    $SUPER+TAB              $WS next
+    #───(CHANGE_FOCUSED_WINDOWS)
+    $SUPER+LEFT             focus left
+    $SUPER+DOWN             focus down
+    $SUPER+UP               focus up
+    $SUPER+RIGHT            focus right
+    #───(RESIZE_FOCUSED_WINDOWS)
+    $SUPER+ALT+LEFT         resize shrink width 10px
+    $SUPER+ALT+DOWN         resize grow height 10px
+    $SUPER+ALT+UP           resize shrink height 10px
+    $SUPER+ALT+RIGHT        resize grow width 10px
+    #───(MOVE_FOCUSED_WINDOWS)
+    $SUPER+CTRL+LEFT        move left
+    $SUPER+CTRL+DOWN        move down
+    $SUPER+CTRL+UP          move up
+    $SUPER+CTRL+RIGHT       move right
+}
+
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────(WINDOW_MANAGEMENT)───
+#───(swaymsg --type get_tree | awk 'tolower($0) ~ /(app_id|class|window_role)/ && NF > 1')───#
+for_window {
+    [app_id=".*"] $OPACITY, $MM, focus, sticky, $HIDETITLEBAR
+    [class=".*"] $OPACITY, $MM, focus, sticky, $HIDETITLEBAR
+    [window_role=".*"] $OPACITY, $MM, focus, sticky, $HIDETITLEBAR
+    [title="(?:Open|Save|File|Folder|As|Select|Choose|Library|Password)"] $OPAQUE, $FLOAT, $MM, focus, sticky, $HIDETITLEBAR
+}
+#───(WINDOW_DEFAULT_APPS)
+assign {
+    [class="vesktop*"] $MWS 2
+    [class="zoom*|teams*"] $MWS 9
+    [app_id="^betterbird*"] $MWS 10
+}
+#───(OTHER)
+floating_modifier               $SUPER normal
+workspace_auto_back_and_forth   no
+workspace_layout                default
+default_orientation             auto
+focus_on_window_activation      smart
+tiling_drag                     enable
+popup_during_fullscreen         smart
+title_align                     center
+
+#───────────────────────────────────────────────────────────────────────────────────────────────────────────────(PERIPHERALS)───
+output {
+    * adaptive_sync             on
+    $DISPLAY1
+    $DISPLAY2
+}
+bindswitch {
+    #───(LAPTOP_AUTO_DISPLAY)
+    --reload --locked lid:on output $DISPLAY1 disable
+    --reload --locked lid:off output $DISPLAY1 enable
+}
+input type:keyboard {
+    xkb_layout                  us
+}
+#───(MOUSE)
+focus_follows_mouse             no
+mouse_warping                   none
+input type:mouse {
+    accel_profile               flat
+    pointer_accel               0
+}
+
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(THEME)───
+#───(SWAYFX)
+#blur                            disable
+#blur_passes                     4px
+#blur_radius                     4px
+#blur_xray                       enable
+#corner_radius                   12px
+#shadows                         enable
+#shadows_on_csd                  enable
+#shadow_color                    $BLACK
+#shadow_blur_radius              20px
+#layer_effects                   "notifications" blur disable; shadows enable; corner_radius 30px
+#default_dim_inactive            0.1
+#dim_inactive_colors.unfocused   $CLEAR
+#dim_inactive_colors.urgent      $RED
+#smart_corner_radius             on
+#scratchpad_minimize             enable
+#titlebar_separator              enable
+#───(SWAY)
+smart_borders                   on
+smart_gaps                      on
+gaps inner                      10px
+default_border                  pixel 2px
+default_floating_border         pixel 2px
+#hide_edge_borders               --i3 smart_no_gaps
+#───(CLASSES)─(BORDER)─(BACKGROUND)─(TEXT)─(INDICATOR)─(CHILD_BORDER)───#
+client.background           N/A     $BLACK
+client.focused              $WHITE  $BLACK  $WHITE  $WHITE  $WHITE
+client.focused_tab_title    $WHITE  $BLACK  $WHITE
+client.focused_inactive     $BLACK  $BLACK  $WHITE  $BLACK  $BLACK
+client.unfocused            $GREY   $BLACK  $GREY   $GREY   $GREY
+client.urgent               $RED    $BLACK  $RED    $RED    $RED
+
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(POWER)───
+exec sh -c $(swayidle -w \
+    timeout 600 "$LOCK" \
+    timeout 300 "if pgrep -x '$LOCK' > /dev/null; then swaymsg 'output * dpms off'; fi" \
+    timeout 1200 "systemctl suspend" \
+    resume "swaymsg 'output * dpms on'" \
+    before-sleep "playerctl -a pause" \
+    before-sleep "if ! pgrep -x '$LOCK' > /dev/null; then '$LOCK'; fi" \
+    after-resume "swaymsg 'output * dpms on'" \
+)
+
+#──────────────────────────────────────────────────────────────────────────────────────────────────────────────────(XWAYLAND)───
+xwayland enable
+
+#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────(INCLUSION)───
+include @sysconfdir@/sway/config.d/*

@@ -1,13 +1,17 @@
+gtk-enable-animations=1
+gtk-primary-button-warps-slider=1
+gtk-cursor-blink-time=1000
+gtk-cursor-blink=1
+gtk-sound-theme-name="Pop"
 # DO NOT EDIT! This file will be overwritten by LXAppearance.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-include "/home/snakeye/.gtkrc-2.0.mine"
 gtk-theme-name="Flat-Remix-GTK-White-Darkest"
-gtk-icon-theme-name="Flat-Remix-Black-Dark"
-gtk-font-name="Sony Sketch EF 12"
+gtk-icon-theme-name="breeze-dark"
+gtk-font-name="Sony Sketch EF,  12"
 gtk-cursor-theme-name="blackarch-cursor"
-gtk-cursor-theme-size=0
-gtk-toolbar-style=GTK_TOOLBAR_ICONS
+gtk-cursor-theme-size=24
+gtk-toolbar-style=3
 gtk-toolbar-icon-size=GTK_ICON_SIZE_MENU
 gtk-button-images=1
 gtk-menu-images=1

@@ -1,7 +1,7 @@
 configuration {
   modi:			"window,drun,filebrowser";
   sidebar-mode:		true;
-  show-icons:		false;
+  show-icons:		true;
   sort:			true;
   sorting-method:	"normal";
   disable-history:	false;

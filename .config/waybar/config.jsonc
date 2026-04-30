@@ -51,8 +51,8 @@
 		"group/temperatures",	// WIP ~ EVERYTHING
 		"group/system",
 		"network",				// WIP ~ REPORT EXTERNAL-IP W/O DDOS
-		"group/power",		// WIP ~ RIGHT CLICK SHOW OPTIONS (NOT HOVER) | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
-		"custom/pacman"			// AUR: WAYBAR-UPDATES
+		"group/power"		// WIP ~ RIGHT CLICK SHOW OPTIONS (NOT HOVER) | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
+		//"custom/pacman"			// AUR: WAYBAR-UPDATES
 	],
 /*────────────────────────────────────(MODULES_LEFT)───*/
 	"custom/appmenu": {
@@ -846,7 +846,7 @@
 			"pending-updates": "󱉚",
 			"updated": ""		// STRING EMPTY=HIDDEN
 		},
-		"on-click": "xterm --detach $SHELL -c 'yay -Syyu && yay -Scc --noconfirm --answerclean y && yay -Ycc --cleanmenu && clear'",
+		"on-click": "kitty --detach $SHELL -c 'yay -Syyu && yay -Scc --noconfirm --answerclean y && yay -Ycc --cleanmenu && clear'",
 		"on-click-middle": "wofi -drun --password --prompt=PASSWORD | sudo reflector --save /etc/pacman.d/mirrorlist",
 		"tooltip": true,
 		"return-type": "json"
