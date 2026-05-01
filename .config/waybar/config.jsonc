@@ -27,11 +27,11 @@
 	/*───(FIX_ALL_MODULES_FORMAT-ALT_RIGHT_CLICK_STATUS)─(POSSIBLE_WABAR_BUG)───*/
 	"modules-left": [			//___APPLICATIONS___
 		"custom/appmenu",		// AUR: WOFI | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/WOFIMENU
-		"sway/workspaces",		// REPLACE ↴
-		"sway/scratchpad",		// REPLACE ↴
+		//"sway/workspaces",		// REPLACE ↴	ARCHIVED
+		//"sway/scratchpad",		// REPLACE ↴	ARCHIVED
 		"hyprland/workspaces",	// REPLACE ⟴ "wlr/workspaces",
 		"tray",
-		"wlr/taskbar",
+		//"wlr/taskbar",		// ARCHIVED
 		"gamemode",
 		"custom/recorder"		// AUR: WF-RECORDER-GUI/OBS-STUDIO | WIP ~ SCRIPT: $HOME/.CONFIG/WAYBAR/SCRIPTS/RECORDER
 	],
@@ -45,13 +45,13 @@
 		"group/window",			// WIP ~ EVERYTHING
 		"custom/redlight",
 		"bluetooth",			// WIP ~ REPORT ALL CONNECTED DEVICES
-		"group/sink",
-		"group/source",			// WIP ~ #SOURCE/SLIDER NOT SHOWN
+		"group/sink",			// WIP ~ GREYED WHEN SOURCE MUTED
+		"group/source",			// WIP ~ #SOURCE/SLIDER NOT SHOWN & GREYED WHEN SINK MUTED
 		"group/backlight",
 		"group/temperatures",	// WIP ~ EVERYTHING
 		"group/system",
 		"network",				// WIP ~ REPORT EXTERNAL-IP W/O DDOS
-		"group/power"		// WIP ~ RIGHT CLICK SHOW OPTIONS (NOT HOVER) | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
+		"group/power"			// WIP ~ RIGHT CLICK SHOW OPTIONS (NOT HOVER) | SCRIPT: $HOME/.CONFIG/WOFI/SCRIPTS/POWERMENU
 		//"custom/pacman"			// AUR: WAYBAR-UPDATES
 	],
 /*────────────────────────────────────(MODULES_LEFT)───*/
@@ -60,9 +60,9 @@
 		"format": "󰣇",
 		"format-alt": "",
 		"format-alt-click": "click-right",
-		"on-click": "wofi",
-		"on-click-middle": "$HOME/.config/wofi/SCRIPTS/WOFIMENU",
-		"tooltip-format": "{}\n──────────────\n🖱ᐩ❶⍆LAUNCHER\n🖱ᐩ❷⍆FORMAT\n🖱ᐩ❸⍆OTHER",
+		"on-click": "rofi -show combi -combi-modes 'window,app,files,drun,run,calc'",
+		"on-click-middle": "rofi -show combi -combi-modes 'window,app,files,drun,run,calc'",
+		"tooltip-format": "{}\n──────────────\n🖱ᐩ❶⍆LAUNCHER\n🖱ᐩ❷⍆LAUNCHER\n🖱ᐩ❸⍆ICON",
 		"tooltip": true
 	},
 	"sway/workspaces": {
@@ -256,7 +256,7 @@
 		"on-scroll-down": "playerctl next",		//"mpris-ctl next",
 		"tooltip-format": "\t{playerName}\n🎜\t{artist} 🢖 {title}",
 		"tooltip": true,	// ?TRUE BREAKS ALL MODULE TOOLTIPS?
-		"return": "json"
+		"return-type": "json"
 	},
 	"cava": {
 		"interval": 1,
@@ -492,7 +492,7 @@
 		},
 		"ignored-sinks": ["Easy Effects Sink"],
 		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-		"on-click-middle": "pavucontrol -t 3",
+		"on-click-middle": "pavucontrol -t 3 || hyprpwcenter",
 		"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
 		"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
 		"tooltip-format": "{icon}\t{desc}",
@@ -509,7 +509,7 @@
 		"format-alt-click": "click-right",
 		"ignored-sources": ["Easy Effects Source"],
 		"on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-		"on-click-middle": "pavucontrol -t 4",
+		"on-click-middle": "pavucontrol -t 4 || hyprpwcenter",
 		"on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
 		"on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
 		"tooltip-format": "{format_source}\t{desc}",

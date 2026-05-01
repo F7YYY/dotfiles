@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script>
+			window.connectOpenActionSocketData = new Promise((resolve) => {
+				window.connectOpenActionSocket = (...args) => resolve(args);
+				window.connectElgatoStreamDeckSocket = window.connectOpenActionSocket;
+			});
+		</script>
+		
+		<link href="./_app/immutable/assets/0.DE2hKqcA.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.DjIsR0Nm.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/zttAQYM4.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/BnK9gjKz.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/BTUiQvqI.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/Cy2ArZ8V.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.Dnmp72nE.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/PV0JxuVJ.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/q1InH8gR.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/Bq1Fl6V2.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/BNba-Xiz.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.Ddl8RRrP.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.DXr_j974.js">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[--><!----><!----><div class="space-y-4"><div class="select-wrapper"><select class="w-full"><option value="" selected>Select an app</option><option disabled>──────────</option><!--[--><!--]--></select></div> <!--[!--><!--]--></div><!----><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_1faam65 = {
+						base: new URL(".", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("./_app/immutable/entry/start.DjIsR0Nm.js"),
+						import("./_app/immutable/entry/app.Dnmp72nE.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

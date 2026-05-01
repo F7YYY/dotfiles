@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover">
+    <meta name=apple-mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-status-bar-style content=black>
+    <title>GoveeLightController Set Brigthness</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/barraider/streamdeck-easypi-v2@latest/src/sdpi.css">
+    <script src="https://cdn.jsdelivr.net/gh/barraider/streamdeck-easypi-v2@latest/src/sdtools.common.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/barraider/streamdeck-easypi-v2@latest/src/rangeTooltip.css">
+    <script src="https://cdn.jsdelivr.net/gh/barraider/streamdeck-easypi-v2@latest/src/rangeTooltip.js"></script>
+
+    <script src="https://sdpi-components.dev/releases/v3/sdpi-components.js"></script>
+</head>
+<body>
+    <div class="sdpi-wrapper">
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Description</div>
+            <div class="sdpi-item-value">
+                Sets the delay of the Autoclicker. A delay of 0 is the same as "holding" the button down.
+            </div>
+        </div>
+        <br/>
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Mouse</div>
+            <select class="sdpi-item-value sdProperty" setting="allowMovementString" id="allowMovementString" oninput="setSettings()">
+                <option value="allowMovement">Allow Mouse Movement</option>
+                <option value="dontAllowMovement">Lock Mouse in Place</option>
+            </select>
+        </div>
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Button</div>
+            <select class="sdpi-item-value sdProperty" setting="selectedButtonString" id="selectedButtonString" oninput="setSettings()">
+                <option value="LMB">Left Mouse Button</option>
+                <option value="MMB">Middle Mouse Button</option>
+                <option value="RMB">Right Mouse Button</option>
+            </select>
+        </div>
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Input Delay</div>
+            <sdpi-textfield class="sdpi-item-value sdProperty" setting="delayString" id="delayString"
+                            value="1" maxlength="4" required oninput="setSettings()">
+            </sdpi-textfield>
+        </div>
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Real Delay</div>
+            <div class="sdpi-item-value sdProperty sdHTML" style="font-size: 17px;" id="realDelayString">
+                1 ms
+            </div>
+        </div>
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Anti-Virus</div>
+            <div class="sdpi-item-value sdProperty sdHTML" style="font-size: 11px;">
+                Anti-virus programs don't like programs that simulate a mouse.<br/>
+                If you see a <b>Yellow Triangle</b> when pressing the button, that probably means that your anti-virus already removed the plugin.<br/>
+                You might need to "allow the threat" in the settings of your anti-virus program for the plugin to work. 
+            </div>
+        </div>
+        <br />
+        <details style="border: 1px solid #ccc; border-radius: 5px; padding: 3px; background: #3d3d3d; font-size: 10px;">
+            <summary style="font-weight: bold; cursor: pointer;">Feedback and Support</summary>
+            <br />
+            <div>Links to Discord, guides and more can be found on the marketplace site!</div>
+            <button onclick="OpenMarketplaceLink()" style="font-size: 10px; padding: 3px">Marketplace</button>
+            <br />
+            <br />
+            <div>The plugin is free, but development is not. Any contribution or feedback no matter how small is greatly appreciated.</div>
+        </details>
+    </div>
+    <script>
+        function OpenMarketplaceLink() {
+            if (websocket && (websocket.readyState === 1)) {
+                const json = {
+                    'event': 'openUrl',
+                    'payload': {
+                        'url': 'https://marketplace.elgato.com/product/autoclicker-16c667bf-b4ee-48e8-9837-423f26f90f80'
+                    }
+                };
+                websocket.send(JSON.stringify(json));
+            }
+        }
+    </script>
+</body>
+</html>

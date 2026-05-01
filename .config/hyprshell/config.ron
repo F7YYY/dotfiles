@@ -2,18 +2,18 @@
 (
     version: 3,
     windows: (
-        scale: 8.5,
-        items_per_row: 5,
+        scale: 10.0,
+        items_per_row: 10,
         overview: (
             launcher: (
                 default_terminal: None,
                 launch_modifier: "ctrl",
-                width: 650,
-                max_items: 5,
+                width: 200,
+                max_items: 1,
                 show_when_empty: true,
                 plugins: (
                     applications: (
-                        run_cache_weeks: 8,
+                        run_cache_weeks: 1,
                         show_execs: true,
                         show_actions_submenu: true,
                     ),
@@ -22,29 +22,9 @@
                     websearch: (
                         engines: [
                             (
-                                url: "https://www.google.com/search?q={}",
-                                name: "Google",
-                                key: 'g',
-                            ),
-                            (
-                                url: "https://www.startpage.com/sp/search?query={}",
-                                name: "Startpage",
-                                key: 's',
-                            ),
-                            (
                                 url: "https://duckduckgo.com/?q={}",
                                 name: "DuckDuckGo",
                                 key: 'd',
-                            ),
-                            (
-                                url: "https://www.bing.com/search?q={}",
-                                name: "Bing",
-                                key: 'b',
-                            ),
-                            (
-                                url: "https://en.wikipedia.org/wiki/Special:Search?search={}",
-                                name: "Wikipedia",
-                                key: 'w',
                             ),
                             (
                                 url: "https://chatgpt.com/?q={}",
@@ -86,7 +66,10 @@
             ),
             key: "Super_L",
             modifier: "super",
-            filter_by: [],
+            filter_by: [
+                same_class,
+                current_workspace,
+            ],
             hide_filtered: false,
             exclude_special_workspaces: "",
         ),
@@ -94,9 +77,10 @@
             modifier: "alt",
             key: "Tab",
             filter_by: [
-                current_monitor,
+                same_class,
+                current_workspace,
             ],
-            switch_workspaces: false,
+            switch_workspaces: true,
             exclude_special_workspaces: "",
         ),
         switch_2: None,

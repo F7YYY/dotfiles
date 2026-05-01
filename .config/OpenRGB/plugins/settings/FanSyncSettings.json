@@ -1,0 +1,22 @@
+{
+    "/17/18/1": {
+        "fanPreset": 2,
+        "graphPointsX": [
+            0.0,
+            20.0,
+            70.0,
+            75.0,
+            100.0
+        ],
+        "graphPointsY": [
+            20.0,
+            20.0,
+            70.0,
+            100.0,
+            100.0
+        ],
+        "maxValue": "100",
+        "measureFunctionText": "",
+        "minValue": "0"
+    }
+}

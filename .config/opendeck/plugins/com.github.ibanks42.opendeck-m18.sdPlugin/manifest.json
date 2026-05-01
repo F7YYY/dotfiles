@@ -1,0 +1,19 @@
+{
+  "Name": "VSD Inside M18 / Mirabox M18",
+  "Description": "Device support plugin for VSD Inside M18 (5548:1000) and Mirabox M18 (6603:1009/1012)",
+  "Author": "ibanks42",
+  "Version": "0.1.2",
+  "PluginUUID": "com.github.ibanks42.opendeck-m18",
+  "CodePathLin": "opendeck-m18-linux",
+  "CodePathMac": "opendeck-m18-mac",
+  "CodePathWin": "opendeck-m18-win.exe",
+  "Icon": "assets/icon",
+  "Category": "Hardware",
+  "OS": [
+    { "Platform": "linux" },
+    { "Platform": "mac", "MinimumVersion": "11.3" },
+    { "Platform": "windows", "MinimumVersion": "10" }
+  ],
+  "Actions": [],
+  "DeviceNamespace": "18"
+}

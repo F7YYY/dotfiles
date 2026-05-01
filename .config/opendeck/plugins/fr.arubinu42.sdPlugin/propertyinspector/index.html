@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <title>fr.arubinu42.action</title>
+
+    <link rel="stylesheet" href="sdpi.css" />
+    <style type="text/css">
+      .hidden {
+        display: none;
+      }
+
+      .wsParams {
+        background-color: rgba(139, 0, 0,.25);
+        padding-bottom: 4px;
+        display: none;
+      }
+      .wsParams > .warning {
+        background-color: #8b0000;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="sdpi-wrapper">
+      <div id="wsParams" class="wsParams">
+        <div class="sdpi-heading" data-localize="Scripts Manager Websocket">Scripts Manager Websocket</div>
+        <div class="sdpi-item warning">
+          <details class="message caution">
+            <summary data-localize="Login information">Login information</summary>
+          </details>
+        </div>
+        <div class="sdpi-item">
+          <div class="sdpi-item-label" data-localize="IP">IP</div>
+          <input class="sdpi-item-value" value="localhost" placeholder="localhost" id="WS_IP" />
+        </div>
+        <div class="sdpi-item">
+          <div class="sdpi-item-label" data-localize="Port">Port</div>
+          <input class="sdpi-item-value" value="5042" placeholder="5042" id="WS_PORT" />
+        </div>
+        <div class="sdpi-item" style="display: none;">
+          <div class="sdpi-item-label" data-localize="Pass">Pass</div>
+          <input class="sdpi-item-value" type="password" value="" id="WS_PASS" />
+        </div>
+        <div class="sdpi-item">
+          <button class="sdpi-item-value" onclick="onConnect()" data-localize="Connect">Connect</button>
+        </div>
+      </div>
+
+      <div class="sdpi-heading hidden" data-action="SCRIPTS_MANAGER.CUSTOM_REQUEST SCRIPTS_MANAGER.TOGGLE_SCRIPT MULTI_ACTIONS.BUTTON MULTI_ACTIONS.VARIABLE_SETTER NOTIFICATIONS.CORNER STREAM_FLASH.PAUSE STREAM_WIDGETS.REPLACE_URL STREAM_WIDGETS.TOGGLE_WIDGET PHASMOPHOBIA.EVIDENCE" data-localize="Parameters">Parameters</div>
+
+      <div type="textarea" class="sdpi-item hidden" data-action="SCRIPTS_MANAGER.CUSTOM_REQUEST">
+        <div class="sdpi-item-label" data-localize="Message">Message</div>
+        <div class="sdpi-item-value textarea">
+          <textarea type="textarea" class="three-lines" data-sync="message"></textarea>
+        </div>
+      </div>
+
+      <div type="checkbox" class="sdpi-item hidden" data-action="SCRIPTS_MANAGER.CUSTOM_REQUEST">
+        <div class="sdpi-item-label" data-localize="Type">Type</div>
+        <div class="sdpi-item-value">
+          <div class="sdpi-item-child">
+            <input id="CUSTOM_REQUEST_JSON" type="checkbox" value="off" data-sync="isJson" />
+            <label for="CUSTOM_REQUEST_JSON" class="sdpi-item-label"><span></span> <label data-localize="JSON">JSON</label></label>
+          </div>
+        </div>
+      </div>
+
+      <div type="select" class="sdpi-item hidden" data-action="SCRIPTS_MANAGER.TOGGLE_SCRIPT">
+        <div class="sdpi-item-label" data-localize="Script">Script</div>
+        <select class="sdpi-item-value select" data-sync="script"></select>
+      </div>
+
+      <div type="select" class="sdpi-item hidden" data-action="SCRIPTS_MANAGER.TOGGLE_SCRIPT">
+        <div class="sdpi-item-label" data-localize="State">State</div>
+        <select class="sdpi-item-value select" data-sync="state">
+          <option value="toggle" data-localize="Toggle">Toggle</option>
+          <option value="enable" data-localize="Enable">Enable</option>
+          <option value="disable" data-localize="Disable">Disable</option>
+        </select>
+      </div>
+
+      <div class="sdpi-item hidden" data-action="MULTI_ACTIONS.BUTTON">
+        <div class="sdpi-item-label" data-localize="Block ID">Block ID</div>
+        <input class="sdpi-item-value" inputmode="numeric" pattern="[0-9]*" type="number" min="1" data-sync="id" />
+      </div>
+
+      <div class="sdpi-item hidden" data-action="MULTI_ACTIONS.VARIABLE_SETTER">
+        <div class="sdpi-item-label" data-localize="Variable Name">Variable Name</div>
+        <input class="sdpi-item-value" type="text" data-sync="name" />
+      </div>
+
+      <div class="sdpi-item hidden" data-action="MULTI_ACTIONS.VARIABLE_SETTER" data-for="MULTI_ACTIONS.VARIABLE_SETTER.TYPE" data-value="string">
+        <div class="sdpi-item-label" data-localize="Value">Value</div>
+        <input class="sdpi-item-value" type="text" data-sync="string" />
+      </div>
+
+      <div class="sdpi-item hidden" data-action="MULTI_ACTIONS.VARIABLE_SETTER" data-for="MULTI_ACTIONS.VARIABLE_SETTER.TYPE" data-value="number">
+        <div class="sdpi-item-label" data-localize="Value">Value</div>
+        <input class="sdpi-item-value" inputmode="numeric" pattern="[0-9-]*" type="number" data-sync="number" />
+      </div>
+
+      <div type="radio" class="sdpi-item hidden" data-action="MULTI_ACTIONS.VARIABLE_SETTER" data-for="MULTI_ACTIONS.VARIABLE_SETTER.TYPE" data-value="boolean">
+        <div class="sdpi-item-label" data-localize="Value">Value</div>
+        <div class="sdpi-item-value">
+          <span class="sdpi-item-child">
+            <input id="MULTI_ACTIONS.VARIABLE_SETTER.BOOLEAN1" type="radio" name="MULTI_ACTIONS.VARIABLE_SETTER.BOOLEAN" value="true" data-sync="boolean" />
+            <label for="MULTI_ACTIONS.VARIABLE_SETTER.BOOLEAN1" class="sdpi-item-label"><span></span> <label data-localize="True">True</label></label>
+          </span>
+          <span class="sdpi-item-child">
+            <input id="MULTI_ACTIONS.VARIABLE_SETTER.BOOLEAN2" type="radio" name="MULTI_ACTIONS.VARIABLE_SETTER.BOOLEAN" value="false" data-sync="boolean" checked />
+            <label for="MULTI_ACTIONS.VARIABLE_SETTER.BOOLEAN2" class="sdpi-item-label"><span></span> <label data-localize="False">False</label></label>
+          </span>
+        </div>
+      </div>
+
+      <div type="radio" class="sdpi-item hidden" data-action="MULTI_ACTIONS.VARIABLE_SETTER">
+        <div class="sdpi-item-label" data-localize="Type">Type</div>
+        <div class="sdpi-item-value">
+          <span class="sdpi-item-child">
+            <input id="MULTI_ACTIONS.VARIABLE_SETTER.TYPE1" type="radio" name="MULTI_ACTIONS.VARIABLE_SETTER.TYPE" value="string" data-sync="type" checked />
+            <label for="MULTI_ACTIONS.VARIABLE_SETTER.TYPE1" class="sdpi-item-label"><span></span> <label data-localize="String">String</label></label>
+          </span>
+          <span class="sdpi-item-child">
+            <input id="MULTI_ACTIONS.VARIABLE_SETTER.TYPE2" type="radio" name="MULTI_ACTIONS.VARIABLE_SETTER.TYPE" value="number" data-sync="type" />
+            <label for="MULTI_ACTIONS.VARIABLE_SETTER.TYPE2" class="sdpi-item-label"><span></span> <label data-localize="Number">Number</label></label>
+          </span>
+          <span class="sdpi-item-child">
+            <input id="MULTI_ACTIONS.VARIABLE_SETTER.TYPE3" type="radio" name="MULTI_ACTIONS.VARIABLE_SETTER.TYPE" value="boolean" data-sync="type" />
+            <label for="MULTI_ACTIONS.VARIABLE_SETTER.TYPE3" class="sdpi-item-label"><span></span> <label data-localize="Boolean">Boolean</label></label>
+          </span>
+        </div>
+      </div>
+
+      <div type="radio" class="sdpi-item hidden" data-action="MULTI_ACTIONS.VARIABLE_SETTER">
+        <div class="sdpi-item-label" data-localize="Scope">Scope</div>
+        <div class="sdpi-item-value">
+          <span class="sdpi-item-child">
+            <input id="MULTI_ACTIONS.VARIABLE_SETTER.SCOPE1" type="radio" name="MULTI_ACTIONS.VARIABLE_SETTER.SCOPE" value="Global" data-sync="scope" checked />
+            <label for="MULTI_ACTIONS.VARIABLE_SETTER.SCOPE1" class="sdpi-item-label"><span></span> <label data-localize="Global">Global</label></label>
+          </span>
+          <span class="sdpi-item-child">
+            <input id="MULTI_ACTIONS.VARIABLE_SETTER.SCOPE2" type="radio" name="MULTI_ACTIONS.VARIABLE_SETTER.SCOPE" value="Local" data-sync="scope" />
+            <label for="MULTI_ACTIONS.VARIABLE_SETTER.SCOPE2" class="sdpi-item-label"><span></span> <label data-localize="Local">Local</label></label>
+          </span>
+          <span class="sdpi-item-child">
+            <input id="MULTI_ACTIONS.VARIABLE_SETTER.SCOPE3" type="radio" name="MULTI_ACTIONS.VARIABLE_SETTER.SCOPE" value="Next" data-sync="scope" />
+            <label for="MULTI_ACTIONS.VARIABLE_SETTER.SCOPE3" class="sdpi-item-label"><span></span> <label data-localize="Next">Next</label></label>
+          </span>
+        </div>
+      </div>
+
+      <div type="select" class="sdpi-item hidden" data-action="NOTIFICATIONS.CORNER">
+        <div class="sdpi-item-label" data-localize="Corner">Corner</div>
+        <select class="sdpi-item-value select" data-sync="corner">
+          <option value="next">Next</option>
+          <option value="top-left" data-localize="Top-Left">Top-Left</option>
+          <option value="top-right" data-localize="Top-Right">Top-Right</option>
+          <option value="bottom-left" data-localize="Bottom-Left">Bottom-Left</option>
+          <option value="bottom-right" data-localize="Bottom-Right">Bottom-Right</option>
+        </select>
+      </div>
+
+      <div type="select" class="sdpi-item hidden" data-action="STREAM_FLASH.PAUSE">
+        <div class="sdpi-item-label" data-localize="State">State</div>
+        <select class="sdpi-item-value select" data-sync="state">
+          <option value="toggle" data-localize="Toggle">Toggle</option>
+          <option value="enable" data-localize="Enable">Enable</option>
+          <option value="disable" data-localize="Disable">Disable</option>
+        </select>
+      </div>
+
+      <div class="sdpi-item hidden" data-action="STREAM_WIDGETS.REPLACE_URL">
+        <div class="sdpi-item-label" data-localize="Widget Name">Widget Name</div>
+        <input class="sdpi-item-value" value="" data-sync="widget" />
+      </div>
+
+      <div class="sdpi-item hidden" data-action="STREAM_WIDGETS.REPLACE_URL">
+        <div class="sdpi-item-label" data-localize="URL">URL</div>
+        <input class="sdpi-item-value" type="text" data-sync="url" />
+      </div>
+
+      <div class="sdpi-item hidden" data-action="STREAM_WIDGETS.TOGGLE_WIDGET">
+        <div class="sdpi-item-label" data-localize="Widget Name">Widget Name</div>
+        <input class="sdpi-item-value" value="" data-sync="widget" />
+      </div>
+
+      <div type="select" class="sdpi-item hidden" data-action="STREAM_WIDGETS.TOGGLE_WIDGET">
+        <div class="sdpi-item-label" data-localize="State">State</div>
+        <select class="sdpi-item-value select" data-sync="state">
+          <option value="toggle" data-localize="Toggle">Toggle</option>
+          <option value="enable" data-localize="Enable">Enable</option>
+          <option value="disable" data-localize="Disable">Disable</option>
+        </select>
+      </div>
+
+      <div type="select" class="sdpi-item hidden" data-action="PHASMOPHOBIA.EVIDENCE">
+        <div class="sdpi-item-label" data-localize="Evidence">Evidence</div>
+        <select class="sdpi-item-value select" data-sync="evidence">
+          <option value="emf-5" data-localize="EMF Level 5">EMF Level 5</option>
+          <option value="fingerprints" data-localize="Fingerprints">Fingerprints</option>
+          <option value="ghost-writing" data-localize="Ghost Writing">Ghost Writing</option>
+          <option value="freezing-temperatures" data-localize="Freezing Temperatures">Freezing Temperatures</option>
+          <option value="dots-projector" data-localize="D.O.T.S Projector">D.O.T.S Projector</option>
+          <option value="ghost-orb" data-localize="Ghost Orb">Ghost Orb</option>
+          <option value="spirit-box" data-localize="Spirit Box">Spirit Box</option>
+        </select>
+      </div>
+
+      <div type="radio" class="sdpi-item hidden" data-action="PHASMOPHOBIA.EVIDENCE">
+        <div class="sdpi-item-label" data-localize="Mode">Mode</div>
+        <div class="sdpi-item-value">
+          <span class="sdpi-item-child">
+            <input id="PHASMOPHOBIA.EVIDENCE.MODE1" type="radio" name="PHASMOPHOBIA.EVIDENCE.MODE" value="on" data-sync="mode" />
+            <label for="PHASMOPHOBIA.EVIDENCE.MODE1" class="sdpi-item-label"><span></span> <label data-localize="Found">Found</label></label>
+          </span>
+          <span class="sdpi-item-child">
+            <input id="PHASMOPHOBIA.EVIDENCE.MODE2" type="radio" name="PHASMOPHOBIA.EVIDENCE.MODE" value="off" data-sync="mode" />
+            <label for="PHASMOPHOBIA.EVIDENCE.MODE2" class="sdpi-item-label"><span></span> <label data-localize="Impossible">Impossible</label></label>
+          </span>
+          <span class="sdpi-item-child">
+            <input id="PHASMOPHOBIA.EVIDENCE.MODE3" type="radio" name="PHASMOPHOBIA.EVIDENCE.MODE" value="toggle" data-sync="mode" checked />
+            <label for="PHASMOPHOBIA.EVIDENCE.MODE3" class="sdpi-item-label"><span></span> <label data-localize="Next state">Next state</label></label>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </body>
+
+</html>

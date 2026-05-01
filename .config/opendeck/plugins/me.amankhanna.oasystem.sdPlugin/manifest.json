@@ -1,0 +1,52 @@
+{
+	"Name": "System Information",
+	"Author": "nekename",
+	"Version": "1.0.0",
+	"Category": "System Information",
+	"Icon": "icon",
+	"OS": [{ "Platform": "windows" }, { "Platform": "mac" }, { "Platform": "linux" }],
+	"CodePaths": {
+		"x86_64-pc-windows-msvc": "oasystem-x86_64-pc-windows-msvc.exe",
+		"x86_64-apple-darwin": "oasystem-x86_64-apple-darwin",
+		"aarch64-apple-darwin": "oasystem-aarch64-apple-darwin",
+		"x86_64-unknown-linux-gnu": "oasystem-x86_64-unknown-linux-gnu",
+		"aarch64-unknown-linux-gnu": "oasystem-aarch64-unknown-linux-gnu"
+	},
+	"CodePathWin": "oasystem-x86_64-pc-windows-msvc.exe",
+	"CodePathMac": "oasystem-x86_64-apple-darwin",
+	"CodePathLin": "oasystem-x86_64-unknown-linux-gnu",
+	"Actions": [
+		{
+			"UUID": "me.amankhanna.oasystem.cpu",
+			"Name": "CPU",
+			"Icon": "icon",
+			"Tooltip": "Displays average CPU utilisation",
+			"Controllers": ["Keypad", "Encoder"],
+			"States": [{ "Title": "0%", "FontSize": 16 }]
+		},
+		{
+			"UUID": "me.amankhanna.oasystem.ram",
+			"Name": "RAM",
+			"Icon": "icon",
+			"Tooltip": "Displays RAM utilisation",
+			"Controllers": ["Keypad", "Encoder"],
+			"States": [{ "Title": "0GB", "FontSize": 14 }]
+		},
+		{
+			"UUID": "me.amankhanna.oasystem.uptime",
+			"Name": "Uptime",
+			"Icon": "icon",
+			"Tooltip": "Displays system uptime",
+			"Controllers": ["Keypad", "Encoder"],
+			"States": [{ "Title": "00:00.00", "FontSize": 12 }]
+		},
+		{
+			"UUID": "me.amankhanna.oasystem.os",
+			"Name": "OS",
+			"Icon": "icon",
+			"Tooltip": "Displays operating system information",
+			"Controllers": ["Keypad", "Encoder"],
+			"States": [{ "Title": "Unknown", "FontSize": 12 }]
+		}
+	]
+}

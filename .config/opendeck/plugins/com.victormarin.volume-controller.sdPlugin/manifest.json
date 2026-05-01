@@ -1,0 +1,30 @@
+{
+  "Name": "Volume Controller",
+  "Author": "Victor Marin",
+  "Version": "1.1.0",
+  "CodePaths": {
+    "x86_64-unknown-linux-gnu": "oa-volume-controller-x86_64-unknown-linux-gnu",
+    "aarch64-unknown-linux-gnu": "oa-volume-controller-aarch64-unknown-linux-gnu"
+  },
+  "CodePathLin": "oa-volume-controller-x86_64-unknown-linux-gnu",
+  "OS": [
+    {
+      "Platform": "linux"
+    }
+  ],
+  "Category": "Volume Controller",
+  "Description": "Take full control of your sound experience with fine-tuned per-app volume management!",
+  "Icon": "img/icon",
+  "PropertyInspectorPath": "pi.html",
+  "Actions": [
+    {
+      "Icon": "img/grid-slider",
+      "Name": "Volume Control Auto Grid",
+      "UUID": "com.victormarin.volume-controller.volctrl",
+      "Tooltip": "Volume controller grid part, fill your SD with this",
+      "States": [
+        {}
+      ]
+    }
+  ]
+}

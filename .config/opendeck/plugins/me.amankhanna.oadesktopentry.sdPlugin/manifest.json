@@ -1,0 +1,29 @@
+{
+	"Name": "Linux App Launcher",
+	"Author": "nekename",
+	"Version": "1.0.2",
+	"Category": "App Launcher",
+	"Icon": "icon",
+	"OS": [{ "Platform": "linux" }],
+	"CodePaths": {
+		"x86_64-pc-windows-msvc": "oadesktopentry-x86_64-pc-windows-msvc.exe",
+		"x86_64-apple-darwin": "oadesktopentry-x86_64-apple-darwin",
+		"aarch64-apple-darwin": "oadesktopentry-aarch64-apple-darwin",
+		"x86_64-unknown-linux-gnu": "oadesktopentry-x86_64-unknown-linux-gnu",
+		"aarch64-unknown-linux-gnu": "oadesktopentry-aarch64-unknown-linux-gnu"
+	},
+	"CodePathWin": "oadesktopentry-x86_64-pc-windows-msvc.exe",
+	"CodePathMac": "oadesktopentry-x86_64-apple-darwin",
+	"CodePathLin": "oadesktopentry-x86_64-unknown-linux-gnu",
+	"Actions": [
+		{
+			"UUID": "me.amankhanna.oadesktopentry.launchapp",
+			"Name": "Launch App",
+			"Icon": "icon",
+			"Tooltip": "Launch an application",
+			"Controllers": ["Keypad", "Encoder"],
+			"PropertyInspectorPath": "pi/launchapp.html",
+			"States": [{ "Image": "actionDefaultImage" }]
+		}
+	]
+}

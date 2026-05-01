@@ -1,0 +1,96 @@
+{
+  "Description": "Fonctionnalités diverses",
+  "fr.arubinu42.action.scripts-manager.custom-request": {
+    "Name": "Scripts Manager: Requête Personnalisée",
+    "Tooltip": "Envoi un objet à Scripts Manager"
+  },
+  "fr.arubinu42.action.scripts-manager.toggle-script": {
+    "Name": "Scripts Manager: Activer un Script",
+    "Tooltip": "Activer/Désactiver un script de Scripts Manager"
+  },
+  "fr.arubinu42.action.multi-actions.button": {
+    "Name": "Multi Actions: Bouton",
+    "Tooltip": "Actionne le bloc \"Stream Deck - Action\" dans Multi Actions de Scripts Manager"
+  },
+  "fr.arubinu42.action.multi-actions.variable-setter": {
+    "Name": "Multi Actions: Définir une Variable",
+    "Tooltip": "Prépare une variable pour \"Multi Actions: Bouton\""
+  },
+  "fr.arubinu42.action.notifications.corner": {
+    "Name": "Notifications: Coin",
+    "Tooltip": "Changer le coin dans lequel afficher les notifications"
+  },
+  "fr.arubinu42.action.notifications.next-screen": {
+    "Name": "Notifications: Écran Suivant",
+    "Tooltip": "Changer l'écran sur lequel afficher les notifications"
+  },
+  "fr.arubinu42.action.stream-flash.next-screen": {
+    "Name": "Stream Flash: Écran Suivant",
+    "Tooltip": "Changer l'écran sur lequel afficher le script"
+  },
+  "fr.arubinu42.action.stream-flash.pause": {
+    "Name": "Stream Flash: Pause",
+    "Tooltip": "Activer/Désactiver la pause des flashs"
+  },
+  "fr.arubinu42.action.stream-widgets.next-screen": {
+    "Name": "Stream Widgets: Écran Suivant",
+    "Tooltip": "Changer l'écran sur lequel afficher le script"
+  },
+  "fr.arubinu42.action.stream-widgets.replace-url": {
+    "Name": "Stream Widgets: Remplacer l'URL",
+    "Tooltip": "Remplace l'adresse de la page web à afficher en tant que widget dans Stream Widgets de Scripts Manager"
+  },
+  "fr.arubinu42.action.stream-widgets.toggle-widget": {
+    "Name": "Stream Widgets: Activer un Widget",
+    "Tooltip": "Activer/Désactiver un widget dans Stream Widgets de Scripts Manager"
+  },
+  "fr.arubinu42.action.phasmophobia.evidence": {
+    "Name": "Overlay Phasmophobia: Preuve",
+    "Tooltip": "Interagit avec l'overlay pour Phasmophobia"
+  },
+  "fr.arubinu42.action.phasmophobia.reset": {
+    "Name": "Overlay Phasmophobia: Réinitialiser",
+    "Tooltip": "Désactive toutes les preuves sur l'overlay pour Phasmophobia"
+  },
+  "Localization": {
+    "Scripts Manager Websocket": "Scripts Manager Websocket",
+    "Login information": "Informations de connexion",
+    "Toggle": "Basculer",
+    "Enable": "Activer",
+    "Disable": "Désactiver",
+    "Global": "Globale",
+    "Local": "Locale",
+    "Next": "Suivant",
+    "IP": "IP",
+    "Port": "Port",
+    "Pass": "Mot de passe",
+    "Where can i find these values?": "Où puis-je trouver ces valeurs?",
+    "Connect": "Connexion",
+    "Parameters": "Paramètres",
+    "Message": "Message",
+    "Type": "Type",
+    "Block ID": "ID du Bloc",
+    "Variable Name": "Nom de la Variable",
+    "Value": "Valeur",
+    "True": "Vrai",
+    "False": "Faux",
+    "Corner": "Coin",
+    "Top-Left": "Haut-Gauche",
+    "Top-Right": "Haut-Droite",
+    "Bottom-Left": "Bas-Gauche",
+    "Bottom-Right": "Bas-Droite",
+    "Widget Name": "Nom du Widget",
+    "Evidence": "Preuve",
+    "EMF Level 5": "EMF Niveau 5",
+    "Fingerprints": "Empreintes digitales",
+    "Ghost Writing": "Écriture Fantômatique",
+    "Freezing Temperatures": "Températures Glaciales",
+    "D.O.T.S Projector": "Projecteur D.O.T.S",
+    "Ghost Orb": "Orbe Fantômatique",
+    "Spirit Box": "Spirit Box",
+    "Mode": "Mode",
+    "Found": "Trouvé",
+    "Impossible": "Impossible",
+    "Next state": "État suivant"
+  }
+}

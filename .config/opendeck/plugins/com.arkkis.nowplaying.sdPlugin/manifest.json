@@ -1,0 +1,40 @@
+{
+  "SDKVersion": 2,
+  "Author": "Arkkis",
+  "CodePath": "NowPlaying.exe",
+  "Description": "Streamline your digital interactions with the 'Now Playing' plugin for Elgato Stream Deck. This versatile tool captures the title of whatever you're listening to or watching on Spotify or your browser, and shares it wherever you can paste text. The plugin sends the content in the format 'np: Artist - SongTitle', allowing you to effortlessly share your current entertainment with your audience, whether it's on chat applications, social media, or other platforms. Enhance audience engagement across various digital spaces with this convenient, one-button solution!",
+  "Name": "Now Playing Command",
+  "Icon": "pluginicon",
+  "URL": "https://github.com/Arkkis/StreamDeckNowPlayingPlugin",
+  "Version": "1.0.0",
+  "Software": {
+    "MinimumVersion": "5.0"
+  },
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Category": "Now Playing",
+  "CategoryIcon": "categoryicon",
+  "Actions": [
+    {
+      "Icon": "actionimage",
+      "Name": "Now Playing Command",
+      "Controllers": [ "Keypad" ],
+      "Encoder": {
+        "TriggerDescription": {
+          "Push": "Fetches and shares the title of the currently playing song or video. Pressing the button triggers the plugin to read the title from Spotify or your browser and paste it into the active text field, followed by sending it (mimicking an Enter key press)."
+        }
+      },
+      "States": [
+        {
+          "Image": "keyicon"
+        }
+      ],
+      "Tooltip": "Share 'Now Playing' Information.",
+      "UUID": "com.arkkis.nowplaying.action"
+    }
+  ]
+}

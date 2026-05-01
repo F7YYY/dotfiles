@@ -7,9 +7,9 @@ gtk-sound-theme-name="Pop"
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 gtk-theme-name="Flat-Remix-GTK-White-Darkest"
-gtk-icon-theme-name="breeze-dark"
+gtk-icon-theme-name="YAMIS"
 gtk-font-name="Sony Sketch EF,  12"
-gtk-cursor-theme-name="blackarch-cursor"
+gtk-cursor-theme-name="breeze_cursors"
 gtk-cursor-theme-size=24
 gtk-toolbar-style=3
 gtk-toolbar-icon-size=GTK_ICON_SIZE_MENU

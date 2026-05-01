@@ -2,15 +2,15 @@
     "AutoStart": {
         "client": "localhost:6743",
         "custom": "",
-        "enabled": true,
+        "enabled": false,
         "host": "0.0.0.0",
         "port": "6742",
         "profile": "WHITE",
         "setclient": true,
         "setcustom": false,
-        "setminimized": true,
+        "setminimized": false,
         "setprofile": true,
-        "setserver": true,
+        "setserver": false,
         "setserverhost": false,
         "setserverport": false
     },
@@ -1840,10 +1840,10 @@
         },
         "disable_key_expansion": true,
         "geometry": {
-            "height": 618,
+            "height": 1023,
             "load_geometry": true,
             "save_on_exit": true,
-            "width": 919,
+            "width": 1900,
             "x": 0,
             "y": 420
         },

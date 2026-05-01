@@ -1,0 +1,178 @@
+{
+	"SDKVersion": 2,
+	"Author": "Craig McLure",
+	"CodePath": "app.html",
+	"Description": "Stream Deck Plugin for the GoXLR Utility",
+	"Name": "GoXLR Utility for StreamDeck",
+	"Icon": "actions/goxlr-utility/assets/goxlr-white",
+	"URL": "https://github.com/frostycoolslug/goxlr-utility-streamdeck",
+	"Version": "0.4.3",
+	"Software": {
+		"MinimumVersion": "5.0"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "10.11"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+
+	"Category": "GoXLR Utility",
+	"CategoryIcon": "actions/goxlr-utility/assets/goxlr-white",
+	"Actions": [
+		{
+			"Icon": "actions/goxlr-utility/assets/goxlr-white",
+			"Name": "Load Profile",
+			"States": [
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-white"
+				},
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-grey"
+				}
+			],
+			"Tooltip": "Loads a GoXLR Profile",
+			"UUID": "com.frostycoolslug.goxlr-utility.profile",
+			"PropertyInspectorPath": "actions/goxlr-utility/property-inspector/load-profile/inspector.html"
+		},
+		{
+			"Icon": "actions/goxlr-utility/assets/goxlr-white",
+			"Name": "Load Mic Profile",
+			"States": [
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-white"
+				},
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-grey"
+				}
+			],
+			"Tooltip": "Loads a GoXLR Microphone Profile",
+			"UUID": "com.frostycoolslug.goxlr-utility.micprofile",
+			"PropertyInspectorPath": "actions/goxlr-utility/property-inspector/load-mic-profile/inspector.html"
+		},
+
+		{
+			"Icon": "actions/goxlr-utility/assets/goxlr-white",
+			"Name": "Set Route",
+			"States": [
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-white"
+				},
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-grey"
+				}
+			],
+			"Tooltip": "Configures a specific route on the GoXLR",
+			"UUID": "com.frostycoolslug.goxlr-utility.routing",
+			"PropertyInspectorPath": "actions/goxlr-utility/property-inspector/set-router/inspector.html"
+		},
+
+		{
+			"Icon": "actions/goxlr-utility/assets/goxlr-white",
+			"Name": "Set Channel Volume",
+			"Controllers": ["Keypad", "Encoder"],
+			"Encoder": {
+				"layout": "$B1"
+			},
+			"States": [
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-white"
+				}
+			],
+			"Tooltip": "Configures the Volume for a Specific Channel",
+			"UUID": "com.frostycoolslug.goxlr-utility.volume",
+			"PropertyInspectorPath": "actions/goxlr-utility/property-inspector/set-volume/inspector.html"
+		},
+		{
+			"Icon": "actions/goxlr-utility/assets/goxlr-white",
+			"Name": "Display Channel Volume",
+			"States": [
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-white"
+				}
+			],
+			"Tooltip": "Displays the current volume level of a channel",
+			"UUID": "com.frostycoolslug.goxlr-utility.display-volume",
+			"PropertyInspectorPath": "actions/goxlr-utility/property-inspector/display-volume/inspector.html"
+		},
+		{
+			"Icon": "actions/goxlr-utility/assets/goxlr-white",
+			"Name": "Set Fader Mute",
+			"States": [
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-white"
+				},
+				{
+				                 	"Image": "actions/goxlr-utility/assets/goxlr-grey"
+				}
+			],
+			"Tooltip": "Configures the Mute Setting on a Fader",
+			"UUID": "com.frostycoolslug.goxlr-utility.toggle-mute",
+			"PropertyInspectorPath": "actions/goxlr-utility/property-inspector/toggle-mute/inspector.html"
+		},
+		{
+			"Icon": "actions/goxlr-utility/assets/goxlr-white",
+			"Name": "Set Microphone Mute",
+			"States": [
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-white"
+				},
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-grey"
+				}
+			],
+			"Tooltip": "Configures the Mute Setting for the Microphone",
+			"UUID": "com.frostycoolslug.goxlr-utility.toggle-mic-mute",
+			"PropertyInspectorPath": "actions/goxlr-utility/property-inspector/toggle-mic-mute/inspector.html"
+		},
+		{
+			"Icon": "actions/goxlr-utility/assets/goxlr-white",
+			"Name": "Toggle Mix Assignment",
+			"States": [
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-white"
+				},
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-grey"
+				}
+			],
+			"Tooltip": "Configures the Mute Setting for the Microphone",
+			"UUID": "com.frostycoolslug.goxlr-utility.toggle-mix-assignment",
+			"PropertyInspectorPath": "actions/goxlr-utility/property-inspector/toggle-mix-assignment/inspector.html"
+		},
+		{
+			"Icon": "actions/goxlr-utility/assets/goxlr-white",
+			"Name": "Set Fx States",
+			"States": [
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-white"
+				},
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-grey"
+				}
+			],
+			"Tooltip": "Configures the Fx State on the GoXLR",
+			"UUID": "com.frostycoolslug.goxlr-utility.toggle-fx",
+			"PropertyInspectorPath": "actions/goxlr-utility/property-inspector/toggle-fx/inspector.html"
+		},
+		{
+			"Icon": "actions/goxlr-utility/assets/goxlr-white",
+			"Name": "Load Fx Preset",
+			"States": [
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-white"
+				},
+				{
+					"Image": "actions/goxlr-utility/assets/goxlr-grey"
+				}
+			],
+			"Tooltip": "Loads an Fx Preset to the GoXLR",
+			"UUID": "com.frostycoolslug.goxlr-utility.load-effect-bank",
+			"PropertyInspectorPath": "actions/goxlr-utility/property-inspector/load-effect-bank/inspector.html"
+		}
+	]
+}

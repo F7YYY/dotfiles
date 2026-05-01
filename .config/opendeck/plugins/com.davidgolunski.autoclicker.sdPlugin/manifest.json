@@ -1,0 +1,58 @@
+{
+  "Actions": [
+    {
+      "Icon": "Actions/ActivateAutoclicker/Click",
+      "Name": "Autoclicker",
+      "States": [
+        {
+          "Image": "Actions/ActivateAutoclicker/Click",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        },
+        {
+          "Image": "Actions/ActivateAutoclicker/Click Active",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        },
+        {
+          "Image": "Actions/ActivateAutoclicker/Click Selected Active",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "Controllers": [ "Keypad", "Encoder" ],
+      "Encoder": {
+        "layout": "Actions/ActivateAutoclicker/AutoclickerDialLayout.json",
+        "TriggerDescription": {
+          "Rotate": "Increase/Decrease",
+          "Push": "Toggle Autoclicker"
+        }
+      },
+      "DisableAutomaticStates": true,
+      "SupportedInMultiActions": false,
+      "Tooltip": "Enables and Disables an autoclicker",
+      "UUID": "com.davidgolunski.autoclicker.autoclickeraction",
+      "PropertyInspectorPath": "Actions/ActivateAutoclicker/AutoclickerAction.html"
+    }
+  ],
+  "Author": "David Golunski",
+  "Name": "Autoclicker",
+  "Description": "A plugin that allows you to configure and activate an Autoclicker.\nUse your StreamDeck to click for you!\nIncludes support for:\n - Clicking/Holding Left Mouse Button\n - Clicking/Holding Middle Mouse Button\n - Clicking/Holding Right Mouse Button\n\n - Dial Support\n - Visual indication to show which Autoclicker is active",
+  "Icon": "Images/Click500",
+  "URL": "https://github.com/DavidGolunski/Autoclicker",
+  "Version": "1.1.0",
+  "CodePath": "Autoclicker",
+  "Category": "Autoclicker",
+  "CategoryIcon": "Actions/ActivateAutoclicker/Click",
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "6.4"
+  },
+  "UUID": "com.davidgolunski.autoclicker"
+}
