@@ -1,0 +1,25 @@
+* {
+    background: #010102;
+    foreground: #BDBEC1;
+
+    color0:     #010102;
+    color1:     #1F2226;
+    color2:     #444648;
+    color3:     #4D4E52;
+    color4:     #525356;
+    color5:     #6B6C6F;
+    color6:     #707174;
+    color7:     #A9AAAE;
+    color8:     #717275;
+    color9:     #1F2226;
+    color10:    #444648;
+    color11:    #4D4E52;
+    color12:    #525356;
+    color13:    #6B6C6F;
+    color14:    #707174;
+    color15:    #CCCCCE;
+
+    accent:     #525356;
+    urgent:     #1F2226;
+    selected:   #444648;
+}

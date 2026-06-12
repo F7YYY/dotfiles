@@ -1,0 +1,133 @@
+configuration {
+    modi: "window,drun,filebrowser";
+    sidebar-mode: true;
+    show-icons: true;
+    drun-display-format: "{name}";
+    matching: "fuzzy";
+}
+
+@import "wallust"
+
+// ---------------------------
+// Core dynamic colors
+// ---------------------------
+* {
+    background-color:   @background;
+    foreground-color:   @foreground;
+    background-alt:     @color0;
+    accent:             @accent;
+    highlight:          @highlight;
+    urgent:             @urgent;
+    placeholder-color:  @color8;
+}
+
+// ---------------------------
+// Window
+// ---------------------------
+window {
+    transparency: "blur";
+    background-color: @background;
+
+    width: 600px;
+    height: 300px;
+
+    border-radius: 16px;
+    padding: 12px;
+}
+
+// ---------------------------
+// Main container
+// ---------------------------
+mainbox {
+    children: [ mode-switcher, inputbar, listview ];
+    spacing: 8px;
+}
+
+// ---------------------------
+// Mode switcher
+// ---------------------------
+mode-switcher {
+    spacing: 6px;
+    background-color: transparent;
+}
+
+// ---------------------------
+// Buttons
+// ---------------------------
+button {
+    padding: 6px 12px;
+    border-radius: 8px;
+
+    background-color: @background-alt;
+    text-color: @foreground-color;
+
+    border: 1px;
+    border-color: transparent;
+}
+
+button selected {
+    background-color: @accent;
+    text-color: @background;
+}
+
+// ---------------------------
+// Input bar
+// ---------------------------
+inputbar {
+    children: [ entry ];
+    margin: 0 0 8px 0;
+}
+
+entry {
+    background-color: @background-alt;
+    text-color: @foreground-color;
+
+    placeholder: ">";
+    placeholder-color: @placeholder-color;
+
+    padding: 10px 16px;
+    border-radius: 10px;
+
+    x-align: 0.5;
+    y-align: 0.5;
+}
+
+// ---------------------------
+// Listview (multi-column)
+// ---------------------------
+listview {
+    columns: 3;
+    lines: 4;
+    cycle: true;
+    dynamic: true;
+    scrollbar: false;
+    spacing: 8px;
+    background-color: transparent;
+}
+
+// ---------------------------
+// Menu elements
+// ---------------------------
+element, element normal {
+    background-color: @background-alt;
+    text-color: @foreground-color;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+element selected {
+    background-color: @highlight;
+    text-color: @background;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+element-text, element-icon {
+    text-color: @foreground-color;
+    background-color: transparent;
+}
+
+element selected element-text,
+element selected element-icon {
+    text-color: @background;
+}

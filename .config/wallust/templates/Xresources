@@ -1,0 +1,20 @@
+! Xresources
+#define color0 #010101
+#define color1 #1E1E1E
+#define color2 #272727
+#define color3 #303030
+#define color4 #3A3A39
+#define color5 #434343
+#define color6 #555555
+#define color7 #999999
+#define color8 #676767
+#define color9 #1E1E1E
+#define color10 #272727
+#define color11 #303030
+#define color12 #3A3A39
+#define color13 #434343
+#define color14 #555555
+#define color15 #C3C3C3
+*.foreground: #B0AFAF
+*.background: #010101
+*.cursorColor: #797979

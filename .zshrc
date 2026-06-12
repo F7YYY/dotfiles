@@ -111,7 +111,7 @@ plugins=(
   aliases
   alias-finder
   archlinux
-  #autoenv
+  autoenv
   autojump
   branch
   catimg
@@ -134,7 +134,7 @@ plugins=(
   git-flow
   github
   gitignore
-  #gitlfs
+  gitlfs
   git-prompt
   gnu-utils
   gpg-agent
@@ -146,20 +146,20 @@ plugins=(
   nmap
   postgres
   rsync
-  #starship
+  starship
   sudo
   systemd
-  #thefuck
+  thefuck
   themes
   ufw
   vscode
   zbell
   zsh-interactive-cd
   zsh-navigation-tools
-  #zsh-autocomplete
-  #zsh-autosuggestions
-  #zsh-navigation-tools
-  #zsh-syntax-highlighting
+  zsh-autocomplete
+  zsh-autosuggestions
+  zsh-navigation-tools
+  zsh-syntax-highlighting
 )
 
 [[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
@@ -192,3 +192,4 @@ plugins=(
 # Example aliases
 # alias zshconfig="mate $HOME/.zshrc"
 # alias ohmyzsh="mate $HOME/.oh-my-zsh"
+fpath=(~/.zsh/completions $fpath)

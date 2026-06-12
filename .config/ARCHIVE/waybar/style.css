@@ -1,0 +1,117 @@
+/********************************************************
+* ██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗   *
+* ██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗  *
+* ██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝  *
+* ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗  *
+* ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║  *
+* ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  *
+*(https://github.com/Alexays/Waybar/wiki/Configuration/)*
+*
+*	THIS JUST GOT TO MUCH
+*
+*	REPLACED BY NOCTALIA-SHELL
+*
+**─────────────────────────────────────────(PRESETS)───*/
+
+/* Import native Wallust variables directly */
+/*@import url("wallust.css");*/
+
+/*──────────────────────────────────────(EVERYTHING)───*/
+* {
+    all: unset;
+    font: italic small-caps bold 16px "Sony Sketch EF, Symbols Nerd Font Mono";
+    text-shadow: 1px 1px @background;
+    border-radius: 20px;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transition-property: inherit;
+}
+@keyframes blink {
+    from { color: inherit; }
+      to { color: transparent; }
+}
+
+/*──────────────────────────────────────────(WAYBAR)───*/
+tooltip {
+    background-color: @background;
+    border: 2px solid @foreground;
+}
+window {
+    color: @foreground;
+    background-color: @background;
+    background: linear-gradient(transparent calc(60%-10px), @foreground, transparent calc(40%+10px));
+}
+.modules-center window * {
+    background: unset;
+    all: unset;
+}
+#waybar window menu, #waybar window menuitem {
+    padding: 4px;
+}
+menu {
+    background-color: @background;
+    border: 1px solid @foreground;
+}
+menu *:hover {
+    background-color: @color8;
+    border: 1px solid @foreground;
+}
+
+/*─────────────────────────────────────────(MODULES)───*/
+*.module {
+    padding: 2px 10px;
+}
+*.modules-left, *.modules-center, *.modules-right {
+    margin: 6px;
+    background-color: @background;
+    border: 1px solid @foreground;
+    border-width: 1px 3px;
+}
+*.overlay {
+    background-color: @background;
+}
+/*───(WLR_TASKBAR)───*/
+#tray *, button {
+    padding: 0px 2px;
+}
+/*───(PULSEAUDIO_SLIDER)───*/
+slider {
+    min-height: 10px;
+}
+*trough {
+    min-width: 100px;
+    border: 1px solid @foreground;
+    background-color: @background;
+}
+*highlight {
+    border: 1px solid @background;
+    background-color: @foreground;
+}
+
+/*─────────────────────────────────────(AUTOMATIONS)───*/
+*:hover:hover, *:hover*, *.current_output, *.focused {
+    color: @foreground;
+}
+*.default, 
+*.on, *.connected, *.options, *.empty, *.sink, *.source, *.hosting-monitor, *.visible, *.selected, *.full, *.solo, *.paused, *.playing {
+    color: @foreground;
+}
+*.hidden, *.deactivated, *.disconnected, *.sink-muted, *.source-muted, *.good, *.passive, *.pairable, *.inactive, *.stopped, *:disabled {
+    color: @color8;
+}
+*:checked, *.off {
+    color: @background;
+}
+*.persistent, *.charging, *.plugged, *.pending-updates, *.needs-attention {
+    animation-duration: 1000ms;
+    animation-name: blink;
+}
+*.warning {
+    animation-duration: 500ms;
+    animation-name: blink;
+}
+*.urgent, *.critical, *.plugged:not(.charging) {
+    animation-duration: 250ms;
+    animation-name: blink;
+}

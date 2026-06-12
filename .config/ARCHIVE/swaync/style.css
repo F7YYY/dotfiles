@@ -1,0 +1,211 @@
+/*__________________________________________*
+*    _____                     _   ________ *
+*   / ___/      ______ ___  __/ | / / ____/ *
+*   \__ \ | /| / / __ `/ / / /  |/ / /      *
+*  ___/ / |/ |/ / /_/ / /_/ / /|  / /___    *
+* /____/|__/|__/\__,_/\__, /_/ |_/\____/    *
+*                    /____/                 *
+*(https://man.archlinux.org/man/swaync.5.en)*
+*___________________________________________*
+*
+*	THIS JUST GOT TO MUCH
+*
+*	REPLACED BY NOCTALIA-SHELL
+*
+═════════════════════════════════════════════
+    1. SYSTEM AUTOMATION & ENGINE VARIABLES
+═══════════════════════════════════════════*/
+@import '$HOME/.config/wallust/colors.css';
+        
+@define-color text              @foreground;
+@define-color background-alt    @color1;
+@define-color selected          @color6;
+@define-color hover             @color5;
+@define-color urgent            @color2;
+@define-color main-color        @color13;
+@define-color bg                alpha(@background-alt, 0.65); /* Adjusted for Frost Glass effect */
+
+:root {
+    --ui-font-title:    18px;
+    --ui-font-body:     14px;
+    --ui-radius:        8px;
+    --ui-margin:        12px;
+    --ui-padding:       10px;
+    --ui-border-size:   2px;
+    --ui-scale-hover:   scale(1.02);
+    --ui-transition:    200ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/*═══════════════════════════════════════════
+    2. GLOBAL DEFAULTS & GLOBAL RESETS
+═══════════════════════════════════════════*/
+* {
+    /*all: unset;*/
+    color: @text;
+    font-family: "Ndot55", "Sony Sketch EF";
+    transition: var(--ui-transition);
+}
+
+/*═══════════════════════════════════════════
+    3. PREMIUM INTERACTIVE BUTTON PHYSICS
+═══════════════════════════════════════════*/
+button, switch, slider, .notification-action, .close-button {
+    background-color: alpha(@text, 0.05);
+    border: var(--ui-border-size) solid transparent;
+    border-radius: var(--ui-radius);
+    padding: 6px 12px;
+}
+
+button:hover, .notification-action:hover, .close-button:hover {
+    background-color: alpha(@hover, 0.3);
+    border-color: @selected;
+    transform: var(--ui-scale-hover); /* Tactile physical pop */
+}
+
+button:active, .notification-action:active, .close-button:active {
+    background-color: @selected;
+    color: @background-alt;
+    transform: scale(0.98); /* Click compression effect */
+}
+
+/*═══════════════════════════════════════════
+    4. THE NOTIFICATION LAYER (MODERN GLASSMORPHISM)
+═══════════════════════════════════════════*/
+.notification-row {
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+.notification-background {
+    background: @bg;
+    border: var(--ui-border-size) solid alpha(@text, 0.1);
+    border-radius: var(--ui-radius);
+    margin: var(--ui-margin);
+    padding: var(--ui-padding);
+    
+    /* FROSTED GLASS IMPROVEMENT */
+    /* This leverages modern compositor blurs behind your notifications */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.notification-background:hover {
+    border-color: alpha(@selected, 0.5);
+    box-shadow: 0 8px 32px 0 alpha(@selected, 0.15);
+}
+
+.notification {
+    border-radius: calc(var(--ui-radius) - 2px);
+}
+
+.notification-content {
+    margin: 4px;
+}
+
+.close-button {
+    background-color: transparent;
+    padding: 4px;
+    margin: 4px;
+}
+
+.image {
+    margin: 0 var(--ui-padding) 0 0;
+    border-radius: calc(var(--ui-radius) - 2px);
+}
+
+/*═══════════════════════════════════════════
+    5. LAYOUT TYPOGRAPHY
+═══════════════════════════════════════════*/
+.summary {
+    font-family: "Ndot55Caps", sans-serif;
+    font-weight: bold;
+    font-size: var(--ui-font-title);
+    color: @main-color;
+    padding-bottom: 4px;
+}
+
+.body {
+    font-size: var(--ui-font-body);
+    font-weight: bold;
+    color: alpha(@text, 0.85); /* Boosts readability contrast */
+}
+
+/*═══════════════════════════════════════════
+    6. CRITICAL SYSTEMS & PROGRESS TRACKING
+═══════════════════════════════════════════*/
+.notification.critical {
+    border: var(--ui-border-size) solid @urgent;
+}
+
+.notification.critical .summary {
+    color: @urgent;
+}
+
+/* Hardware-Smooth Native Progress Bars */
+progress, progressbar, trough {
+    background-color: alpha(@text, 0.1);
+    border-radius: var(--ui-radius);
+    min-height: 6px;
+}
+
+progress highlight, progressbar progress {
+    background-color: @selected;
+    border-radius: var(--ui-radius);
+}
+
+/*═══════════════════════════════════════════
+    7. STREAMLINED MPRIS MEDIA PLAYER
+═══════════════════════════════════════════*/
+.widget-mpris-player {
+    padding: var(--ui-padding);
+    margin: var(--ui-margin);
+    background-color: @mpris-album-art-overlay; 
+    border-radius: var(--ui-radius);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+
+.widget-mpris-title {
+    font-weight: bold;
+    font-size: var(--ui-font-title);
+    color: @text;
+}
+
+.widget-mpris-subtitle {
+    font-size: var(--ui-font-body);
+    color: alpha(@text, 0.7);
+}
+
+/* Make slider progress tracks look uniform with notification progress bars */
+.widget-mpris scale trough {
+    background-color: alpha(@text, 0.1);
+    border-radius: var(--ui-radius);
+}
+
+.widget-mpris scale trough highlight {
+    background-color: @selected;
+}
+
+/*═══════════════════════════════════════════
+    8. NOTIFICATION HEADER GROUPS
+═══════════════════════════════════════════*/
+.notification-group {
+    margin: 4px var(--ui-margin);
+}
+
+.notification-group-headers {
+    font-weight: bold;
+    font-size: calc(var(--ui-font-title) * 1.05);
+    color: @main-color;
+    letter-spacing: 1.5px;
+}
+
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+    background: transparent;
+    color: alpha(@text, 0.6);
+}
+
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover {
+    color: @selected;
+}

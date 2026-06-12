@@ -49,12 +49,13 @@ autoload -U colors && colors
 #──────────────────────────────────────────────────(AUTO_COMPLETE)───
 _comp_options+=(globdots)   # hidden files are included
 HISTFILE="$HOME/.bash_history"
+HISTDUPE=erase
 zmodload zsh/complist
 setopt autocd beep extendedglob notify
 zstyle :compinstall filename "$HOME/.zshrc"
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' format '>>> %d'
-#autoload -Uz compinit
+autoload -Uz compinit
 
 #───────────────────────────────────────────────────────(KEYBINDS)───
 bindkey -e
@@ -75,7 +76,7 @@ bindkey '^H' backward-kill-word         # Ctrl+Backspace
 bindkey '^[[Z' undo                     # Shift+Tab
 bindkey '^[[5~' history-beginning-search-backward   # Page Up
 bindkey '^[[6~' history-beginning-search-forward    # Page Down
-#autoload -Uz bindkey   # function definition file not found
+#autoload -Uz bindkey                    # Function definition not found
 
 #────────────────────────────────────────────────────────────(EWW)───
 #compdef eww

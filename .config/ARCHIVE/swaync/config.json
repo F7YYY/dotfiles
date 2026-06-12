@@ -1,0 +1,60 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "layer": "overlay",
+  "control-center-layer": "top",
+  "layer-shell": true,
+  "cssPriority": "application",
+
+  "positionX": "center",
+  "positionY": "top",
+  "fit-to-screen": true,
+
+  "transition-time": 200,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "relative-timestamps": true,
+  "keyboard-shortcuts": true,
+  "script-fail-notify": true,
+
+  "timeout": 60,
+  "timeout-low": 30,
+  "timeout-critical": 0,
+
+  "control-center-width": 420,
+  "control-center-height": 900,
+  "control-center-margin-top": 10,
+  "control-center-margin-bottom": 10,
+  "control-center-margin-right": 10,
+  "control-center-margin-left": 10,
+
+  "notification-window-width": 400,
+  "notification-icon-size": 64,
+  "image-visibility": "when-available",
+  "notification-body-image-height": 140,
+  "notification-body-image-width": 260,
+
+  "notification-2fa-action": true,
+  "notifications-inline-replies": true,
+
+  "widgets": [
+    "mpris",
+    "title",
+    "dnd",
+    "notifications"
+  ],
+
+  "widget-config": {
+    "title": {
+      "text": "NOTIFICATIONS",
+      "clear-all-button": true,
+      "button-text": "󰩺"
+    },
+    "dnd": {
+      "text": "FUCK_OFF"
+    },
+    "mpris": {
+      "image-size": 64,
+      "image-radius": 8
+    }
+  }
+}

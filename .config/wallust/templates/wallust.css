@@ -1,0 +1,9 @@
+:root {
+    --color0: #010101; --color1: #1E1E1E; --color2: #272727; --color3: #303030;
+    --color4: #3A3A39; --color5: #434343; --color6: #555555; --color7: #999999;
+    --color8: #676767; --color9: #1E1E1E; --color10: #272727; --color11: #303030;
+    --color12: #3A3A39; --color13: #434343; --color14: #555555; --color15: #C3C3C3;
+    --foreground: #B0AFAF;
+    --background: #010101;
+    --cursor: #797979;
+}

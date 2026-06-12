@@ -1,114 +1,107 @@
 configuration {
-  modi:			"window,drun,filebrowser";
-  sidebar-mode:		true;
-  show-icons:		true;
-  sort:			true;
-  sorting-method:	"normal";
-  disable-history:	false;
-  scroll-method:	0;
-  drun-display-format:	"{name}";
-  matching:		"fuzzy";
-  window-thumbnail:	true;
-  display-drun:		"Apps";
-  display-window:	"Windows";
-  display-filebrowser:	"Files";
-
-filebrowser {
-  directories-first:	true;
-  sorting-method:	"name";
-  }
+    modi:                   "window,drun,filebrowser";
+    sidebar-mode:           true;
+    show-icons:             true;
+    drun-display-format:    "{name}";
+    matching:               "fuzzy";
 }
 
-@theme "/dev/null"
+// 1. Pull the master color palette
+@import "wallust.rasi";
+//@import url("../../.config/wallust/wallust.rasi");
 
+
+// 2. Map the imported variables
 * {
-  bg:		#0C0F09;
-  fg:		#05E289;
-  bgAlt: #1B1E25;
-  button:		#05E289;
-  background-color:	@bg;
-  text-color:		@fg;
+    bg-color:           @background;
+    fg-color:           @foreground;
+    alt-bg:             @color1;
+    highlight:          @color2;
+    text-highlight:     @background;
+    //font:               "Sony Sketch EF 12";
+    
+    background-color:   @bg-color;
+    text-color:         @fg-color;
 }
-
-@import "./Themes/style.rasi"
-
-mainbox { children: [ mode-switcher, inputbar, listview ]; }
 
 window {
-  transparency:		"real";
-  width:		650px;
-  border-radius:	15px;
-  height:		500px;
-  border: 12px;
-  border-color: @bg;
+    transparency:       "blur";
+    width:              600px;
+    height:             300px;
+    border-radius:      16px;
+    padding:            12px;
 }
 
-inputbar {
-  children:		[ entry ];
-  expand:		false;
-  padding:		5px 10px 5px 10px;
-}
-
-prompt { 
-  enabled: true; 
-  background-color:	@bgAlt;
-  padding:		15px;
-  border-radius:	15px;
-}
-
-entry {
-  background-color:	@bgAlt;
-  placeholder:		"Search";
-  expand:		true;
-  padding:		15px;
-  border-radius:	15px;
-}
-
-listview {
-  columns:		2;
-  cycle:		true;
-  dynamic:		true;
-  layout:		vertical;
-  scrollbar:		false;
-}
-
-element {
-  orientation:		vertical;
-  margin:		2px 3px 2px 3px;
-  border-radius:	10px;
-  background-color:	@bgAlt;
-}
-
-element-text {
-  expand:		true;
-  margin:		15px 15px 15px 15px;
-  background-color:	inherit;
-  text-color:		inherit;
-}
-
-element selected {
-  background-color:	@fg;
-  text-color:		@bgAlt;
-  border-radius:	10px;
+mainbox {
+    children:           [ mode-switcher, inputbar, listview ];
+    spacing:            8px;
 }
 
 mode-switcher {
-  spacing:		2px;
-  border-radius:	10px;
-  background-color:	inherit;
-  text-color:		inherit;
-  margin:		10px 50px 10px 50px;
+    spacing:            6px;
+    background-color:   transparent;
 }
 
 button {
-  padding:		8px;
-  background-color:	@bgAlt;
-  vertical-align:	0.5; 
-  horizontal-align:	0.5;
+    padding:            6px 12px;
+    border-radius:      8px;
+    background-color:   @alt-bg;
+    text-color:         @fg-color;
 }
 
 button selected {
-  padding:		8px;
-  background-color:	@fg;
-  text-color:		@bgAlt;
+    background-color:   @highlight;
+    text-color:         @text-highlight;
 }
+
+inputbar {
+    children:           [ entry ];
+    margin:             0px 0px 8px 0px;
+}
+
+entry {
+    background-color:   @alt-bg;
+    placeholder:        ">";
+    placeholder-color:  @color3;
+    padding:            10px 16px;
+    border-radius:      10px;
+    x-align:            0.5;
+    y-align:            0.5;
+}
+
+listview {
+    columns:            3;
+    lines:              4;
+    cycle:              true;
+    dynamic:            true;
+    scrollbar:          false;
+    spacing:            8px;
+}
+
+element {
+    padding:            8px;
+    border-radius:      10px;
+    background-color:   @alt-bg;
+    spacing:            10px;
+}
+
+element selected {
+    background-color:   @highlight;
+}
+
+element-icon {
+    size:               24px;
+    background-color:   transparent;
+    text-color:         inherit;
+}
+
+element-text {
+    expand:             true;
+    y-align:            0.5;
+    x-align:            0.0;
+    background-color:   transparent;
+    text-color:         inherit;
+}
+
+element selected element-text { text-color: @text-highlight; }
+element selected element-icon { text-color: @text-highlight; }
