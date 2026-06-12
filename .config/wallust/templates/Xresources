@@ -1,20 +1,20 @@
 ! Xresources
-#define color0 #010101
-#define color1 #1E1E1E
-#define color2 #272727
-#define color3 #303030
-#define color4 #3A3A39
-#define color5 #434343
-#define color6 #555555
-#define color7 #999999
-#define color8 #676767
-#define color9 #1E1E1E
-#define color10 #272727
-#define color11 #303030
-#define color12 #3A3A39
-#define color13 #434343
-#define color14 #555555
-#define color15 #C3C3C3
-*.foreground: #B0AFAF
-*.background: #010101
-*.cursorColor: #797979
+#define color0 #010102
+#define color1 #1F2226
+#define color2 #444648
+#define color3 #4D4E52
+#define color4 #525356
+#define color5 #6B6C6F
+#define color6 #707174
+#define color7 #A9AAAE
+#define color8 #717275
+#define color9 #1F2226
+#define color10 #444648
+#define color11 #4D4E52
+#define color12 #525356
+#define color13 #6B6C6F
+#define color14 #707174
+#define color15 #CCCCCE
+*.foreground: #BDBEC1
+*.background: #010102
+*.cursorColor: #949598

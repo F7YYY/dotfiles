@@ -10,6 +10,7 @@
 [user]
 	name = F7YYY
 	email = 38305613+F7YYY@users.noreply.github.com
+	signingkey = /home/snakeye/.ssh/id_ed25519
 [core]
 	editor = nvim
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
@@ -285,3 +286,5 @@
 	required = true
 [oh-my-zsh]
 	git-commit-alias = e7aa0c56e68348afefdd6af4c5bdb314a2bd6640
+[gpg]
+	format = ssh

@@ -1,8 +1,8 @@
 ;; colors.el
 (setq wallust-colors
-      '("#010101" "#1E1E1E" "#272727" "#303030"
-        "#3A3A39" "#434343" "#555555" "#999999"
-        "#676767" "#1E1E1E" "#272727" "#303030"
-        "#3A3A39" "#434343" "#555555" "#C3C3C3"))
-(setq wallust-foreground "#B0AFAF")
-(setq wallust-background "#010101")
+      '("#010102" "#1F2226" "#444648" "#4D4E52"
+        "#525356" "#6B6C6F" "#707174" "#A9AAAE"
+        "#717275" "#1F2226" "#444648" "#4D4E52"
+        "#525356" "#6B6C6F" "#707174" "#CCCCCE"))
+(setq wallust-foreground "#BDBEC1")
+(setq wallust-background "#010102")

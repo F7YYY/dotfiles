@@ -1,9 +1,9 @@
 :root {
-    --color0: #010101; --color1: #1E1E1E; --color2: #272727; --color3: #303030;
-    --color4: #3A3A39; --color5: #434343; --color6: #555555; --color7: #999999;
-    --color8: #676767; --color9: #1E1E1E; --color10: #272727; --color11: #303030;
-    --color12: #3A3A39; --color13: #434343; --color14: #555555; --color15: #C3C3C3;
-    --foreground: #B0AFAF;
-    --background: #010101;
-    --cursor: #797979;
+    --color0: #010102; --color1: #1F2226; --color2: #444648; --color3: #4D4E52;
+    --color4: #525356; --color5: #6B6C6F; --color6: #707174; --color7: #A9AAAE;
+    --color8: #717275; --color9: #1F2226; --color10: #444648; --color11: #4D4E52;
+    --color12: #525356; --color13: #6B6C6F; --color14: #707174; --color15: #CCCCCE;
+    --foreground: #BDBEC1;
+    --background: #010102;
+    --cursor: #949598;
 }
