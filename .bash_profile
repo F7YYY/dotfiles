@@ -10,61 +10,8 @@
 #                                                                                                                                                                        #
 ##########################################################################################################################################################################
 #
-#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(SOURCES-BAK)───
-#───(AUTO_RUN_INTERACTIVELY)
-#[[ $- != *i* ]] && return      # SOURCED .BASHRC
-#───(SOURCERER)
-#[[ -f "$HOME/.bash_bashrc" ]] && source "$HOME/.bash_profile"
-#───(SOURCE_DEFINITIONS)
-#[[ -f /etc/bash.bashrc ]] && source /etc/bash.bashrc
-#───(bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)")────#
-#[[ -f /usr/share/oh-my-bash/oh-my-bash.sh ]] && source /usr/share/oh-my-bash/oh-my-bash.sh      # BROKEN-PACKAGE AUR:OH-MY-BASH-GIT
-#───(ENABLE_BASH_COMPLETIONS)
-#[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && source /usr/share/bash-completion/bash_completion
-
-#───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(THEME)───
-#───(GSETTINGS)
-# gsettings set org.gnome.desktop.interface <KEY> <VALUE>
-gsettings set org.gnome.desktop.interface clock-format 24h
-
-#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(ALIASES)───
-alias c='clear'
-alias l='ls -l --color=auto'
-alias la='ls -la --color=auto'
-alias ll='ls -lahs --color=auto'
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias ftext='clear && grep -niHIr --color=always "$1" "${2:-.}" | less -r'
-alias curl='curl --user-agent "noleak"'
-alias wget='wget -c --user-agent "noleak"'
-alias rsync='rsync --recursive --progress'
-alias logs='sudo find /var/log -type f -exec file {} + | grep "text" | cut -d " " -f1 | sed -e"s/:$//g" | grep -v "[0-9]$" | xargs tail -f'
-alias alert='notify-send -u critical -a "$([ $? = 0 ] && echo TERMINAL || echo ERROR)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')" "Finished"'
-alias free='free -h'
-alias cp='cp -i'
-alias rm='rm -i'
-alias mv='mv -i'
-alias df='df -h'
-alias du='du -h'
-alias dd='dd status=progress'
-alias shred='shred -zf'
-alias wayland='--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer --ozone-platform-hint=auto'
-
-#───(CHANGE_DIRECTORY)
-alias home='cd ~ || cd "$HOME"'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-#───(ARCHIVE)
-alias mktar='tar -cvf'
-alias mkbz2='tar -cvjf'
-alias mkgz='tar -cvzf'
-alias untar='tar -xvf'
-alias unbz2='tar -xvjf'
-alias ungz='tar -xvzf'
-
+#   SCRIPTS
+#
 #────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(EXPORT_ENVIRONMENT_VARIABLES)───
 exporter() {
     local INPUT="${1:-}"
@@ -73,7 +20,7 @@ exporter() {
     local VENDOR=($(lspci | grep -iE 'vga' | grep -ioE 'amd|nvidia|intel' | awk '{print tolower($0)}'))
 
     #───(VARIABLES)
-    local ENLISTMENT=(
+    local -a ENLISTMENT=(
         "HISTSIZE=1000"
         "HISTFILESIZE=1000"
         "HISTCONTROL=erasedups:ignoredups:ignorespace"
@@ -89,26 +36,28 @@ exporter() {
         "SDL_VIDEODRIVER=$XDG_BACKEND"
         "SDL_VIDEO_DRIVER=$XDG_BACKEND;x11"
         "QT_QPA_PLATFORM=$XDG_BACKEND;xcb"
-        "QT_QPA_PLATFORMTHEME=qt6ct;qt5ct"        #$XDG_BACKEND"
+        "QT_QPA_PLATFORMTHEME=gtk3"        #qt6ct;qt5ct;$XDG_BACKEND"
+        "GSK_RENDERER=vulkan"
         #"QT_AUTO_SCREEN_SCALE_FACTOR=1"
         #"QT_SCREEN_SCALE_FACTORS=1"
 	    #"AQ_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1"   # MULTI-GPU PRIORITY
     )
-    local XORG=(
+    local -a XORG=(
 		"GDK_BACKEND=x11"                           # FORCE BACKEND
 		"XDG_BACKEND=x11"                           # FORCE BACKEND
 	)
-    local WAYLAND=(
+    local -a WAYLAND=(
 		"GDK_BACKEND=wayland"						# FORCE BACKEND
 		"XDG_BACKEND=wayland"						# FORCE BACKEND
 		"MOZ_ENABLE_WAYLAND=1"						# MOZILLA BROWSERS
 		"QT_WAYLAND_FORCE_DPI=physical"
 		"QT_WAYLAND_DISABLE_WINDOWDECORATION=1"
+        "ELECTRON_OZONE_PLATFORM_HINT=wayland"
 		#"QT_WAYLAND_SHELL_INTEGRATION=layer-shell"
 		#"DISPLAY=$WAYLAND_DISPLAY:0"			    # EXPORT FOR SPECIFIC APPS
 	    #"WAYLAND_DEBUG=1"				            # EXPORT FOR DEBUGGING (1, client, server)
 	)
-    local AMD=(
+    local -a AMD=(
 		#"VDPAU_DRIVER=radeonsi"
 		#"LIBVA_DRIVER_NAME=radeonsi"
         #"RADV_PERFTEST=aco"						# DEFAULT MESA:V20.2
@@ -119,20 +68,21 @@ exporter() {
         #"VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json"
         #"VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/amd_icd32.json:/usr/share/vulkan/icd.d/amd_icd64.json"
 	)
-    local NVIDIA=(
+    local -a NVIDIA=(
 		"VDPAU_DRIVER=nvidia"
 		"LIBVA_DRIVER_NAME=nvidia"
 		"GBM_BACKEND=nvidia-drm"
+        "NVD_BACKEND=direct"
 		"LIBVA_DRIVER_NAME=nvidia"
 		"__GLX_VENDOR_LIBRARY_NAME=nvidia"
-		"__GL_GSYNC_ALLOWED"
-		"__GL_VRR_ALLOWED"
+		"__GL_GSYNC_ALLOWED=1"
+		"__GL_VRR_ALLOWED=1"
 		"__GL_SHADER_DISK_CACHE=1"
 		"__GL_SHADER_DISK_CACHE_PATH=/tmp/shaders"
         #"__GL_THREADED_OPTIMIZATION=1"             # PER-GAME BENCHMARKS
 		#"WLR_DRM_NO_ATOMIC=1"				        # LEGACY DRM INTERFACE
 	)
-    local INTEL=(
+    local -a INTEL=(
 		"INTEL=RETARD_ALERT"						# UNLESS FOR IGPU
 		"VDPAU_DRIVER=va_gl"
 		"LIBVA_DRIVER_NAME=iHD"
@@ -140,35 +90,36 @@ exporter() {
     
     #───(BACKEND_APPEND)
     case "$XDG_BACKEND" in
-        wayland) ENLISTMENT+=$WAYLAND ;;
-        x11) ENLISTMENT+=$XORG ;;
+        wayland) ENLISTMENT+=("${WAYLAND[@]}") ;;
+        x11) ENLISTMENT+=("${XORG[@]}") ;;
         *) echo -e "\n[?] UNKNOWN XDG_BACKEND: [$XDG_BACKEND]" ;;
     esac
 
     #───(GPU_APPEND)
     for GPU in "${VENDOR[@]}"; do
         case "$GPU" in
-            amd) ENLISTMENT+=$AMD ;;
-            nvidia) ENLISTMENT+=$NVIDIA ;;
-            intel) ENLISTMENT+=$INTEL ;;
+            amd) ENLISTMENT+=("${AMD[@]}") ;;
+            nvidia) ENLISTMENT+=("${NVIDIA[@]}") ;;
+            intel) ENLISTMENT+=("${INTEL[@]}") ;;
             *) echo -e "\n[?] UNKNOWN GPU: [$GPU]" ;;
         esac
     done
 
     #───(PRIVILEGE_DETECTION)
     echo -e "\n[*] ENUMERATING PRIVILEGE ESCALATE METHODS..."
-    if [[ $EUID -eq 0 ]]; then
+    if (( EUID == 0 )); then
         echo -e "[✓] FOUND: 'root'"
-    elif command -v sudo &>/dev/null; then
+    elif which sudo >/dev/null 2>&1; then
         ESCALATE="sudo"
         echo -e "[✓] FOUND: '$ESCALATE'"
-    elif command -v pkexec &>/dev/null; then                        # BYPASSES ROOT ESCALATION
+    elif which pkexec >/dev/null 2>&1; then                       # BYPASSES ROOT ESCALATION
         ESCALATE="pkexec"
         echo -e "[✓] FOUND: '$ESCALATE'"
     else
         echo -e "\n[!] PRIVILEGED COMMAND NOT FOUND..."
         while true; do
-            read -rp "[?] ENTER PRIVILEGED COMMAND: " ESCALATE
+            echo -e "[?] ENTER PRIVILEGED COMMAND: "
+            read -r ESCALATE
             if [ $ESCALATE cat $ENVFILE &>/dev/null ]; then
                 echo -e "[✓] FOUND: $ESCALATE"; break
             else
@@ -192,66 +143,53 @@ exporter() {
             for VAR in "${ENLISTMENT[@]}"; do echo -e "$VAR"; done
             echo -e "\n──────────────────────────────────────────\n"
             echo -e "[?] CHECKING EXPORTS: [$ENVFILE]\n"
-            $ESCALATE cat "$ENVFILE"
+            ${ESCALATE:+$ESCALATE} cat "$ENVFILE"
             echo -e "\n==========================================\n"
         ;;
         -[Ll]*|--[Ll]*)
             echo -e "\n[+] EXPORTING TO: [$UID($USER)]\n"
             for VAR in "${ENLISTMENT[@]}"; do
-                echo -e "[✓] EXPORTED: "$VAR""
+                echo -e "[✓] %s\n' "$VAR""
 		        export "$VAR"
 	        done
         ;;
         -[Gg]*|--[Gg]*)
             echo -e "\n[+] EXPORTING TO: [$ENVFILE]"
-
             # Ensure $ENVFILE exists with correct perms
             [[ ! -f $ENVFILE ]] && $ESCALATE touch "$ENVFILE" && $ESCALATE chmod 644 "$ENVFILE"
-
-            echo -e "[?]: CREATE BACKUP: [$ENVFILE.bak]"
-            read -rp "BACKUP? (Yes/No): " CONFIRMBAK
+            echo -e "[?]:[$ENVFILE.bak] CREATE BACKUP? (Yes/No): "
+            read -r CONFIRMBAK
             if [[ "$CONFIRMBAK" =~ ^[Yy] ]]; then
                 $ESCALATE cp "$ENVFILE" "$ENVFILE.bak"
                 echo -e "[✓] BACKED-UP"
             else
                 echo -e "\n[!] OVERWRITING: [$ENVFILE]"
                 $ESCALATE cat "$ENVFILE"
-                echo -e "\n[!] ^-FINAL_COPY-^\n"
+                echo -e "\n[!] ^-FINAL_COPY-^"
             fi
+            echo -e "\n[!] #DELETING_ALL_COMMENTED_LINES"
+            echo -e "[+] IMPORTING NEW HEADER\n"
+            TMP="$(mktemp)"
+            {
+                echo "# BASH IMPORT ($(date))"
+                echo "#"
+                echo "# PARSED BY pam_env MODULE"
+                echo "#"
+                echo "# KEY=VAL"
+                echo
+                for VAR in "${ENLISTMENT[@]}"; do
+                    # skip invalid entries
+                    [[ "$VAR" != *"="* ]] && continue
+                    KEY="${VAR%%=*}"
+                    VAL="${VAR#*=}"
+                    # skip empty keys
+                    [[ -z "$KEY" ]] && continue
 
-            # Replace old header block with new one
-            echo -e "\n[!] #DELETING_ALL_COMMENTED_LINES\n[+] IMPORTING NEW HEADER\n"
-            $ESCALATE sed -i '/^#' "$ENVFILE"
-            local HEADER="# BASH IMPORT ($(date))\n#\n# PARSED BY pam_env MODULE\n#\n# KEY=VAL\n"
-            $ESCALATE sed -i -E '/^\s*#/d' "$ENVFILE"           # MUST STAY SEPERATED
-            $ESCALATE sed -i -E "1s|^|$HEADER|" "$ENVFILE"      # MUST STAY SEPERATED
-
-            # Recursively iterate though all lines and arrays for changes
-            for VAR in "${ENLISTMENT[@]}"; do
-                local KEY="${VAR%%=*}"
-                local VAL="${VAR#*=}"
-                local LINE=$($ESCALATE grep -E "^\s*${KEY}=" "$ENVFILE")
-
-                if [ grep  "$KEY" == "$VAR" ]; then
-                    echo -e "[FOUND]:\t$LINE"
-                    echo -e "[REPLACEMENT]:\t$VAR"
-                    read -rp "REPLACE? (Yes/No): " CONFIRMREP
-                    if [[ "$CONFIRMREP" =~ ^[Yy] ]]; then
-                        $ESCALATE sed -i "s|^\s*${KEY}=.*|${VAR}|" "$ENVFILE"
-                        echo -e "[✓] REPLACED: $VAR"
-                    elif [[ "$LINE" == "$VAR" ]]; then
-                        echo -e "[-] SKIPPED: $VAR"
-                        continue
-                    fi
-                else
-                    # Delete commented versions
-                    $ESCALATE sed -i "/^#\s*${KEY}=.*/d" "$ENVFILE"
-                    echo -e "[+] ADDING:\t$VAR"
-                    echo "$VAR" | $ESCALATE tee -a "$ENVFILE" > /dev/null
-                fi
-            done
-
-            # Final copy into /etc/environment
+                    echo "$VAR"
+                done
+            } > "$TMP"
+            $ESCALATE cp "$TMP" "$ENVFILE"
+            rm -f "$TMP"
             echo -e "\n[✓] UPDATED:\t[$ENVFILE]"
         ;;
         *)
@@ -269,16 +207,19 @@ startups() {
     local UWSM=0
     local DESKTOP="$HOME/.config/autostart/COMMANDS.desktop"
     local APPLICATIONS=(
-        #"dbus-update-activation-environment --systemd --all"   # MANAGED BY AUR:UWSM
+        "exporter --local"
+        "dbus-update-activation-environment --systemd --all"
         #"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
         #"gnome-keyring-daemon --start --components=secrets"
-        "exporter --local"
         "backup"
-        #"xdg-autostart"						# AUR:UWSM MANAGED
+        "xdg-autostart"
         #"wlsunset -s 22:00 -S 10:00 -d 60"
-        #"wl-paste --type text --watch cliphist store"
-        #"wl-paste --type image --watch cliphist store"
-        #───(MINIMIZED_FLAGS)
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
+        #───(GSETTINGS)
+        "gsettings set org.gnome.desktop.interface clock-format '24h'"
+        "gsettings set org.gnome.desktop.interface font-name 'Sony Sketch EF'"
+        #───(MINIMIZE_FLAGS)
         #"emacs --daemon"
         #"openrgb --startminimized wayland"
         #"steam-native -silent wayland"
@@ -288,7 +229,7 @@ startups() {
         #"teams --startminimized wayland"
     )
 
-    [ command -v uwsm &>/dev/null ] && UWSM=1 || UWSM=0
+    [ which uwsm &>/dev/null ] && UWSM=1 || UWSM=0
 
     #───(MANAGE_EXECUTIONS)
     case $INPUT in
@@ -359,8 +300,8 @@ startups() {
 
                 if [[ -n "$FOUND" && "$FOUND" != "$LINE" ]]; then
                     echo -e "\n[>] FOUND:\t$FOUND"
-                    echo -e "[<] REPLACE:\t$LINE"
-                    read -rp "[y/N] REPLACE?: " CONFIRMREP
+                    echo -e "[<] REPLACE [y/N]:\t$LINE"
+                    read -r CONFIRMREP
                     if [[ "$CONFIRMREP" =~ ^[Yy] ]]; then
                         sed -i -E "s|^\s*${FOUND}|$LINE|" "$DESKTOP"
                         echo -e "[✓] REPLACED:\t$APP"
@@ -894,899 +835,12 @@ _libredefender() {
         ;;
     esac
 }
-#complete -F _libredefender -o nosort -o bashdefault -o default libredefender       # NOT_ZSH_FRIENDLY
-alias defender="complete -F _libredefender -o nosort -o bashdefault -o default libredefender"
 
-#─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(EWW)───
-_eww() {
-    local i cur prev opts cmd
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
-    cmd=""
-    opts=""
-
-    for i in ${COMP_WORDS[@]}
-    do
-        case "${cmd},${i}" in
-            ",$1")
-                cmd="eww"
-                ;;
-            eww,active-windows)
-                cmd="eww__active__windows"
-                ;;
-            eww,close)
-                cmd="eww__close"
-                ;;
-            eww,close-all)
-                cmd="eww__close__all"
-                ;;
-            eww,daemon)
-                cmd="eww__daemon"
-                ;;
-            eww,debug)
-                cmd="eww__debug"
-                ;;
-            eww,get)
-                cmd="eww__get"
-                ;;
-            eww,graph)
-                cmd="eww__graph"
-                ;;
-            eww,help)
-                cmd="eww__help"
-                ;;
-            eww,inspector)
-                cmd="eww__inspector"
-                ;;
-            eww,kill)
-                cmd="eww__kill"
-                ;;
-            eww,list-windows)
-                cmd="eww__list__windows"
-                ;;
-            eww,logs)
-                cmd="eww__logs"
-                ;;
-            eww,open)
-                cmd="eww__open"
-                ;;
-            eww,open-many)
-                cmd="eww__open__many"
-                ;;
-            eww,ping)
-                cmd="eww__ping"
-                ;;
-            eww,reload)
-                cmd="eww__reload"
-                ;;
-            eww,shell-completions)
-                cmd="eww__shell__completions"
-                ;;
-            eww,state)
-                cmd="eww__state"
-                ;;
-            eww,update)
-                cmd="eww__update"
-                ;;
-            eww__help,active-windows)
-                cmd="eww__help__active__windows"
-                ;;
-            eww__help,close)
-                cmd="eww__help__close"
-                ;;
-            eww__help,close-all)
-                cmd="eww__help__close__all"
-                ;;
-            eww__help,daemon)
-                cmd="eww__help__daemon"
-                ;;
-            eww__help,debug)
-                cmd="eww__help__debug"
-                ;;
-            eww__help,get)
-                cmd="eww__help__get"
-                ;;
-            eww__help,graph)
-                cmd="eww__help__graph"
-                ;;
-            eww__help,help)
-                cmd="eww__help__help"
-                ;;
-            eww__help,inspector)
-                cmd="eww__help__inspector"
-                ;;
-            eww__help,kill)
-                cmd="eww__help__kill"
-                ;;
-            eww__help,list-windows)
-                cmd="eww__help__list__windows"
-                ;;
-            eww__help,logs)
-                cmd="eww__help__logs"
-                ;;
-            eww__help,open)
-                cmd="eww__help__open"
-                ;;
-            eww__help,open-many)
-                cmd="eww__help__open__many"
-                ;;
-            eww__help,ping)
-                cmd="eww__help__ping"
-                ;;
-            eww__help,reload)
-                cmd="eww__help__reload"
-                ;;
-            eww__help,shell-completions)
-                cmd="eww__help__shell__completions"
-                ;;
-            eww__help,state)
-                cmd="eww__help__state"
-                ;;
-            eww__help,update)
-                cmd="eww__help__update"
-                ;;
-            *)
-                ;;
-        esac
-    done
-
-    case "${cmd}" in
-        eww)
-            opts="-c -h -V --debug --force-wayland --config --logs --no-daemonize --restart --help --version shell-completions daemon logs ping update inspector open open-many close reload kill close-all state get list-windows active-windows debug graph help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__active__windows)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__close)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help [WINDOWS]..."
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__close__all)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__daemon)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__debug)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__get)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help <NAME>"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__graph)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help)
-            opts="shell-completions daemon logs ping update inspector open open-many close reload kill close-all state get list-windows active-windows debug graph help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__active__windows)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__close)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__close__all)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__daemon)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__debug)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__get)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__graph)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__help)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__inspector)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__kill)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__list__windows)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__logs)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__open)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__open__many)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__ping)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__reload)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__shell__completions)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__state)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__help__update)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__inspector)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__kill)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__list__windows)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__logs)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__open)
-            opts="-p -s -a -c -h --id --screen --pos --size --anchor --toggle --duration --arg --debug --force-wayland --config --logs --no-daemonize --restart --help <WINDOW_NAME>"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --id)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --screen)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --pos)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -p)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --size)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -s)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --anchor)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -a)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --duration)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --arg)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__open__many)
-            opts="-c -h --arg --toggle --debug --force-wayland --config --logs --no-daemonize --restart --help [WINDOWS]..."
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --arg)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__ping)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__reload)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__shell__completions)
-            opts="-s -c -h --shell --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --shell)
-                    COMPREPLY=($(compgen -W "bash elvish fish powershell zsh" -- "${cur}"))
-                    return 0
-                    ;;
-                -s)
-                    COMPREPLY=($(compgen -W "bash elvish fish powershell zsh" -- "${cur}"))
-                    return 0
-                    ;;
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__state)
-            opts="-a -c -h --all --debug --force-wayland --config --logs --no-daemonize --restart --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        eww__update)
-            opts="-c -h --debug --force-wayland --config --logs --no-daemonize --restart --help [MAPPINGS]..."
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --config)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -c)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-    esac
-}
-
-if [[ "${BASH_VERSINFO[0]}" -eq 4 && "${BASH_VERSINFO[1]}" -ge 4 || "${BASH_VERSINFO[0]}" -gt 4 ]]; then
-    complete -F _eww -o nosort -o bashdefault -o default eww
-else
-    #complete -F _eww -o bashdefault -o default eww
+# shell-agnostic registration
+if [ -n "$ZSH_VERSION" ]; then
+    autoload -Uz compinit
+    compinit
+    compdef _libredefender libredefender
+elif [ -n "$BASH_VERSION" ]; then
+    complete -F _libredefender libredefender
 fi

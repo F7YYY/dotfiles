@@ -35,7 +35,6 @@ palette = "saliencedarkdistributed"
 threshold = 8
 
 #====================( HOOKS )====================#
-# Disables hooks completly
 no_hooks = true
 
 [hooks]
@@ -43,56 +42,21 @@ wallpaper = '''awww img "$(find $HOME/Pictures/Wallpapers -type f -exec file --m
 
 #====================( TEMPLATES )====================#
 [templates]
-#====================#
-#----( Python )----#
-python.template = '../sources/colors.py'
-python.target = '~/.config/wallust/templates/wallust.py'
-#----( JavaScript )----#
-js.template = '../sources/colors.js'
-js.target = '~/.config/wallust/templates/wallust.js'
-#----( JSON )----#
-json.template = '../sources/colors.json'
-json.target = '~/.config/wallust/templates/wallust.json'
-#----( CSS )----#
-css.template = '../sources/colors.css'
-css.target = '~/.config/wallust/templates/wallust.css'
-#----( RASI )----#
-rasi.template = '../sources/colors.rasi'
-rasi.target = '~/.config/wallust/templates/wallust.rasi'
-#----( Rust )----#
-rust.template = '../sources/colors.rs'
-rust.target = '~/.config/wallust/templates/wallust.rs'
-#----( Lua )----#
-lua.template = '../sources/colors.lua'
-lua.target = '~/.config/wallust/templates/wallust.lua'
-#----( YAML )----#
-yaml.template = '../sources/colors.yaml'
-yaml.target = '~/.config/wallust/templates/wallust.yaml'
-#----( TOML )----#
-toml_cfg.template = '../sources/colors.toml'
-toml_cfg.target = '~/.config/wallust/templates/wallust.toml'
-#----( C Header )----#
-c_header.template = '../sources/colors.h'
-c_header.target = '~/.config/wallust/templates/wallust.h'
-#----( Emacs Lisp )----#
-emacs.template = '../sources/colors.el'
-emacs.target = '~/.config/wallust/templates/wallust.el'
-#----( xresources )----#
-xresources.template = '../sources/Xresources'
-xresources.target = '~/.config/wallust/templates/Xresources'
-#====================#
-#----( GHOSTTY )----#
-ghostty.template = '../../ghostty/colors.conf'
-ghostty.target = '~/.config/ghostty/wallust.conf'
-#----( NOCTALIA-SHELL )----#
-noctalia.template = '../../noctalia/colors.conf'
-noctalia.target = '~/.config/noctalia/wallust.conf'
-#----( ROFI )----#
+#----(COLORS)----#
+colors.template = 'colors.txt'
+colors.target = 'wallust.txt'
+#----(GHOSTTY)----#
+#ghostty.template = 'ghostty.conf'
+#ghostty.target = '~/.config/ghostty/wallust.conf'
+#----(NOCTALIA-SHELL)----#
+#noctalia.template = '../../noctalia/colors.conf'
+#noctalia.target = '~/.config/noctalia/wallust.conf'
+#----(ROFI)----#
 #rofi.template = '../../rofi/colors.rasi'
 #rofi.target = '~/.config/rofi/wallust.rasi'
-#----( NIRI )----#
-niri.template = '../../niri/colors.conf'
-niri.target = '~/.config/niri/wallust.conf'
-#----( HYPRLAND )----#
-hyprland.template = '../../hypr/colors.conf'
-hyprland.target = '~/.config/hypr/wallust.conf'
+#----(NIRI)----#
+#niri.template = '../../niri/colors.kdl'
+#niri.target = '~/.config/niri/wallust.kdl'
+#----(HYPRLAND)----#
+#hyprland.template = '~/.config/hypr/colors.conf'
+#hyprland.target = '~/.config/hypr/wallust.conf'

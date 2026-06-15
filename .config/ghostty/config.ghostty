@@ -11,3 +11,4 @@ foreground = ffffff
 # Empty values reset the configuration to the default value
 font-family = Maple Mono
 font-size = 12
+theme = noctalia

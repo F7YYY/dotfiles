@@ -1,9 +1,7 @@
 <!---- DOTFILES ---->
 <div align="center">
 
-# 🥡 ✦ QUALITY_DOTFILES ✦ 🥢
-
-##
+## 🥡 ✦ QUALITY_DOTFILES ✦ 🥢
 
 [![✦ ᴄᴏᴍᴍɪᴛs](https://img.shields.io/github/last-commit/f7yyy/dotfiles?style=flat&color=DDDDDD)](https://github.com/f7yyy/dotfiles/activity)
 [![✦ sɪᴢᴇ](https://img.shields.io/github/repo-size/f7yyy/dotfiles?style=flat&color=DDDDDD)](https://github.com/f7yyy/dotfiles)
@@ -53,7 +51,7 @@
 
 <!---- SYSTEM ---->
 <tr>
-  <td>Distribution</td>
+  <td>DISTRIBUTION</td>
   <td><em>
     <a href="https://archlinux.org">Arch Linux</a>
   </em></td>
@@ -65,7 +63,7 @@
 </tr>
 
 <tr>
-  <td>Boot Manager</td>
+  <td>BOOT MANAGER</td>
   <td><em>
     <a href="https://github.com/systemd/systemd">systemd-boot</a>
   </em></td>
@@ -76,7 +74,7 @@
 </tr>
 
 <tr>
-  <td>Display Manager</td>
+  <td>DISPLAY MANAGER</td>
   <td><em>
     <a href="https://github.com/fairyglade/ly">ly</a>
   </em></td>
@@ -85,7 +83,7 @@
   </em></td>
 </tr>
 
-<!---- DESKTOP / UI ---->
+<!---- DESKTOP ---->
 <tr>
   <td>DE / WM</td>
   <td><em>
@@ -98,39 +96,21 @@
 </tr>
 
 <tr>
-  <td>Lock Screen</td>
+  <td>DESKTOP SHELL</td>
   <td><em>
-    <a href="https://github.com/noctalia-dev/noctalia">noctalia-shell</a>
+    <a href="https://github.com/noctalia-dev/noctalia">noctalia</a>
   </em></td>
   <td><em>
-    —
-  </em></td>
-</tr>
-
-<tr>
-  <td>Status Bar</td>
-  <td><em>
-    <a href="https://github.com/noctalia-dev/noctalia">noctalia-shell</a>
-  </em></td>
-  <td><em>
-    —
+    STATUS BAR +
+    NOTIFICATIONS +
+    WALLPAPER SETTER +
+    APPLICATION MANAGER
   </em></td>
 </tr>
 
 <tr>
-  <td>Notifications</td>
+  <td>WALLPAPER SETTER</td>
   <td><em>
-    <a href="https://github.com/noctalia-dev/noctalia">noctalia-shell</a>
-  </em></td>
-  <td><em>
-    —
-  </em></td>
-</tr>
-
-<tr>
-  <td>Wallpaper Setter</td>
-  <td><em>
-    <a href="https://github.com/noctalia-dev/noctalia">noctalia-shell</a> |
     <a href="https://github.com/anufrievroman/waypaper">waypaper</a>
   </em></td>
   <td><em>
@@ -159,33 +139,26 @@
   </em></td>
   <td><em>
     <a href="https://github.com/daniruiz/Flat-Remix-GTK">flat-remix-gtk</a> |
-    <a href="https://github.com/daniruiz/Flat-Remix">flat-remix</a>
-  </em></td>
-</tr>
-
-<tr>
-  <td>Cursor</td>
-  <td><em>
-    <a href="https://github.com/nwg-piotr/nwg-look">nwg-look</a>
-  </em></td>
-  <td><em>
+    <a href="https://github.com/daniruiz/Flat-Remix">flat-remix</a> |
     <a href="https://github.com/BlackArch/blackarch-config-cursor">blackarch-config-cursor</a>
   </em></td>
 </tr>
 
 <tr>
-  <td>Audio</td>
+  <td>AUDIO</td>
   <td><em>
     <a href="https://github.com/saivert/pwvucontrol">pwvucontrol</a>
   </em></td>
   <td><em>
-    <a href="https://github.com/pop-os/gtk-theme">pop-sound-theme</a>
+    <a href="https://pipewire.org">pipewire</a> |
+    <a href="https://pipewire.pages.freedesktop.org/wireplumber/">wireplumber</a> |
+    <a href="https://gitlab.freedesktop.org/pipewire/helvum">helvum</a>
   </em></td>
 </tr>
 
 <!---- SHELL / DEV ---->
 <tr>
-  <td>Shell</td>
+  <td>SHELL</td>
   <td><em>
     <a href="https://git-scm.com">git</a> |
     <a href="https://www.gnu.org/software/bash/">bash</a> |
@@ -200,7 +173,7 @@
 </tr>
 
 <tr>
-  <td>Package Manager</td>
+  <td>PACKAGE MANAGER</td>
   <td><em>
     <a href="https://github.com/morganamilo/paru">paru</a> |
     <a href="https://flatpak.org">flatpak</a>
@@ -211,7 +184,7 @@
 </tr>
 
 <tr>
-  <td>Font</td>
+  <td>FONT</td>
   <td><em>
     <a href="http://www.ffonts.net/Sony-Sketch-EF.font">sony-sketch-ef-font</a> |
     <a href="https://github.com/xeji01/nothingfont">otf-nothing-font-git</a>
@@ -223,7 +196,7 @@
 
 <!---- APPS ---->
 <tr>
-  <td>Terminal</td>
+  <td>TERMINAL</td>
   <td><em>
     <a href="https://github.com/ghostty-org/ghostty">ghostty</a>
   </em></td>
@@ -233,60 +206,30 @@
 </tr>
 
 <tr>
-  <td>File Manager</td>
+  <td>FILE MANAGER</td>
   <td><em>
     <a href="https://github.com/sxyazi/yazi">yazi</a> |
     <a href="https://github.com/linuxmint/nemo">nemo</a>
   </em></td>
   <td><em>
-    —
-  </em></td>
-</tr>
-
-<tr>
-  <td>Text Editor</td>
-  <td><em>
     <a href="https://vscodium.com">vscodium-electron-bin</a> |
     <a href="https://neovim.io">neovim</a> |
     <a href="https://www.vim.org">gvim</a>
-  </em></td>
-  <td><em>
-    —
   </em></td>
 </tr>
 
 <!---- MEDIA / TOOLS ---->
 <tr>
-  <td>Media Viewer</td>
-  <td><em>
-    <a href="https://github.com/eXeC64/imv">imv</a> |
-    <a href="https://mpv.io">mpv</a> |
-    <a href="https://github.com/karlstav/cava">cava</a>
-  </em></td>
-  <td><em>
-    —
-  </em></td>
-</tr>
-
-<tr>
-  <td>Screen Capture</td>
+  <td>MEDIA</td>
   <td><em>
     <a href="https://obsproject.com">obs-studio</a> |
     <a href="https://github.com/nabiko02/recway">recway</a> |
     <a href="https://flameshot.org">flameshot</a>
   </em></td>
   <td><em>
-    —
-  </em></td>
-</tr>
-
-<tr>
-  <td>Application Manager</td>
-  <td><em>
-    <a href="https://github.com/noctalia-dev/noctalia">noctalia-shell</a>
-  </em></td>
-  <td><em>
-    —
+    <a href="https://github.com/eXeC64/imv">imv</a> |
+    <a href="https://mpv.io">mpv</a> |
+    <a href="https://github.com/karlstav/cava">cava</a>
   </em></td>
 </tr>
 

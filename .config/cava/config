@@ -44,6 +44,7 @@ show_idle_bar_heads = 1
 waveform        = 0
 ##############################################################
 [color]
+theme = "noctalia"
 gradient         = 1
 gradient_color_1 = '#000000'
 gradient_color_2 = '#242424'
