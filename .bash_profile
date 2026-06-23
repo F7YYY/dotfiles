@@ -12,835 +12,469 @@
 #
 #   SCRIPTS
 #
+#   POSIX PORTABLE
+#
 #────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(EXPORT_ENVIRONMENT_VARIABLES)───
 exporter() {
-    local INPUT="${1:-}"
-    local ESCALATE=""
-    local ENVFILE="/etc/environment"
-    local VENDOR=($(lspci | grep -iE 'vga' | grep -ioE 'amd|nvidia|intel' | awk '{print tolower($0)}'))
+    INPUT=$(printf '%s' "$1" | tr '[:upper:]' '[:lower:]')
+    ESCALATE=""
+    ENVFILE="/etc/environment"
+    PCI_DATA=$(lspci 2>/dev/null)
+    PCI_LOWER=$(printf '%s' "$PCI_DATA" | tr '[:upper:]' '[:lower:]')
+    VENDOR="unknown"
 
     #───(VARIABLES)
-    local -a ENLISTMENT=(
-        "HISTSIZE=1000"
-        "HISTFILESIZE=1000"
-        "HISTCONTROL=erasedups:ignoredups:ignorespace"
-        "EDITOR=vscodium-electron -w"
-        "GPG_TTY=$(tty)"
-        "_JAVA_AWT_WM_NONREPARENTING=1"
-	    "XDG_SESSION_TYPE=$XDG_BACKEND"
-		#"XDG_SESSION_DESKTOP=$XDG_CURRENT_DESKTOP" # DE/WM
-		#"XDG_CURRENT_DESKTOP=$XDG_SESSION_DESKTOP" # DE/WM
-        "CLUTTER_BACKEND=$XDG_BACKEND"
-        "ECORE_EVAS_ENGINE=$XDG_BACKEND"
-        "ELM_ENGINE=$XDG_BACKEND"
-        "SDL_VIDEODRIVER=$XDG_BACKEND"
-        "SDL_VIDEO_DRIVER=$XDG_BACKEND;x11"
-        "QT_QPA_PLATFORM=$XDG_BACKEND;xcb"
-        "QT_QPA_PLATFORMTHEME=gtk3"        #qt6ct;qt5ct;$XDG_BACKEND"
-        "GSK_RENDERER=vulkan"
-        #"QT_AUTO_SCREEN_SCALE_FACTOR=1"
-        #"QT_SCREEN_SCALE_FACTORS=1"
-	    #"AQ_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1"   # MULTI-GPU PRIORITY
-    )
-    local -a XORG=(
-		"GDK_BACKEND=x11"                           # FORCE BACKEND
-		"XDG_BACKEND=x11"                           # FORCE BACKEND
-	)
-    local -a WAYLAND=(
-		"GDK_BACKEND=wayland"						# FORCE BACKEND
-		"XDG_BACKEND=wayland"						# FORCE BACKEND
-		"MOZ_ENABLE_WAYLAND=1"						# MOZILLA BROWSERS
-		"QT_WAYLAND_FORCE_DPI=physical"
-		"QT_WAYLAND_DISABLE_WINDOWDECORATION=1"
-        "ELECTRON_OZONE_PLATFORM_HINT=wayland"
-		#"QT_WAYLAND_SHELL_INTEGRATION=layer-shell"
-		#"DISPLAY=$WAYLAND_DISPLAY:0"			    # EXPORT FOR SPECIFIC APPS
-	    #"WAYLAND_DEBUG=1"				            # EXPORT FOR DEBUGGING (1, client, server)
-	)
-    local -a AMD=(
-		#"VDPAU_DRIVER=radeonsi"
-		#"LIBVA_DRIVER_NAME=radeonsi"
-        #"RADV_PERFTEST=aco"						# DEFAULT MESA:V20.2
-        #"mesa_glthread=true"
-        #"AMD_VULKAN_ICD=RADV"						# AMDVLK
-        #"DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1=1"
-        #"MESA_LOADER_DRIVER_OVERRIDE=/lib/dri/radeonsi_dri.so"
-        #"VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json"
-        #"VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/amd_icd32.json:/usr/share/vulkan/icd.d/amd_icd64.json"
-	)
-    local -a NVIDIA=(
-		"VDPAU_DRIVER=nvidia"
-		"LIBVA_DRIVER_NAME=nvidia"
-		"GBM_BACKEND=nvidia-drm"
-        "NVD_BACKEND=direct"
-		"LIBVA_DRIVER_NAME=nvidia"
-		"__GLX_VENDOR_LIBRARY_NAME=nvidia"
-		"__GL_GSYNC_ALLOWED=1"
-		"__GL_VRR_ALLOWED=1"
-		"__GL_SHADER_DISK_CACHE=1"
-		"__GL_SHADER_DISK_CACHE_PATH=/tmp/shaders"
-        #"__GL_THREADED_OPTIMIZATION=1"             # PER-GAME BENCHMARKS
-		#"WLR_DRM_NO_ATOMIC=1"				        # LEGACY DRM INTERFACE
-	)
-    local -a INTEL=(
-		"INTEL=RETARD_ALERT"						# UNLESS FOR IGPU
-		"VDPAU_DRIVER=va_gl"
-		"LIBVA_DRIVER_NAME=iHD"
-	)
-    
-    #───(BACKEND_APPEND)
-    case "$XDG_BACKEND" in
-        wayland) ENLISTMENT+=("${WAYLAND[@]}") ;;
-        x11) ENLISTMENT+=("${XORG[@]}") ;;
-        *) echo -e "\n[?] UNKNOWN XDG_BACKEND: [$XDG_BACKEND]" ;;
+    ENLISTMENT="                            # LIST
+HISTSIZE=1000
+HISTFILESIZE=1000
+HISTCONTROL=erasedups:ignoredups:ignorespace
+EDITOR=vscodium-electron -w
+GPG_TTY=$(tty 2>/dev/null)
+_JAVA_AWT_WM_NONREPARENTING=1
+XDG_SESSION_TYPE=${XDG_BACKEND:-}
+#XDG_SESSION_DESKTOP=$XDG_CURRENT_DESKTOP   # DE/WM
+#XDG_CURRENT_DESKTOP=$XDG_SESSION_DESKTOP   # DE/WM
+CLUTTER_BACKEND=${XDG_BACKEND:-}
+ECORE_EVAS_ENGINE=${XDG_BACKEND:-}
+ELM_ENGINE=${XDG_BACKEND:-}
+SDL_VIDEODRIVER=${XDG_BACKEND:-}
+SDL_VIDEO_DRIVER=${XDG_BACKEND:-};x11
+QT_QPA_PLATFORM=${XDG_BACKEND:-};xcb
+QT_QPA_PLATFORMTHEME=gtk3                   #qt6ct;qt5ct;$XDG_BACKEND
+GSK_RENDERER=vulkan
+#QT_AUTO_SCREEN_SCALE_FACTOR=1
+#QT_SCREEN_SCALE_FACTORS=1
+#AQ_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1   # MULTI-GPU PRIORITY
+"
+    XORG="                                  # LIST
+GDK_BACKEND=x11                             # FORCE BACKEND
+XDG_BACKEND=x11                             # FORCE BACKEND
+"
+    WAYLAND="                               # LIST
+GDK_BACKEND=wayland                         # FORCE BACKEND
+XDG_BACKEND=wayland                         # FORCE BACKEND
+MOZ_ENABLE_WAYLAND=1                        # MOZILLA BROWSERS
+QT_WAYLAND_FORCE_DPI=physical
+QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+ELECTRON_OZONE_PLATFORM_HINT=wayland
+#QT_WAYLAND_SHELL_INTEGRATION=layer-shell
+#DISPLAY=$WAYLAND_DISPLAY:0                 # EXPORT FOR SPECIFIC APPS
+#WAYLAND_DEBUG=1                            # EXPORT FOR DEBUGGING (1, client, server)
+"
+    AMD="                                   # LIST
+VDPAU_DRIVER=radeonsi
+LIBVA_DRIVER_NAME=radeonsi
+RADV_PERFTEST=aco                           # DEFAULT MESA:V20.2
+mesa_glthread=true
+#AMD_VULKAN_ICD=RADV                        # AMDVLK
+#DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1=1
+#MESA_LOADER_DRIVER_OVERRIDE=/lib/dri/radeonsi_dri.so
+#VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json
+#VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/amd_icd32.json:/usr/share/vulkan/icd.d/amd_icd64.json
+"
+    NVIDIA="                                # LIST
+VDPAU_DRIVER=nvidia
+LIBVA_DRIVER_NAME=nvidia
+GBM_BACKEND=nvidia-drm
+NVD_BACKEND=direct
+__GLX_VENDOR_LIBRARY_NAME=nvidia
+__GL_GSYNC_ALLOWED=1
+__GL_VRR_ALLOWED=1
+__GL_SHADER_DISK_CACHE=1
+__GL_SHADER_DISK_CACHE_PATH=/tmp/shaders
+#__GL_THREADED_OPTIMIZATION=1               # PER-GAME BENCHMARKS
+#WLR_DRM_NO_ATOMIC=1                        # LEGACY DRM INTERFACE
+"
+    INTEL="                                 # LIST
+INTEL=RETARD_ALERT                          # UNLESS FOR IGPU
+VDPAU_DRIVER=va_gl
+LIBVA_DRIVER_NAME=iHD
+"
+
+    case "$PCI_LOWER" in
+        *vga*|*3d*)
+            case "$PCI_LOWER" in
+                *amd*|*radeon*) VENDOR="amd" ;;
+                *nvidia*)       VENDOR="nvidia" ;;
+                *intel*)        VENDOR="intel" ;;
+            esac
+        ;;
     esac
 
-    #───(GPU_APPEND)
-    for GPU in "${VENDOR[@]}"; do
-        case "$GPU" in
-            amd) ENLISTMENT+=("${AMD[@]}") ;;
-            nvidia) ENLISTMENT+=("${NVIDIA[@]}") ;;
-            intel) ENLISTMENT+=("${INTEL[@]}") ;;
-            *) echo -e "\n[?] UNKNOWN GPU: [$GPU]" ;;
-        esac
-    done
+    case "${XDG_BACKEND:-}" in
+        wayland) ENLISTMENT="$ENLISTMENT $WAYLAND" ;;
+        x11)     ENLISTMENT="$ENLISTMENT $XORG" ;;
+        "")      ;; 
+        *)       printf "\n[?] UNKNOWN XDG_BACKEND: [%s]\n" "${XDG_BACKEND:-}" ;;
+    esac
 
-    #───(PRIVILEGE_DETECTION)
-    echo -e "\n[*] ENUMERATING PRIVILEGE ESCALATE METHODS..."
-    if (( EUID == 0 )); then
-        echo -e "[✓] FOUND: 'root'"
-    elif which sudo >/dev/null 2>&1; then
+    case "$VENDOR" in
+        amd)    ENLISTMENT="$ENLISTMENT $AMD" ;;
+        nvidia) ENLISTMENT="$ENLISTMENT $NVIDIA" ;;
+        intel)  ENLISTMENT="$ENLISTMENT $INTEL" ;;
+    esac
+
+    printf "\n[*] ENUMERATING PRIVILEGE ESCALATE METHODS...\n"
+    if [ "$(id -u 2>/dev/null)" = "0" ]; then
+        printf "[✓] FOUND: 'root'\n"
+    elif command -v sudo >/dev/null 2>&1; then
         ESCALATE="sudo"
-        echo -e "[✓] FOUND: '$ESCALATE'"
-    elif which pkexec >/dev/null 2>&1; then                       # BYPASSES ROOT ESCALATION
+        printf "[✓] FOUND: '%s'\n" "$ESCALATE"
+   elif command -v pkexec >/dev/null 2>&1; then
         ESCALATE="pkexec"
-        echo -e "[✓] FOUND: '$ESCALATE'"
+        printf "[✓] FOUND: '%s'\n" "$ESCALATE"
     else
-        echo -e "\n[!] PRIVILEGED COMMAND NOT FOUND..."
-        while true; do
-            echo -e "[?] ENTER PRIVILEGED COMMAND: "
+        printf "\n[!] PRIVILEGED COMMAND NOT FOUND...\n"
+        while :; do
+            printf "[?] ENTER PRIVILEGED COMMAND: " 
             read -r ESCALATE
-            if [ $ESCALATE cat $ENVFILE &>/dev/null ]; then
-                echo -e "[✓] FOUND: $ESCALATE"; break
+            if ${ESCALATE} true >/dev/null 2>&1; then
+                printf "[✓] FOUND: %s\n" "$ESCALATE"
+                break
             else
-                echo -e "[!] INVALID COMMAND: [$ESCALATE]"
+                printf "[!] INVALID COMMAND: [%s]\n" "$ESCALATE"
             fi
         done
     fi
 
-    #───(INTERACTION LOGIC)
     case "$INPUT" in
-        -[Hh]*|--[Hh]*|"")
-            echo -e "\n[ $0 ]\n"
-			echo -e "-[ H/help   ]:\tHelp Menu"
-            echo -e "-[ C/check  ]:\tCheck Variables [.bashrc]+[$ENVFILE]"
-            echo -e "-[ L/local  ]:\tLocal export to [$UID($USER)]"
-            echo -e "-[ G/global ]:\tGobal export to [$ENVFILE]"
+        -c*|--c*)
+            printf "\n==========================================\n"
+            printf "[?] CHECKING EXPORTS: [.bashrc]\n\n"
+            printf "%s\n" "$ENLISTMENT"
+            printf "\n──────────────────────────────────────────\n"
+            printf "[?] CHECKING EXPORTS: [%s]\n\n" "$ENVFILE"
+            
+            ${ESCALATE:+$ESCALATE }cat "$ENVFILE"
+            printf "\n==========================================\n"
         ;;
-        -[Cc]*|--[Cc]*)
-            echo -e "\n==========================================\n"
-            echo -e "[?] CHECKING EXPORTS: [.bashrc]\n"
-            for VAR in "${ENLISTMENT[@]}"; do echo -e "$VAR"; done
-            echo -e "\n──────────────────────────────────────────\n"
-            echo -e "[?] CHECKING EXPORTS: [$ENVFILE]\n"
-            ${ESCALATE:+$ESCALATE} cat "$ENVFILE"
-            echo -e "\n==========================================\n"
+        -l*|--l*)
+            _OLD_IFS="$IFS"
+            IFS="
+"
+            printf "\n[+] EXPORTING TO: [%s(%s)]\n\n" "$UID" "$USER"
+            CLEAN_LIST=$(printf '%s\n' "$ENLISTMENT" | sed -e 's/^[ 	]*//' -e 's/[ 	]*#.*//' -e '/^$/d' -e '/^\#/d')
+            for CLEANED in $CLEAN_LIST; do
+                printf "[✓] %s\n" "$CLEANED"
+                export "${CLEANED%%=*}"="${CLEANED#*=}"
+            done
+            IFS="$_OLD_IFS"
         ;;
-        -[Ll]*|--[Ll]*)
-            echo -e "\n[+] EXPORTING TO: [$UID($USER)]\n"
-            for VAR in "${ENLISTMENT[@]}"; do
-                echo -e "[✓] %s\n' "$VAR""
-		        export "$VAR"
-	        done
-        ;;
-        -[Gg]*|--[Gg]*)
-            echo -e "\n[+] EXPORTING TO: [$ENVFILE]"
-            # Ensure $ENVFILE exists with correct perms
-            [[ ! -f $ENVFILE ]] && $ESCALATE touch "$ENVFILE" && $ESCALATE chmod 644 "$ENVFILE"
-            echo -e "[?]:[$ENVFILE.bak] CREATE BACKUP? (Yes/No): "
-            read -r CONFIRMBAK
-            if [[ "$CONFIRMBAK" =~ ^[Yy] ]]; then
-                $ESCALATE cp "$ENVFILE" "$ENVFILE.bak"
-                echo -e "[✓] BACKED-UP"
-            else
-                echo -e "\n[!] OVERWRITING: [$ENVFILE]"
-                $ESCALATE cat "$ENVFILE"
-                echo -e "\n[!] ^-FINAL_COPY-^"
-            fi
-            echo -e "\n[!] #DELETING_ALL_COMMENTED_LINES"
-            echo -e "[+] IMPORTING NEW HEADER\n"
-            TMP="$(mktemp)"
-            {
-                echo "# BASH IMPORT ($(date))"
-                echo "#"
-                echo "# PARSED BY pam_env MODULE"
-                echo "#"
-                echo "# KEY=VAL"
-                echo
-                for VAR in "${ENLISTMENT[@]}"; do
-                    # skip invalid entries
-                    [[ "$VAR" != *"="* ]] && continue
-                    KEY="${VAR%%=*}"
-                    VAL="${VAR#*=}"
-                    # skip empty keys
-                    [[ -z "$KEY" ]] && continue
+        -g*|--g*)
+            CLEANED_GLOBAL=$(printf '%s\n' "$ENLISTMENT" | sed -e 's/^[  ]*//' | grep -v '^#' | grep -v '^$' | sed -e 's/[   ]*#.*//')
 
-                    echo "$VAR"
-                done
-            } > "$TMP"
-            $ESCALATE cp "$TMP" "$ENVFILE"
-            rm -f "$TMP"
-            echo -e "\n[✓] UPDATED:\t[$ENVFILE]"
+            printf "\n[+] EXPORTING TO: [%s]\n" "$ENVFILE"
+            if [ ! -f "$ENVFILE" ]; then
+                ${ESCALATE:+$ESCALATE }touch "$ENVFILE"
+                ${ESCALATE:+$ESCALATE }chmod 644 "$ENVFILE"
+            fi
+            
+            printf "[?]:[%s.bak] CREATE BACKUP? (Yes/No): " "$ENVFILE" 
+            read -r CONFIRMBAK
+            case "$CONFIRMBAK" in
+                [Yy]*)
+                    ${ESCALATE:+$ESCALATE }cp "$ENVFILE" "$ENVFILE.bak"
+                    printf "[✓] BACKED-UP\n"
+                ;;
+                *)
+                    printf "\n[!] OVERWRITING: [%s]\n" "$ENVFILE"
+                    ${ESCALATE:+$ESCALATE }cat "$ENVFILE"
+                    printf "\n[!] ^-FINAL_COPY-^\n"
+                ;;
+            esac
+
+            printf "\n[!] #DELETING_ALL_COMMENTED_LINES\n"
+            printf "[+] IMPORTING NEW HEADER\n\n"
+            printf "# BASH IMPORT (%s)\n#\n# PARSED BY pam_env MODULE\n#\n# KEY=VAL\n\n%s\n" "$(date)" "$CLEANED_GLOBAL" | ${ESCALATE:+$ESCALATE }tee "$ENVFILE" >/dev/null
+            printf "[✓] UPDATED:\t[%s]\n" "$ENVFILE"
         ;;
         *)
-            echo -e "\n[!] UNKNOWN INPUT: $1\n"
-            exporter -h
+            printf "\n[ %s ]\n\n" "$0"
+            printf -- "-[ H/help   ]:\tHelp Menu\n"
+            printf -- "-[ C/check  ]:\tCheck Variables [.bashrc]+[%s]\n" "$ENVFILE"
+            printf -- "-[ L/ ]:\texport to [%s(%s)]\n" "$UID" "$USER"
+            printf -- "-[ G/global ]:\tGobal export to [%s]\n" "$ENVFILE"
         ;;
     esac
-    echo -e "\n[✓] DONE\n"
+    printf "\n[✓] DONE\n\n"
 }
 
 #─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(EXECUTABLES)───
 startups() {
-    local INPUT="$@"
-    local LAUNCH=""
-    local UWSM=0
-    local DESKTOP="$HOME/.config/autostart/COMMANDS.desktop"
-    local APPLICATIONS=(
-        "exporter --local"
-        "dbus-update-activation-environment --systemd --all"
-        #"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-        #"gnome-keyring-daemon --start --components=secrets"
-        "backup"
-        "xdg-autostart"
-        #"wlsunset -s 22:00 -S 10:00 -d 60"
-        "wl-paste --type text --watch cliphist store"
-        "wl-paste --type image --watch cliphist store"
-        #───(GSETTINGS)
-        "gsettings set org.gnome.desktop.interface clock-format '24h'"
-        "gsettings set org.gnome.desktop.interface font-name 'Sony Sketch EF'"
-        #───(MINIMIZE_FLAGS)
-        #"emacs --daemon"
-        #"openrgb --startminimized wayland"
-        #"steam-native -silent wayland"
-        #"vesktop --start-minimized wayland"
-        #"telegram-desktop -startintray wayland"
-        #"youtube-music --use-tray-icon wayland"
-        #"teams --startminimized wayland"
-    )
+    INPUT=$(printf '%s' "${1:-}" | tr '[:upper:]' '[:lower:]')
+    WRAPPER="" 
+    DESKTOP="$HOME/.config/autostart/COMMANDS.desktop"
+    APPS="
+dbus-update-activation-environment --systemd --all
+#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#gnome-keyring-daemon --start --components=secrets
+exporter --local
+backup
+noctalia
+xdg-autostart
+#wlsunset -s 22:00 -S 10:00 -d 60
+wl-paste --type text --watch cliphist store
+wl-paste --type image --watch cliphist store
+#───(GSETTINGS
+gsettings set org.gnome.desktop.interface clock-format '24h'
+gsettings set org.gnome.desktop.interface font-name 'Sony Sketch EF'
+#───(MINIMIZE_FLAGS
+#emacs --daemon
+#openrgb --startminimized wayland
+#steam-native -silent wayland
+#vesktop --start-minimized wayland
+#telegram-desktop -startintray wayland
+#youtube-music --use-tray-icon wayland
+#teams --startminimized wayland
+"
 
-    [ which uwsm &>/dev/null ] && UWSM=1 || UWSM=0
+    if command -v uwsm >/dev/null 2>&1; then
+        WRAPPER="uwsm-app --"
+    elif command -v systemd-run >/dev/null 2>&1; then
+        WRAPPER="systemd-run --user --scope"
+    fi
 
-    #───(MANAGE_EXECUTIONS)
-    case $INPUT in
-        ""|-[Hh]*|--[Hh]*)
-            echo -e "\n[ $0 ]\n"
-    	    echo -e "-[ H/help     ]: Help Menu"
-    	    echo -e "-[ L/launch   ]: Re/Launch Apps"
-    	    echo -e "-[ K/kill     ]: Kill All Apps"
-            echo -e "-[ E/export   ]: Export All to [$DESKTOP]"
-            echo -e "-[ C/check    ]: Output [$DESKTOP]\n"            
-        ;;
-        -[Ll]*|--[Ll]*)
-            $0 --kill
+    case "$INPUT" in
+        -l*|--l*)
+            printf '%s\n' "$APPS" | while IFS= read -r APP; do
+                # Strip leading/trailing spaces and skip comments or empty lines
+                APP=$(printf '%s' "$APP" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+                { [ -z "$APP" ] || [ "${APP#\#}" != "$APP" ]; } && continue
 
-            for APP in "${APPLICATIONS[@]}"; do
-                local NAME="${APP%% *}"
+                NAME=$(printf '%s' "$APP" | cut -d' ' -f1)
+                printf "[✓] LAUNCHING: %s\n" "$APP"
 
-                echo -e "[✓] LAUNCHING: "$APP""
-                [ $UWSM -eq 1 ] && LAUNCH="uwsm-app" || LAUNCH="eval"
-                $LAUNCH "$APP" &>/dev/null &disown
-                if pgrep -af "$NAME" &>/dev/null; then
-                    echo -e "────────────────────────────"
-                    pgrep -af "$NAME" 
-                    echo -e "────────────────────────────\n"
-                fi
-            done
-        ;;
-        -[Kk]*|--[Kk]*)
-            for APP in "${APPLICATIONS[@]}"; do
-                local NAME="${APP%% *}"
-
-                echo -e "[✓] TERMINATING: "$APP""
-                if pgrep -af "$NAME" &>/dev/null; then
-                    echo -e "────────────────────────────"
-                    pkill -9 -f -e "$NAME"
-                    pkill -9 -f -e "$APP"
-                    echo -e "────────────────────────────\n"
+                if [ -n "$WRAPPER" ]; then
+                    nohup $WRAPPER $APP >/dev/null 2>&1 &
                 else
-                    pkill -9 "$NAME" &>/dev/null
-                    pkill -9 "$APP" &>/dev/null
+                    nohup $APP >/dev/null 2>&1 &
+                fi
+                sleep 0.1
+                
+                printf "────────────────────────────\n"
+                if ps -e -o pid,args 2>/dev/null | grep -v "startups" | grep -q "^[ ]*[0-9]*[ ]*$NAME"; then
+                    printf "────────────────────────────\n\n"
+                else
+                    printf "[X] May have failed: %s\n\n" "$NAME"
                 fi
             done
         ;;
-        -[Ee]*|--[Ee]*)
-            local HEADER="[Desktop Entry]\nName=COMMANDS\nIcon=Terminal\nType=Application\nEncoding=UTF-8\nTerminal=false\nComment=Bash Generated $0\n"
+        -k*|--k*)
+            printf '%s\n' "$APPS" | while IFS= read -r APP; do
+                APP=$(printf '%s' "$APP" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+                { [ -z "$APP" ] || [ "${APP#\#}" != "$APP" ]; } && continue
+                
+                NAME=$(printf '%s' "$APP" | cut -d' ' -f1)
+                printf "[✓] TERMINATING: %s\n────────────────────────────\n" "$APP"
+                TARGET_PIDS=$(ps -e -o pid,args | grep "^[ ]*[0-9]*[ ]*$NAME" | awk '{print $1}')
+                if [ -n "$TARGET_PIDS" ]; then
+                    kill $TARGET_PIDS 2>/dev/null || kill -9 $TARGET_PIDS 2>/dev/null
+                fi
+                printf "────────────────────────────\n\n"
+            done
+        ;;
+        -e*|--e*)
+            printf "\n[+] GENERATING SINGLE-LINE EXEC AUTOSTART: [%s]\n" "$DESKTOP"
 
-            # Ensure $DESKTOP is configured
-            if [[ ! -f "$DESKTOP" || ! -s "$DESKTOP" ]]; then
-                echo -e "$HEADER" > "$DESKTOP"
-                chmod +x "$DESKTOP"
-                echo -e "[+] CREATED:\t$DESKTOP"
+            DESKTOP_DIR=$(dirname "$DESKTOP")
+            mkdir -p "$DESKTOP_DIR" && rm -f "$DESKTOP"
+
+            # Parse $APPS to exclude xdg-autostart, empty lines, and comments, then chain them
+            EXEC_CHAIN=$(printf '%s\n' "$APPS" | grep -v "xdg-autostart" | grep -v '^[[:space:]]*#' | grep -v '^[[:space:]]*$' | awk '{printf "%s & ", $0}' | sed 's/ & $/ \&/')
+            EXEC_CHAIN_ESC=$(printf '%s' "$EXEC_CHAIN" | sed 's/"/\\"/g')
+
+            printf "[Desktop Entry]\nName=COMMANDS\nIcon=Terminal\nType=Application\nTerminal=false\nComment=POSIX Generated\nHidden=false\nExec=sh -c \"%s\"\n" \
+                "$EXEC_CHAIN_ESC" > "$DESKTOP"
+
+            chmod +x "$DESKTOP"
+            startups -c
+        ;;
+        -c*|--c*)
+            if [ "${XDG_SESSION_DESKTOP:-}" = "TTY" ]; then
+                printf "\nSAFE_TO_EXECUTE_SCRIPT\nUSECASE:\t<ORGANIZED_SHELL_COMMANDS>\n\n"
             else
-                echo -e "\n[+] REFORMATTING: [$DESKTOP]"
-                # Replace all none Exec= lines
-                sed -i -E '/^\s*Exec=/!d' "$DESKTOP"        # MUST STAY SEPERATED
-                sed -i -E "1s|^|$HEADER|" "$DESKTOP"         # MUST STAY SEPERATED
-                # Report removed lines if any were found
-                local REMOVED_LINES=$(grep -v '^\s*Exec=' "$DESKTOP")
-                if [[ -n "$REMOVED_LINES" ]]; then
-                    echo -e "[-] REMOVED_LINES:\n$REMOVED_LINES\n────────────────────────────"
+                if [ -n "${XDG_SESSION_DESKTOP:-}" ]; then
+                    printf "\nEXPORT_ONCE_AND_FORGET\n\n"
                 fi
             fi
-
-            # Add or replace applications from the APPLICATIONS array
-            for APP in "${APPLICATIONS[@]}"; do
-                local LINE="Exec=$APP"
-                local FOUND=$(grep -E "^\s*Exec\s*=\s*${APP}" "$DESKTOP")
-
-                if [[ -n "$FOUND" && "$FOUND" != "$LINE" ]]; then
-                    echo -e "\n[>] FOUND:\t$FOUND"
-                    echo -e "[<] REPLACE [y/N]:\t$LINE"
-                    read -r CONFIRMREP
-                    if [[ "$CONFIRMREP" =~ ^[Yy] ]]; then
-                        sed -i -E "s|^\s*${FOUND}|$LINE|" "$DESKTOP"
-                        echo -e "[✓] REPLACED:\t$APP"
-                    else
-                        echo -e "[-] SKIPPED:\t$APP"
-                    fi
-                elif [[ -n "$FOUND" && "$FOUND" == "$LINE" ]]; then
-                    echo -e "[-] SKIPPED:\t$APP"
-                else
-                    echo "$LINE" >> "$DESKTOP"
-                    echo -e "[+] ADDED:\t$APP"
-                fi
-            done
-
-            $0 --check
-        ;;
-        -[Cc]*|--[Cc]*)
-            #───(PEACE_OF_MIND)
-            #   if [ $XDG_SESSION_DESKTOP = "TTY" ]; then
-            #       echo -e "\nSAFE_TO_EXECUTE_SCRIPT";
-            #       echo -e "\nUSECASE:\t<ORGAINZED_SHELL_COMMANDS>\n"
-            #   elif [ -f "$DESKTOP" ]
-            #       echo "EXPORT_ONCE_AND_FORGET" > "$DESKTOP"
-            #   else
-            #       echo -e "\nUSE_AS_NEEDED\n"
-            #   fi
-            echo -e "\n────────────────────────────"
-            cat "$DESKTOP" 
-            echo -e "────────────────────────────\n"
+            printf "────────────────────────────\n"
+            if [ -f "$DESKTOP" ]; then
+                while IFS= read -r LINE; do printf "%s\n" "$LINE"; done < "$DESKTOP"
+            else
+                printf "[?] MISSING: %s\n" "$DESKTOP"
+            fi
+            printf "────────────────────────────\n\n"
         ;;
         *)
-            echo -e "\n[?] UNKNOWN_INPUT: $1\n"
-            $0 --help
+            printf -- "-[ H/help     ]: Help Menu\n-[ L/launch   ]: Re/Launch APPS\n-[ K/kill     ]: Kill All APPS\n-[ E/export   ]: Export/Delete [%s]\n-[ C/check    ]: Output [%s]\n\n" "$DESKTOP" "$DESKTOP"
         ;;
     esac
-}
-
-#──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(AUTOMATE_PACKAGES_INSTALLATION)───
-install_packages() {
-	local INPUT="$1"
-	local DISTRO="$(grep -w "^PRETTY_NAME" /etc/os-release | cut -d '"' -f 2)"	# SIMPLY-(lsb_release -sd)
-	local ID="$(grep -w "^ID" /etc/os-release | cut -d '=' -f 2)"
-	local PACKAGED="$(find . -type f -name PACKAGES)"
-	local URL=(https://raw.githubusercontent.com/F7YYY/dotfiles/master/.config/PACKAGES)
-
-	cd $HOME || ~
-	echo -e "
-##############################
- ``***%%@@@_ _
-          ( Y )
-           \ /
-            V
-    ________H_  ,%%&%,
-   /\     _   \ %&&%%&%
-  /  \___/^\___\&%&%%&&
-  |  |[I]   [I]| %YY&%'
-  |  |   .-.   |  ||
-~~%._!@@_|-|_@@!~~||
-~~~~~~~~~)=)~~~~~~~~
-😁 Welcoming Improved Commits!
-##############################
-Home:\t\t$(pwd)
-Distribution:\t$DISTRO
-Architecture:\t$ID
-Packaged:\t$PACKAGED
-##############################
-"
-	if [ ! -f "$PACKAGED" &>/dev/null ]; then
-		echo -e "Downloading the latest [$URL] -> [$(pwd)]"
-		if whereis curl &>/dev/null; then
-			whereis curl
-			curl $URL -o PACKAGES
-
-		elif whereis wget &>/dev/null; then
-			whereis wget
-			wget $URL
-		else
-			whereis curl wget
-			notify-send -u critical -a "ERROR" "CURL & WGET NOT FOUND - Manual Download/Creation Required!"
-			echo -e "\n- CURL & WGET NOT FOUND!\n- Manual Download/Creation Required!\n"
-			install_packages -h
-		fi
-	elif [ -f "$PACKAGED" &>/dev/null ]; then
-		echo -e "Obtained the latest PACKAGES"
-		echo -e "Path: [$PACKAGED]\n"
-		echo -e "##############################\n"
-	else
-		return 1 && echo -e "\n_WTF_\n"
-	fi
-
-	case $INPUT in
-		""|-[Hh]*|--[Hh]*)
-            echo -e "\n[ $0 ]\n"
-			echo -e "-[ H/help   ]:\tHelp Menu"
-			echo -e "-[ R/retry  ]:\tRerun Script"
-			echo -e "-[ C/create ]:\tCreate personalized "PACKAGES" list"
-			echo -e "-[ Q/quit   ]:\tExit Script\n"
-			read -p "?: " INPUT
-			install_packages "$INPUT"
-		;;
-		-[Rr]*|--[Rr]*)
-			echo -e "\nRETRYING_SCRIPT\n"
-			return 1 && install_packages
-		;;
-		-[Cc]*|--[Cc]*)
-			echo -e "#─LIST_ONE_PACKAGE_PER-LINE\n" > $HOME/.config/PACKAGES
-			echo -e "\n[$PACKAGED]\n"
-			echo -e "-[ E/edit ]:\t'${EDITOR}'"
-			echo -e "-[ Q/quit ]:\tExit & Manually Edit\n"
-			read -p "?: " INPUT
-			case $INPUT in
-				""|-[Ee]*|--[Ee]*)
-					if whereis "$EDITOR" &>/dev/null; then
-						$EDITOR $PACKAGED
-					elif whereis nvim &>/dev/null; then
-						nvim $PACKAGED
-					elif whereis vim &>/dev/null; then
-						vim $PACKAGED
-					else
-						echo -e "\n- Editor not exported"
-						echo -e "- NeoVim & Vim not available"
-						echo -e "> Manual editing required after listing [$PACKAGED] <"
-						echo -e "##############################\n"
-						read -p "List_Packages: " LIST
-						tr ' ' '\n' <<< "$LIST" >> "$PACKAGED"
-					fi
-				;;
-				-[Qq]*|--[Qq]*)
-					return 1 && echo -e "\nExiting_Script\n\n##############################"
-				;;
-				*)
-                    echo -e "\n[!] UNKNOWN INPUT: $1\n"
-                    install_packages -h
-				;;
-			esac
-		;;
-		-[Qq]*|--[Qq]*)
-			return 1 && echo -e "\nExiting_Script\n\n##############################"
-		;;
-		*)
-            echo -e "\n[!] UNKNOWN INPUT: $1\n"
-            install_packages -h
-		;;
-	esac
-
-	case $ID in
-		#===(COPY_BETWEEN)=================================================================
-		arch)
-			# BETTER PACKAGE MANAGER INSTALLATION
-    		if ! whereis yay &>/dev/null; then
-    		    sudo pacman -S --needed --noconfirm git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
-    		    cd $HOME && find . -type d -name "yay-bin" -exec rm -fr "{}" +
-    		    echo -e "[$DISTRO] Package Manager Installed: YAY!" 2>&1
-				yay -Siq yay-bin
-    		fi
-			# "PACKAGES" INSTALLATION
-			if whereis yay &>/dev/null; then
-    		    yay -Syyu --needed - < $PACKAGED && sudo pacman-fix-permissions && yay -Ycc && yay -Sc --noconfirm
-    		    notify-send -u low -a "PACKAGES" "[$DISTRO]: Updated & Packaged!"
-    		    echo -e "[$DISTRO]: Updated & Packaged!" 2>&1
-    		fi
-		;;
-		#===(MODIFY_FOR_YOUR_DISTRIBUTION)=================================================
-		#	<PASTE_HERE>
-		#===(COPY_BETWEEN)=================================================================
-		*)
-			notify-send -u critical -a "ERROR" "[$DISTRO]: DISTRIBUTION NOT IMPLEMENTED!"
-    	    echo -e "[$DISTRO]: DISTRIBUTION NOT IMPLEMENTED!\n" 2>&1
-    	    return 1
-		;;
-	esac
 }
 
 #───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(AUTOMATE_PACKAGES_BACKUPS)───
 backup() {
-	local PACKAGED="$(find . -type f -name PACKAGES)"
-	local DAY="1"												# DAY OF THE WEEK
+    PACKAGED=$(find "$HOME" -type f -name PACKAGES 2>/dev/null | head -n 1)
+    : "${PACKAGED:=$HOME/.config/PACKAGES}"
+    PM=""
 
-	if [ -f "$PACKAGED" ] && [ "$(date +%u)" = "$DAY" ]; then
-		echo -e "#───(UPDATED: $(date))" > "$PACKAGED"
-		if whereis yay &>/dev/null; then
-			yay -Qqe >> "$PACKAGED"
-		elif whereis pacman &>/dev/null; then
-			pacman -Qqe >> "$PACKAGED"
-		else
-			echo -e "\nI uSe ArCh BtW!\n"
-		fi
-	fi
-
-	if [ "$(date +%u)" = "$DAY" ]; then
-		git dotfiles cam "AUTO-BACKUP"
-		git gui dotfiles psom
-	fi
-}
-
-#───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(compdef libredefender)───
-_libredefender() {
-    local i cur prev opts cmd
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
-    cmd=""
-    opts=""
-
-    for i in ${COMP_WORDS[@]}; do
-        case "${cmd},${i}" in
-            ",$1")
-                cmd="libredefender"
-            ;;
-            libredefender,completions)
-                cmd="libredefender__completions"
-            ;;
-            libredefender,dump-config)
-                cmd="libredefender__dump__config"
-            ;;
-            libredefender,help)
-                cmd="libredefender__help"
-            ;;
-            libredefender,infections)
-                cmd="libredefender__infections"
-            ;;
-            libredefender,scan)
-                cmd="libredefender__scan"
-            ;;
-            libredefender,scheduler)
-                cmd="libredefender__scheduler"
-            ;;
-            libredefender,test-notify)
-                cmd="libredefender__test__notify"
-            ;;
-            libredefender__help,completions)
-                cmd="libredefender__help__completions"
-            ;;
-            libredefender__help,dump-config)
-                cmd="libredefender__help__dump__config"
-            ;;
-            libredefender__help,help)
-                cmd="libredefender__help__help"
-            ;;
-            libredefender__help,infections)
-                cmd="libredefender__help__infections"
-            ;;
-            libredefender__help,scan)
-                cmd="libredefender__help__scan"
-            ;;
-            libredefender__help,scheduler)
-                cmd="libredefender__help__scheduler"
-            ;;
-            libredefender__help,test-notify)
-                cmd="libredefender__help__test__notify"
-            ;;
-            *)
-            ;;
-        esac
+    for WRAPPER in apk apt brew dnf pacman qlist xbps-query zypper; do
+        command -v "$WRAPPER" >/dev/null 2>&1 && PM="$WRAPPER" && break
     done
 
-    case "${cmd}" in
-        libredefender)
-            opts="-q -v -C -D -h --quiet --verbose --colors --data --help scan scheduler infections test-notify dump-config completions help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --data)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                -D)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__completions)
-            opts="-q -v -C -D -h --quiet --verbose --colors --data --help bash elvish fish powershell zsh"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --data)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                -D)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__dump__config)
-            opts="-q -v -C -D -h --quiet --verbose --colors --data --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --data)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                -D)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__help)
-            opts="scan scheduler infections test-notify dump-config completions help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__help__completions)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__help__dump__config)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__help__help)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__help__infections)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-            ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__help__scan)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__help__scheduler)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__help__test__notify)
-            opts=""
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__infections)
-            opts="-d -q -v -C -D -h --delete --delete-all --quiet --verbose --colors --data --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --data)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                -D)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__scan)
-            opts="-j -q -v -C -D -h --concurrency --quiet --verbose --colors --data --help [PATHS]..."
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --concurrency)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                -j)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                --data)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                -D)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__scheduler)
-            opts="-q -v -C -D -h --quiet --verbose --colors --data --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --data)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                -D)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-        libredefender__test__notify)
-            opts="-q -v -C -D -h --quiet --verbose --colors --data --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --data)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                -D)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                ;;
-                *)
-                    COMPREPLY=()
-                ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-        ;;
-    esac
+    printf "#---(UPDATED: %s | PM: %s)\n" "$(date)" "${PM:-unknown}" > "$PACKAGED"
+
+    case "$PM" in
+        apk)        apk info ;;
+        apt)        apt-mark showmanual ;;
+        brew)       brew leaves ;;
+        dnf)        dnf repoquery --installed --queryformat '%{name}\n' ;;
+        pacman)     pacman -Qqe ;;
+        qlist)      qlist -I ;;
+        xbps-query) xbps-query -l | awk '{print $2}' ;;
+        zypper)     zypper --quiet packages --installed-only | awk -F '|' 'NR>4 {print $3}' | tr -d ' ' ;;
+        *)          printf "\n-- UNKNOWN_PACKAGE_MANAGER --\n" ;;
+    esac >> "$PACKAGED"
+
+    printf "Backup Complete -> %s\n" "$PACKAGED"
 }
 
-# shell-agnostic registration
-if [ -n "$ZSH_VERSION" ]; then
-    autoload -Uz compinit
-    compinit
-    compdef _libredefender libredefender
-elif [ -n "$BASH_VERSION" ]; then
-    complete -F _libredefender libredefender
-fi
+#──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────(AUTOMATE_PACKAGES_INSTALLATION)───
+installation() {
+    LINE="" PM="" CMD="" PACKAGES="" USER_INPUT=""
+
+    INPUT=$(printf '%s' "$1" | tr '[:upper:]' '[:lower:]')
+    DISTRO="Unknown Linux"
+    ID="unknown"
+    PACKAGED=$(find "$HOME" -type f -name PACKAGES 2>/dev/null | head -n 1)
+    : "${PACKAGED:=$HOME/.config/PACKAGES}"
+    URL="https://raw.githubusercontent.com/F7YYY/dotfiles/master/.config/PACKAGES"
+
+    if [ -f /etc/os-release ]; then
+        while IFS= read -r LINE; do
+            case "$LINE" in
+                PRETTY_NAME=*)
+                    DISTRO=${LINE#*=}
+                    DISTRO=$(printf '%s' "$DISTRO" | tr -d '"')
+                    ;;
+                ID=*)
+                    ID=${LINE#*=}
+                    ID=$(printf '%s' "$ID" | tr -d '"')
+                    ;;
+            esac
+        done < /etc/os-release
+    fi
+
+    cd "$HOME" || return 1
+
+    printf '%s\n' "
+##############################
+ \`\`***%%@@@_ _
+          ( Y )
+           \ /
+            V
+    ________H_  ,%%&%,
+   /\     _   \ %%&&%%&%
+  /  \___/^\___\&%%&%%&&
+  |  |[I]   [I]| %%YY&%'
+  |  |   .-.   |  ||
+~~%%._!@@_|-|_@@!~~||
+~~~~~~~~~)=)~~~~~~~~
+😁 Welcoming Improved Commits!
+##############################
+Home:         $(pwd)
+Distribution: $DISTRO
+Architecture: $ID
+Packaged:     $PACKAGED
+##############################
+"
+
+    if [ ! -f "$PACKAGED" ]; then
+        printf "Downloading latest PACKAGES...\n"
+        mkdir -p "$(dirname "$PACKAGED")"
+        if command -v curl >/dev/null 2>&1; then
+            curl -fsSL "$URL" -o "$PACKAGED"
+        elif command -v wget >/dev/null 2>&1; then
+            wget -q "$URL" -O "$PACKAGED"
+        else
+            if command -v notify-send >/dev/null 2>&1; then
+                notify-send -u critical -a "ERROR" "CURL/WGET NOT FOUND!"
+            fi
+            printf "Error: curl or wget required.\n"
+            INPUT="-h"
+        fi
+    fi
+
+    case "$INPUT" in
+        ""|*h*)
+            printf '\n-[ I/install ]: Run Installer\n-[ R/retry  ]: Rerun Script\n-[ C/create ]: Create/Edit list\n-[ Q/quit   ]: Exit\n\n?: '
+            read -r USER_INPUT
+            installation "$USER_INPUT"
+            return 0
+            ;;
+        *r*)
+            printf "\nRetrying...\n"
+            installation ""
+            return 0
+            ;;
+        *c*)
+            mkdir -p "$(dirname "$PACKAGED")"
+            [ ! -f "$PACKAGED" ] && printf "# One package per line\n" > "$PACKAGED"
+            printf '\n-[ E/edit ]\n-[ Q/quit ]\n\n?: '
+            read -r USER_INPUT
+            USER_INPUT=$(printf '%s' "$USER_INPUT" | tr '[:upper:]' '[:lower:]')
+            
+            if [ "$USER_INPUT" = "e" ] || [ -z "$USER_INPUT" ]; then
+                CMD="${EDITOR:-nvim}"
+                if command -v "$CMD" >/dev/null 2>&1; then
+                    "$CMD" "$PACKAGED"
+                elif command -v vi >/dev/null 2>&1; then
+                    vi "$PACKAGED"
+                else
+                    printf "No editor found. Append packages manually to: %s\n" "$PACKAGED"
+                fi
+            fi
+            return 0
+            ;;
+        *q*)
+            printf "\nExiting...\n"
+            return 0
+            ;;
+        *i*)
+            printf "\nParsing package list...\n"
+            ;;
+    esac
+
+    if [ ! -f "$PACKAGED" ] || [ ! -s "$PACKAGED" ]; then
+        printf "Error: Package list is empty or missing.\n"
+        return 1
+    fi
+
+    PACKAGES=""
+    while IFS= read -r LINE; do
+        LINE=$(printf '%s' "$LINE" | cut -d'#' -f1 | tr -d '[:space:]')
+        if [ -n "$LINE" ]; then
+            PACKAGES="$PACKAGES $LINE"
+        fi
+    done < "$PACKAGED"
+
+    PM=""
+    for WRAPPER in pacman apt dnf zypper brew apk xbps-query qlist; do
+        command -v "$WRAPPER" >/dev/null 2>&1 && PM="$WRAPPER" && break
+    done
+
+    printf "Deploying packages via native manager [%s]...\n" "${PM:-unknown}"
+
+    case "$PM" in
+        apk)        sudo apk update && sudo apk add $PACKAGES ;;
+        apt)        sudo apt-get update && sudo apt-get install -y $PACKAGES ;;
+        brew)       brew install $PACKAGES ;;
+        dnf)        sudo dnf install -y $PACKAGES ;;
+        pacman)     sudo pacman -Syu --needed --noconfirm $PACKAGES ;;
+        xbps-query) sudo xbps-install -Sy $PACKAGES ;;
+        qlist)      sudo emerge --ask=n $PACKAGES ;;
+        zypper)     sudo zypper install -y $PACKAGES ;;
+        *)          printf "\n-- UKNOWN_PACKAGE_MANAGER --\n" && return 1 ;;
+    esac
+
+    printf "\n[%s]: - INSTALLATION_COMPLETE\n" "$DISTRO"
+}

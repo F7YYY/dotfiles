@@ -285,6 +285,6 @@
 	process = git-lfs filter-process
 	required = true
 [oh-my-zsh]
-	git-commit-alias = e7aa0c56e68348afefdd6af4c5bdb314a2bd6640
+	git-commit-alias = 
 [gpg]
 	format = ssh

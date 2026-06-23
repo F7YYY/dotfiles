@@ -14,29 +14,23 @@
 #   IMPORTS: .BASHRC & .BASH_PROFILE & .ZPROFILE
 #
 #────────────────────────────────────(SOURCES)───
-export ZSH=/usr/share/zsh
+
 #───(SOURCERER)
 [[ -f "$HOME/.zprofile" ]] && source "$HOME/.zprofile"
 [[ -f "$HOME/.bash_profile" ]] && source "$HOME/.bash_profile"
 [[ -f "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
 [[ -f "/etc/zsh/zprofile" ]] && source "/etc/zsh/zprofile"
 [[ -f "/etc/zsh/zshrc" ]] && source "/etc/zsh/zshrc"
-#───(AUR: oh-my-zsh-git)
-[[ -f "$OMZ/oh-my-zsh.sh" ]] && source "$OMZ/oh-my-zsh.sh"
-#───(AUR: zsh-autocomplete)
-[[ -f "$ZSH/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ]] && source "$ZSH/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 #───(AUR: zsh-autosuggestions)
-[[ -f "$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh" ]] && source "$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
+[[ -f "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 #───(AUR: zsh-syntax-highlighting)
-[[ -f "$ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh" ]] && source "$ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
-#───(AUR: zsh-history-substring-search)
-[[ -f "$ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh" ]] && source "$ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
+[[ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 #───(STARSHIP)
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
 
 #──────────────────────────────(AUTO_COMPLETE)───
 _comp_options+=(globdots)   # hidden files are included
-HISTFILE="$HOME/.bash_history"
+HISTFILE="$HOME/.zsh_history"
 HISTDUPE=erase
 zmodload zsh/complist
 setopt autocd beep extendedglob notify
@@ -64,26 +58,26 @@ bindkey '^H' backward-kill-word         # Ctrl+Backspace
 bindkey '^[[Z' undo                     # Shift+Tab
 bindkey '^[[5~' history-beginning-search-backward   # Page Up
 bindkey '^[[6~' history-beginning-search-forward    # Page Down
-autoload -Uz bindkey
+#autoload -Uz bindkey
 
 #──────────────────────────────────(OH_MY_ZSH)───
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
-OMZ=/usr/share/oh-my-zsh/
+ZSH=/usr/share/oh-my-zsh/
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="random"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $OMZ/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
-#ZSH_THEME_RANDOM_CANDIDATES=( "random" )
+# ZSH_THEME_RANDOM_CANDIDATES=( "random" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -131,15 +125,85 @@ ZSH_THEME="robbyrussell"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $OMZ/custom?
+# Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in $OMZ/plugins/
-# Custom plugins may be added to $OMZ_CUSTOM/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  alias-finder
+  ansible
+  archlinux
+  asdf
+  battery
+  bazel
+  bgnotify
+  branch
+  colored-man-pages
+  colorize
+  command-not-found
+  common-aliases
+  cp
+  #dircycle
+  direnv
+  dirhistory
+  dirpersist
+  docker
+  docker-compose
+  dotenv
+  emoji
+  emoji-clock
+  emotty
+  encode64
+  extract
+  fancy-ctrl-z
+  fasd
+  fastfile
+  fbterm
+  firewalld
+  gh
+  #git
+  git-auto-fetch
+  git-commit
+  git-escape-magic
+  git-extras
+  gitfast
+  git-flow-avh
+  github
+  git-hubflow
+  gitignore
+  git-lfs
+  gnu-utils
+  gpg-agent
+  history
+  history-substring-search
+  keychain
+  nmap
+  otp
+  please
+  qrcode
+  rand-quote
+  rsync
+  safe-paste
+  screen
+  #ssh
+  #ssh-agent
+  starship
+  sudo
+  supervisor
+  systemadmin
+  systemd
+  timer
+  tldr
+  ufw
+  vim-interaction
+  vscode
+  zsh-interactive-cd
+  zsh-navigation-tools
+)
 
 # User configuration
 
@@ -161,16 +225,16 @@ plugins=(git)
 # Set personal aliases, overriding those provided by Oh My Zsh libs,
 # plugins, and themes. Aliases can be placed here, though Oh My Zsh
 # users are encouraged to define aliases within a top-level file in
-# the $OMZ_CUSTOM folder, with .zsh extension. Examples:
-# - $OMZ_CUSTOM/aliases.zsh
-# - $OMZ_CUSTOM/macos.zsh
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-OMZ_CACHE_DIR=$HOME/.cache/oh-my-zsh
-if [[ ! -d $OMZ_CACHE_DIR ]]; then
-  mkdir $OMZ_CACHE_DIR
-fi
+#───(AUR: oh-my-zsh-git)
+ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+[[ ! -d $ZSH_CACHE_DIR ]] && mkdir -p $ZSH_CACHE_DIR
+[[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"

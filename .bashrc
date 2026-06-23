@@ -17,52 +17,31 @@
 #─────────────────────────────────────────────────────────────────────────────────────(THEME)───
 #───(AUTO_RUN_INTERACTIVELY)
 [[ $- != *i* ]] && return
-#starship-theme
+#───(AUR:fastfetch)
+which fastfetch >/dev/null 2>&1 && fastfetch
+#───(AUR:starship)
+#starship_theme
 
 #───────────────────────────────────────────────────────────────────────────────────(ALIASES)───
-alias c='clear'
-alias l='ls -l --color=auto'
-alias la='ls -la --color=auto'
-alias ll='ls -lahs --color=auto'
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias ftext='clear && grep -niHIr --color=always "$1" "${2:-.}" | less -r'
+#───(CUSTOM)
+alias free='free -h 2>/dev/null || free'
 alias curl='curl --user-agent "noleak"'
 alias wget='wget -c --user-agent "noleak"'
-alias rsync='rsync --recursive --progress'
-alias logs='sudo find /var/log -type f -exec file {} + | grep "text" | cut -d " " -f1 | sed -e"s/:$//g" | grep -v "[0-9]$" | xargs tail -f'
-alias alert='notify-send -u critical -a "$([ $? = 0 ] && echo TERMINAL || echo ERROR)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')" "Finished"'
-alias free='free -h'
-alias cp='cp -i'
-alias rm='rm -i'
-alias mv='mv -i'
-alias df='df -h'
-alias du='du -h'
-alias dd='dd status=progress'
-alias shred='shred -zf'
+alias rsync='rsync --recursive --progress -e "ssh -o UserKnownHostsFile=/dev/null"'
+alias ftext='clear && grep -niHIr --color=always "$1" "${2:-.}" | less -r'
+alias logs='sudo find /var/log -type f -exec file {} + | grep "text" | cut -d " " -f1 | sed -e "s/:$//g" | grep -v -E "[0-9]$|\.gz$" | xargs tail -f -n 20'
+alias alert='_status=$?; notify-send -u "$([ $_status = 0 ] && echo NORMAL || echo CRITICAL)" -a "$([ $_status = 0 ] && echo "Terminal Success" || echo "Terminal Error")" "$(history | tail -n1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')" "Exit code: $_status"'
 alias wayland='--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer --ozone-platform-hint=auto'
-#───(CHANGE_DIRECTORY)
-alias home='cd ~ || cd "$HOME"'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-#───(ARCHIVE)
-alias mktar='tar -cvf'
-alias mkbz2='tar -cvjf'
-alias mkgz='tar -cvzf'
-alias untar='tar -xvf'
-alias unbz2='tar -xvjf'
-alias ungz='tar -xvzf'
 
 if [[ -n "$BASH_VERSION" ]]; then
 #───────────────────────────────────────────────────────────────────────────────────(SOURCES)───
-  #───(SYSTEM CONFIG)
+  #───(SYSTEM_CONFIG)
   [[ -r "/etc/bash.bashrc" ]] && source "/etc/bash.bashrc"
-  #───(AUR: oh-my-bash-git)
+  #───(AUR:oh-my-bash-git)
+  OMB_CACHE_DIR=$HOME/.cache/oh-my-bash
+  [[ ! -d $OMB_CACHE_DIR ]] && mkdir -p $OMB_CACHE_DIR
   [[ -r "$OMB/oh-my-bash.sh" ]] && source "$OMB/oh-my-bash.sh"
-  #───(AUR: starship)
+  #───(AUR:starship)
   eval "$(starship init bash)"
 
 #──────────────────────────────────────────────────────────────────────────────────(KEYBINDS)───
@@ -88,7 +67,7 @@ if [[ -n "$BASH_VERSION" ]]; then
   
   # Set name of the theme to load. Optionally, if you set this to "random"
   # it'll load a random theme each time that oh-my-bash is loaded.
-  OMB_THEME="powerbash10k"
+  #OMB_THEME="random"
   
   # If you set OMB_THEME to "random", you can ignore themes you don't like.
   # OMB_THEME_RANDOM_IGNORED=("powerbash10k" "wanelo")
@@ -169,14 +148,6 @@ if [[ -n "$BASH_VERSION" ]]; then
   # Example format: completions=(ssh git bundler gem pip pip3)
   # Add wisely, as too many completions slow down shell startup.
   completions=(
-    defaults
-    dirs
-    gh
-    git
-    git_flow
-    git_flow_avh
-    composer
-    ssh
     apm
     asdf
     awscli
@@ -198,8 +169,8 @@ if [[ -n "$BASH_VERSION" ]]; then
     gem
     gh
     git
-    git_flow_avh
     git_flow
+    git_flow_avh
     go
     gradle
     grunt
@@ -219,8 +190,8 @@ if [[ -n "$BASH_VERSION" ]]; then
     nvm
     oc
     packer
-    pip3
     pip
+    pip3
     projects
     rake
     salt
@@ -331,9 +302,4 @@ if [[ -n "$BASH_VERSION" ]]; then
   # Example aliases
   # alias bashconfig="mate $HOME/.bashrc"
   # alias ohmybash="mate $OMB"
-  
-  OMB_CACHE_DIR=$HOME/.cache/oh-my-bash
-  if [[ ! -d $OMB_CACHE_DIR ]]; then
-  	mkdir $OMB_CACHE_DIR
-  fi
 fi

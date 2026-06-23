@@ -36,13 +36,8 @@ local hyprland = {
   }
   --(APPLICATIONS)--
   exec_once = {
-    "exporter --Local",
-    "xdg-autostart",
-    "noctalia",
-    "awww-daemon",
-    "waypaper --random",
-    "wl-paste --type text --watch cliphist store",
-    "wl-paste --type image --watch cliphist store",
+    "exporter --local",
+    "startups --launch",
   }
 -----------------------------------------------------------------------------------------------------(VARIABLES)--
   variables = {
