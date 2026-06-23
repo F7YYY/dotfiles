@@ -101,9 +101,9 @@
     <a href="https://github.com/noctalia-dev/noctalia">noctalia</a>
   </em></td>
   <td><em>
-    STATUS BAR +
-    NOTIFICATIONS +
-    WALLPAPER SETTER +
+    STATUS BAR |
+    NOTIFICATIONS |
+    WALLPAPER SETTER |
     APPLICATION MANAGER
   </em></td>
 </tr>
@@ -175,11 +175,11 @@
 <tr>
   <td>PACKAGE MANAGER</td>
   <td><em>
-    <a href="https://github.com/morganamilo/paru">paru</a> |
+    <a href="https://www.archlinux.org/pacman">pacman</a> |
     <a href="https://flatpak.org">flatpak</a>
   </em></td>
   <td><em>
-    —
+    <a href="https://github.com/morganamilo/paru">paru</a>
   </em></td>
 </tr>
 
