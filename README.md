@@ -44,7 +44,7 @@
 <table>
 
 <tr>
-  <th>FEATURE</th>
+  <th><em><a href="https://youtu.be/dQw4w9WgXcQ">FEATURE</a></em></th>
   <th>NAME</th>
   <th>THEME</th>
 </tr>
@@ -79,7 +79,7 @@
     <a href="https://github.com/fairyglade/ly">ly</a>
   </em></td>
   <td><em>
-    —
+    <a href="https://github.com/Vladimir-csp/uwsm">uwsm</a>
   </em></td>
 </tr>
 
@@ -101,22 +101,21 @@
     <a href="https://github.com/noctalia-dev/noctalia">noctalia</a>
   </em></td>
   <td><em>
-    STATUS BAR |
-    NOTIFICATIONS |
-    WALLPAPER SETTER |
-    APPLICATION MANAGER
+  EVERYTHING |
+  PLUGINS
   </em></td>
 </tr>
 
 <tr>
   <td>WALLPAPER SETTER</td>
   <td><em>
-    <a href="https://github.com/anufrievroman/waypaper">waypaper</a>
+    <a href="https://github.com/noctalia-dev/noctalia">noctalia</a> |
+    <del><a href="https://github.com/anufrievroman/waypaper">waypaper</a><del>
   </em></td>
   <td><em>
-    <a href="https://github.com/Nomadcxx/gSlapper">gslapper</a> |
-    <a href="https://codeberg.org/LGFae/awww">awww</a> |
-    <a href="https://codeberg.org/explosion-mental/wallust">wallust</a>
+    <del><a href="https://github.com/Nomadcxx/gSlapper">gslapper</a></del>  |
+    <a href="https://github.com/GhostNaN/mpvpaper">mpvpaper</a> |
+    <del><a href="https://codeberg.org/LGFae/awww">awww</a><del>
   </em></td>
 </tr>
 
@@ -135,6 +134,7 @@
 <tr>
   <td>GTK</td>
   <td><em>
+    <a href="https://github.com/nwg-piotr/nwg-displays">nwg-displays</a> |
     <a href="https://github.com/nwg-piotr/nwg-look">nwg-look</a>
   </em></td>
   <td><em>
@@ -212,9 +212,8 @@
     <a href="https://github.com/linuxmint/nemo">nemo</a>
   </em></td>
   <td><em>
-    <a href="https://vscodium.com">vscodium-electron-bin</a> |
-    <a href="https://neovim.io">neovim</a> |
-    <a href="https://www.vim.org">gvim</a>
+    <a href="https://github.com/VSCodium/vscodium.git">vscodium</a> |
+    <a href="https://github.com/helix-editor/helix">helix</a>
   </em></td>
 </tr>
 
