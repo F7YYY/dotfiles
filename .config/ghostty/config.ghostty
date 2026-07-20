@@ -1,14 +1,12 @@
-# Include the dynamic Wallust theme
-config-file = ?~/.config/ghostty/wallust.conf
 background = 000000
 foreground = ffffff
-
 
 # Keybinds
 #keybind = ctrl+e=close_surface
 #keybind = ctrl+x=new_split:right
 
 # Empty values reset the configuration to the default value
-font-family = Maple Mono
+#font-family = Maple Mono
+font-family = ndot57cap
 font-size = 12
 theme = noctalia

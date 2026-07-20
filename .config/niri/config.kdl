@@ -11,36 +11,45 @@
 //////////(https://niri-wm.github.io/niri/Configuration)////////////
 //
 //─────────────────────────────────────────────────────(SOURCE)───//
-include "monitor.kdl"                                   // AUR:nwg-displays
-include "noctalia.kdl"                                  // AUR:noctalia-git
-//include "$HOME/.config/wallust/templates/niri.css"      // AUR:wallust
+include "monitor.kdl"           // AUR:nwg-displays
+include "noctalia.kdl"          // AUR:noctalia-git
+
+//────────────────────────────────────────────────(ENVIRONMENT)───//
+environment {
+    // XDG_CURRENT_DESKTOP "niri"
+    // XDG_SESSION_DESKTOP "niri"
+}
 
 //─────────────────────────────────────────────────────(DAEMON)───//
-spawn-at-startup "exporter --local"
-spawn-at-startup "startups --launch"
-spawn-at-startup "backup"
+spawn-at-startup "sh" "-c" "pgrep -x exporter >/dev/null || exporter --local"
+spawn-at-startup "sh" "-c" "pgrep -x startups >/dev/null || startups --launch"
+spawn-at-startup "sh" "-c" "pgrep -x backup >/dev/null || backup"
 
 //──────────────────────────────────────────────────────(INPUT)───//
+prefer-no-csd
+screenshot-path         "~/Pictures/Screenshots/%F_%H-%M-%S.png"
+output                  "" { variable-refresh-rate; }
+cursor                  { hide-when-typing; }
 input {
-    //workspace-auto-back-and-forth
+    // workspace-auto-back-and-forth
+    // warp-mouse-to-focus
+    // focus-follows-mouse max-scroll-amount="0%"
     keyboard {
-        repeat-delay 200
-        repeat-rate 25
+        repeat-delay    200
+        repeat-rate     40
         xkb {
-            layout "us"     // localectl set-x11-keymap
-            //options "grp:win_space_toggle,compose:rALT,CTRL:nocaps"
+            layout      "us"     // localectl set-x11-keymap
+            // options     "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
         }
         numlock
     }
-
     mouse {
         // off
         // natural-scroll
-        accel-speed 0.0
-        accel-profile "flat"
-        scroll-method "no-scroll"
+        accel-speed     0.0
+        accel-profile   "flat"
+        scroll-method   "no-scroll"
     }
-
     touchpad {
         // off
         // tap
@@ -49,553 +58,264 @@ input {
         // drag false
         // drag-lock
         // natural-scroll
-        // accel-speed 0.0
-        // accel-profile "flat"
-        // scroll-method "two-finger"
-        // disabled-on-external-mouse
+        accel-speed     0.0
+        accel-profile   "flat"
+        scroll-method   "two-finger"
+        disabled-on-external-mouse
     }
-
     trackpoint {
         // off
         // natural-scroll
-        // accel-speed 0.0
-        // accel-profile "flat"
-        // scroll-method "on-button-down"
-        // scroll-button 273
+        accel-speed     0.0
+        accel-profile   "flat"
+        // scroll-method   "on-button-down"
+        // scroll-button   273
         // scroll-button-lock
-        // middle-emulation
+        middle-emulation
     }
-
-    // warp-mouse-to-focus
-    // focus-follows-mouse max-scroll-amount="0%"
 }
 
 //─────────────────────────────────────────────────────(LAYOUT)───//
+overview {
+    // off
+    backdrop-color  "#222222"
+    workspace-shadow {}
+}
 layout {
     gaps 10
-    center-focused-column "on-overflow"
-
-    // You can customize the widths that "switch-preset-column-width" (SUPER+R) toggles between.
+    center-focused-column "always"
+    background-color "transparent"
+    always-center-single-column true
+    default-column-width {
+        proportion 1.0
+    }
     preset-column-widths {
         proportion 0.25
         proportion 0.50
         proportion 0.75
-
-        // fixed 1920
+        proportion 1.00
     }
-
-    // You can also customize the heights that "switch-preset-window-height" (SUPER+CTRL+SHIFT+R) toggles between.
     preset-window-heights {
         proportion 0.25
         proportion 0.50
         proportion 0.75
-
-        // fixed 1080
+        proportion 1.00
     }
-
-    default-column-width {
-       //proportion 0.5
-    }
-
-    focus-ring {
-        // off
-
-        // How many logical pixels the ring extends out from the windows.
-        width 2
-
-        // Colors can be set in a variety of ways:
-        // - CSS named colors: "red"
-        // - RGB hex: "#rgb", "#rgba", "#rrggbb", "#rrggbbaa"
-        // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
-
-        //active-color "#ffffff"
-
-        // Color of the ring on inactive monitors.
-        //
-        // The focus ring only draws around the active window, so the only place
-        // where you can see its inactive-color is on other monitors.
-        //inactive-color "#505050"
-
-        // You can also use gradients. They take precedence over solid colors.
-        // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
-        // The angle is the same as in linear-gradient, and is optional,
-        // defaulting to 180 (top-to-bottom gradient).
-        // You can use any CSS linear-gradient tool on the web to set these up.
-        // Changing the color space is also supported, check the wiki for more info.
-        //
-        // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
-
-        // You can also color the gradient relative to the entire view
-        // of the workspace, rather than relative to just the window itself.
-        // To do that, set relative-to="workspace-view".
-        //
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-    }
-
-    // You can also add a border. It's similar to the focus ring, but always visible.
+    focus-ring { off; }
     border {
-        // The settings are the same as for the focus ring.
-        // If you enable the border, you probably want to disable the focus ring.
-        off
-
-        width 4
-        //active-color "#ffc87f"
-        //inactive-color "#505050"
-
-        // Color of the border around windows that request your attention.
-        //urgent-color "#9b0000"
-
-        // Gradients can use a few different interpolation color spaces.
-        // For example, this is a pastel rainbow gradient via in="oklch longer hue".
-        //
-        // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
-
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        // off
+        width 2
+        // active-color "#FFFFFF"
+        // inactive-color "#AAAAAA"
+        urgent-color "#FF0000"
+        active-gradient from="#FFFFFF" to="#444444" angle=180 relative-to="workspace-view" in="oklch longer hue"
+        inactive-gradient from="#AAAAAA" to="#444444" angle=180 relative-to="workspace-view" in="oklch longer hue"
     }
-
-    // You can enable drop shadows for windows.
     shadow {
-        // Uncomment the next line to enable shadows.
-        // on
-
-        // By default, the shadow draws only around its window, and not behind it.
-        // Uncomment this setting to make the shadow draw behind its window.
-        //
-        // Note that niri has no way of knowing about the CSD window corner
-        // radius. It has to assume that windows have square corners, leading to
-        // shadow artifacts inside the CSD rounded corners. This setting fixes
-        // those artifacts.
-        //
-        // However, instead you may want to set prefer-no-csd and/or
-        // geometry-corner-radius. Then, niri will know the corner radius and
-        // draw the shadow correctly, without having to draw it behind the
-        // window. These will also remove client-side shadows if the window
-        // draws any.
-        //
-        // draw-behind-window true
-
-        // You can change how shadows look. The values below are in logical
-        // pixels and match the CSS box-shadow properties.
-
-        // Softness controls the shadow blur radius.
-        softness 30
-
-        // Spread expands the shadow.
-        spread 5
-
-        // Offset moves the shadow relative to the window.
-        offset x=0 y=5
-
-        // You can also change the shadow color and opacity.
-        //color "#0007"
+        // off
+        draw-behind-window true
+        softness    12
+        spread      4
+        offset      x=0 y=0
+        color       "#000000"
     }
-
-    // Struts shrink the area occupied by windows, similarly to layer-shell panels.
-    // You can think of them as a kind of outer gaps. They are set in logical pixels.
-    // Left and right struts will cause the next window to the side to always be visible.
-    // Top and bottom struts will simply add outer gaps in addition to the area occupied by
-    // layer-shell panels and regular gaps.
     struts {
-        // left 64
-        // right 64
-        // top 64
-        // bottom 64
+        left    0
+        right   0
+        top     0
+        bottom  0
     }
 }
-
 hotkey-overlay {
     skip-at-startup
 }
 
-prefer-no-csd
-
-
-screenshot-path "~/Pictures/Screenshots/%F_%H-%M-%S.png"
-
-// Animation settings.
-// The wiki explains how to configure individual animations:
-// https://niri-wm.github.io/niri/Configuration:-Animations
+//─────────────────────────────────────────────────(ANIMATIONS)───//
 animations {
     // off
-    // slowdown 3.0     // Values below 1 speed them up.
+    // slowdown 1.0
+    window-open {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+    window-close {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+    window-movement {
+        spring damping-ratio=0.9 stiffness=800 epsilon=0.0001
+    }
+    window-resize {
+        spring damping-ratio=0.9 stiffness=1000 epsilon=0.0001
+    }
+    workspace-switch {
+        spring damping-ratio=0.9 stiffness=900 epsilon=0.0001
+    }
+    overview-open-close {
+        spring damping-ratio=0.9 stiffness=900 epsilon=0.0001
+    }
+    horizontal-view-movement {
+        spring damping-ratio=0.9 stiffness=900 epsilon=0.0001
+    }
+    config-notification-open-close {
+        spring damping-ratio=0.9 stiffness=1200 epsilon=0.001
+    }
+    screenshot-ui-open {
+        duration-ms 300
+        curve "ease-out-quad"
+    }
 }
 
+//───────────────────────────────────────────────────────(BLUR)───//
 blur {
-    passes 2        // more passes = stronger blur (default: 3)
-    offset 3.0      // sample distance per pass (default: 3.0)
-    noise 0.03      // grain overlay (default: 0.02)
-    saturation 1.0  // color saturation boost (default: 1.5)
+    passes      2       // DEFAULT: 3
+    offset      1.0     // DEFAULT: 3.0
+    noise       0.0     // DEFAULT: 0.02
+    saturation  0.0     // DEFAULT: 1.5
 }
 
-// Window rules let you adjust behavior for individual windows.
-// Find more information on the wiki:
-// https://niri-wm.github.io/niri/Configuration:-Window-Rules
-
+//────────────────────────────────────────────────────(WINDOWS)───//
 window-rule {
-    geometry-corner-radius 12
-    clip-to-geometry true
+    geometry-corner-radius  10
+    clip-to-geometry        true
+    opacity                 0.90
+    background-effect {
+        blur    true
+        xray    true
+    }
 }
-
-/* Apps: blur them all without xray for a better look */
 window-rule {
-  background-effect {
-    blur true
-    xray false
-  }
-}
-
-/* Noctalia: blur everywhere without xray for a better look */
-layer-rule {
-  match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"
-  background-effect {
-    xray false
-  }
-}
-
-// Open the Firefox picture-in-picture player as floating by default.
-window-rule {
-    // This app-id regular expression will work for both:
-    // - host Firefox (app-id is "firefox")
-    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    match title="^(Open|Save|Save As|File Upload|Preferences|Settings|Picture-in-Picture)$"
     open-floating true
 }
-
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
-
+window-rule {
+    match app-id=r#"^(org\.keepassxc\.KeePassXC|org\.gnome\.World\.Secrets)$"#
     block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
+    //block-out-from "screencast"
 }
 
-// Set the overview wallpaper on the backdrop.
+//─────────────────────────────────────────────────────(LAYERS)───//
 layer-rule {
-    match namespace="^noctalia-overview*"
+    match namespace="^noctalia-.*"
     place-within-backdrop true
 }
-
-// Set the regular wallpaper on the backdrop.
 layer-rule {
-    match namespace="^noctalia-wallpaper*"
-    place-within-backdrop true
-}
-
-// Set transparent workspace background color so you see the backdrop at all times.
-//layout {     // ISSUES
-//    background-color "transparent"
-//}
-
-// Optionally, disable the workspace shadows in the overview.
-overview {
-    workspace-shadow {
-    off
+    match namespace="^noctalia-(background|launcher-overlay|dock|overview|wallpaper)-.*$"
+    background-effect {
+        xray true
     }
-    //backdrop-color "#26233a"
 }
 
+//───────────────────────────────────────────────────(KEYBINDS)───//
 binds {
-    // Keys consist of modifiers separated by + signs, followed by an XKB key name
-    // in the end. To find an XKB name for a particular key, you may use a program
-    // like wev.
-    //
-    // "Mod" is a special modifier equal to SUPER when running on a TTY, and to ALT
-    // when running as a winit window.
-    //
-    // Most actions that you can bind here can also be invoked programmatically with
-    // `niri msg action do-something`.
-
-    // Mod-SHIFT-/, which is usually the same as Mod-?,
-    // shows a list of important hotkeys.
-    SUPER+F1 { show-hotkey-overlay; }
-
-    // Suggested binds for running programs: terminal, app launcher, screen locker.
-    SUPER+ESCAPE hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
-    //SUPER+ALT+SPACE hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
-    SUPER+ALT+L hotkey-overlay-title="Lock the Screen" { spawn "loginctl lock-sessions"; }
-
-    // Use spawn-sh to run a shell COMMAnd. Do this if you need pipes, multiple COMMAnds, etc.
-    // Note: the entire COMMAnd goes as a single argument. It's passed verbatim to `sh -c`.
-    // For example, this is a standard bind to toggle the screen reader (orca).
-    SUPER+ALT+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
-
-    // Example volume keys mappings for PipeWire & WirePlumber.
-    // The allow-when-locked=true property makes them work even when the session is locked.
-    // Using spawn-sh allows to pass multiple arguments together with the COMMAnd.
-    // "-l 1.0" limits the volume to 100%.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-
-    // Example media keys mapping using playerctl.
-    // This will work with any MPRIS-enabled media player.
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
-
-    // Example brightness key mappings for brightnessctl.
-    // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
-    // but you need to manually put each argument in separate "" quotes.
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
-
-    // Open/close the Overview: a zoomed-out view of workspaces and windows.
-    // You can also move the mouse into the top-left hot corner,
-    // or do a four-finger swipe up on a touchpad.
-    SUPER+O repeat=false { toggle-overview; }
-
-    SUPER+Q repeat=false { close-window; }
-
-    SUPER+LEFT    { focus-column-left; }
-    SUPER+DOWN    { focus-window-down; }
-    SUPER+Up    { focus-window-up; }
-    SUPER+RIGHT { focus-column-right; }
-    SUPER+H     { focus-column-left; }
-    SUPER+J     { focus-window-down; }
-    SUPER+K     { focus-window-up; }
-    SUPER+L     { focus-column-right; }
-
-    SUPER+CTRL+LEFT    { move-column-left; }
-    SUPER+CTRL+DOWN    { move-window-down; }
-    SUPER+CTRL+Up    { move-window-up; }
-    SUPER+CTRL+RIGHT { move-column-right; }
-    SUPER+CTRL+H     { move-column-left; }
-    SUPER+CTRL+J     { move-window-down; }
-    SUPER+CTRL+K     { move-window-up; }
-    SUPER+CTRL+L     { move-column-right; }
-
-    // ALTernative COMMAnds that move across workspaces when reaching
-    // the first or last window in a column.
-    // SUPER+J     { focus-window-or-workspace-down; }
-    // SUPER+K     { focus-window-or-workspace-up; }
-    // SUPER+CTRL+J     { move-window-down-or-to-workspace-down; }
-    // SUPER+CTRL+K     { move-window-up-or-to-workspace-up; }
-
-    SUPER+HOME { focus-column-first; }
-    SUPER+END   { focus-column-last; }
-    SUPER+CTRL+HOME { move-column-to-first; }
-    SUPER+CTRL+END   { move-column-to-last; }
-
-    SUPER+SHIFT+LEFT    { focus-monitor-left; }
-    SUPER+SHIFT+DOWN    { focus-monitor-down; }
-    SUPER+SHIFT+Up    { focus-monitor-up; }
-    SUPER+SHIFT+RIGHT { focus-monitor-right; }
-    SUPER+SHIFT+H     { focus-monitor-left; }
-    SUPER+SHIFT+J     { focus-monitor-down; }
-    SUPER+SHIFT+K     { focus-monitor-up; }
-    SUPER+SHIFT+L     { focus-monitor-right; }
-
-    SUPER+SHIFT+CTRL+LEFT    { move-column-to-monitor-left; }
-    SUPER+SHIFT+CTRL+DOWN    { move-column-to-monitor-down; }
-    SUPER+SHIFT+CTRL+Up    { move-column-to-monitor-up; }
-    SUPER+SHIFT+CTRL+RIGHT { move-column-to-monitor-right; }
-    SUPER+SHIFT+CTRL+H     { move-column-to-monitor-left; }
-    SUPER+SHIFT+CTRL+J     { move-column-to-monitor-down; }
-    SUPER+SHIFT+CTRL+K     { move-column-to-monitor-up; }
-    SUPER+SHIFT+CTRL+L     { move-column-to-monitor-right; }
-
-    // ALTernatively, there are COMMAnds to move just a single window:
-    // SUPER+SHIFT+CTRL+LEFT    { move-window-to-monitor-left; }
-    // ...
-
-    // And you can also move a whole workspace to another monitor:
-    // SUPER+SHIFT+CTRL+LEFT    { move-workspace-to-monitor-left; }
-    // ...
-
-    SUPER+PAGE_DOWN        { focus-workspace-down; }
-    SUPER+PAGE_UP        { focus-workspace-up; }
-    SUPER+U                { focus-workspace-down; }
-    SUPER+I                { focus-workspace-up; }
-    SUPER+CTRL+PAGE_DOWN { move-column-to-workspace-down; }
-    SUPER+CTRL+PAGE_UP     { move-column-to-workspace-up; }
-    SUPER+CTRL+U         { move-column-to-workspace-down; }
-    SUPER+CTRL+I         { move-column-to-workspace-up; }
-
-    // ALTernatively, there are COMMAnds to move just a single window:
-    // SUPER+CTRL+PAGE_DOWN { move-window-to-workspace-down; }
-    // ...
-
-    SUPER+SHIFT+PAGE_DOWN { move-workspace-down; }
-    SUPER+SHIFT+PAGE_UP     { move-workspace-up; }
-    SUPER+SHIFT+U         { move-workspace-down; }
-    SUPER+SHIFT+I         { move-workspace-up; }
-
-    // You can bind mouse wheel scroll ticks using the following syntax.
-    // These binds will change direction based on the natural-scroll setting.
-    //
-    // To avoid scrolling through workspaces really fast, you can use
-    // the cooldown-ms property. The bind will be rate-limited to this value.
-    // You can set a cooldown on any bind, but it's most useful for the wheel.
-    SUPER+WHEELSCROLLDOWN        cooldown-ms=150 { focus-workspace-down; }
-    SUPER+WHEELSCROLLUP        cooldown-ms=150 { focus-workspace-up; }
-    SUPER+CTRL+WHEELSCROLLDOWN cooldown-ms=150 { move-column-to-workspace-down; }
-    SUPER+CTRL+WHEELSCROLLUP     cooldown-ms=150 { move-column-to-workspace-up; }
-
-    SUPER+WHEELSCROLLRIGHT        { focus-column-right; }
-    SUPER+WHEELSCROLLLEFT         { focus-column-left; }
-    SUPER+CTRL+WHEELSCROLLRIGHT { move-column-right; }
-    SUPER+CTRL+WHEELSCROLLLEFT    { move-column-left; }
-
-    // Usually scrolling up and down with SHIFT in applications results in
-    // horizontal scrolling; these binds replicate that.
-    SUPER+SHIFT+WHEELSCROLLDOWN        { focus-column-right; }
-    SUPER+SHIFT+WHEELSCROLLUP        { focus-column-left; }
-    SUPER+CTRL+SHIFT+WHEELSCROLLDOWN { move-column-right; }
-    SUPER+CTRL+SHIFT+WHEELSCROLLUP     { move-column-left; }
-
-    // Similarly, you can bind touchpad scroll "ticks".
-    // Touchpad scrolling is continuous, so for these binds it is split into
-    // discrete intervals.
-    // These binds are also affected by touchpad's natural-scroll, so these
-    // example binds are "inverted", since we have natural-scroll enabled for
-    // touchpads by default.
-    // SUPER+TOUCHPADSCROLLDOWN { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
-    // SUPER+TOUCHPADSCROLLUP     { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
-
-    // You can refer to workspaces by index. However, keep in mind that
-    // niri is a dynamic workspace system, so these COMMAnds are kind of
-    // "best effort". Trying to refer to a workspace index bigger than
-    // the current workspace count will instead refer to the bottommost
-    // (empty) workspace.
-    //
-    // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
-    // will all refer to the 3rd workspace.
-    SUPER+1 { focus-workspace 1; }
-    SUPER+2 { focus-workspace 2; }
-    SUPER+3 { focus-workspace 3; }
-    SUPER+4 { focus-workspace 4; }
-    SUPER+5 { focus-workspace 5; }
-    SUPER+6 { focus-workspace 6; }
-    SUPER+7 { focus-workspace 7; }
-    SUPER+8 { focus-workspace 8; }
-    SUPER+9 { focus-workspace 9; }
-    SUPER+CTRL+1 { move-column-to-workspace 1; }
-    SUPER+CTRL+2 { move-column-to-workspace 2; }
-    SUPER+CTRL+3 { move-column-to-workspace 3; }
-    SUPER+CTRL+4 { move-column-to-workspace 4; }
-    SUPER+CTRL+5 { move-column-to-workspace 5; }
-    SUPER+CTRL+6 { move-column-to-workspace 6; }
-    SUPER+CTRL+7 { move-column-to-workspace 7; }
-    SUPER+CTRL+8 { move-column-to-workspace 8; }
-    SUPER+CTRL+9 { move-column-to-workspace 9; }
-
-    // ALTernatively, there are COMMAnds to move just a single window:
-    // SUPER+CTRL+1 { move-window-to-workspace 1; }
-
-    // Switches focus between the current and the previous workspace.
-    // SUPER+TAB { focus-workspace-previous; }
-
-    // The following binds move the focused window in and out of a column.
-    // If the window is alone, they will consume it into the nearby column to the side.
-    // If the window is already in a column, they will expel it out.
-    SUPER+BRACKETLEFT { consume-or-expel-window-left; }
-    SUPER+BRACKETRIGHT { consume-or-expel-window-right; }
-
-    // Consume one window from the right to the bottom of the focused column.
-    SUPER+COMMA    { consume-window-into-column; }
-    // Expel the bottom window from the focused column to the right.
-    SUPER+PERIOD { expel-window-from-column; }
-
-    // Cycle through widths set in preset-column-widths.
-    SUPER+R { switch-preset-column-width; }
-    // Cycling through the presets in reverse order is also possible.
-    SUPER+SHIFT+R { switch-preset-column-width-back; }
-
-    SUPER+CTRL+SHIFT+R { switch-preset-window-height; }
-    SUPER+CTRL+R { reset-window-height; }
-
-    SUPER+F { maximize-column; }
-    SUPER+SHIFT+F { fullscreen-window; }
-
-    // While maximize-column leaves gaps and borders around the window,
-    // maximize-window-to-edges doesn't: the window expands to the edges of the screen.
-    // This bind corresponds to normal window maximizing,
-    // e.g. by double-clicking on the titlebar.
-    SUPER+M { maximize-window-to-edges; }
-
-    // Expand the focused column to space not taken up by other fully visible columns.
-    // Makes the column "fill the rest of the space".
-    SUPER+CTRL+F { expand-column-to-available-width; }
-
-    SUPER+C { center-column; }
-
-    // Center all fully visible columns on screen.
-    SUPER+CTRL+C { center-visible-columns; }
-
-    // Finer width adjustments.
-    // This COMMAnd can also:
-    // * set width in pixels: "1000"
-    // * adjust width in pixels: "-5" or "+5"
-    // * set width as a percentage of screen width: "25%"
-    // * adjust width as a percentage of screen width: "-10%" or "+10%"
-    // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
-    // set-column-width "100" will make the column occupy 200 physical screen pixels.
-    SUPER+MINUS { set-column-width "-10%"; }
-    SUPER+EQUAL { set-column-width "+10%"; }
-
-    // Finer height adjustments when in column with other windows.
-    SUPER+SHIFT+MINUS { set-window-height "-10%"; }
-    SUPER+SHIFT+EQUAL { set-window-height "+10%"; }
-
-    // Move the focused window between the floating and the tiling layout.
-    SUPER+V         { toggle-window-floating; }
-    SUPER+SHIFT+V { switch-focus-between-floating-and-tiling; }
-
-    // Toggle tabbed column display mode.
-    // Windows in this column will appear as vertical tabs,
-    // rather than stacked on top of each other.
-    SUPER+W { toggle-column-tabbed-display; }
-
-    // Actions to switch layouts.
-    // Note: if you uncomment these, make sure you do NOT have
-    // a matching layout switch hotkey configured in xkb options above.
-    // Having both at once on the same hotkey will break the switching,
-    // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-    // SUPER+SPACE         { switch-layout "next"; }
-    // SUPER+SHIFT+SPACE { switch-layout "prev"; }
-
-    PRINT { screenshot; }
-    CTRL+PRINT { screenshot-screen; }
-    ALT+PRINT { screenshot-window; }
-
-    // Applications such as remote-desktop clients and software KVM switches may
-    // request that niri stops processing the keyboard shortcuts defined here
-    // so they may, for example, forward the key presses as-is to a remote machine.
-    // It's a good idea to bind an escape hatch to toggle the inhibitor,
-    // so a buggy application can't hold your session hostage.
-    //
-    // The allow-inhibiting=false property can be applied to other binds as well,
-    // which ensures niri always processes them, even when an inhibitor is active.
-    SUPER+T allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
-    // The quit action will show a confirmation dialog to avoid accidental exits.
-    SUPER+SHIFT+E { quit; }
-    CTRL+ALT+DELETE { quit; }
-
-    // Powers off the monitors. To turn them back on, do any input like
-    // moving the mouse or pressing any other key.
-    SUPER+SHIFT+P { power-off-monitors; }
-
-    // Core Noctalia binds
-    SUPER+SPACE { spawn-sh "noctalia msg panel-toggle launcher"; }
-    SUPER+S { spawn-sh "noctalia msg panel-toggle control-center"; }
-    //SUPER+COMMA { spawn-sh "noctalia msg settings-toggle"; }
-
-    // Audio & Brightness
-    //XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
-    //XF86AudioLowerVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
-    //XF86AudioMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
-    //XF86MonBrightnessUp { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-    //XF86MonBrightnessDown { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+    //────(SYSTEM)────//
+    F1                              repeat=false { show-hotkey-overlay; }
+    SUPER+ALT+R                     repeat=false { spawn-sh "niri msg action reload-config && notify-send 'Niri config.kdl Reloaded'"; }
+    SUPER+ALT+L                     repeat=false hotkey-overlay-title="Lockscreen" { spawn-sh "loginctl lock-sessions"; }
+    CTRL+ALT+DELETE                 repeat=false { quit; }
+    SUPER+RETURN                    repeat=false { spawn "ghostty"; }
+    SUPER+SHIFT+RETURN              repeat=false { spawn-sh "nemo || yazi"; }
+    SUPER+SPACE                     repeat=false { spawn-sh "noctalia msg panel-toggle launcher"; }
+    SUPER+BACKSPACE                 repeat=false { spawn-sh "noctalia msg panel-toggle control-center"; }
+    // SUPER+RETURN                    repeat=false { spawn-sh "noctalia msg settings-toggle"; }
+    SUPER+P                         repeat=false { spawn-sh "pgrep -x hyprpicker >/dev/null || hyprpicker"; }
+    SUPER+O                         repeat=false { toggle-overview; }
+    SUPER+Q                         repeat=false { close-window; }
+    SUPER+SHIFT+Q                   repeat=false { spawn-sh "niri msg -j focused-window | jq -r '.pid // empty' | xargs -r kill -9"; }
+    SUPER+T                         repeat=false allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    //────(FOCUS)────//
+    SUPER+A                         { focus-column-left; }
+    SUPER+D                         { focus-column-right; }
+    SUPER+W                         { focus-window-up; }
+    SUPER+S                         { focus-window-down; }
+    //────(SCROLL)────//
+    SUPER+WHEELSCROLLUP             { focus-workspace-up; }
+    SUPER+WHEELSCROLLDOWN           { focus-workspace-down; }
+    SUPER+WHEELSCROLLLEFT           { focus-column-left; }
+    SUPER+WHEELSCROLLRIGHT          { focus-column-right; }
+    //────(MOVE)────//
+    SUPER+CTRL+A                    { move-column-left; }
+    SUPER+CTRL+D                    { move-column-right; }
+    SUPER+CTRL+W                    { move-column-to-workspace-up; }
+    SUPER+CTRL+S                    { move-column-to-workspace-down; }
+    SUPER+CTRL+Q                    { move-column-to-first; }
+    SUPER+CTRL+E                    { move-column-to-last; }
+    //────(LAYOUT)────//
+    SUPER+R                         { switch-preset-column-width; }
+    SUPER+SHIFT+R                   { switch-preset-window-height; }
+    SUPER+CTRL+R                    { reset-window-height; }
+    SUPER+MINUS                     { set-column-width "-10%"; }
+    SUPER+EQUAL                     { set-column-width "+10%"; }
+    SUPER+SHIFT+MINUS               { set-window-height "-10%"; }
+    SUPER+SHIFT+EQUAL               { set-window-height "+10%"; }
+    SUPER+F                         { maximize-column; }
+    SUPER+SHIFT+F                   { fullscreen-window; }
+    SUPER+M                         { maximize-window-to-edges; }
+    SUPER+CTRL+F                    { expand-column-to-available-width; }
+    SUPER+C                         { center-column; }
+    SUPER+CTRL+C                    { center-visible-columns; }
+    SUPER+V                         { toggle-window-floating; }
+    SUPER+SHIFT+V                   { switch-focus-between-floating-and-tiling; }
+    //────(MONITORS)────//
+    SUPER+CTRL+SHIFT+W              { focus-monitor-up; }
+    SUPER+CTRL+SHIFT+A              { focus-monitor-left; }
+    SUPER+CTRL+SHIFT+S              { focus-monitor-down; }
+    SUPER+CTRL+SHIFT+D              { focus-monitor-right; }
+    SUPER+ALT+SHIFT+A               { move-column-to-monitor-left; }
+    SUPER+ALT+SHIFT+D               { move-column-to-monitor-right; }
+    SUPER+ALT+SHIFT+W               { move-column-to-monitor-up; }
+    SUPER+ALT+SHIFT+S               { move-column-to-monitor-down; }
+    //────(WORKSPACE)────//
+    SUPER+SHIFT+W                   { focus-workspace-up; }
+    SUPER+SHIFT+S                   { focus-workspace-down; }
+    SUPER+ALT+W                     { move-column-to-workspace-up; }
+    SUPER+ALT+S                     { move-column-to-workspace-down; }
+    SUPER+SHIFT+COMMA               { move-workspace-up; }
+    SUPER+SHIFT+PERIOD              { move-workspace-down; }
+    SUPER+TAB                       { focus-workspace-previous; }
+    SUPER+G                         { toggle-column-tabbed-display; }
+    //────(INDEX)────//
+    SUPER+1                         { focus-workspace 1; }
+    SUPER+2                         { focus-workspace 2; }
+    SUPER+3                         { focus-workspace 3; }
+    SUPER+4                         { focus-workspace 4; }
+    SUPER+5                         { focus-workspace 5; }
+    SUPER+6                         { focus-workspace 6; }
+    SUPER+7                         { focus-workspace 7; }
+    SUPER+8                         { focus-workspace 8; }
+    SUPER+9                         { focus-workspace 9; }
+    SUPER+CTRL+1                    { move-column-to-workspace 1; }
+    SUPER+CTRL+2                    { move-column-to-workspace 2; }
+    SUPER+CTRL+3                    { move-column-to-workspace 3; }
+    SUPER+CTRL+4                    { move-column-to-workspace 4; }
+    SUPER+CTRL+5                    { move-column-to-workspace 5; }
+    SUPER+CTRL+6                    { move-column-to-workspace 6; }
+    SUPER+CTRL+7                    { move-column-to-workspace 7; }
+    SUPER+CTRL+8                    { move-column-to-workspace 8; }
+    SUPER+CTRL+9                    { move-column-to-workspace 9; }
+    //────(HARDWARE)────//
+    XF86AudioRaiseVolume            allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"; }
+    XF86AudioLowerVolume            allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
+    XF86AudioMute                   allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioMicMute                allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86AudioPlay                   allow-when-locked=true { spawn-sh "playerctl -a play-pause"; }
+    XF86AudioStop                   allow-when-locked=true { spawn-sh "playerctl -a stop"; }
+    XF86AudioPrev                   allow-when-locked=true { spawn-sh "playerctl -a previous"; }
+    XF86AudioNext                   allow-when-locked=true { spawn-sh "playerctl -a next"; }
+    XF86MonBrightnessUp             allow-when-locked=true { spawn-sh "brightnessctl --quiet set 10%+"; }
+    XF86MonBrightnessDown           allow-when-locked=true { spawn-sh "brightnessctl --quiet set 10%-"; }
+    XF86KbdBrightnessUp             allow-when-locked=true { spawn-sh "brightnessctl --quiet --device '*::kbd_backlight' set 10%+"; }
+    XF86KbdBrightnessDown           allow-when-locked=true { spawn-sh "brightnessctl --quiet --device '*::kbd_backlight' set 10%-"; }
+    CTRL+XF86PowerOff               allow-when-locked=true { spawn-sh "systemctl suspend"; }
+    ALT+XF86PowerOff                allow-when-locked=true { spawn-sh "systemctl reboot"; }
+    XF86PowerOff                    allow-when-locked=true { spawn-sh "systemctl poweroff"; }
+    //────(SCREENSHOTS)────//
+    PRINT                           { screenshot-screen; }
+    ALT+PRINT                       { screenshot-window; }
+    CTRL+PRINT                      { screenshot; }
 }
 
+//────────────────────────────────────────────────────────(DEV)───//
 debug {
-    // Allows notification actions and window activation from Noctalia.
     honor-xdg-activation-with-invalid-serial
 }

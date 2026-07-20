@@ -39,6 +39,8 @@ no_hooks = true
 
 [hooks]
 wallpaper = '''awww img "$(find $HOME/Pictures/Wallpapers -type f -exec file --mime-type {} + | grep 'image/' | cut -d: -f1 | shuf -n 1)"'''
+#----(WAYPAPER)----#
+#post_command = sh -c 'case "$(file -bi "$wallpaper")" in image/*) wallust run "$wallpaper" ;; video/*) t=$(mktemp --suffix=.png) && ffmpeg -v 0 -y -i "$wallpaper" -vf thumbnail -vframes 1 "$t" >/dev/null 2>&1 && wallust run "$t" && rm -f "$t" ;; esac'
 
 #====================( TEMPLATES )====================#
 [templates]
@@ -48,12 +50,9 @@ colors.target = 'wallust.txt'
 #----(GHOSTTY)----#
 #ghostty.template = 'ghostty.conf'
 #ghostty.target = '~/.config/ghostty/wallust.conf'
-#----(NOCTALIA-SHELL)----#
+#----(NOCTALIA)----#
 #noctalia.template = '../../noctalia/colors.conf'
 #noctalia.target = '~/.config/noctalia/wallust.conf'
-#----(ROFI)----#
-#rofi.template = '../../rofi/colors.rasi'
-#rofi.target = '~/.config/rofi/wallust.rasi'
 #----(NIRI)----#
 #niri.template = '../../niri/colors.kdl'
 #niri.target = '~/.config/niri/wallust.kdl'

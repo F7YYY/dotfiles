@@ -205,7 +205,7 @@ startups() {
     WRAPPER="" 
     DESKTOP="$HOME/.config/autostart/COMMANDS.desktop"
     APPS="
-dbus-update-activation-environment --systemd --all
+#dbus-update-activation-environment --systemd --all
 #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #gnome-keyring-daemon --start --components=secrets
 exporter --local
@@ -221,7 +221,7 @@ gsettings set org.gnome.desktop.interface font-name 'Sony Sketch EF'
 #───(MINIMIZE_FLAGS
 #emacs --daemon
 #openrgb --startminimized wayland
-#steam-native -silent wayland
+#steam -silent wayland
 #vesktop --start-minimized wayland
 #telegram-desktop -startintray wayland
 #youtube-music --use-tray-icon wayland
