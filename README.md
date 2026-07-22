@@ -96,26 +96,15 @@
 </tr>
 
 <tr>
-  <td>DESKTOP SHELL</td>
-  <td><em>
-    <a href="https://github.com/noctalia-dev/noctalia">noctalia</a>
-  </em></td>
-  <td><em>
-  EVERYTHING |
-  PLUGINS
-  </em></td>
-</tr>
-
-<tr>
   <td>WALLPAPER SETTER</td>
   <td><em>
     <a href="https://github.com/noctalia-dev/noctalia">noctalia</a> |
     <del><a href="https://github.com/anufrievroman/waypaper">waypaper</a><del>
   </em></td>
   <td><em>
-    <del><a href="https://github.com/Nomadcxx/gSlapper">gslapper</a></del>  |
+    <a href="https://github.com/Nomadcxx/gSlapper">gslapper</a>  |
     <a href="https://github.com/GhostNaN/mpvpaper">mpvpaper</a> |
-    <del><a href="https://codeberg.org/LGFae/awww">awww</a><del>
+    <a href="https://codeberg.org/LGFae/awww">awww</a>
   </em></td>
 </tr>
 
@@ -160,6 +149,7 @@
 <tr>
   <td>SHELL</td>
   <td><em>
+    <a href="https://github.com/noctalia-dev/noctalia">noctalia</a> |
     <a href="https://git-scm.com">git</a> |
     <a href="https://www.gnu.org/software/bash/">bash</a> |
     <a href="https://www.zsh.org/">zsh</a>
@@ -168,7 +158,8 @@
     <a href="https://github.com/yadm-dev/yadm">yadm</a> |
     <a href="https://github.com/arialdomartini/oh-my-git">oh-my-git</a> |
     <a href="https://github.com/ohmybash/oh-my-bash">oh-my-bash</a> |
-    <a href="https://github.com/ohmyzsh/ohmyzsh">oh-my-zsh</a>
+    <a href="https://github.com/ohmyzsh/ohmyzsh">oh-my-zsh</a> |
+    PLUGINS
   </em></td>
 </tr>
 
