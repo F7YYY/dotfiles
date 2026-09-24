@@ -1,0 +1,692 @@
+config_version = 14
+
+[audio]
+enable_sounds = true
+
+[bar.default]
+background_opacity = 0.39999999105930328
+border_width = 2.0
+capsule = true
+capsule_opacity = 0.19999999552965164
+capsule_thickness = 0.69999998807907104
+center = [ "group:g2" ]
+contact_shadow = true
+end = [ "privacy", "group:g5", "group:g4", "group:g3" ]
+font_family = "Sony Sketch EF"
+padding = 16
+radius = 80
+thickness = 32
+widget_spacing = 10
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    enabled = true
+    fill = "surface_variant"
+    id = "g2"
+    members = [ "notifications", "clock", "weather", "widget" ]
+    opacity = 0.19999998807907104
+    padding = 6.0
+
+    [[bar.default.capsule_group]]
+    accordion = true
+    accordion_direction = "start"
+    enabled = true
+    fill = "surface_variant"
+    id = "g3"
+    members = [ "session", "clipboard", "wallhaven", "wallpaper_2", "wallpaper", "keybinds", "control-center", "widget_2" ]
+    opacity = 0.19999998807907104
+    padding = 6.0
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "start"
+    enabled = true
+    fill = "surface_variant"
+    id = "g4"
+    members = [ "output_volume", "input_volume", "brightness", "status", "airpods", "bluetooth", "network", "battery" ]
+    opacity = 0.19999998807907104
+    padding = 6.0
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    enabled = true
+    fill = "surface_variant"
+    id = "g1"
+    members = [ "launcher", "workspaces", "tray" ]
+    opacity = 0.19999998807907104
+    padding = 6.0
+
+    [[bar.default.capsule_group]]
+    accordion = true
+    accordion_direction = "start"
+    enabled = true
+    fill = "surface_variant"
+    id = "g5"
+    members = [ "gamermode", "monitor", "sysmon" ]
+    opacity = 0.19999998807907104
+    padding = 6.0
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    enabled = true
+    fill = "surface_variant"
+    id = "g6"
+    members = [ "launcher_2", "media" ]
+    opacity = 0.19999998807907104
+    padding = 6.0
+
+[brightness]
+enable_ddcutil = true
+sync_all_monitors = true
+
+[calendar]
+enabled = true
+event_time_format = "nigga"
+refresh_minutes = 5
+
+    [calendar.account.gmail]
+    color = "primary"
+    type = "google"
+
+[control_center]
+width = 800
+
+    [control_center.calendar]
+    show_week_numbers = true
+
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[dock]
+active_monitor_only = true
+border_width = 2.0
+icon_size = 32
+inactive_opacity = 0.79999998211860657
+inactive_scale = 0.80000001192092896
+item_spacing = 4
+magnification_scale = 1.2000000029802322
+margin_ends = 2
+smart_auto_hide = true
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
+
+[location]
+auto_locate = true
+custom_schedule = true
+sunrise = "10:00"
+sunset = "22:00"
+
+[lockscreen]
+blurred_desktop = true
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [
+    "lockscreen-login-box@DP-5",
+    "lockscreen-login-box@DVI-I-2",
+    "lockscreen-login-box@DVI-I-1",
+    "lockscreen-login-box@DP-1",
+    "lockscreen-login-box@DP-3",
+    "lockscreen-login-box@DP-2",
+    "lockscreen-login-box@DVI-I-3",
+    "lockscreen-login-box@HDMI-A-1",
+    "lockscreen-widget-0000000000000001"
+]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-1"]
+    box_height = 196.0
+    box_width = 720.0
+    cx = 960.0
+    cy = 898.0
+    output = "DP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "DP-2"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-2".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 2560.0
+    cy = 1258.0
+    output = "DP-3"
+    placement_height = 1440.0
+    placement_width = 5120.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-5"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "DP-5"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-5".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DVI-I-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 298.0
+    output = "DVI-I-1"
+    placement_height = 480.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DVI-I-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DVI-I-2"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 298.0
+    output = "DVI-I-2"
+    placement_height = 480.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DVI-I-2".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DVI-I-3"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 298.0
+    output = "DVI-I-3"
+    placement_height = 0.0
+    placement_width = 0.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DVI-I-3".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 958.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.0
+        background_radius = 0.0
+        center_password_text = true
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = false
+        show_login_button = false
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = false
+        show_weather = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 208.0
+    box_width = 448.0
+    cx = 944.0
+    cy = 540.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = false
+        center_text = true
+        clock_style = "digital"
+        format = "%T"
+        timezone = ""
+
+[nightlight]
+enabled = true
+
+[notification]
+background_opacity = 0.0
+position = "top_center"
+
+[osd]
+background_opacity = 0.0
+offset_y = 10
+
+[plugin_settings."alexander/game-launcher"]
+browser_open_near_click = false
+browser_placement = "attached"
+
+[plugin_settings."aristides/udiskie"]
+auto_open_filemanager = true
+manager_placement = "attached"
+
+[plugin_settings."blackbartblues/keymap"]
+card_opacity = 40
+columns = 4
+panel_placement = "attached"
+
+[plugin_settings."harveywuk/airpods"]
+panel_open_near_click = false
+
+[plugin_settings."kenn/keybind-cheatsheet"]
+cheatsheet_open_near_click = false
+cheatsheet_placement = "attached"
+columns = 4
+show_actions = true
+
+[plugin_settings."marccvictoria/llamanager"]
+panel_open_near_click = false
+panel_placement = "attached"
+
+[plugin_settings."neyfua/obs-integration"]
+panel_placement = "attached"
+
+[plugin_settings."noctalia/notes"]
+panel_placement = "attached"
+
+[plugin_settings."noctalia/wallhaven"]
+api_key = "HGrGGGEvJH1ZdZeW4EiWKlDyHzo8OZxe"
+download_dir = "/home/snakeye/Pictures/Wallpapers/Wallhaven"
+
+[plugin_settings."nomadcxx/gamer-mode"]
+poll_interval = "2"
+
+[plugin_settings."nomadcxx/gslapper"]
+fade = true
+fade_duration = 1.0
+fps_cap = "100"
+hidden_behavior = "auto-stop"
+scale = "original"
+video_directory = "/home/snakeye/Pictures/Wallpapers/ANIMATED"
+
+[plugins]
+enabled = [
+    "nomadcxx/gslapper",
+    "kenn/keybind-cheatsheet",
+    "marccvictoria/llamanager",
+    "noctalia/notes",
+    "noctalia/wallhaven",
+    "aristides/udiskie",
+    "nomadcxx/gamer-mode",
+    "alexander/game-launcher",
+    "harveywuk/airpods",
+    "yuuto/arch-updater"
+]
+
+[shell]
+app_icon_colorize = true
+avatar_path = "/var/lib/AccountsService/icons/snakeye"
+date_format = ""
+external_ip_enabled = true
+font_family = "Sony Sketch EF"
+launch_apps_as_systemd_services = true
+niri_overview_type_to_launch_enabled = true
+panel_anchor_bar = "default"
+password_style = "random"
+polkit_agent = true
+screen_time_enabled = true
+settings_window_translucent = true
+time_format = "%T"
+
+    [shell.launcher]
+    app_grid = true
+
+        [shell.launcher.providers.emoji]
+        global = true
+
+        [shell.launcher.providers.session]
+        global = true
+
+        [shell.launcher.providers.wallpaper]
+        global = true
+
+        [shell.launcher.providers.windows]
+        global = true
+
+    [shell.panel]
+    clipboard_placement = "attached"
+    launcher_placement = "attached"
+    list_item_background = true
+    polkit_placement = "attached"
+    transparency_mode = "glass"
+
+    [shell.screen_corners]
+    enabled = true
+    size = 12
+
+    [shell.screenshot]
+    confirm_region = true
+    directory = "/home/snakeye/Pictures/Screenshots"
+    show_cursor = true
+
+    [shell.shadow]
+    direction = "center"
+
+[system.monitor]
+disk_poll_seconds = 2
+gpu_poll_seconds = 2
+network_poll_seconds = 2
+
+[theme]
+community_palette = "Monochrome"
+mode = "dark"
+pure_black_dark = true
+source = "wallpaper"
+wallpaper_scheme = "m3-monochrome"
+
+    [theme.templates]
+    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "ghostty", "hyprland", "niri", "qt", "starship" ]
+    community_ids = [
+        "opencode",
+        "zen-browser",
+        "discord",
+        "telegram",
+        "vscode",
+        "heroiclauncher",
+        "steam",
+        "fastfetch",
+        "obs",
+        "hyprtoolkit",
+        "yazi"
+    ]
+
+[wallpaper]
+fill_mode = "fit"
+
+    [wallpaper.automation]
+    enabled = true
+
+    [wallpaper.default]
+    path = "/home/snakeye/Pictures/Wallpapers/Wallhaven/wallhaven-g7dkyl.png"
+
+    [wallpaper.last]
+    path = "/home/snakeye/Pictures/Wallpapers/Wallhaven/wallhaven-g7dkyl.png"
+
+    [wallpaper.monitors.DP-1]
+    path = "/home/snakeye/Pictures/Wallpapers/Wallhaven/wallhaven-l3dkpp.png"
+
+    [wallpaper.monitors.DP-2]
+    path = "/home/snakeye/Pictures/Wallpapers/Wallhaven/wallhaven-w5d5gx.jpg"
+
+    [wallpaper.monitors.DP-3]
+    path = "/home/snakeye/Pictures/Wallpapers/Wallhaven/wallhaven-g7dkyl.png"
+
+    [wallpaper.monitors.DP-5]
+    path = "/home/snakeye/Pictures/Wallpapers/Wallhaven/wallhaven-g7dkyl.png"
+
+    [wallpaper.monitors.DVI-I-1]
+    path = "/home/snakeye/Pictures/Wallpapers/KEEB/4.png"
+
+    [wallpaper.monitors.DVI-I-2]
+    path = "/home/snakeye/Pictures/Wallpapers/Wallhaven/wallhaven-5wk623.png"
+
+    [wallpaper.monitors.DVI-I-3]
+    path = "/home/snakeye/Pictures/Wallpapers/zen.jpg"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/snakeye/Pictures/Wallpapers/Wallhaven/wallhaven-721oke.png"
+
+[weather]
+unit = "imperial"
+
+[widget.airpods]
+type = "harveywuk/airpods:airpods"
+
+[widget.audio_visualizer]
+show_when_idle = true
+
+[widget.clipboard]
+custom_image_colorize = true
+
+[widget.clock]
+format = "%T"
+tooltip_format = "%F"
+vertical_format = "%T"
+
+[widget.control-center]
+custom_image_colorize = true
+glyph = "navigation-cog"
+
+[widget.gamermode]
+type = "nomadcxx/gamer-mode:gamermode"
+
+[widget.input_volume]
+custom_image_colorize = true
+
+[widget.keybinds]
+type = "kenn/keybind-cheatsheet:keybinds"
+
+[widget.launcher]
+custom_image_colorize = true
+glyph = "navigation-search"
+
+[widget.launcher_2]
+type = "alexander/game-launcher:launcher"
+
+[widget.media]
+artist_first = true
+hide_when_no_media = true
+title_scroll = "always"
+
+[widget.monitor]
+enabled = true
+flame_height = 2
+show_cpu_temp = false
+show_gpu_temp = false
+show_net = false
+type = "nomadcxx/gamer-mode:monitor"
+
+[widget.network]
+show_label = false
+show_vpn_label = true
+vpn_status = "both"
+
+[widget.output_volume]
+custom_image_colorize = true
+
+[widget.privacy]
+icon_spacing = 8
+
+[widget.screenshot]
+custom_image_colorize = true
+
+[widget.session]
+custom_image_colorize = true
+glyph = "power"
+
+[widget.settings]
+custom_image_colorize = true
+
+[widget.status]
+glyph = "usb"
+hide_when_empty = true
+type = "aristides/udiskie:status"
+
+[widget.sysmon]
+show_glyph = true
+
+[widget.tray]
+drawer = true
+drawer_columns = 5
+match_adjacent_spacing = true
+
+[widget.volume]
+custom_image_colorize = true
+
+[widget.wallhaven]
+type = "noctalia/wallhaven:wallhaven"
+
+[widget.wallpaper]
+custom_image_colorize = true
+
+[widget.wallpaper_2]
+type = "nomadcxx/gslapper:wallpaper"
+
+[widget.widget]
+type = "marccvictoria/llamanager:widget"
+
+[widget.widget_2]
+glyph = "book-download"
+type = "yuuto/arch-updater:widget"
+
+[widget.workspaces]
+style = "focus_hint"

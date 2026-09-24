@@ -1,1 +1,0 @@
-python3 ~/.config/eww/topbar/scripts/weather.py

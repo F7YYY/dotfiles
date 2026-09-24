@@ -1,11 +1,11 @@
 "$schema" = 'https://starship.rs/config-schema.json'
+palette = "noctalia"
 
 add_newline = false
 
 format = "[█](surface0)$os$username[](bg:blue fg:surface0)$directory[](fg:blue bg:green)$git_branch$git_status[](fg:green) "
 right_format = "[](fg:surface0)$status[](bg:surface0 fg:text)$kubernetes[](bg:surface0 fg:text)$time"
 
-palette = "noctalia"
 
 [palettes.catppuccin_macchiato]
 rosewater = "#f4dbd6"
@@ -117,21 +117,21 @@ red       = "#ffb4ab"
 green     = "#ffffff"
 yellow    = "#c6c6c6"
 cyan      = "#ababab"
-magenta   = "#474747"
+magenta   = "#7d7d7d"
 white     = "#e2e2e2"
 black     = "#474747"
 
 # Extended palette (Catppuccin-compatible names)
 rosewater = "#c6c6c6"
 flamingo  = "#ffb4ab"
-pink      = "#474747"
-mauve     = "#474747"
+pink      = "#7d7d7d"
+mauve     = "#7d7d7d"
 maroon    = "#ffb4ab"
 peach     = "#c6c6c6"
 teal      = "#ababab"
 sky       = "#ababab"
 sapphire  = "#e2e2e2"
-lavender  = "#474747"
+lavender  = "#7d7d7d"
 
 # Text shades
 text      = "#e2e2e2"

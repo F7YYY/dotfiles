@@ -1,0 +1,49 @@
+{
+  "displays": [
+    {
+      "name": "DP-3",
+      "description": "PNP(BNQ) ZOWIE XL LCD 97L01432SL0",
+      "x": 1930,
+      "y": 0,
+      "physical_width": 1920,
+      "physical_height": 1080,
+      "transform": "90",
+      "scale": 1.0,
+      "scale_filter": "linear",
+      "refresh": 144.001,
+      "dpms": true,
+      "adaptive_sync": false,
+      "custom_mode": false,
+      "mirror": "",
+      "ten_bit": true,
+      "active": true
+    },
+    {
+      "name": "DP-1",
+      "description": "PNP(BNQ) ZOWIE XL LCD EBSCL02631SL0",
+      "x": 10,
+      "y": 420,
+      "physical_width": 1920,
+      "physical_height": 1080,
+      "transform": "normal",
+      "scale": 1.0,
+      "scale_filter": null,
+      "refresh": 239.76,
+      "dpms": true,
+      "adaptive_sync": false,
+      "custom_mode": false,
+      "mirror": "",
+      "ten_bit": true,
+      "active": true
+    }
+  ],
+  "config": {
+    "view-scale": 0.2,
+    "snap-threshold": 10,
+    "indicator-timeout": 500,
+    "custom-mode": [],
+    "use-desc": false,
+    "confirm-timeout": 10,
+    "profile-bound-wallpapers": true
+  }
+}

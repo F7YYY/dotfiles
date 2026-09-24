@@ -1,0 +1,3423 @@
+{
+    "base_color": 16777215,
+    "controllers": [
+        {
+            "active_mode": 0,
+            "colors": [
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215
+            ],
+            "description": "ENE SMBus Device",
+            "display_name": "",
+            "flags": 1,
+            "leds": [
+                {
+                    "name": "DRAM LED 1"
+                },
+                {
+                    "name": "DRAM LED 2"
+                },
+                {
+                    "name": "DRAM LED 3"
+                },
+                {
+                    "name": "DRAM LED 4"
+                },
+                {
+                    "name": "DRAM LED 5"
+                },
+                {
+                    "name": "DRAM LED 6"
+                },
+                {
+                    "name": "DRAM LED 7"
+                },
+                {
+                    "name": "DRAM LED 8"
+                }
+            ],
+            "location": "I2C: SMBus PIIX4 adapter port 0 at 0b00 (/dev/i2c-1), address 0x71",
+            "modes": [
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 32,
+                    "name": "Direct",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 0,
+                    "name": "Off",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 32,
+                    "name": "Static",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 161,
+                    "name": "Breathing",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 33,
+                    "name": "Flashing",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 1,
+                    "name": "Spectrum Cycle",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 3,
+                    "name": "Rainbow",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 163,
+                    "name": "Chase Fade",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 163,
+                    "name": "Chase",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 1,
+                    "name": "Random Flicker",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                }
+            ],
+            "name": "ENE DRAM",
+            "serial": "",
+            "type": 1,
+            "vendor": "ENE",
+            "version": "AUDA0-E6K5-0101",
+            "zones": [
+                {
+                    "display_name": "",
+                    "flags": 0,
+                    "leds_count": 8,
+                    "leds_max": 8,
+                    "leds_min": 8,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "DRAM",
+                    "type": 1
+                }
+            ]
+        },
+        {
+            "active_mode": 0,
+            "colors": [
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215
+            ],
+            "description": "ENE SMBus Device",
+            "display_name": "",
+            "flags": 1,
+            "leds": [
+                {
+                    "name": "DRAM LED 1"
+                },
+                {
+                    "name": "DRAM LED 2"
+                },
+                {
+                    "name": "DRAM LED 3"
+                },
+                {
+                    "name": "DRAM LED 4"
+                },
+                {
+                    "name": "DRAM LED 5"
+                },
+                {
+                    "name": "DRAM LED 6"
+                },
+                {
+                    "name": "DRAM LED 7"
+                },
+                {
+                    "name": "DRAM LED 8"
+                }
+            ],
+            "location": "I2C: SMBus PIIX4 adapter port 0 at 0b00 (/dev/i2c-1), address 0x73",
+            "modes": [
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 32,
+                    "name": "Direct",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 0,
+                    "name": "Off",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 32,
+                    "name": "Static",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 161,
+                    "name": "Breathing",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 33,
+                    "name": "Flashing",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 1,
+                    "name": "Spectrum Cycle",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 3,
+                    "name": "Rainbow",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 163,
+                    "name": "Chase Fade",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 163,
+                    "name": "Chase",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 1,
+                    "name": "Random Flicker",
+                    "speed": 2,
+                    "speed_max": 0,
+                    "speed_min": 4
+                }
+            ],
+            "name": "ENE DRAM",
+            "serial": "",
+            "type": 1,
+            "vendor": "ENE",
+            "version": "AUDA0-E6K5-0101",
+            "zones": [
+                {
+                    "display_name": "",
+                    "flags": 0,
+                    "leds_count": 8,
+                    "leds_max": 8,
+                    "leds_min": 8,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "DRAM",
+                    "type": 1
+                }
+            ]
+        },
+        {
+            "active_mode": 0,
+            "colors": [
+                16777215,
+                16777215,
+                16777215
+            ],
+            "description": "ZOTAC RTX 50 series RGB GPU Device (N762A-2008e)",
+            "display_name": "",
+            "flags": 1,
+            "leds": [
+                {
+                    "name": "Logo LED"
+                },
+                {
+                    "name": "Side Bar LED"
+                },
+                {
+                    "name": "Infinity Mirror LED"
+                }
+            ],
+            "location": "I2C: NVIDIA i2c adapter 1 at 1:00.0\n (/dev/i2c-4), address 0x4B",
+            "modes": [
+                {
+                    "brightness": 100,
+                    "brightness_max": 100,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 560,
+                    "name": "Static",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 100,
+                    "brightness_max": 100,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 561,
+                    "name": "Breathe",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 513,
+                    "name": "Fade",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 100,
+                    "brightness_max": 100,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 561,
+                    "name": "Wink",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 100,
+                    "brightness_max": 100,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 563,
+                    "name": "Glide",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 515,
+                    "name": "Prism",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 100,
+                    "brightness_max": 100,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 561,
+                    "name": "Bokeh",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 100,
+                    "brightness_max": 100,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 561,
+                    "name": "Beacon",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 100,
+                    "brightness_max": 100,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 561,
+                    "name": "Tandem",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 100,
+                    "brightness_max": 100,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 563,
+                    "name": "Tidal",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 100,
+                    "brightness_max": 100,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 561,
+                    "name": "Astra",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 100,
+                    "brightness_max": 100,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 561,
+                    "name": "Cosmic",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 100,
+                    "brightness_max": 100,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 561,
+                    "name": "Volta",
+                    "speed": 20,
+                    "speed_max": 100,
+                    "speed_min": 0
+                }
+            ],
+            "name": "ZOTAC GAMING GeForce RTX 5080 AMP Extreme INFINITY",
+            "serial": "",
+            "type": 2,
+            "vendor": "ZOTAC",
+            "version": "N762A-2008e",
+            "zones": [
+                {
+                    "display_name": "",
+                    "flags": 0,
+                    "leds_count": 1,
+                    "leds_max": 1,
+                    "leds_min": 1,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Logo",
+                    "type": 0
+                },
+                {
+                    "display_name": "",
+                    "flags": 0,
+                    "leds_count": 1,
+                    "leds_max": 1,
+                    "leds_min": 1,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Side Bar",
+                    "type": 0
+                },
+                {
+                    "display_name": "",
+                    "flags": 0,
+                    "leds_count": 1,
+                    "leds_max": 1,
+                    "leds_min": 1,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Infinity Mirror",
+                    "type": 0
+                }
+            ]
+        },
+        {
+            "active_mode": 0,
+            "colors": [
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215
+            ],
+            "description": "ASUS Aura USB Mainboard Device",
+            "display_name": "",
+            "flags": 1,
+            "leds": [
+                {
+                    "name": "Addressable RGB Header 1, LED 1"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 2"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 3"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 4"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 5"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 6"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 7"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 8"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 9"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 10"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 11"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 12"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 13"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 14"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 15"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 16"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 17"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 18"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 19"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 20"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 21"
+                },
+                {
+                    "name": "Addressable RGB Header 1, LED 22"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 1"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 2"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 3"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 4"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 5"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 6"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 7"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 8"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 9"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 10"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 11"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 12"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 13"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 14"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 15"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 16"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 17"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 18"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 19"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 20"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 21"
+                },
+                {
+                    "name": "Addressable RGB Header 2, LED 22"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 1"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 2"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 3"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 4"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 5"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 6"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 7"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 8"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 9"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 10"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 11"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 12"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 13"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 14"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 15"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 16"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 17"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 18"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 19"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 20"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 21"
+                },
+                {
+                    "name": "Addressable RGB Header 3, LED 22"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 1"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 2"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 3"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 4"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 5"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 6"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 7"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 8"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 9"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 10"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 11"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 12"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 13"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 14"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 15"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 16"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 17"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 18"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 19"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 20"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 21"
+                },
+                {
+                    "name": "Addressable RGB Header 4, LED 22"
+                }
+            ],
+            "location": "HID: /dev/hidraw8",
+            "modes": [
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 32,
+                    "name": "Direct",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Off",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 2,
+                    "colors": [
+                        0
+                    ],
+                    "colors_max": 1,
+                    "colors_min": 1,
+                    "direction": 0,
+                    "flags": 320,
+                    "name": "Static",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 2,
+                    "colors": [
+                        0
+                    ],
+                    "colors_max": 1,
+                    "colors_min": 1,
+                    "direction": 0,
+                    "flags": 320,
+                    "name": "Breathing",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 2,
+                    "colors": [
+                        0
+                    ],
+                    "colors_max": 1,
+                    "colors_min": 1,
+                    "direction": 0,
+                    "flags": 320,
+                    "name": "Flashing",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Spectrum Cycle",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 256,
+                    "name": "Rainbow",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 2,
+                    "colors": [
+                        0
+                    ],
+                    "colors_max": 1,
+                    "colors_min": 1,
+                    "direction": 0,
+                    "flags": 320,
+                    "name": "Chase Fade",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 2,
+                    "colors": [
+                        0
+                    ],
+                    "colors_max": 1,
+                    "colors_min": 1,
+                    "direction": 0,
+                    "flags": 320,
+                    "name": "Chase",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                }
+            ],
+            "name": "ASUS ROG STRIX X870E-E GAMING WIFI7 R2",
+            "serial": "9876543210",
+            "type": 0,
+            "vendor": "ASUS",
+            "version": "AULA3-AR60-0112",
+            "zones": [
+                {
+                    "display_name": "",
+                    "flags": 4158,
+                    "leds_count": 22,
+                    "leds_max": 120,
+                    "leds_min": 0,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Addressable RGB Header 1",
+                    "type": 1
+                },
+                {
+                    "display_name": "",
+                    "flags": 4158,
+                    "leds_count": 22,
+                    "leds_max": 120,
+                    "leds_min": 0,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Addressable RGB Header 2",
+                    "type": 1
+                },
+                {
+                    "display_name": "",
+                    "flags": 4158,
+                    "leds_count": 22,
+                    "leds_max": 120,
+                    "leds_min": 0,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Addressable RGB Header 3",
+                    "type": 1
+                },
+                {
+                    "display_name": "",
+                    "flags": 4158,
+                    "leds_count": 22,
+                    "leds_max": 120,
+                    "leds_min": 0,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Addressable RGB Header 4",
+                    "type": 1
+                }
+            ]
+        },
+        {
+            "active_mode": 0,
+            "colors": [
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215
+            ],
+            "description": "Lian Li Universal Screen Device",
+            "display_name": "",
+            "flags": 1,
+            "leds": [
+                {
+                    "name": "Screen Lighting LED 0"
+                },
+                {
+                    "name": "Screen Lighting LED 1"
+                },
+                {
+                    "name": "Screen Lighting LED 2"
+                },
+                {
+                    "name": "Screen Lighting LED 3"
+                },
+                {
+                    "name": "Screen Lighting LED 4"
+                },
+                {
+                    "name": "Screen Lighting LED 5"
+                },
+                {
+                    "name": "Screen Lighting LED 6"
+                },
+                {
+                    "name": "Screen Lighting LED 7"
+                },
+                {
+                    "name": "Screen Lighting LED 8"
+                },
+                {
+                    "name": "Screen Lighting LED 9"
+                },
+                {
+                    "name": "Screen Lighting LED 10"
+                },
+                {
+                    "name": "Screen Lighting LED 11"
+                },
+                {
+                    "name": "Screen Lighting LED 12"
+                },
+                {
+                    "name": "Screen Lighting LED 13"
+                },
+                {
+                    "name": "Screen Lighting LED 14"
+                },
+                {
+                    "name": "Screen Lighting LED 15"
+                },
+                {
+                    "name": "Screen Lighting LED 16"
+                },
+                {
+                    "name": "Screen Lighting LED 17"
+                },
+                {
+                    "name": "Screen Lighting LED 18"
+                },
+                {
+                    "name": "Screen Lighting LED 19"
+                },
+                {
+                    "name": "Screen Lighting LED 20"
+                },
+                {
+                    "name": "Screen Lighting LED 21"
+                },
+                {
+                    "name": "Screen Lighting LED 22"
+                },
+                {
+                    "name": "Screen Lighting LED 23"
+                },
+                {
+                    "name": "Screen Lighting LED 24"
+                },
+                {
+                    "name": "Screen Lighting LED 25"
+                },
+                {
+                    "name": "Screen Lighting LED 26"
+                },
+                {
+                    "name": "Screen Lighting LED 27"
+                },
+                {
+                    "name": "Screen Lighting LED 28"
+                },
+                {
+                    "name": "Screen Lighting LED 29"
+                },
+                {
+                    "name": "Screen Lighting LED 30"
+                },
+                {
+                    "name": "Screen Lighting LED 31"
+                },
+                {
+                    "name": "Screen Lighting LED 32"
+                },
+                {
+                    "name": "Screen Lighting LED 33"
+                },
+                {
+                    "name": "Screen Lighting LED 34"
+                },
+                {
+                    "name": "Screen Lighting LED 35"
+                },
+                {
+                    "name": "Screen Lighting LED 36"
+                },
+                {
+                    "name": "Screen Lighting LED 37"
+                },
+                {
+                    "name": "Screen Lighting LED 38"
+                },
+                {
+                    "name": "Screen Lighting LED 39"
+                },
+                {
+                    "name": "Screen Lighting LED 40"
+                },
+                {
+                    "name": "Screen Lighting LED 41"
+                },
+                {
+                    "name": "Screen Lighting LED 42"
+                },
+                {
+                    "name": "Screen Lighting LED 43"
+                },
+                {
+                    "name": "Screen Lighting LED 44"
+                },
+                {
+                    "name": "Screen Lighting LED 45"
+                },
+                {
+                    "name": "Screen Lighting LED 46"
+                },
+                {
+                    "name": "Screen Lighting LED 47"
+                },
+                {
+                    "name": "Screen Lighting LED 48"
+                },
+                {
+                    "name": "Screen Lighting LED 49"
+                },
+                {
+                    "name": "Screen Lighting LED 50"
+                },
+                {
+                    "name": "Screen Lighting LED 51"
+                },
+                {
+                    "name": "Screen Lighting LED 52"
+                },
+                {
+                    "name": "Screen Lighting LED 53"
+                },
+                {
+                    "name": "Screen Lighting LED 54"
+                },
+                {
+                    "name": "Screen Lighting LED 55"
+                },
+                {
+                    "name": "Screen Lighting LED 56"
+                },
+                {
+                    "name": "Screen Lighting LED 57"
+                },
+                {
+                    "name": "Screen Lighting LED 58"
+                },
+                {
+                    "name": "Screen Lighting LED 59"
+                }
+            ],
+            "location": "USB: 0416:8050",
+            "modes": [
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 32,
+                    "name": "Direct",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                }
+            ],
+            "name": "Lian Li Universal Screen",
+            "serial": "",
+            "type": 20,
+            "vendor": "Lian Li",
+            "version": "",
+            "zones": [
+                {
+                    "display_name": "",
+                    "flags": 0,
+                    "leds_count": 60,
+                    "leds_max": 60,
+                    "leds_min": 60,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Screen Lighting",
+                    "type": 1
+                }
+            ]
+        },
+        {
+            "active_mode": 0,
+            "colors": [
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215
+            ],
+            "description": "Lian Li Universal Screen 8.8\" LED Ring RGB Controller",
+            "display_name": "",
+            "flags": 2,
+            "leds": [
+                {
+                    "name": "Ring LED 0"
+                },
+                {
+                    "name": "Ring LED 1"
+                },
+                {
+                    "name": "Ring LED 2"
+                },
+                {
+                    "name": "Ring LED 3"
+                },
+                {
+                    "name": "Ring LED 4"
+                },
+                {
+                    "name": "Ring LED 5"
+                },
+                {
+                    "name": "Ring LED 6"
+                },
+                {
+                    "name": "Ring LED 7"
+                },
+                {
+                    "name": "Ring LED 8"
+                },
+                {
+                    "name": "Ring LED 9"
+                },
+                {
+                    "name": "Ring LED 10"
+                },
+                {
+                    "name": "Ring LED 11"
+                },
+                {
+                    "name": "Ring LED 12"
+                },
+                {
+                    "name": "Ring LED 13"
+                },
+                {
+                    "name": "Ring LED 14"
+                },
+                {
+                    "name": "Ring LED 15"
+                },
+                {
+                    "name": "Ring LED 16"
+                },
+                {
+                    "name": "Ring LED 17"
+                },
+                {
+                    "name": "Ring LED 18"
+                },
+                {
+                    "name": "Ring LED 19"
+                },
+                {
+                    "name": "Ring LED 20"
+                },
+                {
+                    "name": "Ring LED 21"
+                },
+                {
+                    "name": "Ring LED 22"
+                },
+                {
+                    "name": "Ring LED 23"
+                },
+                {
+                    "name": "Ring LED 24"
+                },
+                {
+                    "name": "Ring LED 25"
+                },
+                {
+                    "name": "Ring LED 26"
+                },
+                {
+                    "name": "Ring LED 27"
+                },
+                {
+                    "name": "Ring LED 28"
+                },
+                {
+                    "name": "Ring LED 29"
+                },
+                {
+                    "name": "Ring LED 30"
+                },
+                {
+                    "name": "Ring LED 31"
+                },
+                {
+                    "name": "Ring LED 32"
+                },
+                {
+                    "name": "Ring LED 33"
+                },
+                {
+                    "name": "Ring LED 34"
+                },
+                {
+                    "name": "Ring LED 35"
+                },
+                {
+                    "name": "Ring LED 36"
+                },
+                {
+                    "name": "Ring LED 37"
+                },
+                {
+                    "name": "Ring LED 38"
+                },
+                {
+                    "name": "Ring LED 39"
+                },
+                {
+                    "name": "Ring LED 40"
+                },
+                {
+                    "name": "Ring LED 41"
+                },
+                {
+                    "name": "Ring LED 42"
+                },
+                {
+                    "name": "Ring LED 43"
+                },
+                {
+                    "name": "Ring LED 44"
+                },
+                {
+                    "name": "Ring LED 45"
+                },
+                {
+                    "name": "Ring LED 46"
+                },
+                {
+                    "name": "Ring LED 47"
+                },
+                {
+                    "name": "Ring LED 48"
+                },
+                {
+                    "name": "Ring LED 49"
+                },
+                {
+                    "name": "Ring LED 50"
+                },
+                {
+                    "name": "Ring LED 51"
+                },
+                {
+                    "name": "Ring LED 52"
+                },
+                {
+                    "name": "Ring LED 53"
+                },
+                {
+                    "name": "Ring LED 54"
+                },
+                {
+                    "name": "Ring LED 55"
+                },
+                {
+                    "name": "Ring LED 56"
+                },
+                {
+                    "name": "Ring LED 57"
+                },
+                {
+                    "name": "Ring LED 58"
+                },
+                {
+                    "name": "Ring LED 59"
+                }
+            ],
+            "location": "HID: hid:0416:8050:8-7.6.3",
+            "modes": [
+                {
+                    "brightness": 0,
+                    "brightness_max": 4,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 1,
+                    "flags": 32,
+                    "name": "Direct",
+                    "speed": 0,
+                    "speed_max": 4,
+                    "speed_min": 0
+                }
+            ],
+            "name": "Universal Screen 8.8\" LED Ring",
+            "serial": "hid:0416:8050:8-7.6.3",
+            "type": 4,
+            "vendor": "Lian Li",
+            "version": "0.8.12",
+            "zones": [
+                {
+                    "display_name": "",
+                    "flags": 4096,
+                    "leds_count": 60,
+                    "leds_max": 60,
+                    "leds_min": 60,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Ring",
+                    "type": 1
+                }
+            ]
+        },
+        {
+            "active_mode": 0,
+            "colors": [
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215
+            ],
+            "description": "Lian Li UNI FAN SL-INF Wireless RGB Controller",
+            "display_name": "",
+            "flags": 2,
+            "leds": [
+                {
+                    "name": "Fan 1 LED 0"
+                },
+                {
+                    "name": "Fan 1 LED 1"
+                },
+                {
+                    "name": "Fan 1 LED 2"
+                },
+                {
+                    "name": "Fan 1 LED 3"
+                },
+                {
+                    "name": "Fan 1 LED 4"
+                },
+                {
+                    "name": "Fan 1 LED 5"
+                },
+                {
+                    "name": "Fan 1 LED 6"
+                },
+                {
+                    "name": "Fan 1 LED 7"
+                },
+                {
+                    "name": "Fan 1 LED 8"
+                },
+                {
+                    "name": "Fan 1 LED 9"
+                },
+                {
+                    "name": "Fan 1 LED 10"
+                },
+                {
+                    "name": "Fan 1 LED 11"
+                },
+                {
+                    "name": "Fan 1 LED 12"
+                },
+                {
+                    "name": "Fan 1 LED 13"
+                },
+                {
+                    "name": "Fan 1 LED 14"
+                },
+                {
+                    "name": "Fan 1 LED 15"
+                },
+                {
+                    "name": "Fan 1 LED 16"
+                },
+                {
+                    "name": "Fan 1 LED 17"
+                },
+                {
+                    "name": "Fan 1 LED 18"
+                },
+                {
+                    "name": "Fan 1 LED 19"
+                },
+                {
+                    "name": "Fan 1 LED 20"
+                },
+                {
+                    "name": "Fan 1 LED 21"
+                },
+                {
+                    "name": "Fan 1 LED 22"
+                },
+                {
+                    "name": "Fan 1 LED 23"
+                },
+                {
+                    "name": "Fan 1 LED 24"
+                },
+                {
+                    "name": "Fan 1 LED 25"
+                },
+                {
+                    "name": "Fan 1 LED 26"
+                },
+                {
+                    "name": "Fan 1 LED 27"
+                },
+                {
+                    "name": "Fan 1 LED 28"
+                },
+                {
+                    "name": "Fan 1 LED 29"
+                },
+                {
+                    "name": "Fan 1 LED 30"
+                },
+                {
+                    "name": "Fan 1 LED 31"
+                },
+                {
+                    "name": "Fan 1 LED 32"
+                },
+                {
+                    "name": "Fan 1 LED 33"
+                },
+                {
+                    "name": "Fan 1 LED 34"
+                },
+                {
+                    "name": "Fan 1 LED 35"
+                },
+                {
+                    "name": "Fan 1 LED 36"
+                },
+                {
+                    "name": "Fan 1 LED 37"
+                },
+                {
+                    "name": "Fan 1 LED 38"
+                },
+                {
+                    "name": "Fan 1 LED 39"
+                },
+                {
+                    "name": "Fan 1 LED 40"
+                },
+                {
+                    "name": "Fan 1 LED 41"
+                },
+                {
+                    "name": "Fan 1 LED 42"
+                },
+                {
+                    "name": "Fan 1 LED 43"
+                },
+                {
+                    "name": "Fan 2 LED 0"
+                },
+                {
+                    "name": "Fan 2 LED 1"
+                },
+                {
+                    "name": "Fan 2 LED 2"
+                },
+                {
+                    "name": "Fan 2 LED 3"
+                },
+                {
+                    "name": "Fan 2 LED 4"
+                },
+                {
+                    "name": "Fan 2 LED 5"
+                },
+                {
+                    "name": "Fan 2 LED 6"
+                },
+                {
+                    "name": "Fan 2 LED 7"
+                },
+                {
+                    "name": "Fan 2 LED 8"
+                },
+                {
+                    "name": "Fan 2 LED 9"
+                },
+                {
+                    "name": "Fan 2 LED 10"
+                },
+                {
+                    "name": "Fan 2 LED 11"
+                },
+                {
+                    "name": "Fan 2 LED 12"
+                },
+                {
+                    "name": "Fan 2 LED 13"
+                },
+                {
+                    "name": "Fan 2 LED 14"
+                },
+                {
+                    "name": "Fan 2 LED 15"
+                },
+                {
+                    "name": "Fan 2 LED 16"
+                },
+                {
+                    "name": "Fan 2 LED 17"
+                },
+                {
+                    "name": "Fan 2 LED 18"
+                },
+                {
+                    "name": "Fan 2 LED 19"
+                },
+                {
+                    "name": "Fan 2 LED 20"
+                },
+                {
+                    "name": "Fan 2 LED 21"
+                },
+                {
+                    "name": "Fan 2 LED 22"
+                },
+                {
+                    "name": "Fan 2 LED 23"
+                },
+                {
+                    "name": "Fan 2 LED 24"
+                },
+                {
+                    "name": "Fan 2 LED 25"
+                },
+                {
+                    "name": "Fan 2 LED 26"
+                },
+                {
+                    "name": "Fan 2 LED 27"
+                },
+                {
+                    "name": "Fan 2 LED 28"
+                },
+                {
+                    "name": "Fan 2 LED 29"
+                },
+                {
+                    "name": "Fan 2 LED 30"
+                },
+                {
+                    "name": "Fan 2 LED 31"
+                },
+                {
+                    "name": "Fan 2 LED 32"
+                },
+                {
+                    "name": "Fan 2 LED 33"
+                },
+                {
+                    "name": "Fan 2 LED 34"
+                },
+                {
+                    "name": "Fan 2 LED 35"
+                },
+                {
+                    "name": "Fan 2 LED 36"
+                },
+                {
+                    "name": "Fan 2 LED 37"
+                },
+                {
+                    "name": "Fan 2 LED 38"
+                },
+                {
+                    "name": "Fan 2 LED 39"
+                },
+                {
+                    "name": "Fan 2 LED 40"
+                },
+                {
+                    "name": "Fan 2 LED 41"
+                },
+                {
+                    "name": "Fan 2 LED 42"
+                },
+                {
+                    "name": "Fan 2 LED 43"
+                },
+                {
+                    "name": "Fan 3 LED 0"
+                },
+                {
+                    "name": "Fan 3 LED 1"
+                },
+                {
+                    "name": "Fan 3 LED 2"
+                },
+                {
+                    "name": "Fan 3 LED 3"
+                },
+                {
+                    "name": "Fan 3 LED 4"
+                },
+                {
+                    "name": "Fan 3 LED 5"
+                },
+                {
+                    "name": "Fan 3 LED 6"
+                },
+                {
+                    "name": "Fan 3 LED 7"
+                },
+                {
+                    "name": "Fan 3 LED 8"
+                },
+                {
+                    "name": "Fan 3 LED 9"
+                },
+                {
+                    "name": "Fan 3 LED 10"
+                },
+                {
+                    "name": "Fan 3 LED 11"
+                },
+                {
+                    "name": "Fan 3 LED 12"
+                },
+                {
+                    "name": "Fan 3 LED 13"
+                },
+                {
+                    "name": "Fan 3 LED 14"
+                },
+                {
+                    "name": "Fan 3 LED 15"
+                },
+                {
+                    "name": "Fan 3 LED 16"
+                },
+                {
+                    "name": "Fan 3 LED 17"
+                },
+                {
+                    "name": "Fan 3 LED 18"
+                },
+                {
+                    "name": "Fan 3 LED 19"
+                },
+                {
+                    "name": "Fan 3 LED 20"
+                },
+                {
+                    "name": "Fan 3 LED 21"
+                },
+                {
+                    "name": "Fan 3 LED 22"
+                },
+                {
+                    "name": "Fan 3 LED 23"
+                },
+                {
+                    "name": "Fan 3 LED 24"
+                },
+                {
+                    "name": "Fan 3 LED 25"
+                },
+                {
+                    "name": "Fan 3 LED 26"
+                },
+                {
+                    "name": "Fan 3 LED 27"
+                },
+                {
+                    "name": "Fan 3 LED 28"
+                },
+                {
+                    "name": "Fan 3 LED 29"
+                },
+                {
+                    "name": "Fan 3 LED 30"
+                },
+                {
+                    "name": "Fan 3 LED 31"
+                },
+                {
+                    "name": "Fan 3 LED 32"
+                },
+                {
+                    "name": "Fan 3 LED 33"
+                },
+                {
+                    "name": "Fan 3 LED 34"
+                },
+                {
+                    "name": "Fan 3 LED 35"
+                },
+                {
+                    "name": "Fan 3 LED 36"
+                },
+                {
+                    "name": "Fan 3 LED 37"
+                },
+                {
+                    "name": "Fan 3 LED 38"
+                },
+                {
+                    "name": "Fan 3 LED 39"
+                },
+                {
+                    "name": "Fan 3 LED 40"
+                },
+                {
+                    "name": "Fan 3 LED 41"
+                },
+                {
+                    "name": "Fan 3 LED 42"
+                },
+                {
+                    "name": "Fan 3 LED 43"
+                }
+            ],
+            "location": "HID: wireless:2d:7c:71:e5:66:e1",
+            "modes": [
+                {
+                    "brightness": 0,
+                    "brightness_max": 4,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 1,
+                    "flags": 32,
+                    "name": "Direct",
+                    "speed": 0,
+                    "speed_max": 4,
+                    "speed_min": 0
+                }
+            ],
+            "name": "UNI FAN SL-INF Wireless",
+            "serial": "wireless:2d:7c:71:e5:66:e1",
+            "type": 4,
+            "vendor": "Lian Li",
+            "version": "0.8.12",
+            "zones": [
+                {
+                    "display_name": "",
+                    "flags": 4096,
+                    "leds_count": 44,
+                    "leds_max": 44,
+                    "leds_min": 44,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Fan 1",
+                    "type": 1
+                },
+                {
+                    "display_name": "",
+                    "flags": 4096,
+                    "leds_count": 44,
+                    "leds_max": 44,
+                    "leds_min": 44,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Fan 2",
+                    "type": 1
+                },
+                {
+                    "display_name": "",
+                    "flags": 4096,
+                    "leds_count": 44,
+                    "leds_max": 44,
+                    "leds_min": 44,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Fan 3",
+                    "type": 1
+                }
+            ]
+        },
+        {
+            "active_mode": 0,
+            "colors": [
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215
+            ],
+            "description": "Lian Li UNI FAN SL-INF Wireless RGB Controller",
+            "display_name": "",
+            "flags": 2,
+            "leds": [
+                {
+                    "name": "Fan 1 LED 0"
+                },
+                {
+                    "name": "Fan 1 LED 1"
+                },
+                {
+                    "name": "Fan 1 LED 2"
+                },
+                {
+                    "name": "Fan 1 LED 3"
+                },
+                {
+                    "name": "Fan 1 LED 4"
+                },
+                {
+                    "name": "Fan 1 LED 5"
+                },
+                {
+                    "name": "Fan 1 LED 6"
+                },
+                {
+                    "name": "Fan 1 LED 7"
+                },
+                {
+                    "name": "Fan 1 LED 8"
+                },
+                {
+                    "name": "Fan 1 LED 9"
+                },
+                {
+                    "name": "Fan 1 LED 10"
+                },
+                {
+                    "name": "Fan 1 LED 11"
+                },
+                {
+                    "name": "Fan 1 LED 12"
+                },
+                {
+                    "name": "Fan 1 LED 13"
+                },
+                {
+                    "name": "Fan 1 LED 14"
+                },
+                {
+                    "name": "Fan 1 LED 15"
+                },
+                {
+                    "name": "Fan 1 LED 16"
+                },
+                {
+                    "name": "Fan 1 LED 17"
+                },
+                {
+                    "name": "Fan 1 LED 18"
+                },
+                {
+                    "name": "Fan 1 LED 19"
+                },
+                {
+                    "name": "Fan 1 LED 20"
+                },
+                {
+                    "name": "Fan 1 LED 21"
+                },
+                {
+                    "name": "Fan 1 LED 22"
+                },
+                {
+                    "name": "Fan 1 LED 23"
+                },
+                {
+                    "name": "Fan 1 LED 24"
+                },
+                {
+                    "name": "Fan 1 LED 25"
+                },
+                {
+                    "name": "Fan 1 LED 26"
+                },
+                {
+                    "name": "Fan 1 LED 27"
+                },
+                {
+                    "name": "Fan 1 LED 28"
+                },
+                {
+                    "name": "Fan 1 LED 29"
+                },
+                {
+                    "name": "Fan 1 LED 30"
+                },
+                {
+                    "name": "Fan 1 LED 31"
+                },
+                {
+                    "name": "Fan 1 LED 32"
+                },
+                {
+                    "name": "Fan 1 LED 33"
+                },
+                {
+                    "name": "Fan 1 LED 34"
+                },
+                {
+                    "name": "Fan 1 LED 35"
+                },
+                {
+                    "name": "Fan 1 LED 36"
+                },
+                {
+                    "name": "Fan 1 LED 37"
+                },
+                {
+                    "name": "Fan 1 LED 38"
+                },
+                {
+                    "name": "Fan 1 LED 39"
+                },
+                {
+                    "name": "Fan 1 LED 40"
+                },
+                {
+                    "name": "Fan 1 LED 41"
+                },
+                {
+                    "name": "Fan 1 LED 42"
+                },
+                {
+                    "name": "Fan 1 LED 43"
+                },
+                {
+                    "name": "Fan 2 LED 0"
+                },
+                {
+                    "name": "Fan 2 LED 1"
+                },
+                {
+                    "name": "Fan 2 LED 2"
+                },
+                {
+                    "name": "Fan 2 LED 3"
+                },
+                {
+                    "name": "Fan 2 LED 4"
+                },
+                {
+                    "name": "Fan 2 LED 5"
+                },
+                {
+                    "name": "Fan 2 LED 6"
+                },
+                {
+                    "name": "Fan 2 LED 7"
+                },
+                {
+                    "name": "Fan 2 LED 8"
+                },
+                {
+                    "name": "Fan 2 LED 9"
+                },
+                {
+                    "name": "Fan 2 LED 10"
+                },
+                {
+                    "name": "Fan 2 LED 11"
+                },
+                {
+                    "name": "Fan 2 LED 12"
+                },
+                {
+                    "name": "Fan 2 LED 13"
+                },
+                {
+                    "name": "Fan 2 LED 14"
+                },
+                {
+                    "name": "Fan 2 LED 15"
+                },
+                {
+                    "name": "Fan 2 LED 16"
+                },
+                {
+                    "name": "Fan 2 LED 17"
+                },
+                {
+                    "name": "Fan 2 LED 18"
+                },
+                {
+                    "name": "Fan 2 LED 19"
+                },
+                {
+                    "name": "Fan 2 LED 20"
+                },
+                {
+                    "name": "Fan 2 LED 21"
+                },
+                {
+                    "name": "Fan 2 LED 22"
+                },
+                {
+                    "name": "Fan 2 LED 23"
+                },
+                {
+                    "name": "Fan 2 LED 24"
+                },
+                {
+                    "name": "Fan 2 LED 25"
+                },
+                {
+                    "name": "Fan 2 LED 26"
+                },
+                {
+                    "name": "Fan 2 LED 27"
+                },
+                {
+                    "name": "Fan 2 LED 28"
+                },
+                {
+                    "name": "Fan 2 LED 29"
+                },
+                {
+                    "name": "Fan 2 LED 30"
+                },
+                {
+                    "name": "Fan 2 LED 31"
+                },
+                {
+                    "name": "Fan 2 LED 32"
+                },
+                {
+                    "name": "Fan 2 LED 33"
+                },
+                {
+                    "name": "Fan 2 LED 34"
+                },
+                {
+                    "name": "Fan 2 LED 35"
+                },
+                {
+                    "name": "Fan 2 LED 36"
+                },
+                {
+                    "name": "Fan 2 LED 37"
+                },
+                {
+                    "name": "Fan 2 LED 38"
+                },
+                {
+                    "name": "Fan 2 LED 39"
+                },
+                {
+                    "name": "Fan 2 LED 40"
+                },
+                {
+                    "name": "Fan 2 LED 41"
+                },
+                {
+                    "name": "Fan 2 LED 42"
+                },
+                {
+                    "name": "Fan 2 LED 43"
+                }
+            ],
+            "location": "HID: wireless:32:cb:84:e5:66:e1",
+            "modes": [
+                {
+                    "brightness": 0,
+                    "brightness_max": 4,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 1,
+                    "flags": 32,
+                    "name": "Direct",
+                    "speed": 0,
+                    "speed_max": 4,
+                    "speed_min": 0
+                }
+            ],
+            "name": "UNI FAN SL-INF Wireless",
+            "serial": "wireless:32:cb:84:e5:66:e1",
+            "type": 4,
+            "vendor": "Lian Li",
+            "version": "0.8.12",
+            "zones": [
+                {
+                    "display_name": "",
+                    "flags": 4096,
+                    "leds_count": 44,
+                    "leds_max": 44,
+                    "leds_min": 44,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Fan 1",
+                    "type": 1
+                },
+                {
+                    "display_name": "",
+                    "flags": 4096,
+                    "leds_count": 44,
+                    "leds_max": 44,
+                    "leds_min": 44,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Fan 2",
+                    "type": 1
+                }
+            ]
+        },
+        {
+            "active_mode": 0,
+            "colors": [
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215,
+                16777215
+            ],
+            "description": "Lian Li UNI FAN SL-INF Wireless RGB Controller",
+            "display_name": "",
+            "flags": 2,
+            "leds": [
+                {
+                    "name": "Fan 1 LED 0"
+                },
+                {
+                    "name": "Fan 1 LED 1"
+                },
+                {
+                    "name": "Fan 1 LED 2"
+                },
+                {
+                    "name": "Fan 1 LED 3"
+                },
+                {
+                    "name": "Fan 1 LED 4"
+                },
+                {
+                    "name": "Fan 1 LED 5"
+                },
+                {
+                    "name": "Fan 1 LED 6"
+                },
+                {
+                    "name": "Fan 1 LED 7"
+                },
+                {
+                    "name": "Fan 1 LED 8"
+                },
+                {
+                    "name": "Fan 1 LED 9"
+                },
+                {
+                    "name": "Fan 1 LED 10"
+                },
+                {
+                    "name": "Fan 1 LED 11"
+                },
+                {
+                    "name": "Fan 1 LED 12"
+                },
+                {
+                    "name": "Fan 1 LED 13"
+                },
+                {
+                    "name": "Fan 1 LED 14"
+                },
+                {
+                    "name": "Fan 1 LED 15"
+                },
+                {
+                    "name": "Fan 1 LED 16"
+                },
+                {
+                    "name": "Fan 1 LED 17"
+                },
+                {
+                    "name": "Fan 1 LED 18"
+                },
+                {
+                    "name": "Fan 1 LED 19"
+                },
+                {
+                    "name": "Fan 1 LED 20"
+                },
+                {
+                    "name": "Fan 1 LED 21"
+                },
+                {
+                    "name": "Fan 1 LED 22"
+                },
+                {
+                    "name": "Fan 1 LED 23"
+                },
+                {
+                    "name": "Fan 1 LED 24"
+                },
+                {
+                    "name": "Fan 1 LED 25"
+                },
+                {
+                    "name": "Fan 1 LED 26"
+                },
+                {
+                    "name": "Fan 1 LED 27"
+                },
+                {
+                    "name": "Fan 1 LED 28"
+                },
+                {
+                    "name": "Fan 1 LED 29"
+                },
+                {
+                    "name": "Fan 1 LED 30"
+                },
+                {
+                    "name": "Fan 1 LED 31"
+                },
+                {
+                    "name": "Fan 1 LED 32"
+                },
+                {
+                    "name": "Fan 1 LED 33"
+                },
+                {
+                    "name": "Fan 1 LED 34"
+                },
+                {
+                    "name": "Fan 1 LED 35"
+                },
+                {
+                    "name": "Fan 1 LED 36"
+                },
+                {
+                    "name": "Fan 1 LED 37"
+                },
+                {
+                    "name": "Fan 1 LED 38"
+                },
+                {
+                    "name": "Fan 1 LED 39"
+                },
+                {
+                    "name": "Fan 1 LED 40"
+                },
+                {
+                    "name": "Fan 1 LED 41"
+                },
+                {
+                    "name": "Fan 1 LED 42"
+                },
+                {
+                    "name": "Fan 1 LED 43"
+                },
+                {
+                    "name": "Fan 2 LED 0"
+                },
+                {
+                    "name": "Fan 2 LED 1"
+                },
+                {
+                    "name": "Fan 2 LED 2"
+                },
+                {
+                    "name": "Fan 2 LED 3"
+                },
+                {
+                    "name": "Fan 2 LED 4"
+                },
+                {
+                    "name": "Fan 2 LED 5"
+                },
+                {
+                    "name": "Fan 2 LED 6"
+                },
+                {
+                    "name": "Fan 2 LED 7"
+                },
+                {
+                    "name": "Fan 2 LED 8"
+                },
+                {
+                    "name": "Fan 2 LED 9"
+                },
+                {
+                    "name": "Fan 2 LED 10"
+                },
+                {
+                    "name": "Fan 2 LED 11"
+                },
+                {
+                    "name": "Fan 2 LED 12"
+                },
+                {
+                    "name": "Fan 2 LED 13"
+                },
+                {
+                    "name": "Fan 2 LED 14"
+                },
+                {
+                    "name": "Fan 2 LED 15"
+                },
+                {
+                    "name": "Fan 2 LED 16"
+                },
+                {
+                    "name": "Fan 2 LED 17"
+                },
+                {
+                    "name": "Fan 2 LED 18"
+                },
+                {
+                    "name": "Fan 2 LED 19"
+                },
+                {
+                    "name": "Fan 2 LED 20"
+                },
+                {
+                    "name": "Fan 2 LED 21"
+                },
+                {
+                    "name": "Fan 2 LED 22"
+                },
+                {
+                    "name": "Fan 2 LED 23"
+                },
+                {
+                    "name": "Fan 2 LED 24"
+                },
+                {
+                    "name": "Fan 2 LED 25"
+                },
+                {
+                    "name": "Fan 2 LED 26"
+                },
+                {
+                    "name": "Fan 2 LED 27"
+                },
+                {
+                    "name": "Fan 2 LED 28"
+                },
+                {
+                    "name": "Fan 2 LED 29"
+                },
+                {
+                    "name": "Fan 2 LED 30"
+                },
+                {
+                    "name": "Fan 2 LED 31"
+                },
+                {
+                    "name": "Fan 2 LED 32"
+                },
+                {
+                    "name": "Fan 2 LED 33"
+                },
+                {
+                    "name": "Fan 2 LED 34"
+                },
+                {
+                    "name": "Fan 2 LED 35"
+                },
+                {
+                    "name": "Fan 2 LED 36"
+                },
+                {
+                    "name": "Fan 2 LED 37"
+                },
+                {
+                    "name": "Fan 2 LED 38"
+                },
+                {
+                    "name": "Fan 2 LED 39"
+                },
+                {
+                    "name": "Fan 2 LED 40"
+                },
+                {
+                    "name": "Fan 2 LED 41"
+                },
+                {
+                    "name": "Fan 2 LED 42"
+                },
+                {
+                    "name": "Fan 2 LED 43"
+                },
+                {
+                    "name": "Fan 3 LED 0"
+                },
+                {
+                    "name": "Fan 3 LED 1"
+                },
+                {
+                    "name": "Fan 3 LED 2"
+                },
+                {
+                    "name": "Fan 3 LED 3"
+                },
+                {
+                    "name": "Fan 3 LED 4"
+                },
+                {
+                    "name": "Fan 3 LED 5"
+                },
+                {
+                    "name": "Fan 3 LED 6"
+                },
+                {
+                    "name": "Fan 3 LED 7"
+                },
+                {
+                    "name": "Fan 3 LED 8"
+                },
+                {
+                    "name": "Fan 3 LED 9"
+                },
+                {
+                    "name": "Fan 3 LED 10"
+                },
+                {
+                    "name": "Fan 3 LED 11"
+                },
+                {
+                    "name": "Fan 3 LED 12"
+                },
+                {
+                    "name": "Fan 3 LED 13"
+                },
+                {
+                    "name": "Fan 3 LED 14"
+                },
+                {
+                    "name": "Fan 3 LED 15"
+                },
+                {
+                    "name": "Fan 3 LED 16"
+                },
+                {
+                    "name": "Fan 3 LED 17"
+                },
+                {
+                    "name": "Fan 3 LED 18"
+                },
+                {
+                    "name": "Fan 3 LED 19"
+                },
+                {
+                    "name": "Fan 3 LED 20"
+                },
+                {
+                    "name": "Fan 3 LED 21"
+                },
+                {
+                    "name": "Fan 3 LED 22"
+                },
+                {
+                    "name": "Fan 3 LED 23"
+                },
+                {
+                    "name": "Fan 3 LED 24"
+                },
+                {
+                    "name": "Fan 3 LED 25"
+                },
+                {
+                    "name": "Fan 3 LED 26"
+                },
+                {
+                    "name": "Fan 3 LED 27"
+                },
+                {
+                    "name": "Fan 3 LED 28"
+                },
+                {
+                    "name": "Fan 3 LED 29"
+                },
+                {
+                    "name": "Fan 3 LED 30"
+                },
+                {
+                    "name": "Fan 3 LED 31"
+                },
+                {
+                    "name": "Fan 3 LED 32"
+                },
+                {
+                    "name": "Fan 3 LED 33"
+                },
+                {
+                    "name": "Fan 3 LED 34"
+                },
+                {
+                    "name": "Fan 3 LED 35"
+                },
+                {
+                    "name": "Fan 3 LED 36"
+                },
+                {
+                    "name": "Fan 3 LED 37"
+                },
+                {
+                    "name": "Fan 3 LED 38"
+                },
+                {
+                    "name": "Fan 3 LED 39"
+                },
+                {
+                    "name": "Fan 3 LED 40"
+                },
+                {
+                    "name": "Fan 3 LED 41"
+                },
+                {
+                    "name": "Fan 3 LED 42"
+                },
+                {
+                    "name": "Fan 3 LED 43"
+                }
+            ],
+            "location": "HID: wireless:37:73:62:62:32:e1",
+            "modes": [
+                {
+                    "brightness": 0,
+                    "brightness_max": 4,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 1,
+                    "flags": 32,
+                    "name": "Direct",
+                    "speed": 0,
+                    "speed_max": 4,
+                    "speed_min": 0
+                }
+            ],
+            "name": "UNI FAN SL-INF Wireless",
+            "serial": "wireless:37:73:62:62:32:e1",
+            "type": 4,
+            "vendor": "Lian Li",
+            "version": "0.8.12",
+            "zones": [
+                {
+                    "display_name": "",
+                    "flags": 4096,
+                    "leds_count": 44,
+                    "leds_max": 44,
+                    "leds_min": 44,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Fan 1",
+                    "type": 1
+                },
+                {
+                    "display_name": "",
+                    "flags": 4096,
+                    "leds_count": 44,
+                    "leds_max": 44,
+                    "leds_min": 44,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Fan 2",
+                    "type": 1
+                },
+                {
+                    "display_name": "",
+                    "flags": 4096,
+                    "leds_count": 44,
+                    "leds_max": 44,
+                    "leds_min": 44,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Fan 3",
+                    "type": 1
+                }
+            ]
+        }
+    ],
+    "profile_name": "WHITE",
+    "profile_version": 6
+}

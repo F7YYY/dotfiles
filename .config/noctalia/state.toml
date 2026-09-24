@@ -1,0 +1,17 @@
+[calendar_discovery]
+d77kim_calendars = ""
+gmail_calendars = ""
+
+[config_migration_reminders]
+last_notification = """1789336084
+b5ece59f27b25cc0,e1f90e15a7634d23"""
+
+[security_migrations]
+calendar_credentials_v1 = true
+
+[theme_templates]
+applied_builtin_ids = "btop cava ghostty gtk3 gtk4 hyprland niri qt starship"
+
+[wallpaper_panel]
+flatten = true
+sort = "date_desc"
